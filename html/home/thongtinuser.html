@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Khách Hàng</title>
+    <link rel="stylesheet" href="/css/home/style.css">
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 70%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #4CAF50;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.progress-bar .step {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.progress-bar .step.active {
+    background-color: #4CAF50;
+}
+
+.progress-bar span {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.customer-info {
+    margin-top: 20px;
+}
+
+.customer-info h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 150px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+.info-btn {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.update-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.update-btn:hover {
+    background-color: #45a049;
+}
+input[readonly] {
+    background-color: #f0f0f0;  /* Màu nền xám nhạt */
+    border: 1px solid #ccc;     /* Viền xám nhạt */
+    color: #666;                /* Màu chữ xám */
+    cursor: not-allowed;        /* Con trỏ chuột thay đổi thành hình tròn cấm */
+}
+
+
+    </style>
+</head>
+<body>
+    <nav
+    id="header"
+    class="navbar navbar-default navbar-fixed-top"
+    role="navigation"
+  ></nav>
+    <div class="container">
+        <h1>PHONE STORE</h1>
+        
+        <!-- Bước tiến trình -->
+        
+        
+        <div class="customer-info">
+            <h2>Thông tin khách hàng</h2>
+            
+            <!-- Form thông tin khách hàng -->
+            <form>
+                <div class="form-group">
+                    <label for="full-name">Tài khoản:</label>
+                    <input readonly  type="text" id="taiKhoan">
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Mật khẩu:</label>
+                    <input type="password" id="matKhau">
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Họ và tên:</label>
+                    <input type="text" id="full-name">
+                </div>
+                <div class="form-group">
+                    <label for="birth-date">Ngày sinh:</label>
+                    <input type="date" id="birth-date">
+                </div>
+                
+                <div class="form-group">
+                    <label>Giới tính:</label>
+                    <label><input type="radio" name="gender" value="Nam"> Nam</label>
+                    <label><input type="radio" name="gender" value="Nu"> Nữ</label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone-number">Số điện thoại:</label>
+                    <input type="text" id="phone-number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="full-name">Email</label>
+                    <input type="text" id="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Địa chỉ liên lạc:</label>
+                    <input type="text" id="address">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="update-btn" onclick="updateCustomerInfo()">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/information/inforuser.js"></script>
+</body>
+</html>

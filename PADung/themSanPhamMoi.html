@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm mới</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+<body>
+    <div class="top-line">
+        <h1 class="top-line__heading">Thêm sản phẩm mới</h1>
+    </div>
+
+
+    <div class="content__container">
+        <ul class="function__list">
+            <li class="function__item active" data-value="add">
+                <span class="function__item-title">
+                    Thêm mới
+                </span>
+            </li>
+
+
+        </ul>
+        <form id="form-admin">
+            <div class="form-container">
+
+                <div class="form-group">
+                    <label for="user-id" class="form-label">Mã sản phẩm</label>
+
+                    <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
+
+                    <span class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="user-full_name" class="form-label">Tên sản phẩm</label>
+
+                    <input id="user-full_name" name="user-full_name" type="text" class="form-control">
+
+                    <span class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="user-id" class="form-label">Brand</label>
+
+                    <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
+
+                    <span class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="user-id" class="form-label">tìm kiếm sản phẩm</label>
+
+                    <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
+
+                    <span class="form-message"></span>
+                </div>
+                
+
+
+            </div>
+            <div class="form-controls">
+                <button class="btn-control" id="btn-save">Lưu</button>
+                <button class="btn-control" id="btn-cancel">Hủy</button>
+            </div>
+        </form>
+        <table id="product-table">
+            <thead>
+                <tr class="product-table__heading">
+                    <th>Mã SP</th>
+                    <th>Tên SP</th>
+                    <th>Brand</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody class="product-table__list">
+                <tr class="product-table__row">
+                    <td>1</td>
+                    <td>Samsung Galaxy S23 Ultra 256GB</td>
+                    <td>Samsung</td>
+                    <td>
+                        <button class="product-table__update-btn product-table-btn">Xem phiên bản</button>
+                        <button class="product-table__update-btn product-table-btn">sửa</button>
+                        <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                    </td>
+                </tr>
+                <tr class="product-table__row">
+                    <td>2</td>
+                    <td>Samsung Galaxy S23 Ultra 256GB</td>
+                    <td>Samsung</td>
+                    <td>
+                        <button class="product-table__update-btn product-table-btn">Xem phiên bản</button>
+                        <button class="product-table__update-btn product-table-btn">sửa</button>
+                        <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                    </td>
+                </tr>
+                <tr class="product-table__row">
+                    <td>3</td>
+                    <td>Samsung Galaxy S23 Ultra 256GB</td>
+                    <td>Samsung</td>
+                    <td>
+                        <button class="product-table__update-btn product-table-btn">Xem phiên bản</button>
+                        <button class="product-table__update-btn product-table-btn">sửa</button>
+                        <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

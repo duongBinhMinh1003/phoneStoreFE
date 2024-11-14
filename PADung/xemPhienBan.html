@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiên bản</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/PADung/adung.css">
+
+</head>
+<body>
+    <div class="top-line">
+        <h1 class="top-line__heading">Phiên bản</h1>
+    </div>
+
+
+    <div class="content__container">
+        
+        <form id="form-admin">
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="user-username" class="form-label">Mã sản phẩm</label>
+
+                    <input id="user-username" name="user-username" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="user-username" class="form-label">Mã phiên bản</label>
+
+                    <input id="user-username" name="user-username" type="text" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="user-id" class="form-label">Ram</label>
+
+                    <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
+
+                    <span class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="user-full_name" class="form-label">Màu</label>
+
+                    <input id="user-full_name" name="user-full_name" type="text" class="form-control">
+
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-username" class="form-label">Rom</label>
+
+                    <input id="user-username" name="user-username" type="text" class="form-control">
+
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-username" class="form-label">Ảnh</label>
+
+                    <input id="user-username" name="user-username" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="user-username" class="form-label">Giá bán</label>
+
+                    <input id="user-username" name="user-username" type="text" class="form-control">
+
+                    <span class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="user-username" class="form-label">Mô tả sản phẩm</label>
+
+                    <input id="user-username" name="user-username" type="text" class="form-control">
+
+                    <span class="form-message"></span>
+                </div>
+
+
+            </div>
+            <div class="form-controls">
+                <button class="button button-luu" id="">Tạo phiên bản</button>
+                <button class="button button-huy" id="">Hủy</button>
+            </div>
+        </form>
+        <table id="product-table">
+            <thead>
+                <tr class="product-table__heading">
+                    <th>Tên sản phẩm</th>
+                    <th>Mã phiên bản</th>
+                    <th>Giá nhập</th>
+                    <th>Giá bán</th>
+                    <th>RAM</th>
+                    <th>ROM</th>
+                    <th>Màu</th>
+                    <th>Số lượng</th>
+                    <th>Link ảnh</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody class="product-table__list">
+                <tr class="product-table__row">
+                    <td>Samsung Galaxy S23 Ultra 256GB</td>
+                    <td>PB1</td>
+                    <td>10000000</td>
+                    <td>12000000</td>
+                    <td>64GB</td>
+                    <td>512GB</td>
+                    <td>Đen</td>
+                    <td>10</td>
+                    <td><img class="product-table__img"
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s23-ultra.png"
+                            alt=""></td>
+                    <td>
+                        <button class="buttonTable"onclick="xemPB()">Xem danh sách sản phẩm</button>
+                        <button class="buttonTable buttonTable-xoa">Xóa phiên bản</button>
+                        <button class="buttonTable">Sửa phiên bản</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>
+<script>
+    const xemPB = () => {
+        window.location.href = "/PADung/chiTietDanhSachSanPham.html";
+    }
+</script>
