@@ -96,6 +96,7 @@ function renderCart() {
                 <td>
                     <h4>${item.tenSP}</h4>
                     <p>
+                        Mã phiên bản : ${item.memory.maPB}<br>
                         Dung lượng: ${item.memory.ROM}GB<br>
                         Tình trạng: Mới<br>
                         Màu sắc: ${item.memory.mauSac}

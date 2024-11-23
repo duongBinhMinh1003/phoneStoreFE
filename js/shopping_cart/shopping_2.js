@@ -33,7 +33,7 @@ $(document).ready(function () {
                     <label>
                         <input type="radio" name="pay" checked="checked">Chuyển khoản ngân hàng</label>
                         <p>Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.</p>
-                        <p>Vietinbank: 1929429924924 - P T C</p>    
+                        <p>MB bank: 0355578938 - DUONG BINH MINH</p>    
                     <label>
                         <input type="radio" name="pay">Trả tiền mặt khi nhận hàng</label>
                 </div>

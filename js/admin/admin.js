@@ -1,34 +1,31 @@
-const usernameLabel = $('.info__name')
-const contentContainer = $('#content')
-const listControlItems = $$('.nav-links__item')
-const user = JSON.parse(localStorage.getItem('user'));
+const usernameLabel = $(".info__name");
+const contentContainer = $("#content");
+const listControlItems = $$(".nav-links__item");
+const user = JSON.parse(localStorage.getItem("user"));
 function loadForm() {
-    usernameLabel.innerText = user.tenDangNhap
-    
+  usernameLabel.innerText = user.tenDangNhap;
 }
 
-loadForm()
+loadForm();
 const thempn = () => {
-    window.location.href = "./PADung/themPhieuNhap.html"
-}
+  window.location.href = "./PADung/themPhieuNhap.html";
+};
 const xemChiTiet = () => {
-
-    window.location.href="./PADung/chiTietPhieuNhap.html"
-}
+  window.location.href = "./PADung/chiTietPhieuNhap.html";
+};
 const xemPB = () => {
-     window.location.href="./PADung/xemPhienBan.html"
-}
-if(user.quyen == "ql" || user.quyen == "nv"){
-    Array.from(listControlItems).forEach((item) => {
-        item.addEventListener('click', () => {
-            const activeItem = $('.nav-links__item.active');
-            if (activeItem) {
-                activeItem.classList.remove('active')
-            }
-            if (item.getAttribute('data-value') === 'trang-chu') {
-                item.classList.add('active')
-                contentContainer.innerHTML =
-                    `
+  window.location.href = "./PADung/xemPhienBan.html";
+};
+if (user.quyen == "ql" || user.quyen == "nv") {
+  Array.from(listControlItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      const activeItem = $(".nav-links__item.active");
+      if (activeItem) {
+        activeItem.classList.remove("active");
+      }
+      if (item.getAttribute("data-value") === "trang-chu") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
                     <div class="top-line">
                     <h1 class="top-line__heading">TRANG CHỦ</h1>
                 </div>
@@ -132,19 +129,15 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                         </table>
                     </div>
                 </div>
-                `
-                initDashboardPage()
-    
-            }
-            if (item.getAttribute('data-value') === 'ql-nguoidung') {
-                item.classList.add('active')
-                contentContainer.innerHTML =
-                    `
+                `;
+        initDashboardPage();
+      }
+      if (item.getAttribute("data-value") === "ql-nguoidung") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
                     <div class="top-line">
                     <h1 class="top-line__heading">QUẢN LÝ TÀI KHOẢN</h1>
                 </div>
-    
-    
                 <div class="content__container">
                     <ul class="function__list">
                         <li class="function__item active" data-value="add">
@@ -169,9 +162,9 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                         <div class="form-container">
     
                             <div class="form-group">
-                                <label for="user-id" class="form-label">Mã người dùng</label>
+                                <label for="user-id" class="form-label">Mã tài khoản</label>
     
-                                <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
+                                <input id="maTk" name="user-id" type="text" class="form-control" disabled="true">
     
                                 <span class="form-message"></span>
                             </div>
@@ -180,14 +173,14 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                             <div class="form-group">
                                 <label for="user-username" class="form-label">Tên đăng nhập</label>
     
-                                <input id="user-username" name="user-username" type="text" class="form-control">
+                                <input disabled="true" id="tenDangNhap" name="user-username" type="text" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="user-password" class="form-label">Mật khẩu</label>
     
-                                <input id="user-password" name="user-password" type="text" class="form-control">
+                                <input id="password" name="user-password" type="password" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
@@ -209,10 +202,8 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                                 <label for="user-status" class="form-label">Trạng thái</label>
                                 <select name="user-status" id="user-status" class="form-control">
                                     <option value="">--Chọn trạng thái--</option>
-    
-                                    <option value="active">Hoạt động</option>
-                                    <option value="inactive">Không hoạt động</option>
-    
+                                    <option value="on">Hoạt động</option>
+                                    <option value="off">Không hoạt động</option>
                                 </select>
                                 <span class="form-message"></span>
                             </div>
@@ -221,17 +212,19 @@ if(user.quyen == "ql" || user.quyen == "nv"){
     
                         </div>
                         <div class="form-controls">
-                            <button class="btn-control" id="btn-save">Cập nhật</button>
-                            <button class="btn-control" id="btn-cancel">Hủy</button>
+                        <button type="button"  class="btn-control" id="btn-save">Cập nhật</button>
+                        <button type="button" onclick="huyTaiKhoan()"  class="btn-control" id="btn-cancel">Hủy</button>
                         </div>
                     </form>
                     <table id="product-table">
                         <thead>
                             <tr class="product-table__heading">
-                                <th>Mã User</th>
+                                <th>Mã tài khoản</th>
                                 <th>Tên đăng nhập</th>
                                 <th>Mật khẩu</th>
-                                <th style="width: 250px;">Địa chỉ</th>
+                               
+                                <th>Quyền</th>
+                                <th>Trạng thái</th>
                                 <th>Hành động</th>
                                 <!-- <th></th> -->
     
@@ -240,13 +233,14 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                         <tbody class="product-table__list">
                             <tr class="product-table__row product-table__row--clicked">
                                 <td>1</td>
-                                <td>Samsung Galaxy S23 Ultra 256GB</td>
-                                <td>10000000</td>
-                                <td>9000000</td>
+                                <td>admin</td>
+                                <td>123</td>
+                                <td>Sài GÒn VN</td>
+                                <td>Hoàn thành</td>
                                 <td>Đã xử lý</td>
                                 <td>
                                     <button class="product-table__update-btn product-table-btn">Sửa</button>
-                                    <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                                   
                                 </td>
                             </tr>
     
@@ -254,16 +248,14 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                     </table>
     
                 </div>
-                `
-                initUserPage()
-      
-            }
-            if (item.getAttribute('data-value') === 'ql-nhanvien') {
-                item.classList.add('active')
-                contentContainer.innerHTML =
-                    `
+                `;
+        initUserPage();
+      }
+      if (item.getAttribute("data-value") === "ql-nhanvien") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
                     <div class="top-line">
-                    <h1 class="top-line__heading">QUẢN LÝ NGƯỜI DÙNG</h1>
+                    <h1 class="top-line__heading">QUẢN LÝ NHÂN VIÊN</h1>
                 </div>
     
     
@@ -291,61 +283,65 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                         <div class="form-container">
     
                             <div class="form-group">
-                                <label for="user-id" class="form-label">Mã người dùng</label>
+                                <label for="user-id" class="form-label">Mã nhân viên</label>
     
-                                <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="user-full_name" class="form-label">Họ tên người dùng</label>
-    
-                                <input id="user-full_name" name="user-full_name" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-    
-                            <div class="form-group">
-                                <label for="user-username" class="form-label">Tên đăng nhập</label>
-    
-                                <input id="user-username" name="user-username" type="text" class="form-control">
+                                <input id="maNv" name="user-id" type="text" class="form-control" disabled="true">
     
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="user-password" class="form-label">Mật khẩu</label>
+                                <label for="user-full_name" class="form-label">Họ tên nhân viên</label>
     
-                                <input id="user-password" name="user-password" type="text" class="form-control">
+                                <input id="tenNv" name="user-full_name" type="text" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="user-email" class="form-label">Email</label>
     
-                                <input id="user-email" name="user-email" type="text" class="form-control">
+                                <input id="email" name="user-email" type="text" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="user-phone" class="form-label">Số ĐT</label>
+                                <label for="user-phone" class="form-label">Số điện thoại</label>
     
-                                <input id="user-phone" name="user-phone" type="text" class="form-control">
+                                <input id="phone" name="user-phone" type="text" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
-                            <div class="form-group form-group--full">
+                            <div class="form-group">
+                                <label for="user-phone" class="form-label">Ngày sinh</label>
+    
+                                <input id="date" name="user-phone" type="date" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                            <label for="gioiTinh" class="form-label">Giới tính</label>
+                        
+                            <select id="gioiTinh" name="gioiTinh" class="form-control">
+                                <option value="">Chọn giới tính</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nu">Nữ</option>
+                            </select>
+                        
+                            <span class="form-message"></span>
+                        </div>
+                        
+                            <div class="form-group form-group">
                                 <label for="user-address" class="form-label">Địa chỉ</label>
     
-                                <input id="user-address" name="user-address" type="text" class="form-control">
+                                <input id="diaChi" name="user-address" type="text" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="user-permission" class="form-label">Quyền</label>
+                                <label for="user-permission" class="form-label">Loại nhân viên</label>
                                 <select name="user-permission" id="user-permission" class="form-control">
-                                    <option value="">--Chọn quyền--</option>
-                                    <option value="customer">Khách hàng</option>
-                                    <option value="admin">Admin</option>
+                                    <option value="">--Chọn loại--</option>
+                                    <option value="ql">Quản lí</option>
+                                    <option value="nv">Nhân viên</option>
     
                                 </select>
                                 <span class="form-message"></span>
@@ -355,32 +351,51 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                                 <select name="user-status" id="user-status" class="form-control">
                                     <option value="">--Chọn trạng thái--</option>
     
-                                    <option value="active">Hoạt động</option>
-                                    <option value="inactive">Không hoạt động</option>
+                                    <option value="on">Hoạt động</option>
+                                    <option value="off">Không hoạt động</option>
     
                                 </select>
                                 <span class="form-message"></span>
                             </div>
     
-    
+                            <div class="form-group">
+                            <label for="user-id" class="form-label">Tài khoản</label>
+
+                            <input id="taiKhoan" name="user-id" type="text" class="form-control" >
+
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                        <label for="user-id" class="form-label">Mật khẩu</label>
+
+                        <input id="matKhau" name="user-id" type="password" class="form-control" >
+
+                        <span class="form-message"></span>
+                    </div>
     
                         </div>
                         <div class="form-controls">
-                            <button class="btn-control" id="btn-save">Lưu</button>
-                            <button class="btn-control" id="btn-cancel">Hủy</button>
+                        <button type="button"  class="btn-control" id="btn-save">Cập nhật</button>
+                        <button type="button"  class="btn-control" id="btn-add">Thêm</button>
+                        <button type="button" onclick="huyNhanVien()"  class="btn-control" id="btn-cancel">Hủy</button>
                         </div>
                     </form>
                     <table id="product-table">
                         <thead>
                             <tr class="product-table__heading">
-                                <th>Mã User</th>
-                                <th>Tên đăng nhập</th>
-                                <th>Mật khẩu</th>
-                                <th>Họ tên người dùng</th>
-                                <th>Email</th>
+                                <th>Mã nhân viên</th>
+                                <th>Mã tài khoản</th>
+                                <th>Họ tên</th>
+                                <th>Ngày sinh</th>
+                                <th>Giới tính</th>
+                                <th  style ="width: 250px;">Địa chỉ</th>
                                 <th>Số ĐT</th>
-                                <th style="width: 250px;">Địa chỉ</th>
-                                <th>Hành động</th>
+                                <th>Email</th>
+                                <th>Vai trò</th>
+                                <th>Trạng thái</th>
+                                <th>Tài khoản</th>
+                                <th>Mật khẩu</th>
+                                <th >Hành động</th>
                                 <!-- <th></th> -->
     
                             </tr>
@@ -393,8 +408,7 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                                 <td>9000000</td>
                                 <td>Đã xử lý</td>
                                 <td>
-                                    <button class="product-table__update-btn product-table-btn">Sửa</button>
-                                    <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                        
                                 </td>
                             </tr>
     
@@ -402,132 +416,14 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                     </table>
     
                 </div>
-                `
-                initUserPage()
-            }
-    
-            if (item.getAttribute('data-value') === 'ql-Sanpham') {
-                item.classList.add('active')
-    
-                contentContainer.innerHTML = `
-                <div class="top-line">
-            <h1 class="top-line__heading">Quản lý sản phẩm</h1>
-        </div>
-    
-    
-        <div class="content__container">
-            <ul class="function__list">
-                <li class="function__item active" data-value="add">
-                    <span class="function__item-title">
-                        Thêm mới
-                    </span>
-                </li>
-    
-    
-            </ul>
-            <form id="form-admin">
-                <div class="form-container">
-    
-                    <div class="form-group">
-                        <label for="user-id" class="form-label">Mã sản phẩm</label>
-    
-                        <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
-    
-                        <span class="form-message"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-full_name" class="form-label">Tên sản phẩm</label>
-    
-                        <input id="user-full_name" name="user-full_name" type="text" class="form-control">
-    
-                        <span class="form-message"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-id" class="form-label">Brand</label>
-                        <select class="form-control">
-                            <option>Samsung</option>
-                            <option>Iphone</option>
-                            <option>Xiaomi</option>
-                            <option>Oppo</option>
-                            <option>Vivo</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-id" class="form-label">Tìm kiếm sản phẩm</label>
-    
-                        <input id="user-id" name="user-id" type="text" class="form-control" disabled="true">
-    
-                        <span class="form-message"></span>
-                    </div>
-                    
-    
-    
-                </div>
-                <div class="form-controls">
-                    <button class="button-luu button" id="">Lưu</button>
-                    <button class="button-huy button" id="">Hủy</button>
-                </div>
-            </form>
-            <table id="product-table">
-                <thead>
-                    <tr class="product-table__heading">
-                        <th>Mã SP</th>
-                        <th>Tên SP</th>
-                        <th>Hệ điều hành</th>
-                        <th>Brand</th>
-                        <th>xuất xứ</th>
-                        <th>Cam trước</th>
-                        <th>Cam sau</th>
-                        <th>Pin</th>
-                        <th>Thời hạn bảo hành</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody class="product-table__list">
-                    <tr class="product-table__row">
-                        <td>1</td>
-                        <td>Samsung Galaxy S23 Ultra</td>
-                        <td>Android</td>
-                        <td>Samsung</td>
-                        <td>china</td>
-                        <td>50mp</td>
-                        <td>200mp</td>
-                        <td>5000</td>
-                        <td>6 tháng</td>
-                        <td>
-                            <button class="buttonTable" onclick="xemPB()">Xem phiên bản</button>
-                            <button class="buttonTable">Sửa</button>
-                            <button class="buttonTable buttonTable-xoa">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr class="product-table__row">
-                        <td>2</td>
-                        <td>iphone 16 pro max</td>
-                        <td>Ios</td>
-                        <td>Apple</td>
-                        <td>china</td>
-                        <td>50mp</td>
-                        <td>200mp</td>
-                        <td>5000</td>
-                        <td>6 tháng</td>
-                        <td>
-                            <button class="buttonTable" onclick="xemPB()">Xem phiên bản</button>
-                            <button class="buttonTable">Sửa</button>
-                            <button class="buttonTable buttonTable-xoa">Xóa</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-    
-        </div>
-                `
-    
-                initInvoicePage()
-            }
-            if (item.getAttribute('data-value') === 'ql-hoadon') {
-                item.classList.add('active')
-    
-                contentContainer.innerHTML = `
+                `;
+        initNhanVienPage();
+      }
+
+      if (item.getAttribute("data-value") === "ql-hoadon") {
+        item.classList.add("active");
+
+        contentContainer.innerHTML = `
                 <div class="top-line">
                     <h1 class="top-line__heading">QUẢN LÝ ĐƠN HÀNG</h1>
                 </div>
@@ -644,33 +540,31 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                     </table>
                    
                 </div>
-                `
-                initInvoicePage()
-            }
-            if (item.getAttribute('data-value') === 'ql-sanpham') {
-                item.classList.add('active')
-    
-    
-                contentContainer.innerHTML = `
-                <div class="top-line">
-                    <h1 class="top-line__heading">QUẢN LÝ SẢN PHẨM</h1>
+                `;
+        initInvoicePage();
+      }
+      if (item.getAttribute("data-value") === "ql-sanpham") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
+                    <div class="top-line">
+                    <h1 class="top-line__heading">QUẢN LÝ KHUYẾN MÃI</h1>
                 </div>
     
-                <div class="content__container">
     
+                <div class="content__container">
                     <ul class="function__list">
-                        <li class="function__item active" value="add">
-                            <span class="function__item-title" >
+                        <li class="function__item active" data-value="add">
+                            <span class="function__item-title">
                                 Thêm mới
                             </span>
                         </li>
-                        <li class="function__item" value="update">
-                            <span class="function__item-title" >
+                        <li class="function__item " data-value="update">
+                            <span class="function__item-title">
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" value="delete">
-                            <span class="function__item-title" >
+                        <li class="function__item" data-value="delete">
+                            <span class="function__item-title">
                                 Xóa
                             </span>
                         </li>
@@ -683,7 +577,7 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                             <div class="form-group">
                                 <label for="product-id" class="form-label">Mã SP</label>
     
-                                <input id="product-id" name="product-id" type="text" placeholder="VD: 1"
+                                <input id="maSP" name="product-id" type="text" 
                                     class="form-control" disabled="true">
     
                                 <span class="form-message"></span>
@@ -691,112 +585,112 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                             <div class="form-group">
                                 <label for="product-name" class="form-label">Tên SP</label>
     
-                                <input id="product-name" name="product-name" type="text" placeholder="VD: Samsung Galaxy S23 Ultra 256GB"
+                                <input id="tenSP" name="product-name" type="text"
                                     class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="product-price-old" class="form-label">Giá trước KM</label>
-    
-                                <input id="product-price-old" name="product-price-old" type="text"
-                                    placeholder="VD: 31990000" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
+                            <label for="product-brand" class="form-label">Brand</label>
+                            <select name="product-brand" id="thuongHieu" class="form-control">
+                               <option >--Chọn thương hiệu--</option>
+                                <option value="Apple">Apple</option>
+                                <option value="Samsung">Samsung</option>
+                                <option value="Oppo">Oppo</option>
+                                <option value="Xiaomi">Xiaomi</option>
+                                <option value="Vivo">Vivo</option>
+                                <option value="Realme">Realme</option>
+                                <option value="Nokia">Nokia</option>
+                                <option value="Masstel">Masstel</option>
+                                <option value="Itel">Itel</option>
+                                <option value="Mobell">Mobell</option>
+                            </select>
+                            <span class="form-message"></span>
+                        </div>
+
+                          
                             <div class="form-group">
-                                <label for="product-price-current" class="form-label">Giá sau KM</label>
-    
-                                <input id="product-price-current" name="product-price-current" type="text"
-                                    placeholder="VD: 22190000" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="product-brand" class="form-label">Brand</label>
-                                <select name="product-brand" id="product-brand" class="form-control">
-                                    <option value="Iphone">Iphone</option>
-                                    <option value="Samsung">Samsung</option>
-                                    <option value="Oppo">Oppo</option>
-                                    <option value="Xiaomi">Xiaomi</option>
-                                    <option value="Vivo">Vivo</option>
-                                    <option value="Realme">Realme</option>
-                                    <option value="Nokia">Nokia</option>
-                                    <option value="Masstel">Masstel</option>
-                                    <option value="Itel">Itel</option>
-                                    <option value="Mobell">Mobell</option>
-                                </select>
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="product-sale" class="form-label">Phần trăm KM</label>
-    
-                                <input id="product-sale" name="product-sale" type="text" placeholder="VD: 30"
-                                    class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <!-- Form Group for ROM -->
-                            <div class="form-group">
-                                <label class="form-label">ROM</label>
-                                <div class="checkbox-group checkbox-group-rom">
-                                    <input type="checkbox" id="rom-16gb" name="rom-16gb" class="form-checkbox" data-value="16 GB">
-                                    <label for="rom-16gb">16 GB</label>
-    
-                                    <input type="checkbox" id="rom-32gb" name="rom-32gb" class="form-checkbox" data-value="32 GB">
-                                    <label for="rom-32gb">32 GB</label>
-    
-                                    <input type="checkbox" id="rom-64gb" name="rom-64gb" class="form-checkbox" data-value="64 GB">
-                                    <label for="rom-64gb">64 GB</label>
-    
-                                    <input type="checkbox" id="rom-128gb" name="rom-128gb" class="form-checkbox" data-value="128 GB">
-                                    <label for="rom-128gb">128 GB</label>
-    
-                                    <input type="checkbox" id="rom-256gb" name="rom-256gb" class="form-checkbox" data-value="256 GB">
-                                    <label for="rom-256gb">256 GB</label>
-    
-                                    <input type="checkbox" id="rom-512gb" name="rom-512gb" class="form-checkbox" data-value="512 GB">
-                                    <label for="rom-512gb">512 GB</label>
-    
-                                    <input type="checkbox" id="rom-1tb" name="rom-1tb" class="form-checkbox" data-value="1 TB">
-                                    <label for="rom-1tb">1 TB</label>
-    
-                                </div>
-                                <span class="form-message"></span>
-                            </div>
-    
-                            <!-- Form Group for RAM -->
-                            <div class="form-group">
-                                <label class="form-label">RAM</label>
-                                <div class="checkbox-group checkbox-group-ram">
-                                    <input type="checkbox" id="ram-1gb" name="ram-1gb" class="form-checkbox" data-value="1 GB">
-                                    <label for="ram-1gb">1 GB</label>
-    
-                                    <input type="checkbox" id="ram-2gb" name="ram-2gb" class="form-checkbox" data-value="2 GB">
-                                    <label for="ram-2gb">2 GB</label>
-    
-                                    <input type="checkbox" id="ram-3gb" name="ram-3gb" class="form-checkbox" data-value="3 GB">
-                                    <label for="ram-3gb">3 GB</label>
-    
-                                    <input type="checkbox" id="ram-4gb" name="ram-4gb" class="form-checkbox" data-value="4 GB">
-                                    <label for="ram-4gb">4 GB</label>
-    
-                                    <input type="checkbox" id="ram-6gb" name="ram-6gb" class="form-checkbox" data-value="6 GB">
-                                    <label for="ram-6gb">6 GB</label>
-    
-                                    <input type="checkbox" id="ram-8gb" name="ram-8gb" class="form-checkbox" data-value="8 GB">
-                                    <label for="ram-8gb">8 GB</label>
-    
-                                    <input type="checkbox" id="ram-12gb" name="ram-12gb" class="form-checkbox" data-value="12 GB">
-                                    <label for="ram-12gb">12 GB</label>
-    
-                                </div>
-                                <span class="form-message"></span>
-                            </div>
+                            <label for="product-brand" class="form-label">Xuất sứ</label>
+                            <select name="product-brand" id="xuatSu" class="form-control">
+                              <option value="">--Chọn xuất sứ--</option>
+                                <option value="South Korea">South Korea</option>
+                                <option value="USA">USA</option>
+                                <option value="China">China</option>
+                                <option value="Japan">Japan</option>
+                                <option value="Finland">Finland</option>
+                              
+                            </select>
+                            <span class="form-message"></span>
+                        </div>
+                      
+                        <div class="form-group">
+                        <label for="product-id" class="form-label">Cam sau</label>
+
+                        <input id="camSau" name="product-id" type="text" 
+                            class="form-control"
+
+                        <span class="form-message"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="product-id" class="form-label">Cam trước</label>
+
+                    <input id="camTruoc" name="product-id" type="text" 
+                        class="form-control" 
+
+                    <span class="form-message"></span>
+                </div>
+                    <div class="form-group">
+                    <label for="product-brand" class="form-label">Pin</label>
+                    <select name="product-brand" id="pin" class="form-control">
+                    <option >--Chọn Pin--</option>
+                        <option value="3200mAh">3200mAh</option>
+                        <option value="4000mAh">4000mAh</option>
+                        <option value="4500mAh">4500mAh</option>
+                        <option value="4800mAh">4800mAh</option>
+                        <option value="4600mAh">4600mAh</option>
+                        <option value="5000mAh">5000mAh</option>
+                        <option value="4300mAh">4300mAh</option>
+                        <option value="4200mAh">4200mAh</option>
+                    </select>
+                    <span class="form-message"></span>
+                </div>
+             
+                <div class="form-group">
+                <label for="product-id" class="form-label">Thời gian bảo hành</label>
+
+                <input id="baoHanh" name="product-id" type="text" 
+                    class="form-control"
+
+                <span class="form-message"></span>
+            </div>
+       
+    <div class="form-group">
+        <label for="product-brand" class="form-label">Trạng thái</label>
+        <select name="product-brand" id="trangThai" class="form-control">
+        <option >--Chọn trạng thái--</option>
+            <option value="on">on</option>
+            <option value="off">off</option>
+
+      
+        </select>
+        <span class="form-message"></span>
+    </div>
+                  
+                        <div class="form-group">
+                        <label for="product-name" class="form-label">Hệ điều hành</label>
+
+                        <input id="heDieuHanh" name="product-name" type="text"
+                            class="form-control">
+
+                        <span class="form-message"></span>
+                    </div>
+                         
+                            
                             <div class="form-group form-group--full">
                                 <label for="product-img" class="form-label">Ảnh (Nhập đường dẫn)</label>
     
-                                <input id="product-img" name="product-img" type="text"
+                                <input id="hinhAnh" name="product-img" type="text"
                                     placeholder="VD: https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s23-ultra.png"
                                     class="form-control">
                                 <span class="form-message"></span>
@@ -805,8 +699,9 @@ if(user.quyen == "ql" || user.quyen == "nv"){
     
                         </div>
                         <div class="form-controls">
-                            <button class="btn-control" id="btn-save">Lưu</button>
-                            <button class="btn-control" id="btn-cancel">Hủy</button>
+                            <button type="button"  class="btn-control" id="btn-save">Lưu</button>
+                            <button type="button"  class="btn-control" id="btn-add">Thêm</button>
+                            <button type="button" onclick = "huyProduct()"  class="btn-control" id="btn-cancel">Hủy</button>
                         </div>
                     </form>
     
@@ -816,46 +711,41 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                         <tr class="product-table__heading">
                             <th>Mã SP</th>
                             <th>Tên SP</th>
-                            <th>Giá ban đầu</th>
-                            <th>Giá sau KM</th>
-                            <th>% KM</th>
                             <th>Brand</th>
-                            <th>RAM</th>
-                            <th>ROM</th>
-                            <th>Link ảnh</th>
+                            <th>Pin</th>
+                            <th>Cam trước</th>
+                            <th>Cam sau</th>
+                            <th>Hệ điều hành</th>
+                            <th>Xuất xứ</th>
+                            <th>Thời gian bảo hành</th>
+                            <th>Hình ảnh</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody class="product-table__list">
-                        <tr class="product-table__row">
-                            <td>1</td>
-                            <td>Samsung Galaxy S23 Ultra 256GB</td>
-                            <td>10000000</td>
-                            <td>9000000</td>
-                            <td>10</td>
-                            <td>Samsung</td>
-                            <td>2GB, 3GB</td>
-                            <td>512GB, 1TB</td>
-                            <td><img class="product-table__img"
-                                    src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s23-ultra.png"
-                                    alt=""></td>
-                            <td>
-                                <button class="product-table__update-btn product-table-btn">Sửa123</button>
-                                <button class="product-table__delete-btn product-table-btn">Xóa</button>
-                                <button class="product-table__delete-btn product-table-btn">Xem phiên bản</button>
-                            </td>
-                        </tr>
+                            <tr class="product-table__row product-table__row--clicked">
+                                <td>1</td>
+                                <td>admin</td>
+                                <td>123</td>
+                                <td>Sài GÒn VN</td>
+                                <td>Hoàn thành</td>
+                                <td>Đã xử lý</td>
+                                <td>
+                                    <button class="product-table__update-btn product-table-btn">Sửa</button>
+                                   
+                                </td>
+                            </tr>
     
-                    </tbody>
+                        </tbody>
                 </table>
-                8`
-    
-                initProductPage()
-            }
-            if (item.getAttribute('data-value') === 'ql-khuyenmai') {
-                item.classList.add('active')
-                contentContainer.innerHTML =
-                    `
+                8`;
+
+        initProductPage();
+      }
+      if (item.getAttribute("data-value") === "ql-khuyenmai") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
                     <div class="top-line">
                     <h1 class="top-line__heading">QUẢN LÝ KHUYẾN MÃI</h1>
                 </div>
@@ -964,13 +854,12 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                     </table>
     
                 </div>
-                `
-                initPromotionPage()
-            }
-            if (item.getAttribute('data-value') === 'ql-baohanh') {
-                item.classList.add('active')
-                contentContainer.innerHTML =
-                    `
+                `;
+        initPromotionPage();
+      }
+      if (item.getAttribute("data-value") === "ql-baohanh") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
                     <div class="top-line">
                     <h1 class="top-line__heading">QUẢN LÝ BẢO HÀNH</h1>
                 </div>
@@ -1009,7 +898,7 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                             <div class="form-group">
                                 <label for="user-full_name" class="form-label">Thời gian tạo</label>
     
-                                <input id="thoiGian" name="user-full_name" type="text" class="form-control">
+                                <input id="thoiGian" name="user-full_name" type="date" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
@@ -1086,20 +975,20 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                                     <button class="product-table__update-btn product-table-btn">Sửa</button>
                                     <button class="product-table__delete-btn product-table-btn">Xóa</button>
                                 </td>
+                                
                             </tr>
     
                         </tbody>
                     </table>
     
                 </div>
-                `
-                initBaoHanhPage()
-            }
-           
-            if (item.getAttribute('data-value') === 'ql-phieunhap') {
-                item.classList.add('active')
-                contentContainer.innerHTML =
-                    `
+                `;
+        initBaoHanhPage();
+      }
+
+      if (item.getAttribute("data-value") === "ql-phieunhap") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
                     <div class="top-line">
                     <h1 class="top-line__heading">QUẢN LÝ PHIẾU NHẬP</h1>
                 </div>
@@ -1136,9 +1025,16 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
+                            <label for="user-email" class="form-label">Mã nhân viên</label>
+
+                            <input disabled="true" id="maNv" name="user-email" type="text" class="form-control">
+
+                            <span class="form-message"></span>
+                        </div>
+                            <div class="form-group">
                                 <label for="user-full_name" class="form-label">Thời gian tạo</label>
     
-                                <input id="thoiGianTao" name="user-full_name" type="text" class="form-control">
+                                <input id="thoiGianTao" name="user-full_name" type="date" class="form-control">
     
                                 <span class="form-message"></span>
                             </div>
@@ -1153,19 +1049,13 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                             <div class="form-group">
                                 <label for="user-password" class="form-label">Trạng Thái</label>                     
                                 <select id="trangThai" style="height: 100%;">
-                                    <option value="Đã xác nhận">Đã xác nhận</option>
-                                    <option value="Chưa xác nhận">Chưa xác nhận</option>                             
+                                    <option value="da nhap">Đã xác nhận</option>
+                                    <option value="chua xac nhan">Chưa xác nhận</option>                             
                                 </select>
     
                                 <span class="form-message"></span>
                             </div>
-                            <div class="form-group">
-                                <label for="user-email" class="form-label">Mã nhân viên</label>
-    
-                                <input id="maNv" name="user-email" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
+                           
                            
                             <div class="form-group">
                                 <label for="user-email" class="form-label">Mã nhà cung cấp</label>
@@ -1217,1151 +1107,1961 @@ if(user.quyen == "ql" || user.quyen == "nv"){
                     </table>
     
                 </div>
-                `
-                initPhieuNhapPage()
-            }
+                `;
+        initPhieuNhapPage();
+      }
+      if (item.getAttribute("data-value") === "ql-phienBan") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
+                    <div class="top-line">
+                    <h1 class="top-line__heading">QUẢN LÝ PHIÊN BẢN</h1>
+                </div>
     
     
+                <div class="content__container">
+                    <ul class="function__list">
+                        <li class="function__item active" data-value="add">
+                            <span class="function__item-title">
+                                Thêm mới
+                            </span>
+                        </li>
+                        <li class="function__item " data-value="update">
+                            <span class="function__item-title">
+                                Chỉnh sửa
+                            </span>
+                        </li>
+                        <li class="function__item" data-value="delete">
+                            <span class="function__item-title">
+                                Xóa
+                            </span>
+                        </li>
     
     
+                    </ul>
+                    <form id="form-admin">
+                        <div class="form-container">
     
-            if (item.getAttribute('data-value') === 'product-page') {
-                redirectToProductPage()
-            }
+                            <div class="form-group">
+                                <label for="product-id" class="form-label">Mã Phiên bản</label>
     
+                                <input id="maPB" name="product-id" type="text" "
+                                    class="form-control" disabled="true">
     
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-name" class="form-label">Mã sản phẩm</label>
     
+                                <input disabled="true" id="maSP" name="product-name" type="text" "
+                                    class="form-control">
     
-            const logOutBtn = $('#log-out-btn')
-            logOutBtn.addEventListener('click', (e) => {
-                e.preventDefault()
-                User.logOut()
-                // redirectToProductPage()
-            })
-        })
-    })
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-price-old" class="form-label">Màu sắc</label>
+    
+                                <input id="mauSac" name="product-price-old" type="text"
+                                    class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-price-current" class="form-label">RAM</label>
+    
+                                <input id="ram" name="product-price-current" type="text"
+                                    class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="product-sale" class="form-label">ROM</label>
+    
+                                <input id="rom" name="product-sale" type="text" 
+                                    class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                          
+                           
+                            <div class="form-group">
+                            <label for="product-brand" class="form-label">Trạng thái</label>
+                            <select name="product-brand" id="trangThai" class="form-control">
+                            <option >--Chọn trạng thái--</option>
+                                <option value="on">on</option>
+                                <option value="off">off</option>
+                    
+                          
+                            </select>
+                            <span class="form-message"></span>
+                        </div>
+                    <div class="form-group">
+                    <label for="product-sale" class="form-label">Số lượng</label>
 
-}else{
-    window.location.href = "/index.html"
+                    <input id="soLuong" name="product-sale" type="text" 
+                        class="form-control">
+
+                    <span class="form-message"></span>
+                </div>
+                <div class="form-group">
+                <label for="product-sale" class="form-label">Giá giảm</label>
+
+                <input id="giaGiam" name="product-sale" type="text" 
+                    class="form-control">
+
+                <span class="form-message"></span>
+            </div>
+            <div class="form-group">
+            <label for="product-sale" class="form-label">Giá bán</label>
+
+            <input id="giaBan" name="product-sale" type="text" 
+                class="form-control">
+
+            <span class="form-message"></span>
+        </div>
+    
+                        </div>
+                        <div class="form-controls">
+                            <button type="button" class="btn-control" id="btn-save">Lưu</button>
+                            <button type="button"  class="btn-control" id="btn-add">Thêm</button>
+                            <button type="button" onclick="huyPhienBan()" class="btn-control" id="btn-cancel">Hủy</button>
+                        </div>
+                    </form>
+    
+                </div>
+                <table id="product-table">
+                    <thead>
+                        <tr class="product-table__heading">
+                            <th>Mã Phiên bản</th>                           
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Hình ảnh</th>
+                            <th>Màu sắc</th>
+                            <th>RAM</th>
+                            <th>ROM</th>
+                            <th>Số lượng</th>
+                            <th>Giá giảm</th>
+                            <th>Giá bán</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody class="product-table__list">
+                            <tr class="product-table__row product-table__row--clicked">
+                                <td>1</td>
+                                <td>Samsung Galaxy S23 Ultra 256GB</td>
+                                <td>10000000</td>
+                                <td>9000000</td>
+                                <td>Đã xử lý</td>
+                                <td>
+                                    <button class="product-table__update-btn product-table-btn">Sửa</button>
+                                    <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                                </td>
+                            </tr>
+    
+                        </tbody>
+                </table>
+                `;
+        initPhienBanPage();
+      }
+
+      if (item.getAttribute("data-value") === "ql-nhacungcap") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
+                    <div class="top-line">
+                    <h1 class="top-line__heading">QUẢN LÝ NHÀ CUNG CẤP</h1>
+                </div>
+    
+    
+                <div class="content__container">
+                    <ul class="function__list">
+                        <li class="function__item active" data-value="add">
+                            <span class="function__item-title">
+                                Thêm mới
+                            </span>
+                        </li>
+                        <li class="function__item " data-value="update">
+                            <span class="function__item-title">
+                                Chỉnh sửa
+                            </span>
+                        </li>
+                        <li class="function__item" data-value="delete">
+                            <span class="function__item-title">
+                                Xóa
+                            </span>
+                        </li>
+    
+    
+                    </ul>
+                    <form id="form-admin">
+                        <div class="form-container">
+    
+                            <div class="form-group">
+                                <label for="user-id" class="form-label">Mã nhà cung cấp</label>
+    
+                                <input id="maNCC" name="user-id" type="text" class="form-control" disabled="true">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-full_name" class="form-label">Tên nhà cung cấp</label>
+    
+                                <input id="tenNCC" name="user-full_name" type="text" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="user-username" class="form-label">Điạ chỉ</label>
+    
+                                <input id="diaChi" name="user-username" type="text" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-password" class="form-label">Số điện thoại</label>
+    
+                                <input id="sdt" name="user-password" type="text" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                            <label for="user-email" class="form-label">Trạng thái</label>
+
+                            <select id="trangThai" style="height: 100%;">
+                            <option value="on">On</option>
+                            <option value="off">Off</option>                             
+                        </select>
+
+                            <span class="form-message"></span>
+                        </div>
+                            <div class="form-group">
+                                <label for="user-password" class="form-label">Email</label>
+    
+                                <input id="email" name="user-password" type="text" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                           
+                           
+                           
+    
+    
+                        </div>
+                        <div class="form-controls">
+                            <button type="button"  class="btn-control" id="btn-save">Cập nhật</button>
+                             <button type="button"  class="btn-control" id="btn-add">Thêm</button>
+                            <button type="button" onclick="huyNhaCungCap()"  class="btn-control" id="btn-cancel">Hủy</button>
+                        </div>
+                    </form>
+                    <table id="product-table">
+                        <thead>
+                            <tr class="product-table__heading">
+                                <th>Mã nhà cung cấp</th>
+                                <th>Tên nhà cung cấp</th>
+                                <th>Địa chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Trạng thái</th>  
+                                <th>Hành động</th>                        
+                                <!-- <th></th> -->
+    
+                            </tr>
+                        </thead>
+                        <tbody class="product-table__list">
+                            <tr class="product-table__row product-table__row--clicked">
+                                <td>1</td>
+                                <td>Samsung Galaxy S23 Ultra 256GB</td>
+                                <td>10000000</td>
+                                <td>9000000</td>
+                                <td>Đã xử lý</td>
+                                <td>
+                                    <button class="product-table__update-btn product-table-btn">Sửa</button>
+                                    <button class="product-table__delete-btn product-table-btn">Xóa</button>
+                                </td>
+                            </tr>
+    
+                        </tbody>
+                    </table>
+    
+                </div>
+                `;
+        initNhaCungCapPage();
+      }
+
+      if (item.getAttribute("data-value") === "product-page") {
+        redirectToProductPage();
+      }
+
+      const logOutBtn = $("#log-out-btn");
+      logOutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        User.logOut();
+        // redirectToProductPage()
+      });
+    });
+  });
+} else {
+  window.location.href = "/index.html";
 }
-
 
 // Các hàm validate
 const validate = {
-    validateProductName: function (name) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (name.trim() === '') {
-            value = false;
-            message = 'Tên sản phẩm không được để trống';
-            return { value, message };
-        }
-        if (name.length < 7) {
-            value = false
-            message = 'Tên sản phẩm phải ít nhất 7 ký tự'
-            return { value, message }
-        }
-        if (/^\d+$/.test(name)) {
-            value = false;
-            message = 'Tên sản phẩm không được chứa toàn bộ là số';
-            return { value, message }
-        }
-        return { value, message };
-    },
-
-    showErrMessage: function (errorLabel, message) {
-        errorLabel.innerText = message
-        errorLabel.classList.add('active')
-    },
-    validateProductInt: function (input) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (input.toString().trim() === '') {
-            value = false;
-            message = 'Không được để trống';
-            return { value, message };
-        }
-        if (/\D/.test(input)) {
-            value = false;
-            message = 'Không được chứa ký tự chữ';
-        }
-        return { value, message }
-    },
-    hideErrMessage: function (errorLabel) {
-        errorLabel.innerText = ''
-        errorLabel.classList.remove('active')
-    },
-    hideAllErrMessage: function (listErrorMessage) {
-        listErrorMessage.forEach(mess => {
-            mess.innerText = ''
-            mess.classList.remove('active')
-        })
-
-    },
-    validateProductList: function (list) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (!list || list.length === 0) {
-            value = false;
-            message = 'Phải chọn ít nhất 1 giá trị';
-        }
-        return { value, message }
-
-    },
-    validateValue: function (input) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (input.trim() === '') {
-            value = false;
-            message = 'Phải chọn ít nhất 1 giá trị';
-        }
-        return { value, message }
-    },
-    validateUserFullName: function (fullName) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (fullName.trim() === '') {
-            value = false;
-            message = 'Họ tên không được để trống';
-            return { value, message };
-        }
-
-        if (/^\d+$/.test(fullName)) {
-            value = false;
-            message = 'Họ tên không được chứa toàn bộ là số';
-            return { value, message }
-        }
-        return { value, message };
-    },
-    validateUserUsername: function (username) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (username.trim() === '') {
-            value = false;
-            message = 'Tên đăng nhập không được để trống';
-            return { value, message };
-        }
-        if (username.length < 6) {
-            value = false;
-            message = 'Tên đăng nhập tối thiểu 6 ký tự';
-            return { value, message };
-        }
-
-        if (/^\d+$/.test(username)) {
-            value = false;
-            message = 'Tên đăng nhập không được chứa toàn bộ là số';
-            return { value, message }
-        }
-        return { value, message };
-
-    },
-    validateUserPassword: function (password) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (password.trim() === '') {
-            value = false;
-            message = 'Mật khẩu không được để trống';
-            return { value, message };
-        }
-        if (password.length < 6) {
-            value = false;
-            message = 'Mật khẩu tối thiểu 6 ký tự';
-            return { value, message };
-        }
-        return { value, message };
-
-    },
-    validateUserEmail: function (email) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (email.trim() === '') {
-            value = false;
-            message = 'Email không được để trống';
-            return { value, message };
-        }
-        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
-            value = false;
-            message = 'Email phải đúng định dạng. VD: wizardsc1111@gmail.com';
-            return { value, message };
-        }
-        return { value, message };
-    },
-    validateUserPhone: function (phone) {
-        let value = true;
-        let message = 'Hợp lệ'
-        if (/\D/.test(phone)) {
-            value = false;
-            message = 'SĐT không được chứa ký tự chữ';
-        }
-        return { value, message };
-
+  validateProductName: function (name) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (name.trim() === "") {
+      value = false;
+      message = "Tên sản phẩm không được để trống";
+      return { value, message };
     }
-}
-
-
-function initProductPage() {
-    const usernameLabel = $('.info__name')
-    const btnSave = $('#btn-save')
-    const btnCancel = $('#btn-cancel')
-    const btnUpdate = $('.product-table__update-btn')
-    const btnDelete = $('.product-table__delete-btn')
-    const functionList = $$('.function__item')
-    const contentContainer = $('#content')
-    const listControlItems = $$('.nav-links__item')
-    const listErrorMessage = $$('.form-message')
-    renderProductToTable()
-
-    function renderProductToTable() {
-        const tableBody = $('.product-table__list')
-        const productList = Product.getProducts()
-        let html = ''
-        if (productList) {
-            Array.from(productList).forEach(product => {
-
-                html +=
-                    `
-                <tr class="product-table__row">
-                            <td>${product.productID}</td>
-                            <td>${product.name}</td>
-                            <td>${money.formatCurrencytoVND(product.price_old)}</td>
-                            <td>${money.formatCurrencytoVND(product.price_current)}</td>
-                            <td>${product.sale}</td>
-                            <td style="text-transform: capitalize;">${product.brand}</td>
-                            <td>${product.ram}</td>
-                            <td>${product.rom}</td>
-                            <td><img class="product-table__img" src="${product.img}" alt=""></td>
-                            <td>
-                                <button class="product-table__update-btn product-table-btn" data-product-id="${product.productID}">Sửa</button>
-                                <button class="product-table__delete-btn product-table-btn" data-product-id="${product.productID}">Xóa</button>
-                                <button class="product-table__delete-btn product-table-btn" data-product-id="${product.productID}">Xem phiên bản</button>
-                            </td>
-                        </tr>
-                `
-            })
-            tableBody.innerHTML = html
-            const productRowList = $$('.product-table__row')
-            Array.from(productRowList).forEach(row => {
-                const updateButton = row.querySelector('.product-table__update-btn')
-                const deleteButton = row.querySelector('.product-table__delete-btn')
-                updateButton.addEventListener('click', () => {
-                    const productID = updateButton.getAttribute('data-product-id')
-                    const productItem = Product.getProductID(parseInt(productID))
-                    renderProduct(productItem, true)
-
-                })
-
-                deleteButton.addEventListener('click', () => {
-                    const productID = deleteButton.getAttribute('data-product-id')
-                    const productItem = Product.getProductID(parseInt(productID))
-                    renderProduct(productItem, false)
-                    deleteProduct(parseInt(productID))
-                })
-
-
-            })
-        }
+    if (name.length < 7) {
+      value = false;
+      message = "Tên sản phẩm phải ít nhất 7 ký tự";
+      return { value, message };
     }
-    let listROM = [];
-    let listRAM = [];
-    let productId = document.getElementById('product-id');
-    let productName = document.getElementById('product-name');
-    let productPriceOld = document.getElementById('product-price-old');
-    let productPriceCurrent = document.getElementById('product-price-current');
-    let productBrand = document.getElementById('product-brand');
-    let productSale = document.getElementById('product-sale');
-    let productIMG = document.getElementById('product-img');
-    let listROMCheckbox = $$('.checkbox-group-rom input[type="checkbox"]');
-    let listRAMCheckbox = $$('.checkbox-group-ram input[type="checkbox"]');
-    function resetValue() {
-        productId.value = '';
-        productName.value = '';
-        productPriceOld.value = '';
-        productPriceCurrent.value = '';
-        productBrand.selectedIndex = -1; // Bỏ chọn option trong select
-        productSale.value = '';
-        productIMG.value = '';
-        listRAM = []
-        listROM = []
-        Array.from(listROMCheckbox).forEach(item => item.checked = false)
-        Array.from(listRAMCheckbox).forEach(item => item.checked = false)
-        validate.hideAllErrMessage(listErrorMessage)
+    if (/^\d+$/.test(name)) {
+      value = false;
+      message = "Tên sản phẩm không được chứa toàn bộ là số";
+      return { value, message };
     }
-    // Khi nhấn nút thêm thì active nút thêm
-    Array.from(functionList).forEach(item => {
-        item.addEventListener('click', () => {
-            // Loại bỏ lớp 'active' từ tất cả các phần tử
-            Array.from(functionList).forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
-                }
-            });
+    return { value, message };
+  },
 
-            // Thêm lớp 'active' cho phần tử được kích hoạt có giá trị là 'add'
-            if (item.getAttribute('value') === 'add') {
-                item.classList.add('active');
-                resetValue()
-            }
-        });
-    })
-
-
-    function addProduct() {
-        // Lấy giá trị của các input
-        Array.from(listROMCheckbox).forEach((item, index) => {
-            if (item.checked) {
-                listROM.push(romValues[index])
-            }
-        })
-        Array.from(listRAMCheckbox).forEach((item, index) => {
-            if (item.checked) {
-                listRAM.push(ramValues[index])
-            }
-
-        })
-        //Kiểm tra dữ liệu
-        // console.log(productPriceOld.value)
-        const validateAndDisplayError = (input, errorMessageElement, validationFunction) => {
-            const validationResult = validationFunction(input);
-            if (!validationResult.value) {
-                validate.showErrMessage(errorMessageElement, validationResult.message);
-                return false
-            } else {
-                validate.hideErrMessage(errorMessageElement);
-                return true
-            }
-        };
-        const isValidProductName = validateAndDisplayError(productName.value.toString(), listErrorMessage[1], validate.validateProductName);
-        const isValidProductPriceOld = validateAndDisplayError(productPriceOld.value, listErrorMessage[2], validate.validateProductInt);
-        const isValidProductPriceCurrent = validateAndDisplayError(productPriceCurrent.value, listErrorMessage[3], validate.validateProductInt);
-        const isValidProductSale = validateAndDisplayError(productSale.value, listErrorMessage[5], validate.validateProductInt);
-        const isValidListROM = validateAndDisplayError(listROM, listErrorMessage[6], validate.validateProductList);
-        const isValidListRAM = validateAndDisplayError(listRAM, listErrorMessage[7], validate.validateProductList);
-        const isValidBrand = validateAndDisplayError(productBrand.value.toString(), listErrorMessage[4], validate.validateValue)
-        if (isValidProductName && isValidProductPriceOld && isValidProductPriceCurrent && isValidProductSale && isValidBrand && isValidListROM && isValidListRAM) {
-            // Nếu không có lỗi, thêm sản phẩm
-            Product.addProduct(productName.value, productPriceOld.value, productPriceCurrent.value, productIMG.value, productBrand.value, listRAM, listROM, productSale.value);
-            resetValue();
-            renderProductToTable();
-        }
+  showErrMessage: function (errorLabel, message) {
+    errorLabel.innerText = message;
+    errorLabel.classList.add("active");
+  },
+  validateProductInt: function (input) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (input.toString().trim() === "") {
+      value = false;
+      message = "Không được để trống";
+      return { value, message };
     }
-    function renderProduct(productItem, isUpdate) {
-        resetValue()
-        //active cho thẻ sửa
-        Array.from(functionList).forEach(item => {
-            if (item.classList.contains('active')) item.classList.remove('active')
-            if (item.getAttribute('value') === 'update' && isUpdate == true) {
-
-                item.classList.add('active')
-            }
-            if (item.getAttribute('value') === 'delete' && isUpdate == false) {
-                item.classList.add('active')
-            }
-        })
-
-        //Render thông tin sản phẩm lên form
-        productId.value = productItem.productID
-        productName.value = productItem.name
-        productPriceCurrent.value = productItem.price_current
-        productPriceOld.value = productItem.price_old
-        productIMG.value = productItem.img
-        const indexToSelect = Array.from(productBrand.options).findIndex(option => option.value.toLowerCase() === productItem.brand.toLowerCase());
-        if (indexToSelect !== -1) {
-            // Chọn option bằng cách gán giá trị cho selectedIndex
-            productBrand.selectedIndex = indexToSelect;
-        } else {
-            console.error(`Không tìm thấy option với giá trị ${productItem.brand}`);
-        }
-        productSale.value = productItem.sale
-        Array.from(listROMCheckbox).forEach((item) => {
-            productItem.rom.forEach((value) => {
-                if (item.getAttribute('data-value') === value) {
-                    item.checked = true
-                    listROM.push(value)
-                }
-            })
-        })
-
-        Array.from(listRAMCheckbox).forEach((item) => {
-            productItem.ram.forEach((value) => {
-                if (item.getAttribute('data-value') === value) item.checked = true
-                listRAM.push(value)
-            })
-        })
-
+    if (/\D/.test(input)) {
+      value = false;
+      message = "Không được chứa ký tự chữ";
     }
-
-    btnSave.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isUpdateActive = Array.from(functionList).some(item => {
-            if (item.getAttribute('value') === 'update' && item.classList.contains('active')) {
-
-                updateProduct();
-                renderProductToTable();
-                return true;
-            }
-            if (item.getAttribute('value') === 'add' && item.classList.contains('active')) {
-
-                addProduct();
-                renderProductToTable();
-                return true;
-            }
-            return false;
-        });
-
-        if (!isUpdateActive) {
-            console.log('No active "update" item found.');
-        }
+    return { value, message };
+  },
+  hideErrMessage: function (errorLabel) {
+    errorLabel.innerText = "";
+    errorLabel.classList.remove("active");
+  },
+  hideAllErrMessage: function (listErrorMessage) {
+    listErrorMessage.forEach((mess) => {
+      mess.innerText = "";
+      mess.classList.remove("active");
     });
-    btnCancel.addEventListener('click', (e) => {
-        e.preventDefault();
-        resetValue();
-    })
-    function updateProduct() {
-        listRAM = []
-        listROM = []
-        //chỉnh sửa thông tin sản phẩm
-        Array.from(listROMCheckbox).forEach((item, index) => {
-            if (item.checked) {
-                listROM.push(romValues[index])
-            }
-        })
-        Array.from(listRAMCheckbox).forEach((item, index) => {
-            if (item.checked) {
-                listRAM.push(ramValues[index])
-            }
-
-        })
-
-        Product.updateProduct(productId.value, productName.value, productPriceOld.value, productPriceCurrent.value, productIMG.value, productBrand.value, listRAM, listROM, productSale.value)
+  },
+  validateProductList: function (list) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (!list || list.length === 0) {
+      value = false;
+      message = "Phải chọn ít nhất 1 giá trị";
+    }
+    return { value, message };
+  },
+  validateValue: function (input) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (input.trim() === "") {
+      value = false;
+      message = "Phải chọn ít nhất 1 giá trị";
+    }
+    return { value, message };
+  },
+  validateUserFullName: function (fullName) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (fullName.trim() === "") {
+      value = false;
+      message = "Họ tên không được để trống";
+      return { value, message };
     }
 
-    function deleteProduct(productID) {
-        if (confirm('Bạn có muốn xóa sản phẩm này?')) {
-            Product.deleteProduct(productID)
-            renderProductToTable()
-        }
+    if (/^\d+$/.test(fullName)) {
+      value = false;
+      message = "Họ tên không được chứa toàn bộ là số";
+      return { value, message };
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function initInvoicePage() {
-    const invoiceList = [
-        { invoiceID: 1, orderTime: '2024-05-11T14:30', userID: 1, totalPrice: 20000000, status: true },
-        { invoiceID: 2, orderTime: '2024-05-10T09:15', userID: 2, totalPrice: 10000000, status: true },
-        { invoiceID: 3, orderTime: '2024-05-12T18:45', userID: 4, totalPrice: 7000000, status: false },
-        { invoiceID: 4, orderTime: '2024-11-10T10:00', userID: 3, totalPrice: 11000000, status: true },
-        { invoiceID: 5, orderTime: '2024-10-13T16:20', userID: 8, totalPrice: 10000000, status: true }
-    ];    
-    const orderDetails = [ // thêm để text
-        { invoiceID: 1, productIMG: "img/product/samsungs21.jpg", storeProduct: { name: "Samsung Galaxy S21" }, product_price: 5000000, quantity: 2, totalPrice: 10000000 },
-        { invoiceID: 1, productIMG: "img/product/iphone12.jpg", storeProduct: { name: "iPhone 12" }, product_price: 10000000, quantity: 1, totalPrice: 10000000 },
-        { invoiceID: 2, productIMG: "img/product/OPPOReno5.png", storeProduct: { name: "Oppo Reno 5" }, product_price: 10000000, quantity: 1, totalPrice: 10000000 },
-        { invoiceID: 3, productIMG: "img/product/XiaomiRNote10.png", storeProduct: { name: "Realme 7" }, product_price: 7000000, quantity: 1, totalPrice: 7000000 }
-    ];
-    
-    const invoiceDetailContainer = $('.invoice-details__list'); // thêm để text
-    // const invoiceList = Invoice.getInvoices()
-    const invoiceIDInput = $('#invoice-id')
-    const invoiceUserIDInput = $('#invoice-user-id')
-    const invoiceOrderTimeInput = $('#invoice-order-time')
-    const invoiceTotalPriceInput = $('#invoice-total-price')
-    const invoiceStatusInput = $('#invoice-status')
-    const message = $('.invoice-label')
-    const processBtn = $('#btn-process')
-    const updateBtn = $('#btn-update')
-
-
-    function handleInvoiceActions() {
-        //Nút lọc hóa đơn
-        // const filterButton = $('.filter__button')
-        // const startDateInput = $('#filter__start-date')
-        // const endDateInput = $('#filter__end-date')
-        // filterButton.addEventListener('click', () => {
-        //     const startDate = time.getDateTime(startDateInput.value)
-        //     const endDate = time.getDateTime(endDateInput.value)
-
-        //     const filterList = Invoice.getInvoiceByDateTime(startDate, endDate)
-        //     renderInvoice(filterList)
-        // })
-
-       
-            const filterButton = $('.filter__button');
-            const startDateInput = $('#filter__start-date');
-            const endDateInput = $('#filter__end-date');
-            
-            filterButton.addEventListener('click', () => {
-                const startDate = startDateInput.value;  // Giá trị định dạng YYYY-MM-DDTHH:MM
-                const endDate = endDateInput.value;      // Giá trị định dạng YYYY-MM-DDTHH:MM
-                
-             // Kiểm tra xem cả hai trường có giá trị hay không
-                if (!startDate || !endDate) {
-                    alert('Vui lòng nhập đầy đủ thông tin ngày bắt đầu và ngày kết thúc.'); // Thông báo nếu chưa nhập đủ
-                return; // Dừng thực hiện nếu không đủ thông tin
-                }
-
-                // Lọc hóa đơn theo khoảng thời gian
-                const filterList = invoiceList.filter(invoice => {
-                    const invoiceDate = invoice.orderTime;  // Ngày giờ của hóa đơn
-                    return invoiceDate >= startDate && invoiceDate <= endDate;  // So sánh ngày giờ
-                });
-                
-                renderInvoice(filterList);  // Hiển thị hóa đơn sau khi lọc
-            });
-            
-        
-            
-            processBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-            
-                const invoiceID = clickedRow.selectedInvoiceID; // Lấy mã hóa đơn đã chọn
-                const invoiceStatus = $(`.product-table__row--clicked[data-value="${invoiceID}"] td:nth-child(5)`).innerText; // Lấy trạng thái hóa đơn
-            
-                // Kiểm tra trạng thái hóa đơn
-                if (invoiceStatus === 'Chưa xử lý') {
-                    Invoice.updateInvoiceStatus(parseInt(invoiceID), true); // Cập nhật trạng thái hóa đơn
-                    const newList = Invoice.getInvoices(); // Lấy danh sách hóa đơn mới
-                    renderInvoice(newList); // Hiển thị lại danh sách hóa đơn
-                    resetValue(); // Đặt lại trạng thái
-                } else {
-                    alert('Đơn hàng đã được xử lý, không thể xác nhận lại.'); // Thông báo nếu đơn hàng đã xử lý
-                }
-            });
-           
-            updateBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-            
-                const invoiceID = clickedRow.selectedInvoiceID; // Lấy mã hóa đơn đã chọn
-                const invoiceStatus = $(`.product-table__row--clicked[data-value="${invoiceID}"] td:nth-child(5)`).innerText; // Lấy trạng thái hóa đơn
-            
-                // Kiểm tra trạng thái hóa đơn
-                if (invoiceStatus === 'Đã xử lý') {
-                    Invoice.updateInvoiceStatus(parseInt(invoiceID), 'Đang giao'); // Cập nhật trạng thái hóa đơn
-                    const newList = Invoice.getInvoices(); // Lấy danh sách hóa đơn mới
-                    renderInvoice(newList); // Hiển thị lại danh sách hóa đơn
-                    resetValue(); // Đặt lại trạng thái
-                } else {
-                    alert('Chỉ có thể xác nhận đơn hàng đang giao khi đơn hàng đã được xử lý.'); // Thông báo nếu trạng thái không hợp lệ
-                }
-            });
-
+    return { value, message };
+  },
+  validateUserUsername: function (username) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (username.trim() === "") {
+      value = false;
+      message = "Tên đăng nhập không được để trống";
+      return { value, message };
     }
-    handleInvoiceActions()
-    renderInvoice(invoiceList)
-
-
-    
-    function renderInvoice(listInvoice) {
-        const tableBody = $('.product-table__list')
-
-        let html = ''
-        Array.from(listInvoice).forEach(invoice => {
-            let status = ''
-            if (invoice.status === false) {
-                status = 'Chưa xử lý'
-            } else if (invoice.status === true) {
-                status = 'Đã xử lý'
-            }
-            html += `
-            <tr class="product-table__row product-table__row--clicked" data-value="${invoice.invoiceID}">
-                            <td>${invoice.invoiceID}</td>
-                
-                            <!-- <td>${time.getDateTime(invoice.orderTime)}</td> --> 
-                            <td>${invoice.orderTime.replace('T', ' ')}</td>
-                
-                            <td>${invoice.userID}</td>
-
-                            <td>${money.formatCurrencytoVND(invoice.totalPrice)}</td>
-                            <!-- <td>${money.formatCurrencytoVND(Invoice.getTotalPriceOfInvoice(invoice.invoiceID))}</td> -->
-                
-                            <td>${status}</td>
-                
-                            <td>
-                                <button class="product-table__see-btn product-table-btn">Xem</button>
-                            </td>
-             
-               </tr>
-
-            `
-        })
-
-        tableBody.innerHTML = html
-        const productRowList = $$('.product-table__row')
-        Array.from(productRowList).forEach((row) => {
-            const seeButton = row.querySelector('.product-table__see-btn')
-            seeButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                renderDetailProduct(parseInt(row.dataset.value))
-            })
-
-        })
-        clickedRow()
-
-
+    if (username.length < 6) {
+      value = false;
+      message = "Tên đăng nhập tối thiểu 6 ký tự";
+      return { value, message };
     }
 
-    function resetValue() {
-
-        invoiceIDInput.value = ''
-        invoiceUserIDInput.value = ''
-        invoiceOrderTimeInput.value = ''
-        invoiceTotalPriceInput.value = ''
-        invoiceStatusInput.value = ''
-        message.classList.remove('active')
+    if (/^\d+$/.test(username)) {
+      value = false;
+      message = "Tên đăng nhập không được chứa toàn bộ là số";
+      return { value, message };
     }
-
-    // function clickedRow() {
-    //     const rowTable = $$('.product-table__row--clicked')
-    //     Array.from(rowTable).forEach(row => {
-    //         row.addEventListener('click', () => {
-    //             const invoiceID = row.cells[0].innerText;
-    //             clickedRow.selectedInvoiceID = invoiceID;
-    //             const invoiceOrderTime = row.cells[1].innerText;
-    //             const invoiceUserID = row.cells[2].innerText;
-    //             const invoiceTotalPrice = row.cells[3].innerText;
-    //             const invoiceStatus = row.cells[4].innerText;
-
-    //             invoiceIDInput.disabled = true
-    //             invoiceUserIDInput.disabled = true
-    //             invoiceOrderTimeInput.disabled = true
-    //             invoiceTotalPriceInput.disabled = true
-    //             invoiceStatusInput.disabled = true
-
-    //             if (invoiceStatus === 'Chưa xử lý') {
-
-    //                 message.classList.add('active')
-    //                 processBtn.disabled = false;
-
-    //             }
-    //             else {
-    //                 processBtn.disabled = true;
-
-    //                 message.classList.remove('active')
-
-    //                 // processBtn.style.backgroundColor = '#999'
-
-
-    //             }
-    //             invoiceIDInput.value = invoiceID
-    //             invoiceOrderTimeInput.value = invoiceOrderTime
-    //             invoiceUserIDInput.value = invoiceUserID
-    //             invoiceTotalPriceInput.value = invoiceTotalPrice
-    //             invoiceStatusInput.value = invoiceStatus
-    //         })
-    //     })
-    // }
-
-    function clickedRow() {
-        const rowTable = $$('.product-table__row--clicked');
-        Array.from(rowTable).forEach(row => {
-            row.addEventListener('click', () => {
-                const invoiceID = row.cells[0].innerText; // Lấy mã hóa đơn
-                clickedRow.selectedInvoiceID = invoiceID; // Lưu mã hóa đơn đã chọn
-    
-                const invoiceStatus = row.cells[4].innerText; // Lấy trạng thái hóa đơn
-    
-                // Kích hoạt nút "Xác nhận", "Hủy" và "Xác nhận đang giao"
-                processBtn.disabled = false; // Kích hoạt nút "Xác nhận"
-                updateBtn.disabled = false; // Kích hoạt nút "Xác nhận đang giao"
-    
-                // Kiểm tra trạng thái để quyết định nút "Xác nhận" và "Xác nhận đang giao"
-                if (invoiceStatus === 'Chưa xử lý') {
-                    processBtn.disabled = false; // Kích hoạt nút "Xác nhận"
-                    updateBtn.disabled = true; // Vô hiệu hóa nút "Xác nhận đang giao"
-                } else if (invoiceStatus === 'Đã xử lý') {
-                    processBtn.disabled = true; // Vô hiệu hóa nút "Xác nhận"
-                    updateBtn.disabled = false; // Kích hoạt nút "Xác nhận đang giao"
-                } else {
-                    processBtn.disabled = true; // Vô hiệu hóa nút "Xác nhận"
-                    updateBtn.disabled = true; // Vô hiệu hóa nút "Xác nhận đang giao"
-                }
-            });
-        });
+    return { value, message };
+  },
+  validateUserPassword: function (password) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (password.trim() === "") {
+      value = false;
+      message = "Mật khẩu không được để trống";
+      return { value, message };
     }
+    if (password.length < 6) {
+      value = false;
+      message = "Mật khẩu tối thiểu 6 ký tự";
+      return { value, message };
+    }
+    return { value, message };
+  },
+  validateUserEmail: function (email) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (email.trim() === "") {
+      value = false;
+      message = "Email không được để trống";
+      return { value, message };
+    }
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      value = false;
+      message = "Email phải đúng định dạng. VD: wizardsc1111@gmail.com";
+      return { value, message };
+    }
+    return { value, message };
+  },
+  validateUserPhone: function (phone) {
+    let value = true;
+    let message = "Hợp lệ";
+    if (/\D/.test(phone)) {
+      value = false;
+      message = "SĐT không được chứa ký tự chữ";
+    }
+    return { value, message };
+  },
+};
+// SAN PHAM
+async function initProductPage() {
+  try {
+    const response = await fetch("http://localhost:8080/phonestore/get-phone");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
 
+    const data = await response.json();
+    const sanpham = data.data;
+    console.log("sanpham: ", sanpham);
 
-     // Vô hiệu hóa các nút khi khởi tạo
-        processBtn.disabled = true; // Vô hiệu hóa nút "Xác nhận"
-        updateBtn.disabled = true; // Vô hiệu hóa nút "Xác nhận đang giao"
-
-        // Gọi hàm clickedRow để thiết lập sự kiện click cho các dòng
-        clickedRow();
-
-
-
-    // function renderDetailProduct(invoiceID) {
-    //     const invoiceDetailList = $('.invoice-details__list')
-    //     const listDetailInvoice = orderDetails.filter(detail => detail.invoiceID === invoiceID); // mảng thêm để text
-    //     // const listDetailInvoice = Invoice.getDetailInvoice(invoiceID)
-    //     let html = ''
-    //     listDetailInvoice.forEach(detailInvoice => {
-    //         html += `
-    //         <div class="invoice-details__item">
-    //             <img class="invoice-details__img"
-    //                 src="${detailInvoice.productIMG}"
-    //                 alt="">
-    //             <div class="invoice-details__item-wrapper">
-    //                 <div class="invoice-details__name">
-    //                    ${detailInvoice.storeProduct.name}
-    //                 </div>
-    //                 <div class="invoice-details__price">
-    //                     <span class="invoice-details__price-label">Đơn giá: </span>
-    //                     ${money.formatCurrencytoVND(detailInvoice.product_price)}
-    //                 </div>
-    //                 <div class="invoice-details__quantity">
-    //                     <span class="invoice-details__quantity-label">Số lượng: </span>
-    //                     ${detailInvoice.quantity}
-    //                 </div>
-    //                 <div class="invoice-details__total-price">
-    //                     <span class="invoice-details__total-price-label">Tổng tiền: </span>
-    //                     ${money.formatCurrencytoVND(detailInvoice.totalPrice)}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         `
-    //     })
-    //     invoiceDetailList.innerHTML = html
-    // }
-    
-    function renderDetailProduct(invoiceID) {
-        const invoiceDetailList = $('.invoice-details__list');
-        const listDetailInvoice = orderDetails.filter(detail => detail.invoiceID === invoiceID); // mảng thêm để text
-        let html = '';
-    
+    let html = "";
+    sanpham
+      .slice()
+      .reverse()
+      .forEach((sp) => {
         html += `
-        <div class="product-detail-header">
-            <button class="close-detail-btn" style="float: right; cursor: pointer;">&times;</button>
-        </div>
-        <table class="product-detail-table">
-            <thead>
-                <tr>
-                    <th>Mã sản phẩm</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Mã phiên bản</th>
-                    <th>Số seri</th>
-                    <th>RAM</th>
-                    <th>Màu</th>
-                    <th>Giá bán</th>
-                    <th>Số lượng</th>
-                    <th>Tổng tiền</th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-    
-        const productSummary = {};
-    
-        listDetailInvoice.forEach(detailInvoice => {
-            const productKey = detailInvoice.storeProduct.name; // Sử dụng tên sản phẩm làm khóa
-            if (!productSummary[productKey]) {
-                productSummary[productKey] = {
-                    productID: detailInvoice.storeProduct.id, // Giả sử có thuộc tính id
-                    name: detailInvoice.storeProduct.name,
-                    version: detailInvoice.storeProduct.version, // Giả sử có thuộc tính version
-                    serial: detailInvoice.storeProduct.serial, // Giả sử có thuộc tính serial
-                    ram: detailInvoice.storeProduct.ram, // Giả sử có thuộc tính ram
-                    color: detailInvoice.storeProduct.color, // Giả sử có thuộc tính color
-                    price: detailInvoice.product_price,
-                    quantity: 0,
-                    total: 0
-                };
-            }
-            productSummary[productKey].quantity += detailInvoice.quantity;
-            productSummary[productKey].total += detailInvoice.product_price * detailInvoice.quantity;
-        });
-    
-        // Tạo các dòng cho bảng
-        for (const product in productSummary) {
-            const item = productSummary[product];
-            html += `
-                <tr>
-                    <td>${item.productID}</td>
-                    <td>${item.name}</td>
-                    <td>${item.version}</td>
-                    <td>${item.serial}</td>
-                    <td>${item.ram}</td>
-                    <td>${item.color}</td>
-                    <td>${money.formatCurrencytoVND(item.price)}</td>
-                    <td>${item.quantity}</td>
-                    <td>${money.formatCurrencytoVND(item.total)}</td>
-                </tr>
-            `;
+              <tr class="product-table__row"  data-value="${sp.maSP}">
+                  <td>${sp.maSP}</td>
+                  <td>${sp.tenSP}</td>
+                  <td>${sp.thuongHieu}</td>
+                  <td>${sp.pin}</td>
+                  <td>${sp.camTruoc}</td>
+                  <td>${sp.camSau}</td>
+                  <td>${sp.heDieuHanh}</td>
+                  <td>${sp.xuatXu}</td>
+                  <td>${sp.thoiGianBaoHanh}</td>
+                  <td><img class="product-table__img"
+                  src="${sp.hinhAnh}"
+                  alt=""></td>
+                  <td>${sp.trangThai}</td>
+                  <td>
+                      <button id="btn-edit" onclick="editProduct('${sp.maSP}')"   class="product-table__update-btn product-table-btn">Sửa</button>              
+                  </td>
+              </tr>
+              `;
+      });
+
+    document.querySelector(".product-table__list").innerHTML = html;
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+  }
+  const btnUpdate = $("#btn-save");
+  const btnAdd = $("#btn-add");
+  btnUpdate.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+    let maSanPham = document.getElementById("maSP").value;
+    let tenSP = document.getElementById("tenSP").value;
+    let thuongHieu = document.getElementById("thuongHieu").value;
+    let pin = document.getElementById("pin").value;
+    let camTruoc = document.getElementById("camTruoc").value;
+    let camSau = document.getElementById("camSau").value;
+    let heDieuHanh = document.getElementById("heDieuHanh").value;
+    let xuatXu = document.getElementById("xuatSu").value;
+    let thoiGianBaoHanh = document.getElementById("baoHanh").value;
+    let hinhAnh = document.getElementById("hinhAnh").value;
+    let trangThai = document.getElementById("trangThai").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (
+      !maSanPham ||
+      !tenSP ||
+      !thuongHieu ||
+      !camTruoc ||
+      !camSau ||
+      !heDieuHanh ||
+      !xuatXu ||
+      !thoiGianBaoHanh ||
+      !hinhAnh ||
+      !trangThai
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      maSP: maSanPham,
+      tenSP: tenSP,
+      hinhAnh: hinhAnh,
+      thuongHieu: thuongHieu,
+      pin: pin,
+      camTruoc: camTruoc,
+      camSau: camSau,
+      heDieuHanh: heDieuHanh,
+      xuatXu: xuatXu,
+      thoiGianBaoHanh: thoiGianBaoHanh,
+      trangThai: trangThai,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để cập nhật khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/update-sanpham",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
         }
-    
-        html += `
-            </tbody>
-        </table>
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo cập nhật thành công
+      alert("Cập nhật sản phẩm thành công!");
+
+      // Reload lại trang
+    } catch (error) {
+      console.error("Cập nhật thất bại:", error);
+      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+    }
+  });
+
+  btnAdd.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    // Lấy giá trị từ các trường nhập liệu
+    let tenSP = document.getElementById("tenSP").value;
+    let thuongHieu = document.getElementById("thuongHieu").value;
+    let pin = document.getElementById("pin").value;
+    let camTruoc = document.getElementById("camTruoc").value;
+    let camSau = document.getElementById("camSau").value;
+    let heDieuHanh = document.getElementById("heDieuHanh").value;
+    let xuatXu = document.getElementById("xuatSu").value;
+    let thoiGianBaoHanh = document.getElementById("baoHanh").value;
+    let hinhAnh = document.getElementById("hinhAnh").value;
+    let trangThai = document.getElementById("trangThai").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (
+      !tenSP ||
+      !thuongHieu ||
+      !pin ||
+      !camTruoc ||
+      !camSau ||
+      !heDieuHanh ||
+      !xuatXu ||
+      !thoiGianBaoHanh ||
+      !hinhAnh ||
+      !trangThai
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      tenSP,
+      thuongHieu,
+      pin,
+      camTruoc,
+      camSau,
+      heDieuHanh,
+      xuatXu,
+      thoiGianBaoHanh,
+      hinhAnh,
+      trangThai,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để thêm sản phẩm
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/add-phone",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi thêm sản phẩm");
+      }
+
+      // Xử lý phản hồi từ API
+      const result = await response.json();
+      console.log("Thêm thành công:", result);
+
+      // Kiểm tra nếu dữ liệu trả về hợp lệ
+      if (result && result.product) {
+        // Thêm sản phẩm mới vào bảng
+        const table = document.getElementById("product-table");
+        const newRow = table.insertRow();
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
+          <td>${result.product.maSP}</td>
+          <td>${result.product.tenSP}</td>
+          <td>${result.product.thuongHieu}</td>
+          <td>${result.product.pin}</td>
+          <td>${result.product.camTruoc}</td>
+          <td>${result.product.camSau}</td>
+          <td>${result.product.heDieuHanh}</td>
+          <td>${result.product.xuatXu}</td>
+          <td>${result.product.thoiGianBaoHanh}</td>
+          <td>${result.product.hinhAnh}</td>
+          <td>${result.product.trangThai}</td>
+          <td>
+            <button id="btn-edit" onclick="editSanPham('${result.product.maSP}')" class="product-table__update-btn product-table-btn">Sửa</button>
+          </td>
         `;
+      }
 
-        invoiceDetailList.innerHTML = html;
-    
-        const closeButton = invoiceDetailList.querySelector('.close-detail-btn');
-        closeButton.addEventListener('click', () => {
-            invoiceDetailList.innerHTML = '';
-            resetInvoicePage(); 
-        });
+      // Thông báo thành công
+      alert("Thêm sản phẩm thành công!");
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+      alert("Có lỗi xảy ra khi thêm sản phẩm!");
     }
-    
-   
-    function resetInvoicePage() {
-        processBtn.disabled = true; 
-        updateBtn.disabled = true; 
-
-        resetValue(); 
-    }
-
-
+  });
 }
+const editProduct = async (maSP) => {
+  console.log("maSP: ", maSP);
+  let row = document.querySelector(`tr[data-value='${maSP}']`);
+  // Lấy các giá trị từ các ô trong dòng
+  let maSanPham = row.querySelector("td:nth-child(1)").textContent;
+  let tenSP = row.querySelector("td:nth-child(2)").textContent;
+  let thuongHieu = row.querySelector("td:nth-child(3)").textContent;
+  let pin = row.querySelector("td:nth-child(4)").textContent;
+  let camTruoc = row.querySelector("td:nth-child(5)").textContent;
+  let camSau = row.querySelector("td:nth-child(6)").textContent;
+  let heDieuHanh = row.querySelector("td:nth-child(7)").textContent;
+  let xuatSu = row.querySelector("td:nth-child(8)").textContent;
 
-// initInvoicePage()
+  let thoiGianBaoHanh = row.querySelector("td:nth-child(9)").textContent;
 
-function initUserPage() {
-    const userList = User.getUsers()
-    const tableBody = $('.product-table__list')
-    const userIDInput = $('#user-id')
-    const fullNameInput = $('#user-full_name')
-    const usernameInput = $('#user-username')
-    const passwordInput = $('#user-password')
-    const emailInput = $('#user-email')
-    const phoneInput = $('#user-phone')
-    const addressInput = $('#user-address')
-    const permissionInput = $('#user-permission')
-    const statusInput = $('#user-status')
-    const functionList = $$('.function__item')
-    const listErrorMessage = $$('.form-message')
-    const btnSave = $('#btn-save')
-    const btnCancel = $('#btn-cancel')
+  let hinhAnh = row.querySelector("td:nth-child(10) img").getAttribute("src");
 
-    renderUserList(userList)
+  let trangThai = row.querySelector("td:nth-child(11)").textContent;
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maSP").value = maSanPham;
+  document.getElementById("tenSP").value = tenSP;
+  document.getElementById("thuongHieu").value = thuongHieu;
+  document.getElementById("pin").value = pin;
+  document.getElementById("camTruoc").value = camTruoc;
+  document.getElementById("camSau").value = camSau;
+  document.getElementById("heDieuHanh").value = heDieuHanh;
+  document.getElementById("xuatSu").value = xuatSu;
+  document.getElementById("baoHanh").value = thoiGianBaoHanh;
+  document.getElementById("hinhAnh").value = hinhAnh;
+  document.getElementById("trangThai").value = trangThai;
 
-    function renderUserList(listUser) {
-        userIDInput.value = User.getLastUserID() + 1
-        let html = ''
-        Array.from(listUser).forEach(user => {
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
 
-            html += `
-            <tr class="product-table__row" data-value=${user.userID}>
-                <td>${user.userID}</td>
-                <td>${user.username}</td>
-                <td>${user.password}</td>
-                <td>${user.full_name}</td>
-                <td>${user.email}</td>
-                <td>${user.phone}</td>
-                <td>${user.address}</td>
-                <td>
-                            <button class="product-table__update-btn product-table-btn">Sửa</button>
-                            <button class="product-table__delete-btn product-table-btn">Xóa</button>
-                        </td>
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+const huyProduct = () => {
+  document.getElementById("maSP").value = "";
+  document.getElementById("tenSP").value = "";
+  document.getElementById("thuongHieu").value = "";
+  document.getElementById("pin").value = "";
+  document.getElementById("camTruoc").value = "";
+  document.getElementById("camSau").value = "";
+  document.getElementById("heDieuHanh").value = "";
+  document.getElementById("xuatSu").value = "";
+  document.getElementById("baoHanh").value = "";
+  document.getElementById("hinhAnh").value = "";
+  document.getElementById("trangThai").value = "";
+
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+
+// PHIEN BAN
+async function initPhienBanPage() {
+  try {
+    const response = await fetch("http://localhost:8080/phonestore/get-phone");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
+
+    const data = await response.json();
+    const sanpham = data.data;
+    console.log("sanpham: ", sanpham);
+
+    let html = "";
+
+    // Duyệt qua các sản phẩm
+    sanpham
+      .slice()
+      .reverse()
+      .forEach((sp) => {
+        console.log("mảng phiên bản chứa các object ", sp.phienbansps);
+
+        // Nếu sản phẩm không có phiên bản (phienbansps là mảng rỗng hoặc không tồn tại)
+        if (!sp.phienbansps || sp.phienbansps.length === 0) {
+          html += `
+          <tr class="product-table__row" data-value="${sp.maSP}">
+            <td ></td>
+            <td >${sp.maSP}</td>
+            <td >${sp.tenSP}</td>
+            <td><img class="product-table__img" src="${sp.hinhAnh}" alt=""></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            
+            <td>
+              <button id="btn-edit" onclick="addPhienBan('${sp.maSP}')" class="product-table__update-btn product-table-btn">Thêm phiên bản</button>
+            </td>
+          </tr>
+        `;
+        } else {
+          // Duyệt qua các phiên bản sản phẩm
+          sp.phienbansps
+            .slice()
+            .reverse()
+            .forEach((pb) => {
+              html += `
+            <tr class="product-table__row" data-value="${pb.maPB}">
+              <td>${pb.maPB}</td>
+              <td>${sp.maSP}</td>
+              <td>${sp.tenSP}</td>
+              <td><img class="product-table__img" src="${sp.hinhAnh}" alt=""></td>
+              <td>${pb.mauSac}</td>
+              <td>${pb.RAM}</td>
+              <td>${pb.ROM}</td>
+              <td>${pb.soLuong}</td>
+              <td>${pb.giaGiam}</td>
+              <td>${pb.giaBan}</td>
+              <td>${pb.trangThai}</td>
+              <td>
+                <button id="btn-edit" onclick="addPhienBan('${sp.maSP}')" class="product-table__update-btn product-table-btn">Thêm phiên bản</button>
+                <button id="btn-edit" onclick="editPhienBan('${pb.maPB}')" class="product-table__update-btn product-table-btn">Sửa</button>
+              </td>
             </tr>
-             `
-        })
-
-        tableBody.innerHTML = html
-        const tableRow = $$('.product-table__row')
-        Array.from(tableRow).forEach(row => {
-            const userID = row.getAttribute('data-value')
-            const user = User.getUserID(parseInt(userID))
-            const btnUpdate = row.querySelector('.product-table__update-btn')
-            const btnDelete = row.querySelector('.product-table__delete-btn')
-
-            const username = row.cells[1].innerText
-            const password = row.cells[2].innerText
-            const fullName = row.cells[3].innerText
-            const email = row.cells[4].innerText
-            const phone = row.cells[5].innerText
-            const address = row.cells[6].innerText
-            const permission = user.isAdmin ? 'admin' : 'customer'
-            const status = user.isActive ? 'active' : 'inactive'
-            btnUpdate.addEventListener('click', () => {
-                userIDInput.value = userID
-                fullNameInput.value = fullName
-                passwordInput.value = password
-                usernameInput.value = username
-                emailInput.value = email
-                phoneInput.value = phone
-                addressInput.value = address
-                permissionInput.value = permission
-                statusInput.value = status
-                Array.from(functionList).forEach(item => {
-                    if (item.classList.contains('active')) {
-                        item.classList.remove('active')
-                    }
-                    if (item.dataset.value === 'update') {
-                        item.classList.add('active')
-                    }
-                })
-
-            })
-
-            btnDelete.addEventListener('click', () => {
-                deleteUser(userID)
-                resetValue()
-            })
-        })
-
-    }
-    function deleteUser(userID) {
-
-        if (confirm('Bạn có muốn xóa người dùng này?')) {
-            const user = User.getUserID(parseInt(userID))
-            console.log(user.username)
-            console.log(user.full_name)
-            console.log(user.isAdmin)
-            if (user.isAdmin === true) {
-
-                alert('Không thể xóa người dùng quản trị (admin)');
-                return
-            } else {
-                User.deleteUser(userID)
-                resetValue()
-                const newList = User.getUsers()
-                renderUserList(newList)
-            }
-
-
-
+          `;
+            });
         }
+      });
 
+    // Chèn HTML vào bảng
+    document.querySelector(".product-table__list").innerHTML = html;
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+  }
 
+  const btnUpdate = $("#btn-save");
+  const btnAdd = $("#btn-add");
+  btnUpdate.addEventListener("click", async (e) => {
+    let maPB = document.getElementById("maPB").value;
+    let mauSac = document.getElementById("mauSac").value;
+    let ram = document.getElementById("ram").value;
+    let rom = document.getElementById("rom").value;
+    let soLuong = document.getElementById("soLuong").value;
+    let giaGiam = document.getElementById("giaBan").value;
+    let giaBan = document.getElementById("giaGiam").value;
+    let trangThai = document.getElementById("trangThai").value;
+    if (
+      !maPB ||
+      !mauSac ||
+      !ram ||
+      !rom ||
+      !soLuong ||
+      !giaGiam ||
+      !giaBan ||
+      !trangThai
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
     }
-    function updateUser() {
-        const userID = userIDInput.value
-        const username = usernameInput.value
-        const password = passwordInput.value
-        const fullName = fullNameInput.value
-        const email = emailInput.value
-        const phone = phoneInput.value
-        const address = addressInput.value
-        const status = (statusInput.value === 'active') ? true : false
-        User.updateUser(userID, username, password, email, phone, fullName, address, status)
-        const newList = User.getUsers()
 
-        User.loadUsers(newList)
-        renderUserList(newList)
+    // Tạo đối tượng dữ liệu
+    const data = {
+      maPB: maPB,
+      mauSac: mauSac,
+      RAM: ram,
+      ROM: rom,
+      soLuong: soLuong,
+      giaGiam: giaGiam,
+      giaBan: giaBan,
+      trangThai: trangThai,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để cập nhật khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/update-phienban",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo cập nhật thành công
+      alert("Cập nhật phiên bản thành công!");
+
+      // Reload lại trang
+      window.location.reload();
+    } catch (error) {
+      console.error("Cập nhật thất bại:", error);
+      alert("Có lỗi xảy ra khi cập nhật phiên bản!");
     }
-    function addUser() {
-        // const userID = userIDInput.value
-        const validateAndDisplayError = (input, errorMessageElement, validationFunction) => {
-            const validationResult = validationFunction(input);
-            if (!validationResult.value) {
-                validate.showErrMessage(errorMessageElement, validationResult.message);
-                return false
-            } else {
-                validate.hideErrMessage(errorMessageElement);
-                return true
-            }
-        };
-        const isValidFullname = validateAndDisplayError(fullNameInput.value.toString(), listErrorMessage[1], validate.validateUserFullName);
-        const isValidUsername = validateAndDisplayError(usernameInput.value.toString(), listErrorMessage[2], validate.validateUserUsername);
-        const isValidPassword = validateAndDisplayError(passwordInput.value.toString(), listErrorMessage[3], validate.validateUserPassword);
-        const isValidEmail = validateAndDisplayError(emailInput.value.toString(), listErrorMessage[4], validate.validateUserEmail);
-        const isValidPhone = validateAndDisplayError(phoneInput.value.toString(), listErrorMessage[5], validate.validateUserPhone);
-        if (isValidFullname && isValidUsername && isValidPassword && isValidEmail && isValidPhone && isValidPassword) {
-            const username = usernameInput.value
-            const password = passwordInput.value
-            const fullName = fullNameInput.value
-            const email = emailInput.value
-            const phone = phoneInput.value
-            const address = addressInput.value
-            const permission = (permissionInput.value === 'admin') ? true : false
-            const status = (statusInput.value === 'active') ? true : false
-            User.addUser(username, password, email, phone, fullName, address, permission, status)
-            const newList = User.getUsers()
-            User.loadUsers(newList)
-            renderUserList(newList)
+  });
+
+  btnAdd.addEventListener("click", async (e) => {
+    e.preventDefault(); // Ngăn chặn reload trang mặc định
+    let maPB = document.getElementById("maPB").value;
+    let maSP = document.getElementById("maSP").value;
+    let mauSac = document.getElementById("mauSac").value;
+    let ram = document.getElementById("ram").value;
+    let rom = document.getElementById("rom").value;
+    let soLuong = document.getElementById("soLuong").value;
+    let giaGiam = document.getElementById("giaBan").value;
+    let giaBan = document.getElementById("giaGiam").value;
+    let trangThai = document.getElementById("trangThai").value;
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (
+      !maSP ||
+      !mauSac ||
+      !ram ||
+      !rom ||
+      !soLuong ||
+      !giaGiam ||
+      !giaBan ||
+      !trangThai
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      maSP: maSP,
+      mauSac: mauSac,
+      RAM: ram,
+      ROM: rom,
+      soLuong: soLuong,
+      giaGiam: giaGiam,
+      giaBan: giaBan,
+      trangThai: trangThai,
+      maPB: maPB,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để thêm nhân viên
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/add-phienban",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        // Hiển thị lỗi cụ thể từ API
+        if (result.message) {
+          alert("Phiên bản đã tồn tại!!!"); // Hiển thị thông báo lỗi từ server
+        } else {
+          throw new Error("Có lỗi xảy ra khi thêm nhân viên");
         }
         return;
+      }
+      // Xử lý phản hồi từ API (nếu cần)
 
+      console.log("Thêm thành công:", result);
 
+      // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
+      if (result && result.data) {
+        // Thêm hàng mới vào bảng
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
+                     <td>${result.data.maPB}</td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td>${result.data.mauSac}</td>
+                     <td>${result.data.RAM}</td>
+                     <td>${result.data.ROM}</td>
+                     <td>${result.data.soLuong}</td>
+                     <td>${result.data.giaGiam}</td>
+                     <td>${result.data.giaBan}</td>
+                     <td>${result.data.trangThai}</td>
+                 `;
+      }
+
+      console.log("Thêm thành công:", result);
+
+      // Cập nhật bảng (nếu cần)
+      alert("Thêm phiên bản thành công!");
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+      alert("Đã xảy ra lỗi trong quá trình xử lý!");
     }
-    btnSave.addEventListener('click', (e) => {
-        
-        e.preventDefault()
-        Array.from(functionList).forEach(item => {
-            if (item.classList.contains('active') && item.dataset.value === 'update') {
-                updateUser()
-                resetValue()
-
-            } else if (item.classList.contains('active') && item.dataset.value === 'add') {
-                addUser()
-                // resetValue()
-            }
-        })
-
-    })
-    btnCancel.addEventListener('click', (e) => {
-        e.preventDefault();
-        resetValue();
-    })
-
-    function resetValue() {
-        functionList.forEach(item => {
-            if (item.classList.contains('active')) {
-                item.classList.remove('active')
-            }
-            if (item.dataset.value === 'add') {
-                item.classList.add('active')
-            }
-
-        })
-        userIDInput.value = ''
-        usernameInput.value = ''
-        passwordInput.value = ''
-        fullNameInput.value = ''
-        emailInput.value = ''
-        phoneInput.value = ''
-        addressInput.value = ''
-        statusInput.value = ""
-        permissionInput.value = ""
-    }
+  });
 }
+
+const addPhienBan = async (maSP) => {
+  console.log("maSP: ", maSP);
+  document.getElementById("maPB").value = "";
+
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maSP").value = maSP;
+
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+const editPhienBan = async (maPB) => {
+  console.log("maPB: ", maPB);
+  document.getElementById("maSP").value = "";
+  let row = document.querySelector(`tr[data-value='${maPB}']`);
+  // Lấy các giá trị từ các ô trong dòng
+  let maPhienBan = row.querySelector("td:nth-child(1)").textContent;
+  let maSanPham = row.querySelector("td:nth-child(2)").textContent;
+  let mauSac = row.querySelector("td:nth-child(5)").textContent;
+  let ram = row.querySelector("td:nth-child(6)").textContent;
+  let rom = row.querySelector("td:nth-child(7)").textContent;
+  let soLuong = row.querySelector("td:nth-child(8)").textContent;
+  let giaGiam = row.querySelector("td:nth-child(9)").textContent;
+  let giaBan = row.querySelector("td:nth-child(10)").textContent;
+  let trangThai = row.querySelector("td:nth-child(11)").textContent;
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maPB").value = maPhienBan;
+  document.getElementById("maSP").value = maSanPham;
+  document.getElementById("mauSac").value = mauSac;
+  document.getElementById("ram").value = ram;
+  document.getElementById("rom").value = rom;
+  document.getElementById("soLuong").value = soLuong;
+  document.getElementById("giaBan").value = giaGiam;
+  document.getElementById("giaGiam").value = giaBan;
+  document.getElementById("trangThai").value = trangThai;
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+  console.log("items: ", items);
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  console.log("updateItem: ", updateItem);
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+
+function huyPhienBan() {
+  document.getElementById("maPB").value = "";
+  document.getElementById("maSP").value = "";
+  document.getElementById("mauSac").value = "";
+  document.getElementById("ram").value = "";
+  document.getElementById("rom").value = "";
+  document.getElementById("soLuong").value = "";
+  document.getElementById("giaBan").value = "";
+  document.getElementById("giaGiam").value = "";
+  document.getElementById("trangThai").value = "";
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+}
+
+// ACCOUNT
+
+async function initUserPage() {
+  try {
+    const response = await fetch("http://localhost:8080/user/get-taikhoan");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const taiKhoan = data.data;
+    console.log("taiKhoan: ", taiKhoan);
+
+    let html = "";
+    taiKhoan.forEach((tk) => {
+      html += `
+            <tr class="product-table__row" data-value="${tk.tkId}">
+                <td>${tk.tkId}</td>
+                <td>${tk.tenDangNhap}</td>
+                <td>${tk.matKhau}</td>
+                <td>${tk.quyen}</td>
+                <td>${tk.trangThai}</td>
+                <td>
+                    <button id="btn-edit" onclick="editTaiKhoan('${tk.tkId}')"  class="product-table__update-btn product-table-btn">Sửa</button>              
+                </td>
+            </tr>
+            `;
+    });
+
+    document.querySelector(".product-table__list").innerHTML = html;
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+  }
+  const btnUpdate = $("#btn-save");
+  const btnAdd = $("#btn-add");
+  btnUpdate.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+
+    let maTaiKhoanEl = document.getElementById("maTk").value;
+    let taiKhoanEl = document.getElementById("tenDangNhap").value;
+    let matKhauEl = document.getElementById("password").value;
+    let quyenEl = document.getElementById("user-permission").value;
+    let trangThaiEl = document.getElementById("user-status").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (
+      !maTaiKhoanEl ||
+      !taiKhoanEl ||
+      !matKhauEl ||
+      !quyenEl ||
+      !trangThaiEl
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      tkId: maTaiKhoanEl,
+      tenDangNhap: taiKhoanEl,
+      matKhau: matKhauEl,
+      quyen: quyenEl,
+      trangThai: trangThaiEl,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để cập nhật khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/user/update-taikhoanadmin",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo cập nhật thành công
+      alert("Cập nhật tài khoản thành công!");
+
+      // Reload lại trang
+      window.location.reload();
+    } catch (error) {
+      console.error("Cập nhật thất bại:", error);
+      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+    }
+  });
+
+  btnAdd.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+    let maTaiKhoanEl = document.getElementById("maTk").value;
+    let taiKhoanEl = document.getElementById("tenDangNhap").value;
+    let matKhauEl = document.getElementById("password").value;
+    let quyenEl = document.getElementById("user-permission").value;
+    let trangThaiEl = document.getElementById("user-status").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (maTaiKhoanEl != "") {
+      alert("Mã khuyến mãi tồn tại");
+      return;
+    }
+    if (!taiKhoanEl || !matKhauEl || !quyenEl || !trangThaiEl) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      tenDangNhap: taiKhoanEl,
+      matKhau: matKhauEl,
+      quyen: quyenEl,
+      trangThai: trangThaiEl,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để Thêm khuyến mãi
+    try {
+      const response = await fetch("http://localhost:8080/user/add-taikhoan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi Thêm khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Thêm thành công:", result);
+
+      // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
+      if (result && result.account) {
+        // Thêm hàng mới vào bảng
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
+                    <td>${result.account.tkId}</td>
+                    <td>${result.account.tenDangNhap}</td>
+                    <td>${result.account.matKhau}</td>
+                    <td>${result.account.quyen}</td>
+                    <td>${result.account.trangThai}</td>
+                    <td>
+                    <button id="btn-edit" onclick="editTaiKhoan('${result.account.tkId}')"  class="product-table__update-btn product-table-btn">Sửa</button>              
+                </td>
+                `;
+      }
+
+      // Thông báo thành công
+      alert("Thêm tài khoản thành công!");
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+      alert("Có lỗi xảy ra khi thêm tài khoản!");
+    }
+  });
+}
+
+const editTaiKhoan = async (tkId) => {
+  console.log("tkId: ", tkId);
+  let row = document.querySelector(`tr[data-value='${tkId}']`);
+  // Lấy các giá trị từ các ô trong dòng
+  let maTaiKhoan = row.querySelector("td:nth-child(1)").textContent;
+  let taiKhoan = row.querySelector("td:nth-child(2)").textContent;
+  console.log("taiKhoan: ", taiKhoan);
+  let matKhau = row.querySelector("td:nth-child(3)").textContent;
+  let quyen = row.querySelector("td:nth-child(4)").textContent;
+  let trangThai = row.querySelector("td:nth-child(5)").textContent;
+
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maTk").value = maTaiKhoan;
+  document.getElementById("tenDangNhap").value = taiKhoan;
+  document.getElementById("password").value = matKhau;
+  document.getElementById("user-permission").value = quyen;
+  document.getElementById("user-status").value = trangThai;
+
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+const huyTaiKhoan = () => {
+  document.getElementById("maTk").value = "";
+  document.getElementById("tenDangNhap").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("user-permission").value = "";
+  document.getElementById("user-status").value = "";
+
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+
+// NHA CUNG CAP
+
+async function initNhaCungCapPage() {
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-nhacungcap"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const taiKhoan = data.data;
+    console.log("taiKhoan: ", taiKhoan);
+
+    let html = "";
+    taiKhoan.forEach((tk) => {
+      html += `
+            <tr class="product-table__row" data-value="${tk.maNCC}">
+                <td>${tk.maNCC}</td>
+                <td>${tk.tenNCC}</td>
+                <td>${tk.diaChi}</td>
+                <td>${tk.sdt}</td>
+                <td>${tk.email}</td>
+                <td>${tk.trangThai}</td>
+                <td>                  
+                <button id="btn-edit" onclick="editNhaCungCap('${tk.maNCC}')"  class="product-table__update-btn product-table-btn">Sửa</button>   
+                       
+                </td>
+            </tr>
+            `;
+    });
+
+    document.querySelector(".product-table__list").innerHTML = html;
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+  }
+  const btnUpdate = $("#btn-save");
+  const btnAdd = $("#btn-add");
+  btnUpdate.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+
+    let maNCC = document.getElementById("maNCC").value;
+    let tenNCC = document.getElementById("tenNCC").value;
+    let diaChi = document.getElementById("diaChi").value;
+    let sdt = document.getElementById("sdt").value;
+    let email = document.getElementById("email").value;
+    let trangThai = document.getElementById("trangThai").value;
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (!maNCC || !tenNCC || !diaChi || !sdt || !email || !trangThai) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      maNCC: maNCC,
+      tenNCC: tenNCC,
+      diaChi: diaChi,
+      sdt: sdt,
+      email: email,
+      trangThai: trangThai,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để cập nhật khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/update-nhacungcap",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo cập nhật thành công
+      alert("Cập nhật tài khoản thành công!");
+
+      // Reload lại trang
+      window.location.reload();
+    } catch (error) {
+      console.error("Cập nhật thất bại:", error);
+      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+    }
+  });
+
+  btnAdd.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+
+    let tenNCC = document.getElementById("tenNCC").value;
+    let diaChi = document.getElementById("diaChi").value;
+    let sdt = document.getElementById("sdt").value;
+    let email = document.getElementById("email").value;
+    let trangThai = document.getElementById("trangThai").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+
+    if (!tenNCC || !diaChi || !sdt || !email || !trangThai) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      tenNCC: tenNCC,
+      diaChi: diaChi,
+      sdt: sdt,
+      email: email,
+      trangThai: trangThai,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để Thêm khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/add-nhacungcap",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi Thêm khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Thêm thành công:", result);
+
+      // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
+      if (result && result.account) {
+        // Thêm hàng mới vào bảng
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
+                    <td>${result.account.tkId}</td>
+                    <td>${result.account.tenDangNhap}</td>
+                    <td>${result.account.matKhau}</td>
+                    <td>${result.account.quyen}</td>
+                    <td>${result.account.trangThai}</td>
+                    <td>
+                    <button id="btn-edit" onclick="editTaiKhoan('${result.account.tkId}')"  class="product-table__update-btn product-table-btn">Sửa</button>              
+                </td>
+                `;
+      }
+
+      // Thông báo thành công
+      alert("Thêm tài khoản thành công!");
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+      alert("Có lỗi xảy ra khi thêm tài khoản!");
+    }
+  });
+}
+
+const editNhaCungCap = async (maNCC) => {
+  console.log("maNCC: ", maNCC);
+  let row = document.querySelector(`tr[data-value='${maNCC}']`);
+  // Lấy các giá trị từ các ô trong dòng
+  let maNhaCungCap = row.querySelector("td:nth-child(1)").textContent;
+  let tenNCC = row.querySelector("td:nth-child(2)").textContent;
+  let diaChi = row.querySelector("td:nth-child(3)").textContent;
+  let sdt = row.querySelector("td:nth-child(4)").textContent;
+  let email = row.querySelector("td:nth-child(5)").textContent;
+  let trangThai = row.querySelector("td:nth-child(6)").textContent;
+
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maNCC").value = maNhaCungCap;
+  document.getElementById("tenNCC").value = tenNCC;
+  document.getElementById("diaChi").value = diaChi;
+  document.getElementById("sdt").value = sdt;
+  document.getElementById("email").value = email;
+  document.getElementById("trangThai").value = trangThai;
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+const huyNhaCungCap = () => {
+  document.getElementById("maNCC").value = "";
+  document.getElementById("tenNCC").value = "";
+  document.getElementById("diaChi").value = "";
+  document.getElementById("sdt").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("trangThai").value = "";
+
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+
+// NHAN VIEN
+
+async function initNhanVienPage() {
+  try {
+    const response = await fetch("http://localhost:8080/user/get-nhanvien");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const taiKhoan = data.data;
+    console.log("taiKhoan: ", taiKhoan);
+
+    let html = "";
+    taiKhoan.forEach((nv) => {
+      html += `
+              <tr class="product-table__row" data-value="${nv.maNV}">
+                  <td>${nv.maNV}</td>
+                  <td>${nv.maTK}</td>
+                  <td>${nv.hoTen}</td>
+                  <td>${nv.ngaySinh}</td>
+                  <td>${nv.gioiTinh}</td>
+                  <td>${nv.diaChi}</td>
+                  <td>${nv.sdt}</td>
+                  <td>${nv.email}</td>
+                  <td>${nv.vaiTro}</td>
+                  <td>${nv.trangThai}</td>
+                  <td>${nv.maTK_taikhoan.tenDangNhap}</td>
+                  <td>${nv.maTK_taikhoan.matKhau}</td>
+                  <td>
+                      <button id="btn-edit" onclick="editNhanVien('${nv.maNV}')"  class="product-table__update-btn product-table-btn">Sửa</button>              
+                  </td>
+              </tr>
+              `;
+    });
+
+    document.querySelector(".product-table__list").innerHTML = html;
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+  }
+  const btnUpdate = $("#btn-save");
+  const btnAdd = $("#btn-add");
+  btnUpdate.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+
+    let maNv = document.getElementById("maNv").value;
+    let tenNv = document.getElementById("tenNv").value;
+    let email = document.getElementById("email").value;
+    let sdt = document.getElementById("phone").value;
+    let date = document.getElementById("date").value;
+    let permission = document.getElementById("user-permission").value;
+    let status = document.getElementById("user-status").value;
+    let gioiTinh = document.getElementById("gioiTinh").value;
+    let diaChi = document.getElementById("diaChi").value;
+    let tenDangNhap = document.getElementById("taiKhoan").value;
+    let matKhau = document.getElementById("matKhau").value;
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (
+      !maNv ||
+      !tenNv ||
+      !email ||
+      !sdt ||
+      !date ||
+      !permission ||
+      !status ||
+      !gioiTinh ||
+      !diaChi
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      maNV: maNv,
+      hoTen: tenNv,
+      ngaySinh: date,
+      gioiTinh: gioiTinh,
+      diaChi: diaChi,
+      sdt: sdt,
+      email: email,
+      vaiTro: permission,
+      trangThai: status,
+      tenDangNhap,
+      matKhau,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để cập nhật khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/user/update-nhanvien",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo cập nhật thành công
+      alert("Cập nhật tài khoản thành công!");
+
+      // Reload lại trang
+      window.location.reload();
+    } catch (error) {
+      console.error("Cập nhật thất bại:", error);
+      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+    }
+  });
+
+  btnAdd.addEventListener("click", async (e) => {
+    e.preventDefault(); // Ngăn chặn reload trang mặc định
+
+    // Lấy giá trị từ các trường nhập liệu
+    let tenNv = document.getElementById("tenNv").value;
+    let email = document.getElementById("email").value;
+    let sdt = document.getElementById("phone").value;
+    let date = document.getElementById("date").value;
+    let permission = document.getElementById("user-permission").value;
+    let status = document.getElementById("user-status").value;
+    let gioiTinh = document.getElementById("gioiTinh").value;
+    let diaChi = document.getElementById("diaChi").value;
+    let tenDangNhap = document.getElementById("taiKhoan").value;
+    let matKhau = document.getElementById("matKhau").value;
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (
+      !tenNv ||
+      !email ||
+      !sdt ||
+      !date ||
+      !permission ||
+      !status ||
+      !gioiTinh ||
+      !tenDangNhap ||
+      !matKhau ||
+      !diaChi
+    ) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      hoTen: tenNv,
+      ngaySinh: date,
+      gioiTinh: gioiTinh,
+      diaChi: diaChi,
+      sdt: sdt,
+      email: email,
+      vaiTro: permission,
+      trangThai: status,
+      tenDangNhap: tenDangNhap,
+      matKhau: matKhau,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để thêm nhân viên
+    try {
+      const response = await fetch("http://localhost:8080/user/add-nhanvien", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        // Hiển thị lỗi cụ thể từ API
+        if (result.message) {
+          alert(
+            "Hãy tạo tài khoản cho nhân viên trước và email không được trùng!!!"
+          ); // Hiển thị thông báo lỗi từ server
+        } else {
+          throw new Error("Có lỗi xảy ra khi thêm nhân viên");
+        }
+        return;
+      }
+
+      console.log("Thêm thành công:", result);
+
+      // Cập nhật bảng (nếu cần)
+      alert("Thêm nhân viên thành công!");
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+      alert("Đã xảy ra lỗi trong quá trình xử lý!");
+    }
+  });
+}
+
+const editNhanVien = async (maNV) => {
+  console.log("maNV: ", maNV);
+  let row = document.querySelector(`tr[data-value='${maNV}']`);
+  const inputTaiKhoan = document.getElementById("taiKhoan");
+
+  // Thêm thuộc tính disabled để vô hiệu hóa input
+  inputTaiKhoan.disabled = true;
+
+  // let inputmatKhau = document.getElementById("matKhau");
+  // inputmatKhau.disabled = true;
+  // Lấy các giá trị từ các ô trong dòng
+  let maNv = row.querySelector("td:nth-child(1)").textContent;
+  let hoTen = row.querySelector("td:nth-child(3)").textContent;
+  let ngaySinh = row.querySelector("td:nth-child(4)").textContent;
+  let gioiTinh = row.querySelector("td:nth-child(5)").textContent;
+  let diaChi = row.querySelector("td:nth-child(6)").textContent;
+  let sdt = row.querySelector("td:nth-child(7)").textContent;
+  let email = row.querySelector("td:nth-child(8)").textContent;
+  let vaiTro = row.querySelector("td:nth-child(9)").textContent;
+  let trangThai = row.querySelector("td:nth-child(10)").textContent;
+  let taiKhoan = row.querySelector("td:nth-child(11)").textContent;
+  let matKhau = row.querySelector("td:nth-child(12)").textContent;
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maNv").value = maNv;
+  document.getElementById("tenNv").value = hoTen;
+  document.getElementById("email").value = email;
+  document.getElementById("phone").value = sdt;
+  document.getElementById("date").value = ngaySinh;
+  document.getElementById("user-permission").value = vaiTro;
+  document.getElementById("user-status").value = trangThai;
+  document.getElementById("gioiTinh").value = gioiTinh;
+  document.getElementById("diaChi").value = diaChi;
+  document.getElementById("taiKhoan").value = taiKhoan;
+  document.getElementById("matKhau").value = matKhau;
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+const huyNhanVien = () => {
+  let inputTaiKhoan = document.getElementById("taiKhoan");
+
+  inputTaiKhoan.disabled = false;
+
+  document.getElementById("maNv").value = "";
+  document.getElementById("tenNv").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("user-permission").value = "";
+  document.getElementById("user-status").value = "";
+  document.getElementById("gioiTinh").value = "";
+  document.getElementById("diaChi").value = "";
+  document.getElementById("taiKhoan").value = "";
+  document.getElementById("matKhau").value = "";
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
+
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+
+// DASHBOARD
 
 function initDashboardPage() {
-    const boxItem = $$('.box-analysis__item')
-    const filterSelect = document.getElementById('filter__select');
-    const filterButton = $('.filter__button')
-    const defaultMonth = 11
-    loadBoxAnalysis()
-    loadOptionMonth()
-    filterMonth()
-    function loadBoxAnalysis(month = 11) {
-        boxItem.forEach(item => {
-            if (item.dataset.value === 'total-customer') {
-                const a = Invoice.getTotalCustomerByMonth(month)
-                item.querySelector('.box-analysis__number').innerText = a
-            }
-            if (item.dataset.value === 'total-price') {
-                const a = Invoice.calculateRevenueByMonth(month)
-                item.querySelector('.box-analysis__number').innerText = a
-            }
-            if (item.dataset.value === 'total-invoice') {
-                const a = Invoice.getTotalInvoiceByMonth(month)
-                item.querySelector('.box-analysis__number').innerText = a
+  const boxItem = $$(".box-analysis__item");
+  const filterSelect = document.getElementById("filter__select");
+  const filterButton = $(".filter__button");
+  const defaultMonth = 11;
+  loadBoxAnalysis();
+  loadOptionMonth();
+  filterMonth();
+  function loadBoxAnalysis(month = 11) {
+    boxItem.forEach((item) => {
+      if (item.dataset.value === "total-customer") {
+        const a = Invoice.getTotalCustomerByMonth(month);
+        item.querySelector(".box-analysis__number").innerText = a;
+      }
+      if (item.dataset.value === "total-price") {
+        const a = Invoice.calculateRevenueByMonth(month);
+        item.querySelector(".box-analysis__number").innerText = a;
+      }
+      if (item.dataset.value === "total-invoice") {
+        const a = Invoice.getTotalInvoiceByMonth(month);
+        item.querySelector(".box-analysis__number").innerText = a;
+      }
+      if (item.dataset.value === "total-product") {
+        const a = Invoice.getTotalSoldProductsInMonth(month);
+        item.querySelector(".box-analysis__number").innerText = a;
+      }
+    });
+  }
+  function loadOptionMonth() {
+    filterSelect.innerHTML = "";
+    for (let i = 1; i <= 12; i++) {
+      // Tạo một option
+      const option = document.createElement("option");
 
-            }
-            if (item.dataset.value === 'total-product') {
-                const a = Invoice.getTotalSoldProductsInMonth(month)
-                item.querySelector('.box-analysis__number').innerText = a
-            }
-        })
-
+      // Đặt giá trị và văn bản cho option
+      option.value = i.toString(); // Giá trị từ 1 đến 12
+      option.textContent = `Tháng ${i}`;
+      if (i === defaultMonth) {
+        option.selected = true;
+      }
+      // Thêm option vào thẻ select
+      filterSelect.appendChild(option);
     }
-    function loadOptionMonth() {
-        filterSelect.innerHTML = ''
-        for (let i = 1; i <= 12; i++) {
-            // Tạo một option
-            const option = document.createElement('option');
+  }
 
-            // Đặt giá trị và văn bản cho option
-            option.value = i.toString(); // Giá trị từ 1 đến 12
-            option.textContent = `Tháng ${i}`;
-            if (i === defaultMonth) {
-                option.selected = true;
-            }
-            // Thêm option vào thẻ select
-            filterSelect.appendChild(option);
-        }
+  function filterMonth() {
+    filterButton.addEventListener("click", () => {
+      loadBoxAnalysis(parseInt(filterSelect.value));
+      renderTable(parseInt(filterSelect.value));
+    });
+  }
 
+  function renderTable(month = defaultMonth) {
+    const table = $$(".table__container");
+    table.forEach((tb) => {
+      if (parseInt(tb.dataset.value) === 1) {
+        const tableBody = tb.querySelector(".analysis-table__list");
+        tableBody.innerHTML = "";
+        renderTable1(tableBody);
+      }
+      if (parseInt(tb.dataset.value) === 2) {
+        const tableBody = tb.querySelector(".analysis-table__list");
+        tableBody.innerHTML = "";
+        renderTable2(tableBody);
+      }
+    });
+    function renderTable1(tableBody) {
+      brandValues.forEach((item) => {
+        // Tạo một dòng mới
+        const row = document.createElement("tr");
+        row.classList.add("analysis-table__row");
+
+        // Tạo và thêm các ô (td) cho dòng
+        const brandCell = document.createElement("td");
+        brandCell.textContent = item;
+
+        const quantityCell = document.createElement("td");
+
+        quantityCell.textContent = Invoice.getTotalSoldProductsInMonthByBrand(
+          item.toLowerCase(),
+          month
+        );
+
+        row.appendChild(brandCell);
+        row.appendChild(quantityCell);
+
+        // Thêm dòng vào tbody
+        tableBody.appendChild(row);
+      });
     }
 
-    function filterMonth() {
-        filterButton.addEventListener('click', () => {
-            loadBoxAnalysis(parseInt(filterSelect.value));
-            renderTable(parseInt(filterSelect.value));
-        })
+    function renderTable2(tableBody) {
+      brandValues.forEach((item) => {
+        // Tạo một dòng mới
+        const row = document.createElement("tr");
+        row.classList.add("analysis-table__row");
+
+        // Tạo và thêm các ô (td) cho dòng
+        const brandCell = document.createElement("td");
+        brandCell.textContent = item;
+
+        const quantityCell = document.createElement("td");
+
+        quantityCell.textContent = Invoice.calculateRevenueByCategoryAndMonth(
+          item.toLowerCase(),
+          month
+        );
+        row.appendChild(brandCell);
+        row.appendChild(quantityCell);
+
+        // Thêm dòng vào tbody
+        tableBody.appendChild(row);
+      });
     }
-
-    function renderTable(month = defaultMonth) {
-        const table = $$('.table__container')
-        table.forEach(tb => {
-
-            if (parseInt(tb.dataset.value) === 1) {
-                const tableBody = tb.querySelector('.analysis-table__list')
-                tableBody.innerHTML = ''
-                renderTable1(tableBody)
-            }
-            if (parseInt(tb.dataset.value) === 2) {
-                const tableBody = tb.querySelector('.analysis-table__list')
-                tableBody.innerHTML = ''
-                renderTable2(tableBody)
-            }
-        })
-        function renderTable1(tableBody) {
-            brandValues.forEach(item => {
-                // Tạo một dòng mới
-                const row = document.createElement('tr');
-                row.classList.add('analysis-table__row');
-
-                // Tạo và thêm các ô (td) cho dòng
-                const brandCell = document.createElement('td');
-                brandCell.textContent = item;
-
-                const quantityCell = document.createElement('td');
-
-                quantityCell.textContent = Invoice.getTotalSoldProductsInMonthByBrand(item.toLowerCase(), month)
-
-                row.appendChild(brandCell);
-                row.appendChild(quantityCell);
-
-                // Thêm dòng vào tbody
-                tableBody.appendChild(row);
-            });
-        }
-
-        function renderTable2(tableBody) {
-            brandValues.forEach(item => {
-                // Tạo một dòng mới
-                const row = document.createElement('tr');
-                row.classList.add('analysis-table__row');
-
-                // Tạo và thêm các ô (td) cho dòng
-                const brandCell = document.createElement('td');
-                brandCell.textContent = item;
-
-                const quantityCell = document.createElement('td');
-
-                quantityCell.textContent = Invoice.calculateRevenueByCategoryAndMonth(item.toLowerCase(), month)
-                row.appendChild(brandCell);
-                row.appendChild(quantityCell);
-
-                // Thêm dòng vào tbody
-                tableBody.appendChild(row);
-            });
-        }
-
-    }
-    renderTable()
+  }
+  renderTable();
 }
-
 
 // PROMOTION
 
 async function initPromotionPage() {
-    
-   
-    try {
-        const response = await fetch("http://localhost:8080/phonestore/get-promotion");
-        if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
-        
-        const data = await response.json();
-        const promotions = data.data;
-        console.log('promotions: ', promotions);
-        
-        let html = '';
-        promotions.forEach((promo) => {
-            html += `
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-promotion"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const promotions = data.data;
+    console.log("promotions: ", promotions);
+
+    let html = "";
+    promotions.forEach((promo) => {
+      html += `
             <tr class="product-table__row" data-value="${promo.maKM}">
                 <td>${promo.maKM}</td>
                 <td>${promo.moTa}</td>
@@ -2373,224 +3073,218 @@ async function initPromotionPage() {
                 </td>
             </tr>
             `;
-        });
-
-        document.querySelector('.product-table__list').innerHTML = html;
-
-    } catch (error) {
-        console.error("Lỗi khi gọi API khuyến mãi:", error);
-    }
-    const btnUpdate = $('#btn-save')
-    const btnAdd = $('#btn-add')
-    btnUpdate.addEventListener('click', async (e) => {
-        // Lấy giá trị từ các trường nhập liệu
-        let maKmEl = document.getElementById("maKhuyenMai").value;
-        let moTaEl = document.getElementById("moTa").value;
-        let dieuKienEl = document.getElementById("dieuKien").value;
-        let mucGiamEl = document.getElementById("mucGiam").value;
-        let trangThaiEl = document.getElementById("trangThai").value;
-    
-        // Kiểm tra dữ liệu trước khi gửi đi
-        if (!maKmEl || !moTaEl || !dieuKienEl || !mucGiamEl || !trangThaiEl) {
-            alert("Vui lòng điền đầy đủ các thông tin.");
-            return;
-        }
-    
-        // Tạo đối tượng dữ liệu
-        const data = {
-            id: maKmEl,
-            moTa: moTaEl,
-            dieuKien: dieuKienEl,
-            mucGiam: mucGiamEl,
-            trangThai: trangThaiEl
-        };
-    
-        console.log('data: ', data);
-    
-        // Gọi API để cập nhật khuyến mãi
-        try {
-            const response = await fetch('http://localhost:8080/phonestore/update-promotion', {
-                method: 'PUT', 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
-            });
-    
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi cập nhật khuyến mãi');
-            }
-    
-            // Xử lý phản hồi từ API (nếu cần)
-            const result = await response.json();
-            console.log('Cập nhật thành công:', result);
-    
-            // Thông báo cập nhật thành công
-            alert('Cập nhật khuyến mãi thành công!');
-    
-            // Reload lại trang
-            window.location.reload();
-    
-        } catch (error) {
-            console.error('Cập nhật thất bại:', error);
-            alert('Có lỗi xảy ra khi cập nhật khuyến mãi!');
-        }
     });
-    
-       btnAdd.addEventListener('click', async (e) => {
-        // Lấy giá trị từ các trường nhập liệu
-        let maKmEl = document.getElementById("maKhuyenMai").value;
-        let moTaEl = document.getElementById("moTa").value;
-        let dieuKienEl = document.getElementById("dieuKien").value;
-        let mucGiamEl = document.getElementById("mucGiam").value;
-        let trangThaiEl = document.getElementById("trangThai").value;
-    
-        // Kiểm tra dữ liệu trước khi gửi đi
-        if (maKmEl != "") {
-            alert("Mã khuyến mãi tồn tại");
-            return;
+
+    document.querySelector(".product-table__list").innerHTML = html;
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+  }
+  const btnUpdate = $("#btn-save");
+  const btnAdd = $("#btn-add");
+  btnUpdate.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+    let maKmEl = document.getElementById("maKhuyenMai").value;
+    let moTaEl = document.getElementById("moTa").value;
+    let dieuKienEl = document.getElementById("dieuKien").value;
+    let mucGiamEl = document.getElementById("mucGiam").value;
+    let trangThaiEl = document.getElementById("trangThai").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (!maKmEl || !moTaEl || !dieuKienEl || !mucGiamEl || !trangThaiEl) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      id: maKmEl,
+      moTa: moTaEl,
+      dieuKien: dieuKienEl,
+      mucGiam: mucGiamEl,
+      trangThai: trangThaiEl,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để cập nhật khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/update-promotion",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
         }
-        if (!moTaEl || !dieuKienEl || !mucGiamEl || !trangThaiEl) {
-            alert("Vui lòng điền đầy đủ các thông tin.");
-            return;
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo cập nhật thành công
+      alert("Cập nhật khuyến mãi thành công!");
+
+      // Reload lại trang
+      window.location.reload();
+    } catch (error) {
+      console.error("Cập nhật thất bại:", error);
+      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+    }
+  });
+
+  btnAdd.addEventListener("click", async (e) => {
+    // Lấy giá trị từ các trường nhập liệu
+    let maKmEl = document.getElementById("maKhuyenMai").value;
+    let moTaEl = document.getElementById("moTa").value;
+    let dieuKienEl = document.getElementById("dieuKien").value;
+    let mucGiamEl = document.getElementById("mucGiam").value;
+    let trangThaiEl = document.getElementById("trangThai").value;
+
+    // Kiểm tra dữ liệu trước khi gửi đi
+    if (maKmEl != "") {
+      alert("Mã khuyến mãi tồn tại");
+      return;
+    }
+    if (!moTaEl || !dieuKienEl || !mucGiamEl || !trangThaiEl) {
+      alert("Vui lòng điền đầy đủ các thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    const data = {
+      moTa: moTaEl,
+      dieuKien: dieuKienEl,
+      mucGiam: mucGiamEl,
+      trangThai: trangThaiEl,
+    };
+
+    console.log("data: ", data);
+
+    // Gọi API để Thêm khuyến mãi
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/add-khuyenmai",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         }
-    
-        // Tạo đối tượng dữ liệu
-        const data = {
-            moTa: moTaEl,
-            dieuKien: dieuKienEl,
-            mucGiam: mucGiamEl,
-            trangThai: trangThaiEl
-        };
-    
-        console.log('data: ', data);
-    
-        // Gọi API để Thêm khuyến mãi
-        try {
-            const response = await fetch('http://localhost:8080/phonestore/add-khuyenmai', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-    
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi Thêm khuyến mãi');
-            }
-    
-            // Xử lý phản hồi từ API (nếu cần)
-            const result = await response.json();
-            console.log('Thêm thành công:', result);
-    
-            // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
-            if (result && result.data) {
-                // Thêm hàng mới vào bảng
-                const table = document.getElementById('product-table'); // Lấy bảng bằng ID
-                const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
-    
-                // Thêm các ô (td) vào hàng mới
-                newRow.innerHTML = `
+      );
+
+      if (!response.ok) {
+        throw new Error("Có lỗi xảy ra khi Thêm khuyến mãi");
+      }
+
+      // Xử lý phản hồi từ API (nếu cần)
+      const result = await response.json();
+      console.log("Thêm thành công:", result);
+
+      // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
+      if (result && result.data) {
+        // Thêm hàng mới vào bảng
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
                     <td>${result.data.maKM}</td>
                     <td>${result.data.moTa}</td>
                     <td>${result.data.dieuKien}</td>
                     <td>${result.data.mucGiam}</td>
                     <td>${result.data.trangThai}</td>
                 `;
-            }
-    
-            // Thông báo thành công
-            alert('Thêm khuyến mãi thành công!');
-    
-        } catch (error) {
-            console.error('Có lỗi xảy ra:', error);
-            alert('Có lỗi xảy ra khi thêm khuyến mãi!');
-        }
-    });
-    
+      }
 
-    
-   
-
-       
-
-
-
+      // Thông báo thành công
+      alert("Thêm khuyến mãi thành công!");
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+      alert("Có lỗi xảy ra khi thêm khuyến mãi!");
+    }
+  });
 }
 
 const editBtn = async (promotionID) => {
-    // Lấy dòng tương ứng với promotionID
-    let row = document.querySelector(`tr[data-value='${promotionID}']`);
+  // Lấy dòng tương ứng với promotionID
+  let row = document.querySelector(`tr[data-value='${promotionID}']`);
 
-    // Lấy các giá trị từ các ô trong dòng
-    let maKM = row.querySelector('td:nth-child(1)').textContent;  
-    let moTa = row.querySelector('td:nth-child(2)').textContent;  
-    let dieuKien = row.querySelector('td:nth-child(3)').textContent;  
-    let mucGiam = row.querySelector('td:nth-child(4)').textContent;  
-    let trangThai = row.querySelector('td:nth-child(5)').textContent;  
+  // Lấy các giá trị từ các ô trong dòng
+  let maKM = row.querySelector("td:nth-child(1)").textContent;
+  let moTa = row.querySelector("td:nth-child(2)").textContent;
+  let dieuKien = row.querySelector("td:nth-child(3)").textContent;
+  let mucGiam = row.querySelector("td:nth-child(4)").textContent;
+  let trangThai = row.querySelector("td:nth-child(5)").textContent;
 
-    // Điền các giá trị vào các ô nhập liệu
-    document.getElementById("maKhuyenMai").value = maKM;
-    document.getElementById("moTa").value = moTa;
-    document.getElementById("dieuKien").value = dieuKien;
-    document.getElementById("mucGiam").value = mucGiam;
-    document.getElementById("trangThai").value = trangThai;
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maKhuyenMai").value = maKM;
+  document.getElementById("moTa").value = moTa;
+  document.getElementById("dieuKien").value = dieuKien;
+  document.getElementById("mucGiam").value = mucGiam;
+  document.getElementById("trangThai").value = trangThai;
 
-    // Chuyển trạng thái active sang "Chỉnh sửa"
-    // Lấy tất cả các phần tử <li> có lớp "function__item"
-    let items = document.querySelectorAll('.function__item');
-    
-    // Xóa lớp active khỏi tất cả các phần tử
-    items.forEach(item => {
-        item.classList.remove('active');
-    });
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
-    // Thêm lớp active vào phần tử "Chỉnh sửa"
-    let updateItem = document.querySelector('li[data-value="update"]');
-    if (updateItem) {
-        updateItem.classList.add('active');
-    }
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  console.log("updateItem: ", updateItem);
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
 };
 const huyPromotion = () => {
-    document.getElementById("maKhuyenMai").value = "";
-    document.getElementById("moTa").value = "";
-    document.getElementById("dieuKien").value = "";
-    document.getElementById("mucGiam").value = "";
-    document.getElementById("trangThai").value = "";
+  document.getElementById("maKhuyenMai").value = "";
+  document.getElementById("moTa").value = "";
+  document.getElementById("dieuKien").value = "";
+  document.getElementById("mucGiam").value = "";
+  document.getElementById("trangThai").value = "";
 
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
-    
-    // Chuyển trạng thái active sang "Chỉnh sửa"
-    // Lấy tất cả các phần tử <li> có lớp "function__item"
-    let items = document.querySelectorAll('.function__item');
-    
-    // Xóa lớp active khỏi tất cả các phần tử
-    items.forEach(item => {
-        item.classList.remove('active');
-    });
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
 
-    // Thêm lớp active vào phần tử "Chỉnh sửa"
-    let updateItem = document.querySelector('li[data-value="add"]');
-    if (updateItem) {
-        updateItem.classList.add('active');
-    }
-
-}
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
 
 //  phieuBaoHanh
 
 async function initBaoHanhPage() {
-    try {
-        const response = await fetch("http://localhost:8080/phonestore/get-phieubaohanh");
-        if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
-        
-        const data = await response.json();
-        const res = data.data;
-        console.log('res: ', res);
-        
-        let html = '';
-        res.forEach((item) => {
-            html += `
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-phieubaohanh"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const res = data.data;
+    console.log("res: ", res);
+
+    let html = "";
+    res.forEach((item) => {
+      html += `
             <tr class="product-table__row" data-value="${item.maPBH}">
                 <td>${item.maPBH}</td>
                 <td>${item.thoiGianTao}</td>
@@ -2605,123 +3299,138 @@ async function initBaoHanhPage() {
                 </td>
             </tr>
             `;
-        });
-
-        document.querySelector('.product-table__list').innerHTML = html;
-
-
-
-
-
-    const btnUpdate = $('#btn-save')
-    const btnAdd = $('#btn-add')
-    btnUpdate.addEventListener('click', async (e) => {
-        // Lấy giá trị từ các trường nhập liệu
-        let maPBHEl = document.getElementById("maBaoHanh").value;
-        let thoiGianTaoEl = document.getElementById("thoiGian").value;
-        let tongTienEl = document.getElementById("tongTien").value;
-        let MaNVEl = document.getElementById("maNv").value;
-        let soSeriEl = document.getElementById("soSeri").value;
-        let trangThaiEl = document.getElementById("trangThai").value;
-        let noiDungEl = document.getElementById("noiDung").value;
-    
-        // Kiểm tra dữ liệu trước khi gửi đi
-        if (!maPBHEl || !thoiGianTaoEl || !tongTienEl || !MaNVEl || !soSeriEl || !trangThaiEl || !noiDungEl) {
-            alert("Vui lòng điền đầy đủ các thông tin.");
-            return;
-        }
-    
-        // Tạo đối tượng dữ liệu
-        const data = {
-            maPBH: maPBHEl,
-            thoiGianTao: thoiGianTaoEl,
-            tongTien: tongTienEl,
-            trangThai: trangThaiEl,
-            maNV: MaNVEl,
-            soSeri: soSeriEl,
-            noiDung: noiDungEl
-        };
-    
-        console.log('data: ', data);
-    
-        try {
-            const response = await fetch('http://localhost:8080/phonestore/update-baohanh', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-    
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi cập nhật khuyến mãi');
-            }
-    
-            const result = await response.json();
-            console.log('Cập nhật thành công:', result);
-    
-            // Load lại trang sau khi cập nhật thành công
-            window.location.reload();
-    
-            alert('Cập nhật khuyến mãi thành công!');
-        } catch (error) {
-            console.log('Lỗi khi cập nhật khuyến mãi:', error);
-            alert('Có lỗi xảy ra khi cập nhật khuyến mãi!');
-        }
     });
-    
 
+    document.querySelector(".product-table__list").innerHTML = html;
 
-       btnAdd.addEventListener('click', async (e) => {
-        // Lấy giá trị từ các trường nhập liệu
-        let thoiGianTaoEl = document.getElementById("thoiGian").value;
-        let tongTienEl = document.getElementById("tongTien").value;
-        let MaNVEl = document.getElementById("maNv").value;
-        let soSeriEl = document.getElementById("soSeri").value;
-        let trangThaiEl = document.getElementById("trangThai").value;
-        let noiDungEl = document.getElementById("noiDung").value;
-    
-        // Kiểm tra dữ liệu trước khi gửi đi
-        if (!thoiGianTaoEl || !tongTienEl || !MaNVEl || !soSeriEl || !trangThaiEl || !noiDungEl) {
-            alert("Vui lòng điền đầy đủ các thông tin.");
-            return;
+    const btnUpdate = $("#btn-save");
+    const btnAdd = $("#btn-add");
+    btnUpdate.addEventListener("click", async (e) => {
+      // Lấy giá trị từ các trường nhập liệu
+      let maPBHEl = document.getElementById("maBaoHanh").value;
+      let thoiGianTaoEl = document.getElementById("thoiGian").value;
+      let tongTienEl = document.getElementById("tongTien").value;
+      let MaNVEl = document.getElementById("maNv").value;
+      let soSeriEl = document.getElementById("soSeri").value;
+      let trangThaiEl = document.getElementById("trangThai").value;
+      let noiDungEl = document.getElementById("noiDung").value;
+
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !maPBHEl ||
+        !thoiGianTaoEl ||
+        !tongTienEl ||
+        !MaNVEl ||
+        !soSeriEl ||
+        !trangThaiEl ||
+        !noiDungEl
+      ) {
+        alert("Vui lòng điền đầy đủ các thông tin.");
+        return;
+      }
+
+      // Tạo đối tượng dữ liệu
+      const data = {
+        maPBH: maPBHEl,
+        thoiGianTao: thoiGianTaoEl,
+        tongTien: tongTienEl,
+        trangThai: trangThaiEl,
+        maNV: MaNVEl,
+        soSeri: soSeriEl,
+        noiDung: noiDungEl,
+      };
+
+      console.log("data: ", data);
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/update-baohanh",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
         }
-    
-        // Tạo đối tượng dữ liệu
-        const data = {
-            thoiGianTao: thoiGianTaoEl,
-            tongTien: tongTienEl,
-            trangThai: trangThaiEl,
-            maNV: MaNVEl,
-            soSeri: soSeriEl,
-            noiDung: noiDungEl
-        };
-    
-        console.log('data: ', data);
-    
-        try {
-            const response = await fetch('http://localhost:8080/phonestore/add-baohanh', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-    
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi thêm khuyến mãi');
-            }
-    
-            const result = await response.json();
-            console.log('Thêm thành công:', result);
-            alert('Thêm khuyến mãi thành công!');
-    
-            // Cập nhật bảng bằng cách thêm một hàng mới
-            const table = document.getElementById('product-table'); // Lấy bảng bằng ID
-            const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
-    
-            // Thêm các ô (td) vào hàng mới
-            newRow.innerHTML = `
+
+        const result = await response.json();
+        console.log("Cập nhật thành công:", result);
+
+        // Load lại trang sau khi cập nhật thành công
+        window.location.reload();
+
+        alert("Cập nhật khuyến mãi thành công!");
+      } catch (error) {
+        console.log("Lỗi khi cập nhật khuyến mãi:", error);
+        alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+      }
+    });
+
+    btnAdd.addEventListener("click", async (e) => {
+      // Lấy giá trị từ các trường nhập liệu
+      let thoiGianTaoEl = document.getElementById("thoiGian").value;
+      let tongTienEl = document.getElementById("tongTien").value;
+      let MaNVEl = document.getElementById("maNv").value;
+      let soSeriEl = document.getElementById("soSeri").value;
+      let trangThaiEl = document.getElementById("trangThai").value;
+      let noiDungEl = document.getElementById("noiDung").value;
+
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !thoiGianTaoEl ||
+        !tongTienEl ||
+        !MaNVEl ||
+        !soSeriEl ||
+        !trangThaiEl ||
+        !noiDungEl
+      ) {
+        alert("Vui lòng điền đầy đủ các thông tin.");
+        return;
+      }
+
+      // Tạo đối tượng dữ liệu
+      const data = {
+        thoiGianTao: thoiGianTaoEl,
+        tongTien: tongTienEl,
+        trangThai: trangThaiEl,
+        maNV: MaNVEl,
+        soSeri: soSeriEl,
+        noiDung: noiDungEl,
+      };
+
+      console.log("data: ", data);
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/add-baohanh",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi thêm khuyến mãi");
+        }
+
+        const result = await response.json();
+        console.log("Thêm thành công:", result);
+        alert("Thêm khuyến mãi thành công!");
+
+        // Cập nhật bảng bằng cách thêm một hàng mới
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
                 <td>${result.data.maPBH}</td>
                 <td>${result.data.thoiGianTao}</td>
                 <td>${result.data.tongTien}</td>
@@ -2734,266 +3443,275 @@ async function initBaoHanhPage() {
                 <button  onclick="deleteBaoHanh('${result.data.maPBH}')" class="product-table__delete-btn product-table-btn">Xóa</button>             
             </td>
             `;
-    
-        } catch (error) {
-            console.error('Lỗi khi thêm khuyến mãi:', error);
-            alert('Có lỗi xảy ra khi thêm khuyến mãi!');
-        }
+      } catch (error) {
+        console.error("Lỗi khi thêm khuyến mãi:", error);
+        alert("Có lỗi xảy ra khi thêm khuyến mãi!");
+      }
     });
-    
-      
-} catch (error) {
-        console.error("Lỗi khi gọi API bảo hành:", error);
-    }
-    
+  } catch (error) {
+    console.error("Lỗi khi gọi API bảo hành:", error);
+  }
 }
 
 const editBaoHanh = async (idBaoHanh) => {
-    // Lấy dòng tương ứng với idBaoHanh
-    let row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
+  // Lấy dòng tương ứng với idBaoHanh
+  let row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
 
-    // Lấy các giá trị từ các ô trong dòng
-    let maPBH = row.querySelector('td:nth-child(1)').textContent;  
-    let thoiGianTao = row.querySelector('td:nth-child(2)').textContent;  
-    let tongTien = row.querySelector('td:nth-child(3)').textContent;  
-    let trangThai = row.querySelector('td:nth-child(4)').textContent;  
-    let maNV = row.querySelector('td:nth-child(5)').textContent;  
-    let soSeri = row.querySelector('td:nth-child(6)').textContent;
-    let noiDung = row.querySelector('td:nth-child(7)').textContent;
+  // Lấy các giá trị từ các ô trong dòng
+  let maPBH = row.querySelector("td:nth-child(1)").textContent;
+  let thoiGianTao = row.querySelector("td:nth-child(2)").textContent;
+  let tongTien = row.querySelector("td:nth-child(3)").textContent;
+  let trangThai = row.querySelector("td:nth-child(4)").textContent;
+  let maNV = row.querySelector("td:nth-child(5)").textContent;
+  let soSeri = row.querySelector("td:nth-child(6)").textContent;
+  let noiDung = row.querySelector("td:nth-child(7)").textContent;
 
-    // Điền các giá trị vào các ô nhập liệu
-    document.getElementById("maBaoHanh").value = maPBH;
-    document.getElementById("thoiGian").value = thoiGianTao;
-    document.getElementById("tongTien").value = tongTien;
-    document.getElementById("maNv").value = maNV;
-    document.getElementById("soSeri").value = soSeri;
-    document.getElementById("trangThai").value = trangThai;
-    document.getElementById("noiDung").value = noiDung;
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maBaoHanh").value = maPBH;
+  document.getElementById("thoiGian").value = thoiGianTao;
+  document.getElementById("tongTien").value = tongTien;
+  document.getElementById("maNv").value = maNV;
+  document.getElementById("soSeri").value = soSeri;
+  document.getElementById("trangThai").value = trangThai;
+  document.getElementById("noiDung").value = noiDung;
 
-    // Chuyển trạng thái active sang "Chỉnh sửa"
-    // Lấy tất cả các phần tử <li> có lớp "function__item"
-    let items = document.querySelectorAll('.function__item');
-    
-    // Xóa lớp active khỏi tất cả các phần tử
-    items.forEach(item => {
-        item.classList.remove('active');
-    });
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
-    // Thêm lớp active vào phần tử "Chỉnh sửa"
-    let updateItem = document.querySelector('li[data-value="update"]');
-    if (updateItem) {
-        updateItem.classList.add('active');
-    }
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
 };
 const huyBaoHanh = () => {
-    document.getElementById("maBaoHanh").value = "";
-    document.getElementById("thoiGian").value = "";
-    document.getElementById("tongTien").value = "";
-    document.getElementById("maNv").value = "";
-    document.getElementById("soSeri").value = "";
-    document.getElementById("trangThai").value = "";
-    document.getElementById("noiDung").value = "";
+  document.getElementById("maBaoHanh").value = "";
+  document.getElementById("thoiGian").value = "";
+  document.getElementById("tongTien").value = "";
+  document.getElementById("maNv").value = "";
+  document.getElementById("soSeri").value = "";
+  document.getElementById("trangThai").value = "";
+  document.getElementById("noiDung").value = "";
 
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
-    
-    // Chuyển trạng thái active sang "Chỉnh sửa"
-    // Lấy tất cả các phần tử <li> có lớp "function__item"
-    let items = document.querySelectorAll('.function__item');
-    
-    // Xóa lớp active khỏi tất cả các phần tử
-    items.forEach(item => {
-        item.classList.remove('active');
-    });
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
 
-    // Thêm lớp active vào phần tử "Chỉnh sửa"
-    let updateItem = document.querySelector('li[data-value="add"]');
-    if (updateItem) {
-        updateItem.classList.add('active');
-    }
-
-}
-const deleteBaoHanh = async (idBaoHanh) => {
-    let row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
-    let maPBH = row.querySelector('td:nth-child(1)').textContent;  
-    console.log('maPBH: ', maPBH);
-
-    const data = {
-        idBaoHanh: maPBH, // Gửi idPhiếuBảoHành thay vì maPBH
-    };
-
-    try {
-        const response = await fetch('http://localhost:8080/phonestore/delete-baohanh', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-            throw new Error('Có lỗi xảy ra khi xoá bảo hành');
-        }
-
-        const result = await response.json();
-        console.log('Xoá thành công:', result);
-
-        // Thông báo thành công
-        alert('Xoá bảo hành thành công!');
-        row.remove(); // Xóa dòng khỏi bảng sau khi xóa thành công
-    } catch (error) {
-        console.error('Có lỗi khi xoá bảo hành:', error);
-        alert('Có lỗi xảy ra khi xoá bảo hành!');
-    }
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
 };
+const deleteBaoHanh = async (idBaoHanh) => {
+  let row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
+  let maPBH = row.querySelector("td:nth-child(1)").textContent;
+  console.log("maPBH: ", maPBH);
 
+  const data = {
+    idBaoHanh: maPBH, // Gửi idPhiếuBảoHành thay vì maPBH
+  };
 
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/delete-baohanh",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
+    if (!response.ok) {
+      throw new Error("Có lỗi xảy ra khi xoá bảo hành");
+    }
 
+    const result = await response.json();
+    console.log("Xoá thành công:", result);
 
+    // Thông báo thành công
+    alert("Xoá bảo hành thành công!");
+    row.remove(); // Xóa dòng khỏi bảng sau khi xóa thành công
+  } catch (error) {
+    console.error("Có lỗi khi xoá bảo hành:", error);
+    alert("Có lỗi xảy ra khi xoá bảo hành!");
+  }
+};
 
 // PHIEU NHAP
 
-
 async function initPhieuNhapPage() {
-    try {
-        const response = await fetch("http://localhost:8080/phonestore/get-phieunhap");
-        if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
-        
-        const data = await response.json();
-        const res = data.data;
-        console.log('res: ', res);
-        
-        let html = '';
-        res.forEach((item) => {
-            html += `
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-phieunhap"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const res = data.data;
+    console.log("res: ", res);
+    const nhanvien = JSON.parse(localStorage.getItem("khachhang"));
+    console.log(nhanvien.maNV);
+
+    let html = "";
+    res
+      .slice()
+      .reverse()
+      .forEach((item) => {
+        const maNV = item.maNV || "";
+        html += `
             <tr class="product-table__row" data-value="${item.maPN}">
                 <td>${item.maPN}</td>
                 <td>${item.ngayTao}</td>
                 <td>${item.tongTien}</td>
                 <td>${item.trangThai}</td>
-                <td>${item.maNV}</td>
+                <td>${maNV}</td>
                 <td>${item.maNCC}</td>
                 <td>
                     <button onclick="editPhieuNhap('${item.maPN}')"  class="product-table__update-btn product-table-btn">Sửa</button> 
-                    <button onclick="xenChiTietPhieuNhap('${item.maPN}')"  class="product-table__update-btn product-table-btn">Chi tiết</button> 
+                    <button onclick="xacNhanPhieuNhap('${item.maPN}')"  class="product-table__update-btn product-table-btn">Xác nhận</button> 
                                 
                 </td>
             </tr>
             `;
-        });
+      });
 
-        document.querySelector('.product-table__list').innerHTML = html;
+    document.querySelector(".product-table__list").innerHTML = html;
 
+    const btnUpdate = $("#btn-save");
+    const btnAdd = $("#btn-add");
+    btnUpdate.addEventListener("click", async (e) => {
+      // Lấy giá trị từ các trường nhập liệu
+      let maPnEl = document.getElementById("maPhieuNhap").value;
+      let thoiGianTaoEl = document.getElementById("thoiGianTao").value;
+      let tongTienEl = document.getElementById("tongTien").value;
+      let MaNVEl = document.getElementById("maNv").value;
+      let trangThaiEl = document.getElementById("trangThai").value;
+      let maNccEl = document.getElementById("maNCC").value;
 
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !thoiGianTaoEl ||
+        !tongTienEl ||
+        !MaNVEl ||
+        !trangThaiEl ||
+        !maNccEl ||
+        !maPnEl
+      ) {
+        alert("Vui lòng điền đầy đủ các thông tin.");
+        return;
+      }
 
-
-
-    const btnUpdate = $('#btn-save')
-    const btnAdd = $('#btn-add')
-    btnUpdate.addEventListener('click', async (e) => {
-        // Lấy giá trị từ các trường nhập liệu
-        let maPnEl =    document.getElementById("maPhieuNhap").value ;
-        let thoiGianTaoEl = document.getElementById("thoiGianTao").value;
-        let tongTienEl = document.getElementById("tongTien").value;
-        let MaNVEl = document.getElementById("maNv").value;
-        let trangThaiEl = document.getElementById("trangThai").value;
-        let maNccEl = document.getElementById("maNCC").value; 
-    
-   
-         // Kiểm tra dữ liệu trước khi gửi đi
-         if (!thoiGianTaoEl || !tongTienEl || !MaNVEl  || !trangThaiEl || !maNccEl || !maPnEl) {
-            alert("Vui lòng điền đầy đủ các thông tin.");
-            return;
-        }
-    
-       // Tạo đối tượng dữ liệu
-       const data = {
-        maPN : maPnEl,
+      // Tạo đối tượng dữ liệu
+      const data = {
+        maPN: maPnEl,
         ngayTao: thoiGianTaoEl,
         tongTien: tongTienEl,
         trangThai: trangThaiEl,
         maNV: MaNVEl,
-        maNCC:maNccEl
-    };
-    
-        console.log('data: ', data);
-    
-        try {
-            const response = await fetch('http://localhost:8080/phonestore/update-phieunhap', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-    
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi cập nhật phiếu nhập');
-            }
-    
-            const result = await response.json();
-            console.log('Cập nhật thành công:', result);
-    
-            // Load lại trang sau khi cập nhật thành công
-            window.location.reload();
-    
-            alert('Cập nhật phiếu nhập thành công!');
-        } catch (error) {
-            console.log('Lỗi khi cập nhật phiếu nhập:', error);
-            alert('Có lỗi xảy ra khi cập nhật phiếu nhập!');
+        maNCC: maNccEl,
+      };
+
+      console.log("data: ", data);
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/update-phieunhap",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi cập nhật phiếu nhập");
         }
+
+        const result = await response.json();
+        console.log("Cập nhật thành công:", result);
+
+        // Load lại trang sau khi cập nhật thành công
+        window.location.reload();
+
+        alert("Cập nhật phiếu nhập thành công!");
+      } catch (error) {
+        console.log("Lỗi khi cập nhật phiếu nhập:", error);
+        alert("Có lỗi xảy ra khi cập nhật phiếu nhập!");
+      }
     });
-    
 
+    btnAdd.addEventListener("click", async (e) => {
+      // Lấy giá trị từ các trường nhập liệu
+      let thoiGianTaoEl = document.getElementById("thoiGianTao").value;
+      let tongTienEl = document.getElementById("tongTien").value;
+      let MaNVEl = document.getElementById("maNv").value;
+      let trangThaiEl = document.getElementById("trangThai").value;
+      let maNccEl = document.getElementById("maNCC").value;
 
-       btnAdd.addEventListener('click', async (e) => {
-        // Lấy giá trị từ các trường nhập liệu
-        let thoiGianTaoEl = document.getElementById("thoiGianTao").value;
-        let tongTienEl = document.getElementById("tongTien").value;
-        let MaNVEl = document.getElementById("maNv").value;
-        let trangThaiEl = document.getElementById("trangThai").value;
-        let maNccEl = document.getElementById("maNCC").value; 
-    
-        // Kiểm tra dữ liệu trước khi gửi đi
-        if (!thoiGianTaoEl || !tongTienEl || !MaNVEl  || !trangThaiEl || !maNccEl) {
-            alert("Vui lòng điền đầy đủ các thông tin.");
-            return;
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !thoiGianTaoEl ||
+        !tongTienEl ||
+        !MaNVEl ||
+        !trangThaiEl ||
+        !maNccEl
+      ) {
+        alert("Vui lòng điền đầy đủ các thông tin.");
+        return;
+      }
+
+      // Tạo đối tượng dữ liệu
+      const data = {
+        ngayTao: thoiGianTaoEl,
+        tongTien: tongTienEl,
+        trangThai: trangThaiEl,
+        maNV: MaNVEl,
+        maNCC: maNccEl,
+      };
+
+      console.log("data: ", data);
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/add-phieunhap",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi thêm phiếu nhập");
         }
-    
-        // Tạo đối tượng dữ liệu
-        const data = {
-            ngayTao: thoiGianTaoEl,
-            tongTien: tongTienEl,
-            trangThai: trangThaiEl,
-            maNV: MaNVEl,
-            maNCC:maNccEl
-        };
-    
-        console.log('data: ', data);
-    
-        try {
-            const response = await fetch('http://localhost:8080/phonestore/add-phieunhap', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-    
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi thêm phiếu nhập');
-            }
-    
-            const result = await response.json();
-            console.log('Thêm thành công:', result);
-            alert('Thêm phiếu nhập thành công!');
-    
-            // Cập nhật bảng bằng cách thêm một hàng mới
-            const table = document.getElementById('product-table'); // Lấy bảng bằng ID
-            const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
-    
-            // Thêm các ô (td) vào hàng mới
-            newRow.innerHTML = `
+
+        const result = await response.json();
+        console.log("Thêm thành công:", result);
+        alert("Thêm phiếu nhập thành công!");
+
+        // Cập nhật bảng bằng cách thêm một hàng mới
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
                 <td>${result.data.maPN}</td>
                 <td>${result.data.ngayTao}</td>
                 <td>${result.data.tongTien}</td>
@@ -3005,97 +3723,117 @@ async function initPhieuNhapPage() {
                             
             </td>
             `;
-    
-        } catch (error) {
-            console.error('Lỗi khi thêm phiếu nhập:', error);
-            alert('Có lỗi xảy ra khi thêm phiếu nhập!');
-        }
+      } catch (error) {
+        console.error("Lỗi khi thêm phiếu nhập:", error);
+        alert("Có lỗi xảy ra khi thêm phiếu nhập!");
+      }
     });
-    
-      
-} catch (error) {
-        console.error("Lỗi khi gọi API phiếu nhập:", error);
-    }
-    
+  } catch (error) {
+    console.error("Lỗi khi gọi API phiếu nhập:", error);
+  }
 }
 
 const editPhieuNhap = async (idPhieuNhap) => {
-    // Lấy dòng tương ứng với idBaoHanh
-    let row = document.querySelector(`tr[data-value='${idPhieuNhap}']`);
+  // Lấy dòng tương ứng với idBaoHanh
+  let row = document.querySelector(`tr[data-value='${idPhieuNhap}']`);
+  const nhanvien = JSON.parse(localStorage.getItem("khachhang"));
+  console.log(nhanvien.maNV);
+  // Lấy các giá trị từ các ô trong dòng
+  let maPN = row.querySelector("td:nth-child(1)").textContent;
+  let thoiGianTao = row.querySelector("td:nth-child(2)").textContent;
+  let tongTien = row.querySelector("td:nth-child(3)").textContent;
+  let trangThai = row.querySelector("td:nth-child(4)").textContent;
+  let maNV = row.querySelector("td:nth-child(5)").textContent;
+  let nhaCC = row.querySelector("td:nth-child(6)").textContent;
 
-    // Lấy các giá trị từ các ô trong dòng
-    let maPN = row.querySelector('td:nth-child(1)').textContent;  
-    let thoiGianTao = row.querySelector('td:nth-child(2)').textContent;  
-    let tongTien = row.querySelector('td:nth-child(3)').textContent;  
-    let trangThai = row.querySelector('td:nth-child(4)').textContent;  
-    let maNV = row.querySelector('td:nth-child(5)').textContent;  
-    let nhaCC = row.querySelector('td:nth-child(6)').textContent;
-  
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maPhieuNhap").value = maPN;
+  document.getElementById("thoiGianTao").value = thoiGianTao;
+  document.getElementById("tongTien").value = tongTien;
+  document.getElementById("maNv").value = maNV;
+  document.getElementById("trangThai").value = trangThai;
+  document.getElementById("maNCC").value = nhaCC;
 
-    // Điền các giá trị vào các ô nhập liệu
-    document.getElementById("maPhieuNhap").value = maPN;
-    document.getElementById("thoiGianTao").value = thoiGianTao;
-    document.getElementById("tongTien").value = tongTien;
-    document.getElementById("maNv").value = maNV;
-    document.getElementById("trangThai").value = trangThai;
-    document.getElementById("maNCC").value = nhaCC;
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
-    // Chuyển trạng thái active sang "Chỉnh sửa"
-    // Lấy tất cả các phần tử <li> có lớp "function__item"
-    let items = document.querySelectorAll('.function__item');
-    
-    // Xóa lớp active khỏi tất cả các phần tử
-    items.forEach(item => {
-        item.classList.remove('active');
-    });
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
 
-    // Thêm lớp active vào phần tử "Chỉnh sửa"
-    let updateItem = document.querySelector('li[data-value="update"]');
-    if (updateItem) {
-        updateItem.classList.add('active');
-    }
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
 };
-const huyPhieuNhap = () => { 
-    document.getElementById("maPhieuNhap").value = "";
-    document.getElementById("thoiGianTao").value = "";
-    document.getElementById("tongTien").value = "";
-    document.getElementById("maNv").value = "";
-    document.getElementById("trangThai").value = "";
-    document.getElementById("maNCC").value = "";
+const huyPhieuNhap = () => {
+  const nhanvien = JSON.parse(localStorage.getItem("khachhang"));
+  console.log(nhanvien.maNV);
+  document.getElementById("maPhieuNhap").value = "";
+  document.getElementById("thoiGianTao").value = "";
+  document.getElementById("tongTien").value = "";
+  document.getElementById("maNv").value = nhanvien.maNV;
+  document.getElementById("trangThai").value = "";
+  document.getElementById("maNCC").value = "";
 
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
-    
-    // Chuyển trạng thái active sang "Chỉnh sửa"
-    // Lấy tất cả các phần tử <li> có lớp "function__item"
-    let items = document.querySelectorAll('.function__item');
-    
-    // Xóa lớp active khỏi tất cả các phần tử
-    items.forEach(item => {
-        item.classList.remove('active');
-    });
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
 
-    // Thêm lớp active vào phần tử "Chỉnh sửa"
-    let updateItem = document.querySelector('li[data-value="add"]');
-    if (updateItem) {
-        updateItem.classList.add('active');
-    }
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="add"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
+const xacNhanPhieuNhap = async (idPhieuNhap) => {
+  // Lấy dòng tương ứng với idBaoHanh
+  let row = document.querySelector(`tr[data-value='${idPhieuNhap}']`);
+  const nhanvien = JSON.parse(localStorage.getItem("khachhang"));
+  console.log(nhanvien.maNV);
+  // Lấy các giá trị từ các ô trong dòng
+  let maPN = row.querySelector("td:nth-child(1)").textContent;
+  let thoiGianTao = row.querySelector("td:nth-child(2)").textContent;
+  let tongTien = row.querySelector("td:nth-child(3)").textContent;
+  let trangThai = row.querySelector("td:nth-child(4)").textContent;
+  let maNV = nhanvien.maNV;
+  let nhaCC = row.querySelector("td:nth-child(6)").textContent;
 
-}
-const xenChiTietPhieuNhap = (idPhieuNhap) => {
-    console.log('idPhieuNhap: ', idPhieuNhap);
-    
+  // Điền các giá trị vào các ô nhập liệu
+  document.getElementById("maPhieuNhap").value = maPN;
+  document.getElementById("thoiGianTao").value = thoiGianTao;
+  document.getElementById("tongTien").value = tongTien;
+  document.getElementById("maNv").value = maNV;
+  document.getElementById("trangThai").value = trangThai;
+  document.getElementById("maNCC").value = nhaCC;
 
-}
+  // Chuyển trạng thái active sang "Chỉnh sửa"
+  // Lấy tất cả các phần tử <li> có lớp "function__item"
+  let items = document.querySelectorAll(".function__item");
 
+  // Xóa lớp active khỏi tất cả các phần tử
+  items.forEach((item) => {
+    item.classList.remove("active");
+  });
 
-
-
-
-
+  // Thêm lớp active vào phần tử "Chỉnh sửa"
+  let updateItem = document.querySelector('li[data-value="update"]');
+  if (updateItem) {
+    updateItem.classList.add("active");
+  }
+};
 
 // const deletePhieuNhap = async (idPhieuNhap) => {
 //     let row = document.querySelector(`tr[data-value='${idPhieuNhap}']`);
-//     let maPN = row.querySelector('td:nth-child(1)').textContent;  
+//     let maPN = row.querySelector('td:nth-child(1)').textContent;
 //     console.log('maPBH: ', maPN);
 
 //     const data = {
@@ -3127,26 +3865,10 @@ const xenChiTietPhieuNhap = (idPhieuNhap) => {
 //     }
 // };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Hàm chuyển đổi giá tiền sang định dạng hiển thị (ví dụ: VND)
 function convertMoney(amount) {
-    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(amount);
 }
-

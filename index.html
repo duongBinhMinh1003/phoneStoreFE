@@ -1,102 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shop Điện thoại</title>
-    <link rel="stylesheet" href="/css/Lib.css" />
-    <script src="/vendor/jquery-3.6.0.min.js" defer></script>
-    <script src="/vendor/bootstrap.js" defer></script>
-    <script src="/js/main.js" defer></script>
 
-  </head>
-  <body>
-    <nav
-      id="header"
-      class="navbar navbar-default navbar-fixed-top"
-      role="navigation"
-    ></nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Điện thoại</title>
+  <link rel="stylesheet" href="/css/Lib.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="/vendor/jquery-3.6.0.min.js" defer></script>
+  <script src="/vendor/bootstrap.js" defer></script>
+  <script src="/js/main.js" defer></script>
+  <style>
+    @property --a {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
 
-    <div id="slide_phone" class="carousel slide" data-ride="carousel">
-      <!-- Render -->
-      <div class="carousel-inner"></div>
-      <a class="left carousel-control" href="#slide_phone" data-slide="prev"
-        ><span class="glyphicon glyphicon-chevron-left"></span
-      ></a>
-      <a class="right carousel-control" href="#slide_phone" data-slide="next"
-        ><span class="glyphicon glyphicon-chevron-right"></span
-      ></a>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="product_popular text-center">
-          <h1 class="title_products">Phổ biến hiện nay</h1>
-          <div class="menu__select">
-            <ul class="menu__select--population none__tedec"></ul>
-          </div>
-          <div class="row">
-            <div
-              class="none__tedec product col-xs-12 col-sm-6 col-md-6 col-lg-6"
-            >
-              <a href="">
-                <img src="/img/product/samsungs21.jpg" alt="" />
-                <h3>Sam sung galaxy S21</h3>
-                <p>Kiến tạo sức mạnh vượt trọi, camera zoom 128px</p>
-                <a href="/html/news/imformation.html" class="btn btn-default">
-                  Xem thêm <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
-              </a>
+    .card {
+      overflow: hidden;
+      position: relative;
+      border-radius: 0.5em;
+      place-self: center;
+      place-content: center;
+      padding: 0.5em;
+      color: #ededed;
+      font: clamp(1em, 2vw + 2vh, 2em) sans-serif;
+      text-align: center;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .card::before {
+      position: absolute;
+      z-index: -1;
+      inset: -1em;
+      border: solid 1.25em;
+      border-image: conic-gradient(from var(--a), #7997e8, #f6d3ff) 1;
+      filter: blur(0.75em);
+      animation: a 4s linear infinite;
+      content: "";
+    }
+
+    @keyframes a {
+      to {
+        --a: 1turn;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="header" class="navbar navbar-default navbar-fixed-top" role="navigation"></nav>
+
+  <div id="slide_phone" class="carousel slide" data-ride="carousel">
+    <!-- Render -->
+    <div class="carousel-inner"></div>
+    <a class="left carousel-control" href="#slide_phone" data-slide="prev"><span
+        class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#slide_phone" data-slide="next"><span
+        class="glyphicon glyphicon-chevron-right"></span></a>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="product_popular text-center">
+        <section class="middle dark-mode-able py-5">
+          <section class="w3_stats py-lg-0 py-md-5 py-4">
+            <div class="container">
+              <div class="row res d-flex text-center">
+                <div class="w3-stats d-flex flex-wrap justify-content-between">
+                  <div class="item col-md-3 col-6 mt-md-0 mt-4 dark-mode-able">
+                    <div class="dark-mode-able counter">
+                      <div class="icon">
+                        <span class="fa fa-building"></span>
+                      </div>
+                      <h3>15,100</h3>
+                      <p class="text">Chi nhánh</p>
+                    </div>
+                  </div>
+                  <div class="item col-md-3 col-6 mt-md-0 mt-4 dark-mode-able">
+                    <div class="counter">
+                      <div class="icon">
+                        <span class="fa fa-users"></span>
+                      </div>
+                      <h3>12,100</h3>
+                      <p class="text">Lượt truy cập</p>
+                    </div>
+                  </div>
+                  <div class="item col-md-3 col-6 mt-md-0 mt-4 dark-mode-able">
+                    <div class="counter">
+                      <div class="icon">
+                        <span class="fa-solid fa-mobile-screen-button"></span>
+                      </div>
+                      <h3>19,256</h3>
+                      <p class="text">Sản phẩm</p>
+                    </div>
+                  </div>
+
+                  <div class="item col-md-3 col-6 mt-md-0 mt-4 dark-mode-able">
+                    <div class="counter">
+                      <div class="icon">
+                        <span class="fa fa-smile"></span>
+                      </div>
+                      <h3>2,560</h3>
+                      <p class="text">Happy Customers</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div
-              class="none__tedec product col-xs-12 col-sm-6 col-md-6 col-lg-6"
-            >
-              <a href="">
-                <img src="/img/product/newsiphone-12-pro-1.jpg" alt="" />
-                <h3>iPhone 12 pro</h3>
-                <p>Sức mạnh toàn diện, hệ điều hành IOS</p>
-                <a href="/html/news/imformation.html" class="btn btn-default">
-                  Xem thêm <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
-              </a>
-            </div>
-          </div>
+          </section>
+        </section>
+        <h1 class="title_products">Phổ biến hiện nay</h1>
+        <div class="menu__select">
+          <ul class="menu__select--population none__tedec"></ul>
         </div>
-        <div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1 id="titleChange" class="text-uppercase fontSize_small">Danh sách sản phẩm</h1>
-          <ul class="list-inline list__sort">
-            <li class="list-inline-item" style="font-size: 18px;">
-              <b>Sắp xếp theo:</b>
-            </li>
-            <li class="list-inline-item list__sort--item">
-              <i class="fa fa-money" aria-hidden="true"></i>
-              <b id="priceMoney"> Bán chạy</b>
-            </li>
-            <li class="list-inline-item list__sort--item">
-              <i class="fa fa-sort" aria-hidden="true"></i>
-              <b id="priceHight">Giá cao</b>
-            </li>
-            <li class="list-inline-item list__sort--item">
-              <i class="fa fa-gift" aria-hidden="true"></i>
-              <b id="priceGift">Khuyến mãi</b>
-            </li>
-          </ul>
-          <div class="products"></div>
-          <nav aria-label="Page navigation" class="navigation">
-            <ul class="pagination"></ul>
-          </nav>
+        <div class="row">
+          <div class="none__tedec product col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <a href="">
+              <img src="/img/product/samsungs21.jpg" alt="" />
+              <h3>Sam sung galaxy S21</h3>
+              <p>Kiến tạo sức mạnh vượt trọi, camera zoom 128px</p>
+              <a href="/html/news/imformation.html" class="btn btn-default">
+                Xem thêm <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </a>
+          </div>
+          <div class="none__tedec product col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <a href="">
+              <img src="/img/product/newsiphone-12-pro-1.jpg" alt="" />
+              <h3>iPhone 12 pro</h3>
+              <p>Sức mạnh toàn diện, hệ điều hành IOS</p>
+              <a href="/html/news/imformation.html" class="btn btn-default">
+                Xem thêm <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </a>
+          </div>
         </div>
       </div>
+      <div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 id="titleChange" class="text-uppercase fontSize_small">Danh sách sản phẩm</h1>
+        <ul class="list-inline list__sort">
+          <li class="list-inline-item" style="font-size: 18px;">
+            <b>Sắp xếp theo:</b>
+          </li>
+          <li class="list-inline-item list__sort--item">
+            <i class="fa fa-money" aria-hidden="true"></i>
+            <b id="priceMoney"> Bán chạy</b>
+          </li>
+          <li class="list-inline-item list__sort--item">
+            <i class="fa fa-sort" aria-hidden="true"></i>
+            <b id="priceHight">Giá cao</b>
+          </li>
+          <li class="list-inline-item list__sort--item">
+            <i class="fa fa-gift" aria-hidden="true"></i>
+            <b id="priceGift">Khuyến mãi</b>
+          </li>
+        </ul>
+        <div class="products"></div>
+        <nav aria-label="Page navigation" class="navigation">
+          <ul class="pagination"></ul>
+        </nav>
+      </div>
     </div>
-    <footer id="footer"></footer>
+  </div>
+  <footer id="footer"></footer>
 
-    <script>
-      const dangXuat = () => {
-  
-    localStorage.removeItem('user');
-    localStorage.removeItem('khachhang');
-    window.location.href="/html/home/login.html"
-}
-    </script>
-  </body>
+  <script>
+    const dangXuat = () => {
+
+      localStorage.removeItem('user');
+      localStorage.removeItem('khachhang');
+      window.location.href = "/html/home/login.html"
+    }
+  </script>
+
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
+
+  <!-- waypoint -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"
+    integrity="sha512-ZKNVEa7gi0Dz4Rq9jXcySgcPiK+5f01CqW+ZoKLLKr9VMXuCsw3RjWiv8ZpIOa0hxO79np7Ec8DDWALM0bDOaQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- countup js -->
+  <script src="./Counting-Up-To-Numerical-Values-On-Scroll-jQuery-Countup-js//jquery.countup.js"></script>
+  <!-- config -->
+  <script>
+    $(".counter h3").countUp();
+  </script>
+
+</body>
+
 </html>
