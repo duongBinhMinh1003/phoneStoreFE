@@ -40,16 +40,93 @@
                     <a href="/html/home/thongtinuser.html">
                         <p>Thông tin tài khoản</p>
                     </a>
+                    <a href="#" lass="dropdown-toggle" data-toggle="dropdown" onclick="showOrderModal()">
+                        <p>Đơn mua</p>
+                    </a>
                     <a href="" onclick="dangXuat()">
                         <p>Đăng xuất</p>
                     </a>
+
                 </div>
+
+
             </li>
             <li id="dangNhap">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <a id="dangnhapTK" href="/html/home/login.html">Đăng nhập</a>
 
             </li>
+
+
+            <!-- Modal cho đơn hàng -->
+
+            <div id="orderModal" class="modal" style="display:none;">
+                <div class="modal-content" style="max-height: 80%;">
+                    <span class="close" onclick="closeOrderModal()">&times;</span>
+                    <h2>Danh sách đơn mua</h2>
+
+                    <div class="content__container">
+                        <div class="invoice-details">
+                            <div class="invoice-details__header">
+                                CHI TIẾT HÓA ĐƠN
+                            </div>
+                            <div class="invoice-details__list">
+                                <button class="fa-solid fa-xmark close-detail-btn" onclick="closeProductDetail()"
+                                    style="display: none;">
+                                </button> <!-- Nút đóng ẩn ban đầu -->
+                                <table class="product-detail-table" style="display: none;">
+                                    <!-- Bảng chi tiết ẩn ban đầu -->
+                                    <thead>
+                                        <tr>
+
+                                            <th>Tên sản phẩm</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Màu</th>
+                                            <th>ROM</th>
+                                            <th>Giá bán</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="product-detail-body">
+                                        <!-- Nội dung chi tiết sản phẩm sẽ được thêm vào đây -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <table id="order-product-table" class="product-detail-table">
+                            <!-- Đổi id thành order-product-table -->
+                            <thead>
+                                <tr class="product-table__heading">
+                                    <th>Mã ĐH</th>
+                                    <th>Địa chỉ nhận</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Hình thức thanh toán</th>
+                                    <th>Trạng thái</th>
+                                    <th>Xem chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody class="order-product-table__list"> <!-- Đổi class thành order-product-table__list -->
+                                <tr class="order-product-table__row order-product-table__row--clicked">
+                                    <!-- Đổi class thành order-product-table__row -->
+                                    <td>1</td>
+                                    <td>11/05/2024</td>
+                                    <td>1</td>
+                                    <td>10,000,000 VNĐ</td>
+                                    <td>Đã xử lý</td>
+                                    <td>
+                                        <button class=" order-product-table__see-btn product-table-btn">Xem</button>
+                                        <!-- Đổi class thành order-product-table__see-btn -->
+                                    </td>
+                                </tr>
+                                <!-- Thêm các hàng khác ở đây nếu cần -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <span id="sideGioHang">|</span>
             <li id="gioHang"><i class="fa fa-shopping-cart" aria-hidden="true"></i><a
                     href="/html/shopping__cart/shopping_cart.html">Giỏ hàng</a></li>
@@ -156,5 +233,13 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
+    </div>
+</div>
+<!-- Modal cho đơn hàng -->
+<div id="orderModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeOrderModal()">&times;</span>
+        <h2>Danh sách đơn hàng</h2>
+        <!-- Thêm nội dung đơn hàng ở đây -->
     </div>
 </div>

@@ -693,3 +693,265 @@ function rederPavination(dataProducts) {
                                 </a>
                             </li>`);
 }
+
+// Hàm để hiển thị dữ liệu trong bảng
+function showOrderModal() {
+  // Lấy giá trị từ input
+  const invoiceOrderTimeInput = $("#invoice-order-time").val(); // Lấy giá trị từ input
+  console.log(invoiceOrderTimeInput); // In ra giá trị để kiểm tra
+  document.getElementById("orderModal").style.display = "block"; // Hiển thị modal
+  populateOrderTable(orderData); // Gọi hàm để điền dữ liệu vào bảng
+}
+
+function closeOrderModal() {
+  document.getElementById("orderModal").style.display = "none"; // Ẩn modal
+  location.reload();
+}
+
+// Dữ liệu hóa đơn gốc
+const invoiceList = [
+  {
+    userID: 1,
+    orderTime: "2024-05-11T14:30",
+    invoiceID: 1,
+    totalPrice: 20000000,
+    status: true,
+  },
+  {
+    userID: 1,
+    orderTime: "2024-05-10T09:15",
+    invoiceID: 2,
+    totalPrice: 14000000,
+    status: true,
+  },
+  {
+    userID: 1,
+    orderTime: "2024-05-12T18:45",
+    invoiceID: 5,
+    totalPrice: 7000000,
+    status: false,
+  },
+  {
+    userID: 1,
+    orderTime: "2024-11-10T10:00",
+    invoiceID: 10,
+    totalPrice: 11000000,
+    status: true,
+  },
+  {
+    userID: 1,
+    orderTime: "2024-10-13T16:20",
+    invoiceID: 20,
+    totalPrice: 10000000,
+    status: true,
+  },
+];
+
+// Chuyển đổi dữ liệu sang định dạng mới
+const orderData = invoiceList.map((invoice) => ({
+  id: invoice.invoiceID,
+  time: new Date(invoice.orderTime).toLocaleString("vi-VN"), // Định dạng thời gian
+  customerId: invoice.userID,
+  total: invoice.totalPrice.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }), // Định dạng tiền tệ
+  status: invoice.status ? "Đã xử lý" : "Chưa xử lý", // Chuyển đổi trạng thái
+}));
+
+// Hàm để hiển thị dữ liệu trong bảng
+async function populateOrderTable() {
+  const khachhang = JSON.parse(localStorage.getItem("khachhang"));
+  try {
+    // Gọi API để lấy danh sách đơn hàng
+    const response = await fetch(
+      `http://localhost:8080/phonestore/get-order/${khachhang.maKH}`
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu đơn hàng");
+
+    const data = await response.json();
+    const orders = data.data; // Lấy danh sách đơn hàng từ API
+    console.log("Danh sách đơn hàng:", orders);
+
+    // Chèn dữ liệu vào bảng
+    const tableBody = document.querySelector(".order-product-table__list");
+    tableBody.innerHTML = ""; // Xóa nội dung cũ trước khi thêm mới
+
+    orders.forEach((order) => {
+      const row = document.createElement("tr");
+      row.className = "order-product-table__row";
+      row.innerHTML = `
+          <td>${order.maDH}</td> 
+          <td>${order.diaChiNhan}</td> 
+          <td>${order.ngayDat}</td> 
+          <td>${order.tongTien}</td> 
+          <td>${order.httt}</td>
+          <td>${order.trangThai}</td> 
+          <td>
+              <button class="detail-button order-product-table__see-btn product-table-btn" onclick="showProductDetails('${order.maDH}')">Xem</button>
+          </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  } catch (error) {
+    console.error("Lỗi khi gọi API đơn hàng:", error);
+  }
+}
+
+// Hàm để hiển thị dữ liệu trong bảng
+function populateTable() {
+  const tableBody = document.querySelector(".order-product-table__list");
+  tableBody.innerHTML = ""; // Xóa nội dung cũ trước khi thêm mới
+  orderData.forEach((order) => {
+    const row = document.createElement("tr");
+    row.className = "order-product-table__row";
+    row.innerHTML = `
+            <td>${order.customerId}</td>
+            <td>${order.time}</td>
+            <td>${order.id}</td>
+            <td>${order.total}</td>
+            <td>${order.status}</td>
+            <td>
+                <button class="order-product-table__see-btn product-table-btn" onclick="showProductDetails(${order.id})">Xem</button>
+            </td>
+        `;
+    tableBody.appendChild(row);
+  });
+}
+
+// Hàm hiển thị chi tiết sản phẩm
+async function showProductDetails(orderId) {
+  console.log("orderId: ", orderId);
+
+  try {
+    const response = await fetch(
+      `http://localhost:8080/phonestore/get-chitietorder/${orderId}`
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu chi tiết đơn hàng");
+
+    const data = await response.json();
+    const productDetails = data.data;
+    console.log("Chi tiết sản phẩm của đơn hàng:", productDetails);
+
+    const productDetailTable = document.querySelector(".product-detail-table");
+    const productDetailBody = document.querySelector(".product-detail-body");
+    const closeButton = document.querySelector(".close-detail-btn");
+
+    productDetailBody.innerHTML = "";
+
+    if (!productDetails || productDetails.length === 0) {
+      productDetailBody.innerHTML =
+        '<tr><td colspan="10">Không có sản phẩm nào cho hóa đơn này.</td></tr>';
+    } else {
+      const productMap = new Map();
+      const detailRows = {};
+
+      for (const product of productDetails) {
+        const maPB = product.maPB;
+
+        if (productMap.has(maPB)) {
+          productMap.set(maPB, {
+            quantity: productMap.get(maPB).quantity + 1,
+            totalPrice: productMap.get(maPB).totalPrice + product.giaBan,
+          });
+
+          const row = detailRows[maPB];
+          const quantityCell = row.querySelectorAll("td")[5];
+          const totalPriceCell = row.querySelectorAll("td")[6];
+          quantityCell.textContent = productMap.get(maPB).quantity;
+          totalPriceCell.textContent = productMap
+            .get(maPB)
+            .totalPrice.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            });
+          continue;
+        }
+
+        const detailRow = document.createElement("tr");
+        detailRow.innerHTML = `
+          <td>Đang tải...</td> <!-- Tên sản phẩm -->
+          <td><img class="product-table_img_detail" src="placeholder.jpg" alt="Hình ảnh" ></td> <!-- Hình ảnh -->
+          <td>Đang tải...</td> <!-- Màu -->
+          <td>Đang tải...</td> <!-- RAM -->
+          <td>${product.giaBan.toLocaleString("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          })}</td>
+          <td>1</td>
+          <td>${product.giaBan.toLocaleString("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          })}</td>
+        `;
+        productDetailBody.appendChild(detailRow);
+
+        detailRows[maPB] = detailRow;
+        productMap.set(maPB, {
+          quantity: 1,
+          totalPrice: product.giaBan,
+        });
+
+        try {
+          const seriResponse = await fetch(
+            `http://localhost:8080/phonestore/get-sanphambyseri/${product.soSeri}`
+          );
+          if (!seriResponse.ok)
+            throw new Error(
+              `Không tìm thấy sản phẩm với seri: ${product.soSeri}`
+            );
+          const seriData = await seriResponse.json();
+
+          const cells = detailRow.querySelectorAll("td");
+          const productInfo = seriData.data.maPB_phienbansp;
+
+          cells[2].textContent = productInfo.mauSac || "N/A";
+          cells[3].textContent = productInfo.RAM || "N/A";
+
+          try {
+            const productResponse = await fetch(
+              `http://localhost:8080/phonestore/get-spbyid/${productInfo.maSP}`
+            );
+            if (!productResponse.ok)
+              throw new Error(
+                `Không tìm thấy sản phẩm với maSP: ${productInfo.maSP}`
+              );
+
+            const productData = await productResponse.json();
+
+            cells[0].textContent = productData.sanPham.tenSP || "N/A";
+
+            // Cập nhật hình ảnh sản phẩm
+            const imageCell = detailRow.querySelector("td:nth-child(2) img");
+            imageCell.src = productData.sanPham.hinhAnh || "placeholder.jpg";
+            imageCell.alt = productData.sanPham.tenSP || "Hình ảnh sản phẩm";
+          } catch (productError) {
+            console.error(
+              `Lỗi khi lấy tên sản phẩm với maSP: ${productInfo.maSP}`,
+              productError
+            );
+            cells[0].textContent = "N/A";
+          }
+        } catch (seriError) {
+          console.error(
+            `Lỗi khi lấy chi tiết sản phẩm với seri ${product.soSeri}:`,
+            seriError
+          );
+        }
+      }
+    }
+
+    productDetailTable.style.display = "table";
+    closeButton.style.display = "block";
+  } catch (error) {
+    console.error("Lỗi khi gọi API chi tiết đơn hàng:", error);
+  }
+}
+
+function closeProductDetail() {
+  const productDetailTable = document.querySelector(".product-detail-table");
+  const closeButton = document.querySelector(".close-detail-btn"); // Lấy nút đóng
+  productDetailTable.style.display = "none"; // Ẩn bảng chi tiết
+  closeButton.style.display = "none"; // Ẩn nút đóng
+}
+// ... existing code ...

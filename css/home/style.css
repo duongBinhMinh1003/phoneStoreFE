@@ -625,3 +625,167 @@ section.w3_stats {
 
   position: relative;
 }
+.modal {
+  display: none; /* Ẩn modal mặc định */
+  position: fixed; /* Đặt modal ở vị trí cố định */
+  z-index: 1000; /* Đảm bảo modal nổi lên trên các phần tử khác */
+  left: 50%;
+  top: 50%;
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  height: 100%; /* Chiếm toàn bộ chiều cao */
+  overflow: auto; /* Thêm thanh cuộn nếu cần */
+  background-color: rgba(0, 0, 0, 0.5); /* Nền mờ cho modal */
+}
+
+.modal-content {
+  background-color: #fff; /* Màu nền của nội dung modal */
+  margin: 8% auto; /* Đặt nội dung ở giữa màn hình */
+  padding: 20px; /* Khoảng cách padding cho nội dung */
+  border: 1px solid #888; /* Đường viền cho modal */
+  width: 80%; /* Chiều rộng của modal */
+}
+
+.close {
+  color: #aaa; /* Màu cho nút đóng */
+  float: right; /* Đặt nút đóng ở bên phải */
+  font-size: 28px; /* Kích thước chữ cho nút đóng */
+  font-weight: bold; /* Đậm cho nút đóng */
+}
+
+.close:hover,
+.close:focus {
+  color: black; /* Màu khi hover vào nút đóng */
+  text-decoration: none; /* Bỏ gạch chân */
+  cursor: pointer; /* Con trỏ khi hover */
+}
+
+/* CSS cho bảng trong orderModal */
+#order-product-table {
+  /* Đổi ID từ #product-table thành #order-product-table */
+  margin-top: 10px;
+  margin-bottom: 70px;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid var(--primary-color);
+  border-radius: 4px;
+  text-align: center;
+}
+
+#order-product-table .product-table__heading {
+  /* Đổi class từ .product-table__heading thành .product-table__heading */
+  color: var(--primary-color);
+  background-color: transparent;
+  text-align: center;
+  font-size: 1.5rem;
+  height: 40px;
+}
+
+#order-product-table tr th,
+#order-product-table tr td {
+  /* Đổi ID từ #product-table thành #order-product-table */
+  padding: 4px 15px;
+  color: var(--text-color);
+}
+
+#order-product-table tbody tr td {
+  /* Đổi ID từ #product-table thành #order-product-table */
+  border-top: 1px solid black;
+}
+
+#order-product-table tbody tr:nth-child(odd) {
+  /* Đổi ID từ #product-table thành #order-product-table */
+  background-color: var(--white-color);
+}
+
+#order-product-table tbody tr:hover {
+  /* Đổi ID từ #product-table thành #order-product-table */
+  cursor: pointer;
+  background-color: var(--filter-item-color);
+}
+
+#order-product-table tr td {
+  /* Đổi ID từ #product-table thành #order-product-table */
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.product-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-detail-table th,
+.product-detail-table td {
+  border: 1px solid var(--primary-color);
+  padding: 8px;
+  text-align: center;
+}
+
+.product-detail-table th {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.product-detail-table tbody tr:nth-child(odd) {
+  background-color: var(--white-color);
+}
+
+.product-detail-table tbody tr:hover {
+  background-color: var(--filter-item-color);
+}
+
+.close-detail-btn {
+  background-color: white; /* Màu nền trắng */
+  color: rgb(27, 22, 22); /* Màu chữ đỏ */
+  border: none; /* Xóa viền khung */
+  padding: 10px 15px; /* Thêm khoảng cách bên trong */
+  font-size: 13px; /* Kích thước chữ */
+  cursor: pointer; /* Hiển thị con trỏ khi di chuột qua */
+  border-radius: 5px; /* Bo góc cho nút */
+  transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển màu nền và màu chữ */
+}
+
+.close-detail-btn:hover {
+  color: #888; /* Màu chữ khi di chuột qua */
+}
+
+.detail-button {
+  padding: 2px 0.8em;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #17c3b2;
+  border: 2px solid #17c3b2;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1;
+  transition: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.detail-button:before {
+  content: "";
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: 0.5s ease;
+  transform: translate(-50%, -50%) rotate(45deg);
+  display: block;
+  z-index: -1;
+  background-color: #17c3b2;
+}
+
+.detail-button:hover::before {
+  width: 105%;
+}
+
+.detail-button:hover {
+  color: #111;
+}
+.product-table_img_detail {
+  height: 60px;
+  width: 60px;
+}
