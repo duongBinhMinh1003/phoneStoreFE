@@ -1,8 +1,11 @@
 //value
 let priceNew = 0;
 let priceOld = 0;
+let arrSetUnique = [];
+let newPhienBan = "";
 let memmorySelected = "";
 const user = JSON.parse(localStorage.getItem("user"));
+let carts = JSON.parse(localStorage.getItem("listCart"));
 $(document).ready(function () {
   let posNav = $(".container__top").offset().top;
   let posPhone = $(".product__intro-fixed").offset().top;
@@ -106,7 +109,7 @@ $(document).ready(function () {
           // Lấy giá cũ và giá mới từ từng đối tượng `mmr`
           const priceOld = mmr.giaBan;
           const priceNew = mmr.giaGiam;
-
+          const newPhienBan = mmr.maPB;
           return `<button id="mmr_${index}" class="btn-memory btn btn-default btn-sm" 
                           data-price-old="${priceOld}" 
                           data-price-new="${priceNew}"
@@ -132,7 +135,7 @@ $(document).ready(function () {
           return `<option value="mmr_${index}">${mmr.ROM}GB</option>`;
         })
       );
-
+      newPhienBan = firstMemory.maPB;
       priceNew = firstMemory.giaGiam;
       memmorySelected = firstMemory;
 
@@ -178,7 +181,7 @@ $(document).ready(function () {
       memmorySelected = selectedMemory;
       priceOld = selectedMemory.giaBan;
       priceNew = selectedMemory.giaGiam;
-
+      newPhienBan = selectedMemory.maPB;
       // Cập nhật giá trên giao diện
       $(".product__item--priceOld").text(convertMoney(priceOld));
       $(".product__item--priceNew").text(convertMoney(priceNew));
@@ -190,53 +193,14 @@ $(document).ready(function () {
 function getMemory() {
   return memmorySelected;
 }
+function getPhienBan() {
+  return newPhienBan;
+}
 function getPrice() {
   return priceNew;
 }
 function convertMoney(money) {
   return money.toLocaleString("vi", { style: "currency", currency: "vnd" });
-}
-
-async function buyNow() {
-  // Kiểm tra nếu người dùng chưa đăng nhập
-  if (!user) {
-    alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
-    window.location.href = "/html/home/login.html";
-    return;
-  }
-
-  // Lấy id sản phẩm từ URL
-  let url_string = window.location.href;
-  let url = new URL(url_string);
-  let idProduct = url.searchParams.get("id");
-
-  try {
-    // Gọi API để lấy dữ liệu sản phẩm
-    const response = await fetch(
-      `http://localhost:8080/phonestore/getPhoneById?id=${idProduct}`
-    );
-    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
-
-    // Nhận dữ liệu sản phẩm từ API
-    const data = await response.json();
-    const item = data.sanPham;
-
-    // Kiểm tra và khởi tạo giỏ hàng từ localStorage nếu chưa tồn tại
-    let carts = JSON.parse(localStorage.getItem("listCart")) || [];
-
-    // Thêm sản phẩm vào giỏ hàng
-    item.price = getPrice();
-    item.memory = getMemory();
-    carts.push(item);
-
-    // Lưu lại giỏ hàng vào localStorage
-    localStorage.setItem("listCart", JSON.stringify(carts));
-    alert("Thêm sản phẩm vào giỏ hàng thành công!");
-    window.location.href = "/html/shopping__cart/shopping_cart.html";
-    console.log("Sản phẩm đã thêm vào giỏ hàng:", item);
-  } catch (error) {
-    console.error("Lỗi khi tải sản phẩm:", error);
-  }
 }
 
 async function addCart() {
@@ -248,9 +212,9 @@ async function addCart() {
   }
 
   // Lấy id sản phẩm từ URL
-  let url_string = window.location.href;
-  let url = new URL(url_string);
-  let idProduct = url.searchParams.get("id");
+  const url_string = window.location.href;
+  const url = new URL(url_string);
+  const idProduct = url.searchParams.get("id");
 
   try {
     // Gọi API để lấy dữ liệu sản phẩm
@@ -261,25 +225,171 @@ async function addCart() {
 
     // Nhận dữ liệu sản phẩm từ API
     const data = await response.json();
-    console.log("data: ", data);
     const item = data.sanPham;
 
-    // Kiểm tra và khởi tạo giỏ hàng từ localStorage nếu chưa tồn tại
+    // Lấy giỏ hàng hiện tại từ localStorage
     let carts = JSON.parse(localStorage.getItem("listCart")) || [];
 
-    // Thêm sản phẩm vào giỏ hàng
+    // Thêm thông tin bổ sung cho sản phẩm
+    item.maPB = getPhienBan();
     item.price = getPrice();
     item.memory = getMemory();
+
+    // Thêm sản phẩm vào giỏ hàng
     carts.push(item);
 
     // Lưu lại giỏ hàng vào localStorage
     localStorage.setItem("listCart", JSON.stringify(carts));
-    Swal.fire({
-      title: "Thêm giỏ hàng thành công!",
-      text: "You clicked the button!",
-      icon: "success",
-    });
+
+    // Hiển thị thông báo thành công
+    alert("Thêm sản phẩm vào giỏ hàng thành công!");
+    console.log("Sản phẩm đã thêm vào giỏ hàng:", item);
+
+    // Xử lý lưu giỏ hàng vào backend
+    await saveCartToDatabase(carts);
   } catch (error) {
-    console.error("Lỗi khi tải sản phẩm:", error);
+    console.error("Lỗi khi thêm sản phẩm vào giỏ hàng:", error);
+    alert("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.");
   }
+}
+async function buyNow() {
+  // Kiểm tra nếu người dùng chưa đăng nhập
+  if (!user) {
+    alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+    window.location.href = "/html/home/login.html";
+    return;
+  }
+
+  // Lấy id sản phẩm từ URL
+  const url_string = window.location.href;
+  const url = new URL(url_string);
+  const idProduct = url.searchParams.get("id");
+
+  try {
+    // Gọi API để lấy dữ liệu sản phẩm
+    const response = await fetch(
+      `http://localhost:8080/phonestore/getPhoneById?id=${idProduct}`
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
+
+    // Nhận dữ liệu sản phẩm từ API
+    const data = await response.json();
+    const item = data.sanPham;
+
+    // Lấy giỏ hàng hiện tại từ localStorage
+    let carts = JSON.parse(localStorage.getItem("listCart")) || [];
+
+    // Thêm thông tin bổ sung cho sản phẩm
+    item.maPB = getPhienBan();
+    item.price = getPrice();
+    item.memory = getMemory();
+
+    // Thêm sản phẩm vào giỏ hàng
+    carts.push(item);
+
+    // Lưu lại giỏ hàng vào localStorage
+    // localStorage.setItem("listCart", JSON.stringify(carts));
+
+    // Hiển thị thông báo thành công
+    alert("Thêm sản phẩm vào giỏ hàng thành công!");
+    console.log("Sản phẩm đã thêm vào giỏ hàng:", item);
+
+    // Xử lý lưu giỏ hàng vào backend
+    await saveCartToDatabase(carts);
+    window.location.href = "/html/shopping__cart/shopping_cart.html";
+  } catch (error) {
+    console.error("Lỗi khi thêm sản phẩm vào giỏ hàng:", error);
+    alert("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.");
+  }
+}
+
+async function saveCartToDatabase(carts) {
+  // Loại bỏ sản phẩm trùng lặp
+
+  carts.forEach((item) => {
+    if (!compare(arrSetUnique, item.maPB, item.price)) {
+      arrSetUnique.push(item);
+    }
+  });
+
+  // Lấy thông tin khách hàng
+  const kh = JSON.parse(localStorage.getItem("khachhang"));
+  if (!kh) {
+    alert("Không tìm thấy thông tin khách hàng. Vui lòng đăng nhập lại.");
+    return;
+  }
+
+  // Chuẩn bị và gửi dữ liệu từng sản phẩm
+  for (const item of arrSetUnique) {
+    const count = getCountItem(carts, item.maPB, item.price);
+    const data = {
+      maKH: kh.maKH,
+      maPB: item.maPB,
+      soLuong: count,
+      donGia: item.price * count,
+    };
+    console.log("data: ", data);
+
+    try {
+      // Gọi API để kiểm tra giỏ hàng có tồn tại sản phẩm chưa
+      const checkResponse = await fetch(
+        "http://localhost:8080/phonestore/check-cart",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ maKH: kh.maKH, maPB: item.maPB }),
+        }
+      );
+
+      if (!checkResponse.ok) throw new Error("Lỗi khi kiểm tra giỏ hàng");
+
+      const checkResult = await checkResponse.json();
+
+      if (checkResult.exists) {
+        // Nếu sản phẩm đã tồn tại, gọi API để cập nhật giỏ hàng
+        const updateResponse = await fetch(
+          "http://localhost:8080/phonestore/update-cart",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!updateResponse.ok) throw new Error("Lỗi khi cập nhật giỏ hàng");
+
+        const updateResult = await updateResponse.json();
+        console.log("Giỏ hàng đã được cập nhật:", updateResult);
+      } else {
+        // Nếu sản phẩm chưa tồn tại, gọi API để lưu giỏ hàng
+        const saveResponse = await fetch(
+          "http://localhost:8080/phonestore/save-cart",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!saveResponse.ok)
+          throw new Error("Lỗi khi lưu giỏ hàng vào cơ sở dữ liệu");
+
+        const saveResult = await saveResponse.json();
+        console.log("Dữ liệu giỏ hàng đã được lưu:", saveResult);
+      }
+    } catch (error) {
+      console.error("Có lỗi khi xử lý giỏ hàng:", error);
+      alert("Không thể lưu giỏ hàng. Vui lòng thử lại sau.");
+    }
+  }
+}
+
+// Hàm kiểm tra sản phẩm trùng lặp
+function compare(arr, key, price) {
+  return arr.some((item) => item.maPB === key && item.price === price);
+}
+
+// Hàm đếm số lượng sản phẩm trùng lặp
+function getCountItem(arr, item, price) {
+  return arr.filter((x) => x.maPB === item && x.price === price).length;
 }

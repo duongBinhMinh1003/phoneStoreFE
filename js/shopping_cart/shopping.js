@@ -1,8 +1,7 @@
 const VOUCHER = "provip";
 let priceVOUCHER = 0;
 let carts = JSON.parse(localStorage.getItem("listCart"));
-
-carts.maSP;
+const kh = JSON.parse(localStorage.getItem("khachhang"));
 function handleVoucher() {
   let voucher = document.getElementById("voucher").value;
   if (voucher.trim().length == 0) {
@@ -21,19 +20,19 @@ function handleVoucher() {
 
 function compare(arr, key, price) {
   //not finded
-  return arr.find((item) => item.maSP === key && item.price === price);
+  return arr.find((item) => item.maPB === key && item.price === price);
 }
 function getCountItem(arr, item, price) {
-  return arr.filter((x) => x.maSP === item && x.price === price).length;
+  return arr.filter((x) => x.maPB === item && x.price === price).length;
 }
-function deleteItem(maSP, price) {
+function deleteItem(maPB, price) {
   let indexRM = carts.findIndex(
-    (item) => item.maSP == maSP && item.price == price
+    (item) => item.maPB == maPB && item.price == price
   );
   console.log("carts: ", carts);
 
   if (indexRM == -1) return;
-  if (getCountItem(carts, maSP, price) === 1) {
+  if (getCountItem(carts, maPB, price) === 1) {
     if (confirm("Bạn chắc chắn muốn bỏ sản phẩm này")) {
       carts.splice(indexRM, 1);
     }
@@ -43,34 +42,17 @@ function deleteItem(maSP, price) {
     carts.splice(indexRM, 1);
   }
   localStorage.setItem("listCart", JSON.stringify(carts));
+  saveCartToDatabase(carts);
   renderCart();
 }
-function addItem(maSP, price) {
-  let itemAdd = carts.find((item) => item.maSP == maSP && item.price == price);
-  carts.push(itemAdd);
-  localStorage.setItem("listCart", JSON.stringify(carts));
-  renderCart();
-}
-function removeAll(maSP, price) {
-  if (confirm("Bạn chắc chắn muốn bỏ sản phẩm này")) {
-    console.log(carts);
 
-    carts = carts.filter(
-      (item) =>
-        item.maSP !== maSP || (item.maSP === maSP && item.price !== price)
-    );
-    localStorage.setItem("listCart", JSON.stringify(carts));
-    renderCart();
-  }
-}
-renderCart();
-function renderCart() {
-  $(".payment__tableBody").empty();
-  $(".sum_payment").empty();
+function addItem(maPB, price) {
   let arrSetUnique = [];
+  console.log("arrSetUnique: ", arrSetUnique);
+  let carts = JSON.parse(localStorage.getItem("listCart"));
   carts.map((item) => {
     console.log("item: ", item);
-    if (!compare(arrSetUnique, item.maSP, item.price)) {
+    if (!compare(arrSetUnique, item.maPB, item.price)) {
       arrSetUnique.push(item);
     }
   });
@@ -80,61 +62,262 @@ function renderCart() {
     return;
   }
   arrSetUnique.forEach((item) => {
-    let count = getCountItem(carts, item.maSP, item.price);
-    console.log("count: ", count);
-    $(".payment__tableBody").append(
-      `
+    let count = getCountItem(carts, item.maPB, item.price);
+    const data = {
+      maKH: kh.maKH,
+      maPB: item.maPB,
+      soLuong: count,
+      donGia: item.price * count,
+    };
+  });
+  saveCartToDatabase(carts);
+  let itemAdd = carts.find((item) => item.maPB == maPB && item.price == price);
+  carts.push(itemAdd);
+  localStorage.setItem("listCart", JSON.stringify(carts));
+  renderCart();
+}
+
+async function saveCartToDatabase(carts) {
+  // Loại bỏ sản phẩm trùng lặp
+  const arrSetUnique = [];
+  carts.forEach((item) => {
+    if (!compare(arrSetUnique, item.maPB, item.price)) {
+      arrSetUnique.push(item);
+    }
+  });
+
+  // Lấy thông tin khách hàng
+  const kh = JSON.parse(localStorage.getItem("khachhang"));
+  if (!kh) {
+    alert("Không tìm thấy thông tin khách hàng. Vui lòng đăng nhập lại.");
+    return;
+  }
+
+  // Chuẩn bị và gửi dữ liệu từng sản phẩm
+  for (const item of arrSetUnique) {
+    const count = getCountItem(carts, item.maPB, item.price);
+    const data = {
+      maKH: kh.maKH,
+      maPB: item.maPB,
+      soLuong: count,
+      donGia: item.price * count,
+    };
+    console.log("data: ", data);
+
+    try {
+      // Gọi API để kiểm tra giỏ hàng có tồn tại sản phẩm chưa
+      const checkResponse = await fetch(
+        "http://localhost:8080/phonestore/check-cart",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ maKH: kh.maKH, maPB: item.maPB }),
+        }
+      );
+
+      if (!checkResponse.ok) throw new Error("Lỗi khi kiểm tra giỏ hàng");
+
+      const checkResult = await checkResponse.json();
+
+      if (checkResult.exists) {
+        // Nếu sản phẩm đã tồn tại, gọi API để cập nhật giỏ hàng
+        const updateResponse = await fetch(
+          "http://localhost:8080/phonestore/update-cart",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!updateResponse.ok) throw new Error("Lỗi khi cập nhật giỏ hàng");
+
+        const updateResult = await updateResponse.json();
+        console.log("Giỏ hàng đã được cập nhật:", updateResult);
+      } else {
+        // Nếu sản phẩm chưa tồn tại, gọi API để lưu giỏ hàng
+        const saveResponse = await fetch(
+          "http://localhost:8080/phonestore/save-cart",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!saveResponse.ok)
+          throw new Error("Lỗi khi lưu giỏ hàng vào cơ sở dữ liệu");
+
+        const saveResult = await saveResponse.json();
+        console.log("Dữ liệu giỏ hàng đã được lưu:", saveResult);
+      }
+    } catch (error) {
+      console.error("Có lỗi khi xử lý giỏ hàng:", error);
+      alert("Không thể lưu giỏ hàng. Vui lòng thử lại sau.");
+    }
+  }
+  renderCart();
+}
+
+async function removeAll(maPB, price) {
+  if (confirm("Bạn chắc chắn muốn bỏ tất cả sản phẩm này khỏi giỏ hàng?")) {
+    const kh = JSON.parse(localStorage.getItem("khachhang"));
+    carts = carts.filter(
+      (item) =>
+        item.maPB !== maPB || (item.maPB === maPB && item.price !== price)
+    );
+    localStorage.setItem("listCart", JSON.stringify(carts));
+    renderCart();
+
+    if (!kh) {
+      alert("Không tìm thấy thông tin khách hàng. Vui lòng đăng nhập lại.");
+      return;
+    }
+
+    try {
+      // Gọi API để xóa sản phẩm khỏi giỏ hàng
+      const response = await fetch(
+        "http://localhost:8080/phonestore/delete-cart",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ maPB, maKH: kh.maKH }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Lỗi khi xóa sản phẩm khỏi giỏ hàng");
+      }
+
+      const result = await response.json();
+      console.log("Sản phẩm đã được xóa khỏi giỏ hàng:", result);
+
+      // Sau khi xóa thành công, gọi lại API `get-cart` để lấy lại giỏ hàng cập nhật
+      const cartResponse = await fetch(
+        "http://localhost:8080/phonestore/get-cart",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ maKH: kh.maKH }),
+        }
+      );
+
+      if (!cartResponse.ok) {
+        throw new Error("Lỗi khi lấy giỏ hàng sau khi xóa sản phẩm.");
+      }
+
+      const cartResult = await cartResponse.json();
+      console.log("Giỏ hàng mới: ", cartResult);
+
+      // Cập nhật lại giao diện với giỏ hàng mới
+      renderCart(cartResult.data);
+    } catch (error) {
+      console.error("Có lỗi khi xóa sản phẩm:", error);
+      alert("Không thể xóa sản phẩm. Vui lòng thử lại sau.");
+    }
+  }
+}
+
+renderCart();
+async function renderCart() {
+  // Xóa dữ liệu hiện tại trong giao diện
+  $(".payment__tableBody").empty();
+  $(".sum_payment").empty();
+
+  // Lấy thông tin khách hàng từ `localStorage`
+  const kh = JSON.parse(localStorage.getItem("khachhang"));
+  if (!kh) {
+    $(".payment__tableBody").text("Chưa có sản phẩm");
+    $(".sum_payment").text("Chưa có sản phẩm");
+    alert("Không tìm thấy thông tin khách hàng. Vui lòng đăng nhập lại.");
+    return;
+  }
+
+  try {
+    // Gọi API lấy giỏ hàng
+    const response = await fetch("http://localhost:8080/phonestore/get-cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ maKH: kh.maKH }),
+    });
+
+    if (!response.ok) throw new Error("Lỗi khi lấy giỏ hàng.");
+
+    const result = await response.json();
+    console.log("result: ", result);
+
+    // Kiểm tra nếu giỏ hàng trống
+    if (result.data.length === 0) {
+      $(".payment__tableBody").text("Chưa có sản phẩm");
+      $(".sum_payment").text("Chưa có sản phẩm");
+      return;
+    }
+
+    let arrSetUnique = result.data;
+    console.log("arrSetUnique: ", arrSetUnique);
+
+    // Hiển thị dữ liệu giỏ hàng
+    arrSetUnique.forEach((item) => {
+      let count = item.soLuong; // Số lượng từ API
+      $(".payment__tableBody").append(
+        `
             <tr>
-                <td><a onclick="removeAll('${item.maSP}',${
-        item.price
-      }); return false" href="#"><i class="fa fa-times" aria-hmaSPden="true"></i></a></td>
-                <td><img height="100" wmaSPth="100"
-                        src=${item.hinhAnh}
+                <td><a onclick="removeAll('${item.maPB}', ${
+          item.donGia
+        }); return false" href="#"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                <td><img height="100" width="100"
+                        src=${item.maPB_phienbansp.maSP_sanpham.hinhAnh}
                         alt="">
                 </td>
                 <td>
-                    <h4>${item.tenSP}</h4>
+                    <h4>${item.maPB_phienbansp.maSP_sanpham.tenSP}</h4>
                     <p>
-                        Mã phiên bản : ${item.memory.maPB}<br>
-                        Dung lượng: ${item.memory.ROM}GB<br>
+                        Mã phiên bản : ${item.maPB}<br>
+                        Dung lượng: ${item.maPB_phienbansp?.ROM || "N/A"}GB<br>
                         Tình trạng: Mới<br>
-                        Màu sắc: ${item.memory.mauSac}
+                        Màu sắc: ${item.maPB_phienbansp?.mauSac || "N/A"}
                     </p>
                 </td>
-                <td class="nav__pc"><h5>${convertMoney(item.price)}</h5></td>
+                <td class="nav__pc"><h5>${convertMoney(item.donGia)}</h5></td>
                 <td class="nav__pc">
                     <div class="payment__tableBody--count">
-                        <i onclick="deleteItem('${item.maSP}',${
-        item.price
-      })" class="fa fa-minus count_minus" aria-hmaSPden="true"></i>
-                        <span>${count}</span>
-                        <i onclick="addItem('${item.maSP}',${
-        item.price
-      })" class="fa fa-plus count_plus" aria-hmaSPden="true"></i>
+                    <span>${count}</span>
                     </div>
                 </td>
-                <td><h5>${convertMoney(item.price * count)}</h5></td>
+                <td><h5>${convertMoney(item.donGia * count)}</h5></td>
             </tr>
             `
-    );
-  });
-  $(".sum_payment").append(
-    `<h3 class="sum_payment--title">Tổng giỏ hàng</h3>
+      );
+    });
+
+    // Tính tổng giỏ hàng và hiển thị
+    const totalAmount = await sumNotVoucher(arrSetUnique); // Tính tổng sau khi lấy giỏ hàng
+    $(".sum_payment").append(
+      `<h3 class="sum_payment--title">Tổng giỏ hàng</h3>
             <div class="sum__payment--detail">
                 <p>Tạm tính</p>
-                <h4>${convertMoney(sumNotVoucher())}</h4>
+                <h4>${convertMoney(totalAmount)}</h4>
                 <p>Giảm giá</p>
                 <h4>${convertMoney(priceVOUCHER)}</h4>
                 <hr>
                 <p>Tổng</p>
-                <h3>${convertMoney(sumNotVoucher() - priceVOUCHER)}</h3>
+                <h3>${convertMoney(totalAmount - priceVOUCHER)}</h3>
             </div>
-        <a href="/html/shopping__cart/shopping_cart_2.html" class="btn btn-danger">Thanh toán ngay</a>
-    `
-  );
+        <a href="/html/shopping__cart/shopping_cart_2.html" class="btn btn-danger">Thanh toán ngay</a>`
+    );
+  } catch (error) {
+    console.error("Có lỗi khi tải giỏ hàng:", error);
+    alert("Không thể lấy dữ liệu giỏ hàng. Vui lòng thử lại sau.");
+    $(".payment__tableBody").text("Chưa có sản phẩm");
+    $(".sum_payment").text("Chưa có sản phẩm");
+  }
 }
-function sumNotVoucher() {
+
+// Hàm tính tổng giỏ hàng từ API
+async function sumNotVoucher(cartItems) {
   let sum = 0;
-  carts.map((item) => (sum += Number(item.price)));
+  cartItems.forEach((item) => {
+    sum += item.donGia * item.soLuong; // Cộng dồn giá trị các sản phẩm trong giỏ hàng
+  });
   return sum;
 }

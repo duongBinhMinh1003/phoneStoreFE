@@ -59,7 +59,6 @@ $(document).ready(function () {
 
   //get data from dataProducts
   $.getJSON("/js/data.json").done((data) => {
-    console.log("data: ", data);
     dataBrands = [...data.dataBrands];
     dataSlides = [...data.dataSlides];
     dataProducts = [...data.dataProducts];
@@ -87,8 +86,6 @@ $(document).ready(function () {
       const kh = JSON.parse(localStorage.getItem("khachhang"));
 
       if (kh) {
-        console.log("Tên đăng nhập: ", kh.hoTen);
-
         $("#dangnhapTK")
           .text(kh.hoTen)
           .attr("href", "/html/home/thongtinuser.html");
@@ -275,7 +272,6 @@ async function fetchProducts() {
     if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
 
     const data = await response.json();
-    console.log("Data from API:", data); // Log dữ liệu trả về từ API
   } catch (error) {
     console.error("Error fetching products:", error);
   }
@@ -375,7 +371,6 @@ async function renderProduct() {
 
     const productsEl = await response.json();
     const products = productsEl.data;
-    console.log("products: ", products);
 
     // Empty the container before appending new items
     $(".products").empty();
