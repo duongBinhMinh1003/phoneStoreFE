@@ -161,14 +161,8 @@ async function saveCartToDatabase(carts) {
 
 async function removeAll(maPB, price) {
   if (confirm("Bạn chắc chắn muốn bỏ tất cả sản phẩm này khỏi giỏ hàng?")) {
+    // Lấy thông tin khách hàng từ localStorage
     const kh = JSON.parse(localStorage.getItem("khachhang"));
-    carts = carts.filter(
-      (item) =>
-        item.maPB !== maPB || (item.maPB === maPB && item.price !== price)
-    );
-    localStorage.setItem("listCart", JSON.stringify(carts));
-    renderCart();
-
     if (!kh) {
       alert("Không tìm thấy thông tin khách hàng. Vui lòng đăng nhập lại.");
       return;
@@ -192,7 +186,7 @@ async function removeAll(maPB, price) {
       const result = await response.json();
       console.log("Sản phẩm đã được xóa khỏi giỏ hàng:", result);
 
-      // Sau khi xóa thành công, gọi lại API `get-cart` để lấy lại giỏ hàng cập nhật
+      // Sau khi xóa thành công, gọi lại API để lấy danh sách giỏ hàng mới
       const cartResponse = await fetch(
         "http://localhost:8080/phonestore/get-cart",
         {
@@ -209,7 +203,10 @@ async function removeAll(maPB, price) {
       const cartResult = await cartResponse.json();
       console.log("Giỏ hàng mới: ", cartResult);
 
-      // Cập nhật lại giao diện với giỏ hàng mới
+      // Cập nhật `localStorage` với giỏ hàng mới
+      localStorage.setItem("listCart", JSON.stringify(cartResult.data));
+
+      // Hiển thị lại giao diện giỏ hàng
       renderCart(cartResult.data);
     } catch (error) {
       console.error("Có lỗi khi xóa sản phẩm:", error);
@@ -244,7 +241,6 @@ async function renderCart() {
     if (!response.ok) throw new Error("Lỗi khi lấy giỏ hàng.");
 
     const result = await response.json();
-    console.log("result: ", result);
 
     // Kiểm tra nếu giỏ hàng trống
     if (result.data.length === 0) {
@@ -254,11 +250,17 @@ async function renderCart() {
     }
 
     let arrSetUnique = result.data;
-    console.log("arrSetUnique: ", arrSetUnique);
+
+    let totalAmount = 0; // Tổng tiền chưa trừ voucher
 
     // Hiển thị dữ liệu giỏ hàng
     arrSetUnique.forEach((item) => {
-      let count = item.soLuong; // Số lượng từ API
+      let count = item.soLuong; // Số lượng sản phẩm từ API
+      let price = item.maPB_phienbansp.giaGiam; // Giá sau giảm
+      let subtotal = price * count; // Tổng tiền cho sản phẩm này
+
+      totalAmount += subtotal; // Cộng dồn vào tổng tiền toàn giỏ hàng
+
       $(".payment__tableBody").append(
         `
             <tr>
@@ -278,20 +280,22 @@ async function renderCart() {
                         Màu sắc: ${item.maPB_phienbansp?.mauSac || "N/A"}
                     </p>
                 </td>
-                <td class="nav__pc"><h5>${convertMoney(item.donGia)}</h5></td>
+                <td class="nav__pc"><h5>${convertMoney(price)}</h5></td>
                 <td class="nav__pc">
                     <div class="payment__tableBody--count">
                     <span>${count}</span>
                     </div>
                 </td>
-                <td><h5>${convertMoney(item.donGia * count)}</h5></td>
+                <td><h5>${convertMoney(subtotal)}</h5></td>
             </tr>
             `
       );
     });
 
-    // Tính tổng giỏ hàng và hiển thị
-    const totalAmount = await sumNotVoucher(arrSetUnique); // Tính tổng sau khi lấy giỏ hàng
+    // Áp dụng giảm giá từ voucher
+    const finalAmount = totalAmount - priceVOUCHER;
+
+    // Hiển thị tổng giỏ hàng
     $(".sum_payment").append(
       `<h3 class="sum_payment--title">Tổng giỏ hàng</h3>
             <div class="sum__payment--detail">
@@ -301,7 +305,7 @@ async function renderCart() {
                 <h4>${convertMoney(priceVOUCHER)}</h4>
                 <hr>
                 <p>Tổng</p>
-                <h3>${convertMoney(totalAmount - priceVOUCHER)}</h3>
+                <h3>${convertMoney(finalAmount)}</h3>
             </div>
         <a href="/html/shopping__cart/shopping_cart_2.html" class="btn btn-danger">Thanh toán ngay</a>`
     );

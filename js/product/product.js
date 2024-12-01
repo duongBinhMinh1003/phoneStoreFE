@@ -5,7 +5,8 @@ let arrSetUnique = [];
 let newPhienBan = "";
 let memmorySelected = "";
 const user = JSON.parse(localStorage.getItem("user"));
-let carts = JSON.parse(localStorage.getItem("listCart"));
+
+const kh = JSON.parse(localStorage.getItem("khachhang"));
 $(document).ready(function () {
   let posNav = $(".container__top").offset().top;
   let posPhone = $(".product__intro-fixed").offset().top;
@@ -228,9 +229,10 @@ async function addCart() {
     const item = data.sanPham;
 
     // Lấy giỏ hàng hiện tại từ localStorage
-    let carts = JSON.parse(localStorage.getItem("listCart")) || [];
-
+    let carts = [];
+    const kh = JSON.parse(localStorage.getItem("khachhang"));
     // Thêm thông tin bổ sung cho sản phẩm
+    item.kh = kh.maKH;
     item.maPB = getPhienBan();
     item.price = getPrice();
     item.memory = getMemory();
@@ -239,7 +241,6 @@ async function addCart() {
     carts.push(item);
 
     // Lưu lại giỏ hàng vào localStorage
-    localStorage.setItem("listCart", JSON.stringify(carts));
 
     // Hiển thị thông báo thành công
     alert("Thêm sản phẩm vào giỏ hàng thành công!");
@@ -277,9 +278,10 @@ async function buyNow() {
     const item = data.sanPham;
 
     // Lấy giỏ hàng hiện tại từ localStorage
-    let carts = JSON.parse(localStorage.getItem("listCart")) || [];
-
+    let carts = [];
+    const kh = JSON.parse(localStorage.getItem("khachhang"));
     // Thêm thông tin bổ sung cho sản phẩm
+    item.kh = kh.maKH;
     item.maPB = getPhienBan();
     item.price = getPrice();
     item.memory = getMemory();
@@ -288,7 +290,6 @@ async function buyNow() {
     carts.push(item);
 
     // Lưu lại giỏ hàng vào localStorage
-    // localStorage.setItem("listCart", JSON.stringify(carts));
 
     // Hiển thị thông báo thành công
     alert("Thêm sản phẩm vào giỏ hàng thành công!");
@@ -311,6 +312,7 @@ async function saveCartToDatabase(carts) {
       arrSetUnique.push(item);
     }
   });
+  console.log("carts: ", carts);
 
   // Lấy thông tin khách hàng
   const kh = JSON.parse(localStorage.getItem("khachhang"));
@@ -328,6 +330,7 @@ async function saveCartToDatabase(carts) {
       soLuong: count,
       donGia: item.price * count,
     };
+    console.log("count: ", count);
     console.log("data: ", data);
 
     try {

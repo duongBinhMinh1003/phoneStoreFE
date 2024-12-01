@@ -51,10 +51,6 @@ $(document).ready(function () {
       alert("Vui lòng nhập email");
       return false;
     }
-
-    // Nếu tất cả đều hợp lệ
-    return true;
-    // Chuẩn bị dữ liệu tài khoản
     let data = {
       tenDangNhap: taiKhoanEl,
       matKhau: matKhauEl,
@@ -93,7 +89,7 @@ $(document).ready(function () {
           data: JSON.stringify(dataUser),
           success: function (response) {
             console.log("Success in post-user: ", response);
-            alert(response.message); // Thông báo thành công cho tạo người dùng
+            window.location.href = "/html/home/login.html";
           },
           error: function (xhr, status, error) {
             console.error("Error in post-user: ", error);
@@ -197,54 +193,6 @@ $(document).ready(function () {
       }
     });
 });
-document.getElementById("name").onkeyup = () => {
-  let patName = new RegExp(
-    `^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+(\ +[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+)*)$`
-  );
-  let resName = patName.test(document.getElementById("name").value.trim());
-  if (resName) {
-    trueRegex("name");
-    ten = true;
-  } else {
-    falseRegex("name");
-    ten = false;
-  }
-};
-document.getElementById("lastName").onkeyup = () => {
-  let patName = new RegExp(
-    `^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+(\ +[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+)*)$`
-  );
-  let resName = patName.test(document.getElementById("lastName").value.trim());
-  if (resName) {
-    trueRegex("lastName");
-    ho = true;
-  } else {
-    falseRegex("lastName");
-    ho = false;
-  }
-};
-document.getElementById("email1").onkeyup = () => {
-  let patMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  let resMail = patMail.test(document.getElementById("email").value.trim());
-  if (resMail) {
-    trueRegex("email");
-    email = true;
-  } else {
-    falseRegex("email");
-    email = false;
-  }
-};
-document.getElementById("pasword").onkeyup = () => {
-  let passWord = /^(?=.*[a-zA-Z])(?=.*[0-9])(\w).{5,}$/;
-  let resPass = passWord.test(document.getElementById("pasword").value.trim());
-  if (resPass) {
-    trueRegex("pasword");
-    pass = true;
-  } else {
-    falseRegex("pasword");
-    pass = false;
-  }
-};
 
 function falseRegex(id) {
   document.getElementById(id).style.borderBottom = "5px solid red";
