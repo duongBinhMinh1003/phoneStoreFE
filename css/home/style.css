@@ -591,7 +591,7 @@ li.dropdown:hover a {
 }
 
 .res .icon span {
-  background: #333;
+  background: #999;
   font-size: 26px;
   border-radius: 50%;
   width: 68px;
@@ -788,4 +788,39 @@ section.w3_stats {
 .product-table_img_detail {
   height: 60px;
   width: 60px;
+}
+.order-product-table__return-btn {
+  padding: 2px 0.8em; /* Khoảng cách bên trong */
+  border-radius: 8px; /* Bo góc */
+  background-color: transparent; /* Nền trong suốt */
+  color: #17c3b2; /* Màu chữ */
+  border: 2px solid #17c3b2; /* Viền */
+  font-size: 16px; /* Kích thước chữ */
+  cursor: pointer; /* Hiển thị con trỏ khi di chuột qua */
+  z-index: 1; /* Đảm bảo nút nổi lên trên các phần tử khác */
+  transition: 0.3s; /* Hiệu ứng chuyển màu */
+  overflow: hidden; /* Ẩn phần thừa */
+  position: relative; /* Đặt vị trí tương đối */
+}
+
+.order-product-table__return-btn:before {
+  content: ""; /* Tạo phần tử trước */
+  width: 0; /* Chiều rộng ban đầu */
+  height: 300%; /* Chiều cao */
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  top: 50%; /* Đặt ở giữa */
+  left: 50%; /* Đặt ở giữa */
+  transition: 0.5s ease; /* Hiệu ứng chuyển đổi */
+  transform: translate(-50%, -50%) rotate(45deg); /* Định vị */
+  display: block; /* Hiển thị */
+  z-index: -1; /* Đặt dưới nút */
+  background-color: #17c3b2; /* Màu nền */
+}
+
+.order-product-table__return-btn:hover::before {
+  width: 105%; /* Mở rộng chiều rộng khi hover */
+}
+
+.order-product-table__return-btn:hover {
+  color: #111; /* Màu chữ khi hover */
 }

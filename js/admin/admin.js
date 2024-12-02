@@ -443,7 +443,130 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                 `;
         initNhanVienPage();
       }
+      if (item.getAttribute("data-value") === "ql-phieunhap") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
+                    <div class="top-line">
+                    <h1 class="top-line__heading">QUẢN LÝ PHIẾU NHẬP</h1>
+                </div>
+    
+    
+                <div class="content__container">
+                    <ul class="function__list">
+                        <li class="function__item active" data-value="add">
+                            <span class="function__item-title">
+                                Thêm mới
+                            </span>
+                        </li>
+                        <li class="function__item " data-value="update">
+                            <span class="function__item-title">
+                                Chỉnh sửa
+                            </span>
+                        </li>
+                        <li class="function__item" data-value="delete">
+                            <span class="function__item-title">
+                                Xóa
+                            </span>
+                        </li>
+    
+    
+                    </ul>
+                    <form id="form-admin">
+                        <div class="form-container">
+    
+                            <div class="form-group">
+                                <label for="user-id" class="form-label">Mã phiếu nhập</label>
+    
+                                <input id="maPhieuNhap" name="user-id" type="text" class="form-control" disabled="true">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                            <label for="user-email" class="form-label">Mã nhân viên</label>
 
+                            <input disabled="true" id="maNv" name="user-email" type="text" class="form-control">
+
+                            <span class="form-message"></span>
+                        </div>
+                            <div class="form-group">
+                                <label for="user-full_name" class="form-label">Thời gian tạo</label>
+    
+                                <input id="thoiGianTao" name="user-full_name" type="date" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="user-username" class="form-label">Tổng tiền</label>
+    
+                                <input id="tongTien" name="user-username" type="text" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-password" class="form-label">Trạng Thái</label>                     
+                                <select id="trangThai" style="height: 100%;">
+                                    <option value="da nhap">Đã xác nhận</option>
+                                    <option value="chua xac nhan">Chưa xác nhận</option>                             
+                                </select>
+    
+                                <span class="form-message"></span>
+                            </div>
+                           
+                           
+                            <div class="form-group">
+                                <label for="user-email" class="form-label">Mã nhà cung cấp</label>
+    
+                                <input id="maNCC" name="user-email" type="text" class="form-control">
+    
+                                <span class="form-message"></span>
+                            </div>
+                           
+                           
+    
+    
+                        </div>
+                        <div class="form-controls">
+                            <button type="button"  class="btn-control" id="btn-save">Cập nhật</button>
+                            <button type="button"  class="btn-control" id="btn-add">Thêm</button>
+                            <button type="button" onclick="huyPhieuNhap()"  class="btn-control" id="btn-cancel">Hủy</button>
+                        </div>
+                    </form>
+                    <table id="product-table">
+                        <thead>
+                            <tr class="product-table__heading">
+                                <th>Mã phiếu nhập</th>
+                                <th>Thời gian tạo</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Mã nhân viên</th>  
+                                <th>Nhà cung cấp</th>       
+                                <th>Hành động</th>            
+                                <!-- <th></th> -->
+    
+                            </tr>
+                        </thead>
+                        <tbody class="product-table__list">
+                            <tr class="product-table__row product-table__row--clicked">
+                                <td>1</td>
+                                <td>Samsung Galaxy S23 Ultra 256GB</td>
+                                <td>10000000</td>
+                                <td>9000000</td>
+                                <td>Đã xử lý</td>
+                                <td>Đã xử lý</td>
+                                <td>
+                                    <button class="product-table__update-btn product-table-btn">Sửa</button>
+                                    <button class="product-table__delete-btn product-table-btn">Xem chi tiết</button>
+                                </td>
+                            </tr>
+    
+                        </tbody>
+                    </table>
+    
+                </div>
+                `;
+        initPhieuNhapPage();
+      }
       if (item.getAttribute("data-value") === "ql-hoadon") {
         item.classList.add("active");
 
@@ -567,6 +690,102 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                 `;
         initInvoicePage();
       }
+      if (item.getAttribute("data-value") === "ql-dontra") {
+        item.classList.add("active");
+    
+        // Mảng dữ liệu ảo
+        const mockData = [
+            { maDT: 1, maDH: 50, maKH: 1, status: "chưa xử lý" },
+            { maDT: 2, maDH: 51, maKH: 3, status: "đã xử lý" },
+            { maDT: 3, maDH: 52, maKH: 10, status: "chưa xử lý" },
+            { maDT: 4, maDH: 53, maKH: 20, status: "chưa xử lý" },
+            { maDT: 5, maDH: 54, maKH: 11, status: "đã xử lý" },
+        ];
+    
+        // Tạo HTML cho bảng
+        contentContainer.innerHTML = `
+            <div class="top-line">
+                <h1 class="top-line__heading">QUẢN LÝ ĐƠN TRẢ</h1>
+            </div>
+            
+            <div class="content__container">
+                <div class="invoice-details-return">
+                    <div class="invoice-details__header-return">
+                        DANH SÁCH ĐƠN TRẢ
+                    </div>
+                </div>
+    
+                <table id="return-product-table">
+                    <thead>
+                        <tr class="return-product-table__heading">
+                            <th>Mã DT</th>
+                            <th>Mã DH</th>
+                            <th>Mã KH</th>
+                            <th>Tình trạng</th>
+                            <th>Duyệt</th>
+                        </tr>
+                    </thead>
+                    <tbody class="return-product-table__list">
+                        ${mockData.map(item => `
+                            <tr class="return-product-table__row return-product-table1__row--clicked">
+                                <td>${item.maDT}</td>
+                                <td>${item.maDH}</td>
+                                <td>${item.maKH}</td>
+                                <td class="status">${item.status}</td>
+                                <td>
+                                    <button class="btn-control btn-process">Xử lý</button>
+                                    <button class="btn-control btn-cancel">Hủy</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    
+        // Gọi hàm xử lý sự kiện cho các nút
+        handleButtonEvents();
+    
+        initReturnInvoicePage(); 
+    }
+    
+    // Hàm xử lý sự kiện cho các nút
+    function handleButtonEvents() {
+        const rows = document.querySelectorAll('.return-product-table__row');
+        rows.forEach(row => {
+            const statusCell = row.querySelector('.status');
+            const processBtn = row.querySelector('.btn-process');
+            const cancelBtn = row.querySelector('.btn-cancel');
+    
+            // Kiểm tra trạng thái và bật/tắt nút
+            if (statusCell.textContent.trim() === "chưa xử lý") {
+                processBtn.disabled = false;
+                cancelBtn.disabled = false;
+            } else if (statusCell.textContent.trim() === "đã xử lý") {
+                processBtn.disabled = true;
+                cancelBtn.disabled = true;
+            }
+    
+            // Thêm sự kiện cho nút xử lý
+            processBtn.addEventListener('click', () => {
+                alert("Cập nhật trạng thái thành công!");
+                // Cập nhật trạng thái trong bảng
+                statusCell.textContent = "đã xử lý";
+                processBtn.disabled = true;
+                cancelBtn.disabled = true;
+            });
+    
+            // Thêm sự kiện cho nút hủy
+            cancelBtn.addEventListener('click', () => {
+                alert("Hủy đơn trả thành công!");
+                // Cập nhật trạng thái trong bảng
+                statusCell.textContent = "đã xử lý";
+                processBtn.disabled = true;
+                cancelBtn.disabled = true;
+            });
+        });
+    }
+
       if (item.getAttribute("data-value") === "ql-sanpham") {
         item.classList.add("active");
         contentContainer.innerHTML = `
@@ -3452,438 +3671,186 @@ const deleteBaoHanh = async (idBaoHanh) => {
 };
 
 // PHIEU NHAP
+// PHIEU NHAP
 
 async function initPhieuNhapPage() {
   try {
-    // Gọi API để lấy dữ liệu nhà cung cấp
-    const response = await fetch(
-      "http://localhost:8080/phonestore/get-nhacungcap"
-    );
-    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu nhà cung cấp");
-
-    const data = await response.json();
-    const nhacungcap = data.data; // Giả sử API trả về danh sách nhà cung cấp trong `data`
-
-    // Gắn dữ liệu vào dropdown
-    const supplierSelect = document.getElementById("supplier");
-
-    // Xóa các option hiện tại (nếu cần)
-    supplierSelect.innerHTML = "";
-
-    // Map qua danh sách nhà cung cấp và tạo các option
-    nhacungcap.forEach((supplier) => {
-      const option = document.createElement("option");
-      option.value = supplier.maNCC; // Gán `maPN` làm value
-      option.text = supplier.tenNCC; // Gán `tenNCC` làm hiển thị
-      supplierSelect.appendChild(option);
-    });
-
-    console.log("Danh sách nhà cung cấp:", nhacungcap);
-  } catch (error) {
-    console.error("Lỗi khi gọi API nhà cung cấp:", error);
-    alert("Không thể lấy dữ liệu nhà cung cấp. Vui lòng thử lại sau.");
-  }
-
-  try {
-    // Gọi API để lấy dữ liệu phiếu nhập
     const response = await fetch(
       "http://localhost:8080/phonestore/get-phieunhap"
     );
-    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu phiếu nhập");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
 
     const data = await response.json();
-    const nhacungcap = data.data; // Giả sử API trả về danh sách phiếu nhập trong `data`
+    const res = data.data;
+    console.log("res: ", res);
+    const nhanvien = JSON.parse(localStorage.getItem("khachhang"));
+    console.log(nhanvien.maNV);
 
-    // Tìm mã phiếu nhập cuối cùng
-    let maxMaPN = 0;
-
-    nhacungcap.forEach((supplier) => {
-      // Tách phần số từ maPN (ví dụ: "PN008" -> 8)
-      const currentMaPN = parseInt(supplier.maPN.replace(/[^0-9]/g, ""), 10);
-      if (currentMaPN > maxMaPN) {
-        maxMaPN = currentMaPN;
-      }
-    });
-
-    // Tạo mã phiếu nhập mới (ví dụ: PN014)
-    const newMaPN = `PN${String(maxMaPN + 1).padStart(3, "0")}`;
-
-    // Gán giá trị mới vào trường cần hiển thị
-    const noteInput = document.getElementById("noteId");
-    if (noteInput) {
-      noteInput.value = newMaPN; // Gán giá trị mới vào input hoặc nơi bạn muốn hiển thị
-    }
-
-    console.log(
-      "Mã phiếu nhập cuối cùng:",
-      `PN${String(maxMaPN).padStart(3, "0")}`
-    );
-    console.log("Mã phiếu nhập mới:", newMaPN);
-  } catch (error) {
-    console.error("Lỗi khi gọi API phiếu nhập:", error);
-    alert("Không thể lấy dữ liệu phiếu nhập. Vui lòng thử lại sau.");
-  }
-
-  // Set giá trị cho ô input
-  document.getElementById("creatorId").value = kh.maNV; // Gán Creator ID mới
-
-  // Set giá trị cho danh sách chọn (select)
-
-  let products = []; // Mảng lưu trữ danh sách sản phẩm
-
-  try {
-    // Gọi API để lấy dữ liệu sản phẩm
-    const response = await fetch(
-      "http://localhost:8080/phonestore/get-phienban"
-    );
-    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
-
-    const data = await response.json();
-    products = data.data; // Gán dữ liệu vào mảng `products`
-    console.log("products: ", products);
-  } catch (error) {
-    console.error("Lỗi khi gọi API sản phẩm:", error);
-    alert("Không thể lấy dữ liệu sản phẩm. Vui lòng thử lại sau.");
-    return; // Ngăn việc tiếp tục xử lý nếu dữ liệu không có
-  }
-
-  const productTable = document.getElementById("productTable");
-  const selectedTable = document.getElementById("selectedTable");
-  const quantityInput = document.getElementById("quantityInput");
-  const totalPrice = document.getElementById("totalPrice");
-  let selectedProductId = null; // Lưu trữ ID sản phẩm được chọn
-
-  // Render bảng sản phẩm
-  function renderProductTable() {
-    productTable.innerHTML = "";
-    products.forEach((product) => {
-      product.chitietphieunhaps.forEach((chitiet) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${product.maPB}</td>
-          <td>${product.maSP_sanpham.tenSP}</td>
-          <td>${product.RAM}</td>
-          <td>${product.ROM}</td>
-          <td>${product.mauSac}</td>        
-          <td>${chitiet.soLuong}</td>
-          <td>${chitiet.donGiaNhap.toLocaleString()}đ</td>
-        `;
-
-        // Khi click vào dòng, lưu ID sản phẩm vào biến `selectedProductId`
-        row.addEventListener("click", () => {
-          selectedProductId = product.maPB; // Lưu ID sản phẩm
-          highlightSelectedRow(row); // Làm nổi bật dòng được chọn
-        });
-
-        productTable.appendChild(row);
+    let html = "";
+    res
+      .slice()
+      .reverse()
+      .forEach((item) => {
+        const maNV = item.maNV || "";
+        html += `
+            <tr class="product-table__row" data-value="${item.maPN}">
+                <td>${item.maPN}</td>
+                <td>${item.ngayTao}</td>
+                <td>${item.tongTien}</td>
+                <td>${item.trangThai}</td>
+                <td>${maNV}</td>
+                <td>${item.maNCC}</td>
+                <td>
+                    <button onclick="editPhieuNhap('${item.maPN}')"  class="product-table__update-btn product-table-btn">Sửa</button> 
+                    <button onclick="xacNhanPhieuNhap('${item.maPN}')"  class="product-table__update-btn product-table-btn">Xác nhận</button> 
+                                
+                </td>
+            </tr>
+            `;
       });
-    });
-  }
 
-  // Highlight dòng đã chọn
-  function highlightSelectedRow(row) {
-    const rows = productTable.querySelectorAll("tr");
-    rows.forEach((r) => r.classList.remove("selected"));
-    row.classList.add("selected");
-  }
+    document.querySelector(".product-table__list").innerHTML = html;
 
-  // Tính toán tổng giá trị
-  function calculateTotal() {
-    const rows = selectedTable.querySelectorAll("tr");
-    let total = 0;
-    rows.forEach((row) => {
-      const price = parseInt(row.cells[2].textContent.replace(/\D/g, ""));
-      total += price;
-    });
-    totalPrice.textContent = `${total.toLocaleString()}đ`;
-  }
+    const btnUpdate = $("#btn-save");
+    const btnAdd = $("#btn-add");
+    btnUpdate.addEventListener("click", async (e) => {
+      // Lấy giá trị từ các trường nhập liệu
+      let maPnEl = document.getElementById("maPhieuNhap").value;
+      let thoiGianTaoEl = document.getElementById("thoiGianTao").value;
+      let tongTienEl = document.getElementById("tongTien").value;
+      let MaNVEl = document.getElementById("maNv").value;
+      let trangThaiEl = document.getElementById("trangThai").value;
+      let maNccEl = document.getElementById("maNCC").value;
 
-  // Xóa sản phẩm khỏi bảng selectedTable
-  document.getElementById("removeProduct").addEventListener("click", () => {
-    const selectedRow = selectedTable.querySelector(".selected");
-    if (!selectedRow) {
-      return alert("Please select a product to remove!");
-    }
-
-    selectedRow.remove(); // Xóa dòng được chọn
-    calculateTotal(); // Cập nhật tổng giá trị
-  });
-
-  // Cập nhật số lượng sản phẩm trong selectedTable
-  selectedTable.addEventListener("click", (event) => {
-    const row = event.target.closest("tr");
-    if (!row) return;
-
-    selectedTable
-      .querySelectorAll("tr")
-      .forEach((r) => r.classList.remove("selected"));
-    row.classList.add("selected");
-
-    const currentQuantity = parseInt(row.cells[1].textContent);
-    const newQuantity = prompt("Enter new quantity:", currentQuantity);
-    if (newQuantity === null) return;
-
-    const quantity = parseInt(newQuantity);
-    if (!quantity || quantity <= 0) {
-      return alert("Invalid quantity!");
-    }
-
-    const productId = row.cells[0].textContent;
-    const product = products.find((p) => p.maPB === productId); // Tìm sản phẩm theo maPB
-
-    if (!product) {
-      return alert("Product not found!");
-    }
-
-    // Tìm đơn giá từ chitietphieunhaps tương ứng với số lượng mới
-    const chitiet = product.chitietphieunhaps.find(
-      (item) => item.soLuong >= quantity
-    );
-    if (!chitiet) {
-      return alert(
-        "No sufficient purchase price information available for the requested quantity!"
-      );
-    }
-
-    const newPrice = quantity * chitiet.donGiaNhap; // Lấy đơn giá từ chitietphieunhaps
-
-    if (quantity < chitiet.soLuong) {
-      return alert("Not enough stock!");
-    }
-
-    row.cells[1].textContent = quantity; // Cập nhật số lượng mới
-    row.cells[2].textContent = `${newPrice.toLocaleString()}đ`; // Cập nhật giá mới
-
-    product.quantity += currentQuantity - quantity; // Cập nhật lại số lượng tồn kho
-    renderProductTable(); // Cập nhật lại bảng sản phẩm
-
-    calculateTotal(); // Cập nhật tổng giá trị
-  });
-
-  // Thêm sản phẩm vào bảng selectedTable
-  document.getElementById("addProduct").addEventListener("click", () => {
-    if (!selectedProductId) {
-      return alert("Please select a product!");
-    }
-
-    const quantity = parseInt(quantityInput.value);
-    if (!quantity || quantity <= 0) {
-      return alert("Invalid quantity!");
-    }
-
-    // Find the product using selectedProductId
-    const product = products.find((p) => p.maPB === selectedProductId);
-    if (!product) {
-      return alert("Product not found!");
-    }
-
-    // Check if there is enough stock
-    if (quantity > product.quantity) {
-      return alert("Not enough stock!");
-    }
-
-    // Look for the corresponding price from the chitietphieunhaps
-    const chitiet = product.chitietphieunhaps.find(
-      (item) => item.soLuong >= quantity
-    );
-    if (!chitiet) {
-      return alert("Vượt quá số lượng!");
-    }
-
-    const price = chitiet.donGiaNhap; // Get the price from chitietphieunhaps
-
-    // Check if the product already exists in the selectedTable
-    const existingRow = Array.from(selectedTable.rows).find(
-      (row) => row.cells[0].textContent === product.maPB
-    );
-
-    if (existingRow) {
-      // If the product already exists, increase the quantity and update price
-      const currentQuantity = parseInt(existingRow.cells[1].textContent);
-      const newQuantity = currentQuantity + quantity;
-      existingRow.cells[1].textContent = newQuantity;
-
-      const newPrice = newQuantity * price; // Use the price from chitietphieunhaps
-      existingRow.cells[2].textContent = `${newPrice.toLocaleString()}đ`;
-    } else {
-      // If it's a new product, add a new row to selectedTable
-      const totalPrice = quantity * price;
-      selectedTable.innerHTML += `
-        <tr>
-          <td>${product.maPB}</td>
-          <td>${quantity}</td>
-          <td>${totalPrice.toLocaleString()}đ</td>
-        </tr>
-      `;
-    }
-
-    // Deduct the stock
-    product.quantity -= quantity;
-    renderProductTable(); // Re-render the product table
-
-    calculateTotal(); // Update the total price
-  });
-  //  IMPORT
-  document.getElementById("import").addEventListener("click", async () => {
-    // Lấy dữ liệu từ các trường
-    let totalPrice = document
-      .getElementById("totalPrice")
-      .textContent.trim()
-      .replace(/\./g, "") // Xóa bỏ dấu chấm
-      .replace("đ", ""); // Loại bỏ ký tự "đ"
-
-    let maNV = document.getElementById("creatorId").value.trim();
-    let maPN = document.getElementById("noteId").value.trim();
-    let maNCC = document.getElementById("supplier").value.trim();
-
-    // Tạo object dữ liệu
-    const data = {
-      maPN,
-      tongTien: parseInt(totalPrice) || 0, // Chuyển tổng tiền thành số nguyên
-      maNV,
-      maNCC,
-    };
-
-    // Gửi dữ liệu qua API
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/add-phieunhap",
-        {
-          method: "POST", // Phương thức POST
-          headers: {
-            "Content-Type": "application/json", // Định dạng JSON
-          },
-          body: JSON.stringify(data), // Chuỗi JSON để gửi
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Không thể thêm phiếu nhập. Vui lòng thử lại.");
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !thoiGianTaoEl ||
+        !tongTienEl ||
+        !MaNVEl ||
+        !trangThaiEl ||
+        !maNccEl ||
+        !maPnEl
+      ) {
+        alert("Vui lòng điền đầy đủ các thông tin.");
+        return;
       }
 
-      const result = await response.json();
-      console.log("Kết quả từ server:", result);
-
-      // Hiển thị thông báo thành công
-      alert("Thêm phiếu nhập thành công!");
-    } catch (error) {
-      console.error("Lỗi khi gọi API thêm phiếu nhập:", error);
-      alert("Đã xảy ra lỗi khi thêm phiếu nhập. Vui lòng kiểm tra và thử lại.");
-    }
-    // Lấy tbody của bảng
-    const tableBody = document.getElementById("selectedTable");
-
-    // Lấy tất cả các hàng trong tbody
-    const rows = tableBody.querySelectorAll("tr");
-
-    // Duyệt qua từng hàng và lấy dữ liệu từ các ô (cells)
-    rows.forEach(async (row) => {
-      const cells = row.querySelectorAll("td"); // Lấy tất cả các ô trong hàng
-
-      const productData = {
-        maPN: maPN,
-        maPB: cells[0]?.textContent.trim() || "", // Lấy nội dung cột 1 (Product ID)
-        soLuong: parseInt(cells[1]?.textContent.trim() || "0"), // Chuyển Quantity thành số nguyên
-        donGiaNhap: parseInt(
-          (cells[2]?.textContent.trim() || "0").replace(/\./g, "") // Xóa dấu chấm và chuyển thành số
-        ),
+      // Tạo đối tượng dữ liệu
+      const data = {
+        maPN: maPnEl,
+        ngayTao: thoiGianTaoEl,
+        tongTien: tongTienEl,
+        trangThai: trangThaiEl,
+        maNV: MaNVEl,
+        maNCC: maNccEl,
       };
 
-      console.log("productData: ", productData);
+      console.log("data: ", data);
 
-      // Gọi API để gửi dữ liệu
       try {
         const response = await fetch(
-          "http://localhost:8080/phonestore/add-chitietphieunhap",
+          "http://localhost:8080/phonestore/update-phieunhap",
           {
-            method: "POST", // Phương thức POST
+            method: "PUT",
             headers: {
-              "Content-Type": "application/json", // Định dạng JSON
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(productData), // Dữ liệu gửi dưới dạng JSON
+            body: JSON.stringify(data),
           }
         );
 
         if (!response.ok) {
-          throw new Error(
-            "Không thể thêm chi tiết phiếu nhập. Vui lòng thử lại."
-          );
+          throw new Error("Có lỗi xảy ra khi cập nhật phiếu nhập");
         }
 
         const result = await response.json();
-        console.log("Kết quả từ API:", result);
+        console.log("Cập nhật thành công:", result);
 
-        // Hiển thị thông báo thành công
-        alert("Thêm chi tiết phiếu nhập thành công!");
+        // Load lại trang sau khi cập nhật thành công
+        window.location.reload();
+
+        alert("Cập nhật phiếu nhập thành công!");
       } catch (error) {
-        console.error("Lỗi khi gọi API thêm chi tiết phiếu nhập:", error);
-        alert("Đã xảy ra lỗi khi thêm chi tiết phiếu nhập. Vui lòng thử lại.");
+        console.log("Lỗi khi cập nhật phiếu nhập:", error);
+        alert("Có lỗi xảy ra khi cập nhật phiếu nhập!");
       }
     });
-  });
 
-  // Hàm tìm kiếm sản phẩm
-  function searchProducts() {
-    const searchInput = document
-      .getElementById("search")
-      .value.replace(/\s+/g, "")
-      .toLowerCase();
-    const searchType = document.getElementById("searchType").value;
+    btnAdd.addEventListener("click", async (e) => {
+      // Lấy giá trị từ các trường nhập liệu
+      let thoiGianTaoEl = document.getElementById("thoiGianTao").value;
+      let tongTienEl = document.getElementById("tongTien").value;
+      let MaNVEl = document.getElementById("maNv").value;
+      let trangThaiEl = document.getElementById("trangThai").value;
+      let maNccEl = document.getElementById("maNCC").value;
 
-    if (!searchInput) {
-      renderFilteredProducts(products); // Hiển thị lại tất cả sản phẩm khi tìm kiếm trống
-      return;
-    }
-
-    const filteredProducts = products.filter((product) => {
-      const maPB = product.maPB.replace(/\s+/g, "").toLowerCase();
-      const tenSP = product.maSP_sanpham.tenSP
-        .replace(/\s+/g, "")
-        .toLowerCase();
-
-      if (searchType === "id") {
-        return maPB.includes(searchInput);
-      } else if (searchType === "name") {
-        return tenSP.includes(searchInput);
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !thoiGianTaoEl ||
+        !tongTienEl ||
+        !MaNVEl ||
+        !trangThaiEl ||
+        !maNccEl
+      ) {
+        alert("Vui lòng điền đầy đủ các thông tin.");
+        return;
       }
-      return false;
+
+      // Tạo đối tượng dữ liệu
+      const data = {
+        ngayTao: thoiGianTaoEl,
+        tongTien: tongTienEl,
+        trangThai: trangThaiEl,
+        maNV: MaNVEl,
+        maNCC: maNccEl,
+      };
+
+      console.log("data: ", data);
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/add-phieunhap",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi thêm phiếu nhập");
+        }
+
+        const result = await response.json();
+        console.log("Thêm thành công:", result);
+        alert("Thêm phiếu nhập thành công!");
+
+        // Cập nhật bảng bằng cách thêm một hàng mới
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
+                <td>${result.data.maPN}</td>
+                <td>${result.data.ngayTao}</td>
+                <td>${result.data.tongTien}</td>
+                <td>${result.data.trangThai}</td>
+                <td>${result.data.maNV}</td>
+                <td>${result.data.maNCC}</td>
+                <td>
+                <button onclick="editPhieuNhap('${result.data.maPN}')"  class="product-table__update-btn product-table-btn">Sửa</button> 
+                            
+            </td>
+            `;
+      } catch (error) {
+        console.error("Lỗi khi thêm phiếu nhập:", error);
+        alert("Có lỗi xảy ra khi thêm phiếu nhập!");
+      }
     });
-
-    renderFilteredProducts(filteredProducts); // Hiển thị sản phẩm đã lọc
+  } catch (error) {
+    console.error("Lỗi khi gọi API phiếu nhập:", error);
   }
-
-  // Hàm hiển thị danh sách sản phẩm đã lọc
-  function renderFilteredProducts(filteredProducts) {
-    productTable.innerHTML = "";
-
-    filteredProducts.forEach((product) => {
-      product.chitietphieunhaps.forEach((chitiet) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${product.maPB}</td>
-          <td>${product.maSP_sanpham.tenSP}</td>
-          <td>${product.RAM}</td>
-          <td>${product.ROM}</td>
-          <td>${product.mauSac}</td>
-          <td>${chitiet.soLuong}</td>
-          <td>${chitiet.donGiaNhap.toLocaleString()}đ</td>
-        `;
-
-        row.addEventListener("click", () => {
-          selectedProductId = product.maPB;
-          highlightSelectedRow(row);
-        });
-
-        productTable.appendChild(row);
-      });
-    });
-  }
-
-  // Gắn sự kiện tìm kiếm vào ô input
-  document.getElementById("search").addEventListener("input", searchProducts);
-
-  // Hiển thị danh sách ban đầu
-  renderProductTable();
 }
 
 const editPhieuNhap = async (idPhieuNhap) => {

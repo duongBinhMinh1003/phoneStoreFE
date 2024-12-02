@@ -26,6 +26,7 @@
   "homepage": "https://github.com/AGMStudio/count-up#readme",
   "dependencies": {
     "jquery": "^3.1.1",
+    "jquery.countup.js": "file:",
     "waypoints": "^4.0.1"
   },
   "devDependencies": {

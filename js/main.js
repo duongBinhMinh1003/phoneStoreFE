@@ -59,6 +59,7 @@ $(document).ready(function () {
 
   //get data from dataProducts
   $.getJSON("/js/data.json").done((data) => {
+    console.log("data: ", data);
     dataBrands = [...data.dataBrands];
     dataSlides = [...data.dataSlides];
     dataProducts = [...data.dataProducts];
@@ -86,6 +87,8 @@ $(document).ready(function () {
       const kh = JSON.parse(localStorage.getItem("khachhang"));
 
       if (kh) {
+        console.log("Tên đăng nhập: ", kh.hoTen);
+
         $("#dangnhapTK")
           .text(kh.hoTen)
           .attr("href", "/html/home/thongtinuser.html");
@@ -272,6 +275,7 @@ async function fetchProducts() {
     if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
 
     const data = await response.json();
+    console.log("Data from API:", data); // Log dữ liệu trả về từ API
   } catch (error) {
     console.error("Error fetching products:", error);
   }
@@ -371,6 +375,7 @@ async function renderProduct() {
 
     const productsEl = await response.json();
     const products = productsEl.data;
+    console.log("products: ", products);
 
     // Empty the container before appending new items
     $(".products").empty();
@@ -784,6 +789,7 @@ async function populateOrderTable() {
           <td>${order.trangThai}</td> 
           <td>
               <button class="detail-button order-product-table__see-btn product-table-btn" onclick="showProductDetails('${order.maDH}')">Xem</button>
+              <button class="order-product-table__return-btn product-table-btn" onclick="confirmReturn('${order.maDH}', ${order.tongTien})">Trả hàng</button>
           </td>
       `;
       tableBody.appendChild(row);
@@ -808,10 +814,63 @@ function populateTable() {
             <td>${order.status}</td>
             <td>
                 <button class="order-product-table__see-btn product-table-btn" onclick="showProductDetails(${order.id})">Xem</button>
+                <button class="order-product-table__return-btn product-table-btn" onclick="confirmReturn('${order.maDH}', ${order.tongTien})">Trả hàng</button>
             </td>
         `;
     tableBody.appendChild(row);
   });
+}
+
+function confirmReturn(orderId, totalAmount) {
+  const userConfirmed = confirm("Bạn có muốn xác nhận trả?");
+  if (userConfirmed) {
+    // Lấy thông tin người dùng từ localStorage
+    const khachhang = JSON.parse(localStorage.getItem("khachhang"));
+    const userId = khachhang.maKH; // Lấy userID
+
+    // Tạo maPhieu mới
+    const maPhieu = generateUniqueId(); // Hàm tạo ID duy nhất cho maPhieu
+    const ngayTra = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
+
+    // Tạo đối tượng dữ liệu để gửi
+    const data = {
+      maPhieu: maPhieu,
+      ngayTra: ngayTra,
+      lyDo: null,
+      hoanTien: totalAmount,
+      maKH: userId,
+      maDH: orderId,
+      trangThai: 'off'
+    };
+
+    // Gửi yêu cầu POST đến API
+    fetch('http://localhost:8080/phonestore/create-return', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Lỗi khi tạo phiếu trả hàng');
+      return response.json();
+    })
+    .then(data => {
+      alert("Xác nhận trả thành công!");
+      console.log("Dữ liệu trả về:", data);
+    })
+    .catch(error => {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+      alert("Đã xảy ra lỗi khi xác nhận trả hàng.");
+    });
+  } else {
+    alert("Đã hủy yêu cầu trả hàng.");
+  }
+}
+
+// Hàm tạo ID duy nhất cho maPhieu
+function generateUniqueId() {
+  return 'PH' + Date.now(); // Ví dụ: PH1634567890123
 }
 
 // Hàm hiển thị chi tiết sản phẩm
