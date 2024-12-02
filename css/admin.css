@@ -79,7 +79,7 @@
 }
 
 .nav-links__change {
-  margin-top: 120px;
+  margin-top: 50px;
 }
 
 /* Quản lý sản phẩm */
@@ -852,7 +852,7 @@ table th {
   font-weight: bold;
 }
 .nav-links__container {
-  max-height: 500px; /* Chiều cao tối đa menu */
+  max-height: 350px; /* Chiều cao tối đa menu */
   overflow-y: auto; /* Thêm thanh cuộn dọc */
   scrollbar-width: thin; /* Thanh cuộn nhỏ gọn (trên Firefox) */
 }
@@ -960,4 +960,82 @@ button:hover {
 }
 #supplier {
   width: 152px; /* Đặt chiều rộng cố định */
+}
+
+
+/* Quản lý đơn trả */
+.invoice-details-return {
+  margin: 30px 0; 
+}
+
+.invoice-details__header-return {
+  font-size: 1.8rem; /* Kích thước chữ cho tiêu đề */
+  font-weight: bold;
+  margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+}
+
+#return-product-table {
+  margin-top: 10px;
+  margin-bottom: 70px;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid var(--primary-color);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.return-product-table__heading {
+  background-color: transparent;
+  text-align: center;
+  font-size: 1.5rem;
+  height: 40px;
+}
+
+.return-product-table__list tr:hover{
+    cursor: pointer;
+    background-color: var(--white-color);
+    transition: 0.3s;
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền khi hover */
+}
+
+.return-product-table__list tr:nth-child(odd) {
+  background-color: var(--white-color); /* Màu nền cho hàng lẻ */
+  border: 1px solid black;
+}
+
+.return-product-table__list tr:hover {
+  background-color: var(--filter-item-color); /* Màu nền khi hover */
+}
+
+.return-product-table__list td {
+  padding: 10px; /* Khoảng cách trong ô */
+  text-align: center; /* Căn giữa chữ trong ô */
+  color: var(--text-color); /* Màu chữ trong ô */
+  font-size: 1.4rem; /* Kích thước chữ trong ô */
+}
+#return-product-table th,
+#return-product-table td {
+  width: 20%; /* Chia đều cho 4 cột */
+}
+
+.btn-control {
+  color: var(--white-color); /* Màu chữ cho nút */
+  border: none; /* Không viền */
+  border-radius: 5px; /* Bo tròn góc */
+  padding: 8px 12px; /* Khoảng cách trong nút */
+  cursor: pointer; /* Con trỏ khi hover */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền khi hover */
+}
+.btn-process {
+  background-color: #f1b2ab; /* Màu xanh lá cho nút xử lý */
+}
+
+.btn-cancel {
+  background-color: #f1b2ab; /* Màu đỏ cho nút hủy */
+}
+.btn-process:hover {
+  background-color: #65f170; /* Màu nền khi hover */
+}
+.btn-cancel:hover {
+  background-color: #ff0e0e; /* Màu nền khi hover */
 }
