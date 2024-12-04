@@ -1,21 +1,69 @@
-const VOUCHER = "provip";
-let priceVOUCHER = 0;
 let carts = JSON.parse(localStorage.getItem("listCart"));
 const kh = JSON.parse(localStorage.getItem("khachhang"));
-function handleVoucher() {
-  let voucher = document.getElementById("voucher").value;
-  if (voucher.trim().length == 0) {
-    alert('Vui lòng nhập mã - (Voucher: "provip")');
-  } else {
-    if (voucher !== VOUCHER) {
-      alert("Mã giảm giá không đúng");
-    } else {
-      alert("Áp dụng mã thành công");
-      priceVOUCHER = 1000000;
-    }
+let VOUCHER_LIST = [];
+let priceVOUCHER = 0;
+
+async function handleVoucher() {
+  try {
+    // Gọi API để lấy dữ liệu khuyến mãi
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-promotion"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khuyến mãi");
+
+    const data = await response.json();
+    const khuyenmai = data.data;
+    console.log("Danh sách khuyến mãi:", khuyenmai);
+
+    // Lọc và ánh xạ danh sách mã giảm giá
+    VOUCHER_LIST = khuyenmai.map((item) => ({
+      code: item.maKM,
+      discount: item.mucGiam,
+      status: item.trangThai,
+    }));
+    console.log("Danh sách mã giảm giá:", VOUCHER_LIST);
+  } catch (error) {
+    console.error("Lỗi khi gọi API khuyến mãi:", error);
+    alert("Không thể tải khuyến mãi. Vui lòng thử lại sau!");
+    return;
   }
-  localStorage.setItem("voucher", priceVOUCHER);
-  renderCart();
+
+  const voucher = document.getElementById("voucher").value.trim(); // Lấy mã giảm giá từ input
+  if (voucher.length === 0) {
+    alert('Vui lòng nhập mã - (Ví dụ: "provip")');
+    return;
+  }
+
+  // Tìm mã giảm giá trong danh sách VOUCHER_LIST
+  const foundVoucher = VOUCHER_LIST.find((item) => item.code === voucher);
+
+  if (!foundVoucher) {
+    alert("Mã giảm giá không đúng");
+    return;
+  }
+
+  // Kiểm tra trạng thái của voucher
+  if (foundVoucher.status === "off") {
+    alert("Voucher đã hết hạn");
+    return;
+  }
+
+  // Áp dụng mã giảm giá
+  alert(
+    `Áp dụng mã thành công! Giảm giá: ${foundVoucher.discount.toLocaleString()}đ`
+  );
+
+  // Lưu thông tin voucher vào localStorage
+  priceVOUCHER = foundVoucher.discount;
+  localStorage.setItem(
+    "voucher",
+    JSON.stringify({
+      maKM: foundVoucher.code,
+      discount: priceVOUCHER,
+    })
+  );
+
+  renderCart(); // Cập nhật giỏ hàng
 }
 
 function compare(arr, key, price) {

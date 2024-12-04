@@ -709,19 +709,6 @@ section.w3_stats {
   line-height: 1.5;
 }
 
-.product-detail-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.product-detail-table th,
-.product-detail-table td {
-  border: 1px solid var(--primary-color);
-  padding: 8px;
-  text-align: center;
-}
-
 .product-detail-table th {
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -788,4 +775,32 @@ section.w3_stats {
 .product-table_img_detail {
   height: 60px;
   width: 60px;
+}
+
+/* MODAL */
+.modal-content {
+  max-height: 80%; /* Giới hạn chiều cao của modal */
+  overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+  padding: 20px; /* Khoảng cách bên trong modal */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.content__container {
+  max-height: calc(100% - 40px); /* Trừ đi padding của modal */
+  overflow-y: auto; /* Thêm thanh cuộn cho nội dung */
+}
+
+.product-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-detail-table th,
+.product-detail-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }

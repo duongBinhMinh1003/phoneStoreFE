@@ -83,9 +83,13 @@ $(document).ready(function () {
       renderNavClassify();
       handleMobileNav();
 
+      // Lấy thông tin từ localStorage
       const kh = JSON.parse(localStorage.getItem("khachhang"));
+      const user = JSON.parse(localStorage.getItem("user"));
 
-      if (kh) {
+      // Kiểm tra nếu có thông tin user
+      if (user) {
+        // Hiển thị thông tin user
         $("#dangnhapTK")
           .text(kh.hoTen)
           .attr("href", "/html/home/thongtinuser.html");
@@ -93,7 +97,15 @@ $(document).ready(function () {
         $("#sideGioHang").show();
         $("#dangNhap").hide();
         $("#tenTk").show();
+
+        // Hiển thị mục admin nếu là nv hoặc ql
+        if (user.quyen === "nv" || user.quyen === "ql") {
+          $("#admin").show();
+        } else {
+          $("#admin").hide(); // Ẩn admin cho các quyền khác
+        }
       } else {
+        // Hiển thị giao diện đăng nhập nếu không có user
         $("#dangnhapTK")
           .text("Đăng nhập")
           .attr("href", "/html/home/login.html");
@@ -775,21 +787,93 @@ async function populateOrderTable() {
     orders.forEach((order) => {
       const row = document.createElement("tr");
       row.className = "order-product-table__row";
+
+      // Kiểm tra trạng thái để hiển thị nút phù hợp
+      let actionButtons = `<button class="detail-button order-product-table__see-btn product-table-btn" onclick="showProductDetails('${order.maDH}')">Xem</button>`;
+
+      if (
+        order.trangThai === "Chờ xác nhận" ||
+        order.trangThai === "Đã xác nhận"
+      ) {
+        actionButtons += `<button class="detail-button order-product-table__see-btn product-table-btn" onclick="huyDon('${order.maDH}')">Huỷ đơn</button>`;
+      }
+
       row.innerHTML = `
-          <td>${order.maDH}</td> 
-          <td>${order.diaChiNhan}</td> 
-          <td>${order.ngayDat}</td> 
-          <td>${order.tongTien}</td> 
-          <td>${order.httt}</td>
-          <td>${order.trangThai}</td> 
-          <td>
-              <button class="detail-button order-product-table__see-btn product-table-btn" onclick="showProductDetails('${order.maDH}')">Xem</button>
-          </td>
+        <td>${order.maDH}</td> 
+        <td>${order.diaChiNhan}</td> 
+        <td>${order.ngayDat}</td> 
+        <td>${order.tongTien.toLocaleString()}đ</td> 
+        <td>${order.httt}</td>
+        <td>${order.trangThai}</td> 
+        <td>${actionButtons}</td>
       `;
+
       tableBody.appendChild(row);
     });
   } catch (error) {
     console.error("Lỗi khi gọi API đơn hàng:", error);
+  }
+}
+
+async function huyDon(maDH) {
+  console.log("maDH: ", maDH);
+
+  const result = await Swal.fire({
+    title: "Bạn có chắc chắn muốn huỷ đơn hàng này?",
+    text: "Sau khi huỷ, bạn sẽ không thể khôi phục lại!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Xác nhận",
+    cancelButtonText: "Huỷ",
+  });
+
+  if (!result.isConfirmed) {
+    return;
+  }
+
+  const data = {
+    maDH: maDH,
+    trangThai: "Đã huỷ",
+  };
+
+  try {
+    // Gửi yêu cầu cập nhật trạng thái đơn hàng
+    const response = await fetch(
+      "http://localhost:8080/phonestore/update-donhang",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Lỗi khi cập nhật trạng thái đơn hàng");
+    }
+
+    const result = await response.json();
+    console.log("Cập nhật thành công:", result);
+
+    // Hiển thị thông báo thành công
+    await Swal.fire({
+      title: "Thành công!",
+      text: "Đơn hàng đã được huỷ.",
+      icon: "success",
+    });
+
+    // Cập nhật lại giao diện
+    populateOrderTable();
+  } catch (error) {
+    console.error("Lỗi khi gọi API cập nhật đơn hàng:", error);
+    Swal.fire({
+      title: "Lỗi!",
+      text: "Không thể huỷ đơn hàng. Vui lòng thử lại sau.",
+      icon: "error",
+    });
   }
 }
 

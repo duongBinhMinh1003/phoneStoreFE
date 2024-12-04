@@ -588,8 +588,6 @@ td:nth-child(8) {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  margin: 10px 10px 50px 10px;
 }
 
 .table__container {
@@ -960,4 +958,159 @@ button:hover {
 }
 #supplier {
   width: 152px; /* Đặt chiều rộng cố định */
+}
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Màu nền tổng thể */
+}
+
+.inventory-container {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+  padding: 20px;
+  gap: 20px;
+}
+
+.inventory-left-panel,
+.inventory-right-panel {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 300px; /* Đảm bảo panel không bị quá nhỏ */
+  max-width: 48%; /* Cân đối chiều rộng panel */
+}
+
+.inventory-search-bar {
+  margin-bottom: 20px;
+}
+
+.inventory-search-bar label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.inventory-search-bar input {
+  width: calc(70% - 10px); /* Chiều rộng dynamic */
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.inventory-filter-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.inventory-table-wrapper {
+  max-height: 400px; /* Giới hạn chiều cao bảng */
+  overflow-y: auto;
+  overflow-x: auto; /* Cuộn ngang nếu cần */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.inventory-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.inventory-data-table thead {
+  background-color: #f0f0f0;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.inventory-data-table th,
+.inventory-data-table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.inventory-data-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.inventory-button-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.inventory-button-bar button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #f38377;
+  transition: background-color 0.3s ease;
+}
+
+.inventory-button-bar button:hover {
+  background-color: #f55544;
+}
+
+/* Tùy chỉnh thanh cuộn */
+.inventory-table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.inventory-table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
+}
+
+.inventory-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.inventory-table-wrapper::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .inventory-container {
+    flex-direction: column;
+  }
+
+  .inventory-left-panel,
+  .inventory-right-panel {
+    max-width: 100%;
+  }
+
+  .inventory-search-bar input,
+  .inventory-filter-select {
+    width: 100%; /* Full chiều rộng */
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .inventory-button-bar {
+    justify-content: center;
+  }
+
+  .inventory-button-bar button {
+    width: 100%;
+  }
+}
+.right_panel_product {
+  margin-top: 83px;
 }

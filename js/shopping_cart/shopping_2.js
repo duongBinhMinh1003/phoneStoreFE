@@ -1,5 +1,6 @@
 $(document).ready(async function () {
-  let priceVOUCHER = Number(localStorage.getItem("voucher")) || 0;
+  const priceVOUCHER = JSON.parse(localStorage.getItem("voucher"));
+  console.log("priceVOUCHER: ", priceVOUCHER);
 
   // Hàm gọi API lấy giỏ hàng
   const fetchCart = async () => {
@@ -42,7 +43,7 @@ $(document).ready(async function () {
     );
 
   const total = calculateTotal();
-  const finalTotal = total - priceVOUCHER;
+  const finalTotal = total - priceVOUCHER.discount;
 
   // Hàm tạo danh sách sản phẩm
   const createProductElements = () =>
@@ -77,7 +78,7 @@ $(document).ready(async function () {
               ${createProductElements()}
               <hr>
               <p>Giảm giá</p>
-              <h4 class="text-end">${convertMoney(priceVOUCHER)}</h4>
+              <h4 class="text-end">${convertMoney(priceVOUCHER.discount)}</h4>
               <p>Tổng</p>
               <h3 class="text-end">${convertMoney(finalTotal)}</h3>
               <div class="howpayment">
@@ -86,7 +87,7 @@ $(document).ready(async function () {
                       <p>Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ được giao sau khi tiền đã chuyển.</p>
                       <p>Vietinbank: 1929429924924 - P T C</p>    
                   <label>
-                      <input type="radio" name="pay">COD</label>
+                      <input type="radio" name="pay">Thanh toán khi nhận hàng</label>
               </div>
           </div>
       <a onclick="thanhToan(${finalTotal})" class="btn btn-danger">Thanh toán ngay</a>
@@ -104,7 +105,7 @@ $(document).ready(async function () {
           </div>
           <hr>
           <p>Giảm giá</p>
-              <h4>${convertMoney(priceVOUCHER)}</h4>
+              <h4>${convertMoney(priceVOUCHER.discount)}</h4>
           <h4>Tổng</h4>
           <h3>${convertMoney(finalTotal)}</h3>
           <h2 class="text-danger">Đã thanh toán</h2>
@@ -353,13 +354,14 @@ async function thanhToan(price) {
       alert("Không tìm thấy thông tin khách hàng. Vui lòng đăng nhập lại.");
       return;
     }
-
+    const priceVOUCHER = JSON.parse(localStorage.getItem("voucher"));
     // 3. Gửi đơn hàng lên API
     let dataDonHang = {
       diaChiNhan: kh.diaChi,
       tongTien: price,
       httt: selectedPayment,
       maKH: kh.maKH,
+      maKM: priceVOUCHER.maKM,
     };
     const donHangResponse = await fetch(
       "http://localhost:8080/phonestore/add-donhang",

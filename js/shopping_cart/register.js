@@ -67,8 +67,8 @@ $(document).ready(function () {
       data: JSON.stringify(data),
       success: function (response) {
         console.log("Success in signup: ", response);
-        alert(response.message); // Thông báo thành công cho đăng ký tài khoản
-
+        alert("Đăng kí tài khoản thành công!"); // Thông báo thành công cho đăng ký tài khoản
+        alert("Kiểm tra email của bạn để nhận mã khuyến mãi !");
         // Lấy tkId từ phản hồi và sử dụng cho yêu cầu tạo người dùng
         let dataUser = {
           hoTen: nameEl,
@@ -94,7 +94,7 @@ $(document).ready(function () {
           error: function (xhr, status, error) {
             console.error("Error in post-user: ", error);
             if (xhr.status === 400) {
-              alert(xhr.responseJSON.message);
+              alert("Kiểm tra email của bạn để nhận mã khuyến mãi !");
             } else {
               alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
             }

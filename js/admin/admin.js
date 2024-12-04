@@ -28,110 +28,110 @@ if (user.quyen == "ql" || user.quyen == "nv") {
       if (item.getAttribute("data-value") === "trang-chu") {
         item.classList.add("active");
         contentContainer.innerHTML = `
-                    <div class="top-line">
-                    <h1 class="top-line__heading">TRANG CHỦ</h1>
+            <div class="top-line">
+            <h1 class="top-line__heading">THỐNG KÊ</h1>
+        </div>
+        <div class="filter">
+            <div class="filter__container">
+                <label for="" class="filter__label">Chọn tháng cần xem</label>
+                <select name="filter__select" id="filter__select" class="filter__control">
+                    <option value="">--Chọn tháng--</option>
+                    <option value="customer">Khách hàng</option>
+                    <option value="admin">Admin</option>
+
+                </select>
+                <div class="filter__button">Lọc</div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="box-analysis__container">
+            <div class="box-analysis__item" data-value="total-customer">
+                <div class="box-analysis__heading">
+                    <div class="box-analysis__icon">
+                        <i class="fa-solid fa-money-bill"></i>
+                    </div>
+                    <div class="box-analysis__label">Khách hàng</div>
                 </div>
-                <div class="filter">
-                    <div class="filter__container">
-                        <label for="" class="filter__label">Chọn tháng cần xem</label>
-                        <select name="filter__select" id="filter__select" class="filter__control">
-                            <option value="">--Chọn tháng--</option>
-                            <option value="customer">Khách hàng</option>
-                            <option value="admin">Admin</option>
-    
-                        </select>
-                        <div class="filter__button">Lọc</div>
+                <div class="box-analysis__number">100000</div>
+
+
+            </div>
+            <div class="box-analysis__item" data-value="total-invoice">
+                <div class="box-analysis__heading">
+                    <div class="box-analysis__icon">
+                        <i class="fa-solid fa-money-bill"></i>
                     </div>
-    
-    
+                    <div class="box-analysis__label">Tổng hóa đơn</div>
                 </div>
-    
-    
-    
-                <div class="box-analysis__container">
-                    <div class="box-analysis__item" data-value="total-customer">
-                        <div class="box-analysis__heading">
-                            <div class="box-analysis__icon">
-                                <i class="fa-solid fa-money-bill"></i>
-                            </div>
-                            <div class="box-analysis__label">Khách hàng</div>
-                        </div>
-                        <div class="box-analysis__number">100000</div>
-    
-    
+                <div class="box-analysis__number">100000</div>
+            </div>
+            <div class="box-analysis__item" data-value="total-price">
+                <div class="box-analysis__heading">
+                    <div class="box-analysis__icon">
+                        <i class="fa-solid fa-money-bill"></i>
                     </div>
-                    <div class="box-analysis__item" data-value="total-invoice">
-                        <div class="box-analysis__heading">
-                            <div class="box-analysis__icon">
-                                <i class="fa-solid fa-money-bill"></i>
-                            </div>
-                            <div class="box-analysis__label">Tổng hóa đơn</div>
-                        </div>
-                        <div class="box-analysis__number">100000</div>
-                    </div>
-                    <div class="box-analysis__item" data-value="total-price">
-                        <div class="box-analysis__heading">
-                            <div class="box-analysis__icon">
-                                <i class="fa-solid fa-money-bill"></i>
-                            </div>
-                            <div class="box-analysis__label">Tổng doanh thu</div>
-                        </div>
-                        <div class="box-analysis__number">100000</div>
-                    </div>
-                    <div class="box-analysis__item" data-value="total-product">
-                        <div class="box-analysis__heading">
-                            <div class="box-analysis__icon">
-                                <i class="fa-solid fa-money-bill"></i>
-                            </div>
-                            <div class="box-analysis__label">Tổng sản phẩm bán ra</div>
-                        </div>
-                        <div class="box-analysis__number">100000</div>
-                    </div>
+                    <div class="box-analysis__label">Tổng doanh thu</div>
                 </div>
-                <div id="table_wrapper">
-    
-                    <div class="table__container" data-value="1">
-                        <div class="table__title">
-                            TỔNG SẢN PHẨM BÁN RA THEO THƯƠNG HIỆU
-                        </div>
-                        <table class="analysis-table">
-                            <thead>
-                                <tr class="analysis-table__heading">
-                                    <th>Tên thương hiệu</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody class="analysis-table__list">
-                                <tr class="analysis-table__row">
-                                    <td>Samsung</td>
-                                    <td>2</td>
-                                </tr>
-    
-                            </tbody>
-                        </table>
+                <div class="box-analysis__number">100000</div>
+            </div>
+            <div class="box-analysis__item" data-value="total-product">
+                <div class="box-analysis__heading">
+                    <div class="box-analysis__icon">
+                        <i class="fa-solid fa-money-bill"></i>
                     </div>
-                    <div class="table__container" data-value="2">
-                        <div class="table__title">
-                            TỔNG DOANH THU BÁN RA THEO THƯƠNG HIỆU
-                        </div>
-                        <table class="analysis-table">
-                            <thead>
-                                <tr class="analysis-table__heading">
-                                    <th>Tên thương hiệu</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody class="analysis-table__list">
-                                <tr class="analysis-table__row">
-                                    <td>Samsung</td>
-                                    <td>2</td>
-                                </tr>
-    
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="box-analysis__label">Tổng sản phẩm bán ra</div>
                 </div>
-                `;
+                <div class="box-analysis__number">100000</div>
+            </div>
+        </div>
+        <div id="table_wrapper">
+
+            <div class="table__container" data-value="1">
+                <div class="table__title">
+                    TỔNG SẢN PHẨM BÁN RA THEO THƯƠNG HIỆU
+                </div>
+                <table class="analysis-table">
+                    <thead>
+                        <tr class="analysis-table__heading">
+                            <th>Tên thương hiệu</th>
+                            <th>Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody class="analysis-table__list">
+                        <tr class="analysis-table__row">
+                            <td>Samsung</td>
+                            <td>2</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="table__container" data-value="2">
+                <div class="table__title">
+                    TỔNG DOANH THU BÁN RA THEO THƯƠNG HIỆU
+                </div>
+                <table class="analysis-table">
+                    <thead>
+                        <tr class="analysis-table__heading">
+                            <th>Tên thương hiệu</th>
+                            <th>Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody class="analysis-table__list">
+                        <tr class="analysis-table__row">
+                            <td>Samsung</td>
+                            <td>2</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        `;
         initDashboardPage();
       }
       if (item.getAttribute("data-value") === "ql-nguoidung") {
@@ -444,129 +444,6 @@ if (user.quyen == "ql" || user.quyen == "nv") {
         initNhanVienPage();
       }
 
-      if (item.getAttribute("data-value") === "ql-hoadon") {
-        item.classList.add("active");
-
-        contentContainer.innerHTML = `
-                <div class="top-line">
-                    <h1 class="top-line__heading">QUẢN LÝ ĐƠN HÀNG</h1>
-                </div>
-    
-                <div class="search">
-                </div>
-    
-                <div class="filter">
-                    <div class="filter__item">
-                        <label class="filter__label" for="filter__start-date">Chọn ngày bắt đầu:</label>
-                        <input type="datetime-local" class="filter__input" id="filter__start-date" name="filter__start-date"
-                            placeholder="Chọn ngày bắt đầu">
-                    </div>
-                    <div class="filter__item">
-                        <label class="filter__label" for="filter__end-date">Chọn ngày kết thúc:</label>
-                        <input type="datetime-local" class="filter__input" id="filter__end-date" name="filter__end-date"
-                            placeholder="Chọn ngày bắt đầu">
-                    </div>
-                    <div class="filter__item">
-                        <div class="filter__button">Lọc</div>
-                    </div>
-                </div>
-                <div class="content__container">
-                    <form id="form-admin">
-                        <!-- <div class="form-container">
-    
-                            <div class="form-group">
-                                <label for="invoice-id" class="form-label">Mã HĐ</label>
-    
-                                <input id="invoice-id" name="invoice-id" type="text" class="form-control" disabled="true">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="invoice-user-id" class="form-label">Mã KH</label>
-    
-                                <input id="invoice-user-id" name="invoice-user-id" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="invoice-order-time" class="form-label">Thời gian đặt hàng</label>
-    
-                                <input id="invoice-order-time" name="invoice-order-time" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="invoice-total-price" class="form-label">Tổng tiền</label>
-    
-                                <input id="invoice-total-price" name="invoice-total-price" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="invoice-status" class="form-label">Tình trạng</label>
-    
-                                <input id="invoice-status" name="invoice-status" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-    
-                           
-    
-                            
-                        </div> -->
-                        <div class="form-controls form-hoadon">
-                            <div class="form-label">
-                                <div class="invoice-label">Đơn hàng chưa được xử lý! Nhấn nút để xử lý ngay</div>
-                            </div>
-    
-                            <button class="btn-control" id="btn-process">Xử lý</button>
-    
-                            <button class="btn-control" id="btn-update">Xác nhận đang giao</button>
-                        </div>
-                    
-                        
-                    </form> 
-    
-                    <div class="invoice-details">
-                        <div class="invoice-details__header">
-                            CHI TIẾT HÓA ĐƠN
-                        </div>
-                        <div class="invoice-details__list">
-                            
-                        </div>
-                    </div>
-    
-                    <table id="product-table">
-                        <thead>
-                            <tr class="product-table__heading">
-                                <th>Mã HD</th>
-                                <th>Thời gian đặt hàng </th>
-                                <th>Mã KH</th>
-                                <th>Tổng tiền</th>
-                                <th>Tình trạng</th>
-                                <th>Chi tiết đơn hàng</th>
-                            </tr>
-                        </thead>
-                        <tbody class="product-table__list">
-                        <tr class="product-table__row product-table__row--clicked">
-                            <td>1</td>
-                            <td>11/05/2024</td>
-                            <td>1</td>
-                            <td>10000000</td>
-                            <td>Đã xử lý</td>
-                            <td>1</td>
-                            <td>
-                                <button class="product-table__see-btn product-table-btn">Xem</button>
-                            </td>
-                        </tr>
-    
-                        </tbody>
-                    </table>
-                   
-                </div>
-                `;
-        initInvoicePage();
-      }
       if (item.getAttribute("data-value") === "ql-sanpham") {
         item.classList.add("active");
         contentContainer.innerHTML = `
@@ -815,6 +692,13 @@ if (user.quyen == "ql" || user.quyen == "nv") {
     
                                 <span class="form-message"></span>
                             </div>
+                              <div class="form-group">
+                            <label for="user-email" class="form-label">Mã nhân viên</label>
+
+                            <input id="maNv" name="user-email" type="text" class="form-control" disabled="true">
+
+                            <span class="form-message"></span>
+                        </div>
                             <div class="form-group">
                                 <label for="user-full_name" class="form-label">Mô tả</label>
     
@@ -823,13 +707,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 <span class="form-message"></span>
                             </div>
     
-                            <div class="form-group">
-                                <label for="user-username" class="form-label">Điều kiện</label>
-    
-                                <input id="dieuKien" name="user-username" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
+                          
                             <div class="form-group">
                                 <label for="user-password" class="form-label">Mức giảm</label>
     
@@ -841,8 +719,8 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 <label for="user-email" class="form-label">Trạng thái</label>
     
                                 <select id="trangThai" style="height: 100%;">
-                                <option value="on">On</option>
-                                <option value="off">Off</option>                             
+                                <option value="on">on</option>
+                                <option value="off">off</option>                             
                             </select>
     
                                 <span class="form-message"></span>
@@ -853,8 +731,8 @@ if (user.quyen == "ql" || user.quyen == "nv") {
     
                         </div>
                         <div class="form-controls">
-                            <button type="button"  class="btn-control" id="btn-save">Cập nhật</button>
-                             <button type="button"  class="btn-control" id="btn-add">Thêm</button>
+                            <button type="button" onclick="updateKM()"  class="btn-control" id="btn-save">Cập nhật</button>
+                             <button type="button" onclick="addKM()"  class="btn-control" id="btn-add">Thêm</button>
                             <button type="button" onclick="huyPromotion()"  class="btn-control" id="btn-cancel">Hủy</button>
                         </div>
                         <div class="group">
@@ -873,8 +751,8 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                         <thead>
                             <tr class="product-table__heading">
                                 <th>Mã khuyến mãi</th>
+                                <th>Mã nhân viên</th>
                                 <th>Mô tả</th>
-                                <th>Điều kiện</th>
                                 <th>Mức giảm</th>
                                 <th>Trạng thái</th>  
                                 <th>Hành động</th>                        
@@ -941,6 +819,13 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
+                            <label for="user-email" class="form-label">Mã nhân viên</label>
+
+                            <input id="maNv" name="user-email" type="text" class="form-control" disabled="true">
+
+                            <span class="form-message"></span>
+                        </div>
+                            <div class="form-group">
                                 <label for="user-full_name" class="form-label">Thời gian tạo</label>
     
                                 <input id="thoiGian" name="user-full_name" type="date" class="form-control">
@@ -962,13 +847,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
     
                                 <span class="form-message"></span>
                             </div>
-                            <div class="form-group">
-                                <label for="user-email" class="form-label">Mã nhân viên</label>
-    
-                                <input id="maNv" name="user-email" type="text" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
+                          
                             <div class="form-group">
                                 <label for="user-email" class="form-label">Số seri</label>
     
@@ -1439,6 +1318,142 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                 </div>
                 `;
         initNhaCungCapPage();
+      }
+      if (item.getAttribute("data-value") === "ql-phieunhap") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
+                    <div class="top-line">
+                    <h1 class="top-line__heading">QUẢN LÝ PHIẾU NHẬP</h1>
+                </div>
+    
+    
+                <div class="content__container">
+                <div class="inventory-container">
+        <!-- Search and Table Section -->
+        <div class="inventory-left-panel">
+            <div class="inventory-search-bar">
+                <label for="inventory-search">Searching</label>
+                <input type="text" id="inventory-search"  placeholder="Enter search term"   >
+            </div>
+            <div class="inventory-table-wrapper">
+                <table class="inventory-data-table">
+                    <thead>
+                        <tr>
+                            <th>Mẫ PN</th>
+                            <th>Mã NV</th>
+                            <th>Nhà cung cấp</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày nhập</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-data-body">
+                        <!-- Rows will be dynamically added -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="inventory-button-bar">
+                <button id="inventory-delete-btn">Delete</button>
+                <button id="inventory-accept-btn" >Xác nhận</button>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="inventory-right-panel">
+            <div class="inventory-search-bar">
+              
+            
+               
+            </div>
+            <table class="inventory-data-table right_panel_product">
+                <thead>
+                    <tr>
+
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá nhập</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-product-body">
+                    <!-- Add rows dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+                </div>
+                `;
+        initNhapPage();
+      }
+      if (item.getAttribute("data-value") === "ql-hoadon") {
+        item.classList.add("active");
+        contentContainer.innerHTML = `
+                    <div class="top-line">
+                    <h1 class="top-line__heading">QUẢN LÝ ĐƠN HÀNG</h1>
+                </div>
+    
+    
+                <div class="content__container">
+                <div class="inventory-container">
+        <!-- Search and Table Section -->
+        <div class="inventory-left-panel">
+            <div class="inventory-search-bar">
+                <label for="inventory-search">Searching</label>
+                <input type="text" id="inventory-search"  placeholder="Enter search term"   >
+            </div>
+            <div class="inventory-table-wrapper">
+                <table class="inventory-data-table">
+                    <thead>
+                        <tr>
+                            <th>Mã ĐH</th>
+                            <th>Mã NV</th>
+                            <th>Mã KH</th>
+                            <th>Mã KM</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                            <th>HTTT</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-data-body">
+                        <!-- Rows will be dynamically added -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="inventory-button-bar">
+                <button id="inventory-danggiao-btn">Đang giao</button>
+                <button id="inventory-accept-btn" >Xác nhận</button>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="inventory-right-panel">
+            <div class="inventory-search-bar">
+              
+            
+               
+            </div>
+            <table class="inventory-data-table right_panel_product">
+                <thead>
+                    <tr>
+
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số seri</th>
+                        <th>Giá bán</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-product-body">
+                    <!-- Add rows dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+                </div>
+                `;
+        initDonHangPage();
       }
 
       if (item.getAttribute("data-value") === "product-page") {
@@ -2554,6 +2569,7 @@ async function initNhaCungCapPage() {
           <td>${tk.trangThai}</td>
           <td>                  
             <button id="btn-edit" onclick="editNhaCungCap('${tk.maNCC}')" class="product-table__update-btn product-table-btn">Sửa</button>   
+           
           </td>
         </tr>
       `;
@@ -2575,9 +2591,23 @@ async function initNhaCungCapPage() {
     let email = document.getElementById("email").value;
     let trangThai = document.getElementById("trangThai").value;
 
-    // Kiểm tra dữ liệu trước khi gửi đi
+    // Kiểm tra dữ liệu nhập
     if (!maNCC || !tenNCC || !diaChi || !sdt || !email || !trangThai) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ các thông tin.", "error");
+      return;
+    }
+
+    // Kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Swal.fire("Lỗi", "Email không hợp lệ.", "error");
+      return;
+    }
+
+    // Kiểm tra định dạng số điện thoại
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(sdt)) {
+      Swal.fire("Lỗi", "Số điện thoại phải có 10 chữ số.", "error");
       return;
     }
 
@@ -2603,27 +2633,65 @@ async function initNhaCungCapPage() {
       );
 
       if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi cập nhật nhà cung cấp");
+        const errorText = await response.text();
+        throw new Error(errorText || "Có lỗi xảy ra khi cập nhật nhà cung cấp");
       }
 
       const result = await response.json();
-      alert("Cập nhật nhà cung cấp thành công!");
-      window.location.reload();
+      console.log("Cập nhật thành công:", result);
+
+      // Thông báo thành công
+      Swal.fire("Thành công", "Nhà cung cấp đã được cập nhật!", "success");
+
+      // Cập nhật giao diện mà không cần tải lại
+      updateTableRow(maNCC, data);
     } catch (error) {
       console.error("Cập nhật thất bại:", error);
-      alert("Có lỗi xảy ra khi cập nhật nhà cung cấp!");
+      Swal.fire(
+        "Lỗi",
+        `Không thể cập nhật nhà cung cấp: ${error.message}`,
+        "error"
+      );
     }
   });
 
+  // Hàm cập nhật giao diện
+  function updateTableRow(maNCC, data) {
+    const row = document.querySelector(`tr[data-value='${maNCC}']`);
+    if (row) {
+      row.querySelector("td:nth-child(2)").textContent = data.tenNCC;
+      row.querySelector("td:nth-child(3)").textContent = data.diaChi;
+      row.querySelector("td:nth-child(4)").textContent = data.sdt;
+      row.querySelector("td:nth-child(5)").textContent = data.email;
+      row.querySelector("td:nth-child(6)").textContent = data.trangThai;
+    }
+  }
+
   btnAdd.addEventListener("click", async (e) => {
+    // Lấy dữ liệu từ các trường nhập liệu
     let tenNCC = document.getElementById("tenNCC").value;
     let diaChi = document.getElementById("diaChi").value;
     let sdt = document.getElementById("sdt").value;
     let email = document.getElementById("email").value;
     let trangThai = document.getElementById("trangThai").value;
 
+    // Kiểm tra dữ liệu nhập
     if (!tenNCC || !diaChi || !sdt || !email || !trangThai) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ các thông tin.", "error");
+      return;
+    }
+
+    // Kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Swal.fire("Lỗi", "Email không hợp lệ.", "error");
+      return;
+    }
+
+    // Kiểm tra định dạng số điện thoại
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(sdt)) {
+      Swal.fire("Lỗi", "Số điện thoại phải có 10 chữ số.", "error");
       return;
     }
 
@@ -2648,17 +2716,58 @@ async function initNhaCungCapPage() {
       );
 
       if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi thêm nhà cung cấp");
+        const errorText = await response.text();
+        throw new Error(errorText || "Có lỗi xảy ra khi thêm nhà cung cấp");
       }
 
       const result = await response.json();
-      alert("Thêm nhà cung cấp thành công!");
-      window.location.reload();
+      console.log("Thêm thành công:", result);
+
+      // Hiển thị thông báo thành công
+      Swal.fire("Thành công", "Nhà cung cấp đã được thêm!", "success");
+
+      // Cập nhật giao diện (thêm dòng mới vào bảng)
+      addTableRow(result);
+
+      // Xóa dữ liệu nhập trong form
+      clearInputFields();
     } catch (error) {
       console.error("Có lỗi xảy ra:", error);
-      alert("Có lỗi xảy ra khi thêm nhà cung cấp!");
+      Swal.fire(
+        "Lỗi",
+        `Không thể thêm nhà cung cấp: ${error.message}`,
+        "error"
+      );
     }
   });
+
+  // Hàm cập nhật giao diện
+  function addTableRow(ncc) {
+    const table = document.getElementById("supplierTable"); // Giả sử bảng có id là supplierTable
+    const newRow = table.insertRow();
+
+    newRow.innerHTML = `
+      <td>${ncc.maNCC}</td>
+      <td>${ncc.tenNCC}</td>
+      <td>${ncc.diaChi}</td>
+      <td>${ncc.sdt}</td>
+      <td>${ncc.email}</td>
+      <td>${ncc.trangThai}</td>
+      <td>
+        <button class="btn btn-primary btn-edit" data-id="${ncc.maNCC}">Sửa</button>
+        <button class="btn btn-danger btn-delete" data-id="${ncc.maNCC}">Xoá</button>
+      </td>
+    `;
+  }
+
+  // Hàm xóa dữ liệu nhập trong form
+  function clearInputFields() {
+    document.getElementById("tenNCC").value = "";
+    document.getElementById("diaChi").value = "";
+    document.getElementById("sdt").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("trangThai").value = "";
+  }
 }
 
 const editNhaCungCap = async (maNCC) => {
@@ -2882,14 +2991,27 @@ const huyNhanVien = () => {
 
 // DASHBOARD
 
-function initDashboardPage() {
+async function initDashboardPage() {
   const boxItem = $$(".box-analysis__item");
   const filterSelect = document.getElementById("filter__select");
   const filterButton = $(".filter__button");
   const defaultMonth = 11;
+  let brandValues = ["Samsung", "Apple", "Xiaomi"]; // Example list of brands
+  try {
+    const response = await fetch("http://localhost:8080/phonestore/get-phone");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
+
+    const data = await response.json();
+    brandValues = data.data; // Cập nhật lại danh sách sản phẩm từ API
+    console.log("Sản phẩm: ", brandValues);
+  } catch (error) {
+    console.error("Lỗi khi gọi API sản phẩm:", error);
+  }
+
   loadBoxAnalysis();
   loadOptionMonth();
   filterMonth();
+
   function loadBoxAnalysis(month = 11) {
     boxItem.forEach((item) => {
       if (item.dataset.value === "total-customer") {
@@ -2910,19 +3032,16 @@ function initDashboardPage() {
       }
     });
   }
+
   function loadOptionMonth() {
     filterSelect.innerHTML = "";
     for (let i = 1; i <= 12; i++) {
-      // Tạo một option
       const option = document.createElement("option");
-
-      // Đặt giá trị và văn bản cho option
-      option.value = i.toString(); // Giá trị từ 1 đến 12
+      option.value = i.toString();
       option.textContent = `Tháng ${i}`;
       if (i === defaultMonth) {
         option.selected = true;
       }
-      // Thêm option vào thẻ select
       filterSelect.appendChild(option);
     }
   }
@@ -2937,67 +3056,66 @@ function initDashboardPage() {
   function renderTable(month = defaultMonth) {
     const table = $$(".table__container");
     table.forEach((tb) => {
+      const tableBody = tb.querySelector(".analysis-table__list");
+      tableBody.innerHTML = ""; // Clear previous content
+
       if (parseInt(tb.dataset.value) === 1) {
-        const tableBody = tb.querySelector(".analysis-table__list");
-        tableBody.innerHTML = "";
-        renderTable1(tableBody);
+        renderTable1(tableBody, month);
       }
       if (parseInt(tb.dataset.value) === 2) {
-        const tableBody = tb.querySelector(".analysis-table__list");
-        tableBody.innerHTML = "";
-        renderTable2(tableBody);
+        renderTable2(tableBody, month);
       }
     });
-    function renderTable1(tableBody) {
-      brandValues.forEach((item) => {
-        // Tạo một dòng mới
-        const row = document.createElement("tr");
-        row.classList.add("analysis-table__row");
-
-        // Tạo và thêm các ô (td) cho dòng
-        const brandCell = document.createElement("td");
-        brandCell.textContent = item;
-
-        const quantityCell = document.createElement("td");
-
-        quantityCell.textContent = Invoice.getTotalSoldProductsInMonthByBrand(
-          item.toLowerCase(),
-          month
-        );
-
-        row.appendChild(brandCell);
-        row.appendChild(quantityCell);
-
-        // Thêm dòng vào tbody
-        tableBody.appendChild(row);
-      });
-    }
-
-    function renderTable2(tableBody) {
-      brandValues.forEach((item) => {
-        // Tạo một dòng mới
-        const row = document.createElement("tr");
-        row.classList.add("analysis-table__row");
-
-        // Tạo và thêm các ô (td) cho dòng
-        const brandCell = document.createElement("td");
-        brandCell.textContent = item;
-
-        const quantityCell = document.createElement("td");
-
-        quantityCell.textContent = Invoice.calculateRevenueByCategoryAndMonth(
-          item.toLowerCase(),
-          month
-        );
-        row.appendChild(brandCell);
-        row.appendChild(quantityCell);
-
-        // Thêm dòng vào tbody
-        tableBody.appendChild(row);
-      });
-    }
   }
-  renderTable();
+
+  function renderTable1(tableBody, month) {
+    brandValues.forEach((item) => {
+      // Kiểm tra xem item có thuộc tính 'thuongHieu' không
+      const brandName = item.thuongHieu || "Chưa có tên thương hiệu"; // Đảm bảo item có thuộc tính thuongHieu
+
+      console.log("item: ", brandName);
+
+      const row = document.createElement("tr");
+      row.classList.add("analysis-table__row");
+
+      const brandCell = document.createElement("td");
+      brandCell.textContent = brandName; // Gán tên thương hiệu vào ô của bảng
+
+      const quantityCell = document.createElement("td");
+      const soldQuantity = Invoice.getTotalSoldProductsInMonthByBrand(
+        brandName.toLowerCase(),
+        month
+      );
+      quantityCell.textContent = soldQuantity;
+
+      row.appendChild(brandCell);
+      row.appendChild(quantityCell);
+      tableBody.appendChild(row);
+    });
+  }
+
+  function renderTable2(tableBody, month) {
+    brandValues.forEach((item) => {
+      const row = document.createElement("tr");
+      row.classList.add("analysis-table__row");
+
+      const brandCell = document.createElement("td");
+      brandCell.textContent = item;
+
+      const quantityCell = document.createElement("td");
+      const revenue = Invoice.calculateRevenueByCategoryAndMonth(
+        item.toLowerCase(),
+        month
+      );
+      quantityCell.textContent = revenue;
+
+      row.appendChild(brandCell);
+      row.appendChild(quantityCell);
+      tableBody.appendChild(row);
+    });
+  }
+
+  renderTable(); // Initial render of the tables
 }
 
 // PROMOTION
@@ -3021,7 +3139,6 @@ async function initPromotionPage() {
       return (
         maKM.toLowerCase().includes(searchTerm) ||
         moTa.toLowerCase().includes(searchTerm) ||
-        dieuKien.toLowerCase().includes(searchTerm) ||
         String(mucGiam).toLowerCase().includes(searchTerm) || // Chuyển mucGiam thành chuỗi
         trangThai.toLowerCase().includes(searchTerm)
       );
@@ -3053,7 +3170,7 @@ async function initPromotionPage() {
 // Hàm renderPromotion để hiển thị khuyến mãi đã lọc
 function renderPromotion(filteredPromotions) {
   const promotionList = document.querySelector(".product-table__list");
-
+  document.getElementById("maNv").value = kh.maNV;
   // Kiểm tra nếu không có khuyến mãi nào được lọc, hiển thị thông báo "Không tìm thấy"
   if (filteredPromotions.length === 0) {
     promotionList.innerHTML = `<tr><td colspan="6" style="text-align: center;">Không tìm thấy khuyến mãi nào.</td></tr>`;
@@ -3066,8 +3183,8 @@ function renderPromotion(filteredPromotions) {
     html += `
       <tr class="product-table__row" data-value="${promo.maKM}">
         <td>${promo.maKM}</td>
+        <td>${promo.maNV}</td>
         <td>${promo.moTa}</td>
-        <td>${promo.dieuKien}</td>
         <td>${promo.mucGiam}</td>
         <td>${promo.trangThai}</td>
         <td>
@@ -3080,6 +3197,119 @@ function renderPromotion(filteredPromotions) {
   // Cập nhật nội dung bảng với dữ liệu đã lọc
   promotionList.innerHTML = html;
 }
+const updateKM = async () => {
+  // Lấy dữ liệu từ các trường
+  let maKM = document.getElementById("maKhuyenMai").value;
+  let moTa = document.getElementById("moTa").value;
+  let mucGiam = document.getElementById("mucGiam").value;
+  let trangThai = document.getElementById("trangThai").value;
+  let maNV = document.getElementById("maNv").value; // Bổ sung nếu mã nhân viên được nhập từ form
+
+  // Kiểm tra dữ liệu đầu vào
+  if (!maKM || !moTa || !mucGiam || !trangThai || !maNV) {
+    Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin.", "error");
+    return;
+  }
+
+  // Chuẩn bị object dữ liệu
+  const data = {
+    maKM,
+    moTa,
+    mucGiam,
+    trangThai,
+    maNV,
+  };
+
+  console.log("Dữ liệu gửi đi:", data);
+
+  try {
+    // Gửi yêu cầu cập nhật
+    const response = await fetch(
+      "http://localhost:8080/phonestore/update-khuyenmai", // Thay URL bằng endpoint thực tế
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Không thể cập nhật khuyến mãi. Vui lòng thử lại.");
+    }
+
+    const result = await response.json();
+    console.log("Kết quả cập nhật:", result);
+
+    // Hiển thị thông báo thành công
+    Swal.fire("Thành công", "Khuyến mãi đã được cập nhật.", "success");
+
+    // Tải lại trang hoặc cập nhật bảng nếu cần
+    window.location.reload();
+  } catch (error) {
+    console.error("Lỗi khi cập nhật khuyến mãi:", error);
+    Swal.fire(
+      "Lỗi",
+      "Đã xảy ra lỗi khi cập nhật khuyến mãi. Vui lòng thử lại.",
+      "error"
+    );
+  }
+};
+
+const addKM = async () => {
+  let moTa = document.getElementById("moTa").value.trim();
+  let mucGiam =
+    parseFloat(document.getElementById("mucGiam").value.trim()) || 0;
+  let trangThai = document.getElementById("trangThai").value.trim();
+  let maNV = document.getElementById("maNv").value.trim();
+
+  // Kiểm tra dữ liệu đầu vào
+  if (!moTa || !mucGiam || !trangThai || !maNV) {
+    Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin.", "error");
+    return;
+  }
+
+  // Chuẩn bị object dữ liệu
+  const data = {
+    moTa,
+    mucGiam,
+    trangThai,
+    maNV,
+  };
+
+  console.log("Dữ liệu gửi đi:", data);
+
+  try {
+    // Gửi yêu cầu thêm khuyến mãi
+    const response = await fetch(
+      "http://localhost:8080/phonestore/add-khuyenmai", // Thay URL bằng endpoint thực tế
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Không thể thêm khuyến mãi. Vui lòng thử lại.");
+    }
+
+    const result = await response.json();
+    console.log("Kết quả thêm khuyến mãi:", result);
+
+    // Hiển thị thông báo thành công
+    Swal.fire("Thành công", "Khuyến mãi đã được thêm.", "success");
+
+    // Tải lại trang hoặc cập nhật bảng nếu cần
+    window.location.reload();
+  } catch (error) {
+    console.error("Lỗi khi thêm khuyến mãi:", error);
+    Swal.fire(
+      "Lỗi",
+      "Đã xảy ra lỗi khi thêm khuyến mãi. Vui lòng thử lại.",
+      "error"
+    );
+  }
+};
 
 const editBtn = async (promotionID) => {
   // Lấy dòng tương ứng với promotionID
@@ -3087,15 +3317,14 @@ const editBtn = async (promotionID) => {
 
   // Lấy các giá trị từ các ô trong dòng
   let maKM = row.querySelector("td:nth-child(1)").textContent;
-  let moTa = row.querySelector("td:nth-child(2)").textContent;
-  let dieuKien = row.querySelector("td:nth-child(3)").textContent;
+  let moTa = row.querySelector("td:nth-child(3)").textContent;
   let mucGiam = row.querySelector("td:nth-child(4)").textContent;
   let trangThai = row.querySelector("td:nth-child(5)").textContent;
 
   // Điền các giá trị vào các ô nhập liệu
   document.getElementById("maKhuyenMai").value = maKM;
   document.getElementById("moTa").value = moTa;
-  document.getElementById("dieuKien").value = dieuKien;
+  document.getElementById("maNv").value = kh.maNV;
   document.getElementById("mucGiam").value = mucGiam;
   document.getElementById("trangThai").value = trangThai;
 
@@ -3110,7 +3339,7 @@ const editBtn = async (promotionID) => {
 
   // Thêm lớp active vào phần tử "Chỉnh sửa"
   let updateItem = document.querySelector('li[data-value="update"]');
-  console.log("updateItem: ", updateItem);
+
   if (updateItem) {
     updateItem.classList.add("active");
   }
@@ -3118,7 +3347,6 @@ const editBtn = async (promotionID) => {
 const huyPromotion = () => {
   document.getElementById("maKhuyenMai").value = "";
   document.getElementById("moTa").value = "";
-  document.getElementById("dieuKien").value = "";
   document.getElementById("mucGiam").value = "";
   document.getElementById("trangThai").value = "";
 
@@ -3188,6 +3416,7 @@ async function initBaoHanhPage() {
 
 // Hàm hiển thị danh sách bảo hành
 function renderBaoHanh(data) {
+  document.getElementById("maNv").value = kh.maNV;
   let html = "";
   data.forEach((item) => {
     html += `
@@ -3219,7 +3448,7 @@ function renderBaoHanh(data) {
     let trangThaiEl = document.getElementById("trangThai").value;
     let noiDungEl = document.getElementById("noiDung").value;
 
-    // Kiểm tra dữ liệu trước khi gửi đi
+    // Kiểm tra dữ liệu trước khi tiếp tục
     if (
       !maPBHEl ||
       !thoiGianTaoEl ||
@@ -3229,59 +3458,92 @@ function renderBaoHanh(data) {
       !trangThaiEl ||
       !noiDungEl
     ) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin.", "error");
       return;
     }
 
-    // Tạo đối tượng dữ liệu
-    const data = {
-      maPBH: maPBHEl,
-      thoiGianTao: thoiGianTaoEl,
-      tongTien: tongTienEl,
-      trangThai: trangThaiEl,
-      maNV: MaNVEl,
-      soSeri: soSeriEl,
-      noiDung: noiDungEl,
-    };
+    // Hiển thị hộp thoại xác nhận
+    Swal.fire({
+      title: "Bạn có chắc chắn?",
+      text: "Thao tác này sẽ cập nhật bảo hành!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Có, cập nhật!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Tạo đối tượng dữ liệu
+        const data = {
+          maPBH: maPBHEl,
+          thoiGianTao: thoiGianTaoEl,
+          tongTien: tongTienEl,
+          trangThai: trangThaiEl,
+          maNV: MaNVEl,
+          soSeri: soSeriEl,
+          noiDung: noiDungEl,
+        };
 
-    console.log("data: ", data);
+        console.log("Dữ liệu gửi đi:", data);
 
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/update-baohanh",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+        try {
+          const response = await fetch(
+            "http://localhost:8080/phonestore/update-baohanh",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }
+          );
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || "Có lỗi xảy ra khi cập nhật bảo hành");
+          }
+
+          const result = await response.json();
+          console.log("Cập nhật thành công:", result);
+
+          // Hiển thị thông báo thành công
+          Swal.fire("Thành công", "Bảo hành đã được cập nhật!", "success");
+
+          // Cập nhật giao diện mà không cần tải lại
+          updateRowInTable(maPBHEl, data);
+        } catch (error) {
+          console.error("Lỗi khi cập nhật bảo hành:", error);
+          Swal.fire(
+            "Lỗi",
+            `Không thể cập nhật bảo hành: ${error.message}`,
+            "error"
+          );
         }
-      );
-
-      if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
       }
-
-      const result = await response.json();
-      console.log("Cập nhật thành công:", result);
-
-      // Load lại trang sau khi cập nhật thành công
-      window.location.reload();
-
-      alert("Cập nhật khuyến mãi thành công!");
-    } catch (error) {
-      console.log("Lỗi khi cập nhật khuyến mãi:", error);
-      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
-    }
+    });
   });
+
+  // Hàm cập nhật giao diện
+  function updateRowInTable(maPBH, data) {
+    const row = document.querySelector(`tr[data-value='${maPBH}']`);
+    if (row) {
+      row.querySelector("td:nth-child(2)").textContent = data.thoiGianTao;
+      row.querySelector("td:nth-child(3)").textContent = data.tongTien;
+      row.querySelector("td:nth-child(4)").textContent = data.trangThai;
+      row.querySelector("td:nth-child(5)").textContent = data.maNV;
+      row.querySelector("td:nth-child(6)").textContent = data.soSeri;
+      row.querySelector("td:nth-child(7)").textContent = data.noiDung;
+    }
+  }
+
   btnAdd.addEventListener("click", async (e) => {
     // Lấy giá trị từ các trường nhập liệu
-    let thoiGianTaoEl = document.getElementById("thoiGian").value;
-    let tongTienEl = document.getElementById("tongTien").value;
-    let MaNVEl = document.getElementById("maNv").value;
-    let soSeriEl = document.getElementById("soSeri").value;
-    let trangThaiEl = document.getElementById("trangThai").value;
-    let noiDungEl = document.getElementById("noiDung").value;
+    const thoiGianTaoEl = document.getElementById("thoiGian").value;
+    const tongTienEl = document.getElementById("tongTien").value;
+    const MaNVEl = document.getElementById("maNv").value;
+    const soSeriEl = document.getElementById("soSeri").value;
+    const trangThaiEl = document.getElementById("trangThai").value;
+    const noiDungEl = document.getElementById("noiDung").value;
 
     // Kiểm tra dữ liệu trước khi gửi đi
     if (
@@ -3292,7 +3554,7 @@ function renderBaoHanh(data) {
       !trangThaiEl ||
       !noiDungEl
     ) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ các thông tin.", "error");
       return;
     }
 
@@ -3305,8 +3567,6 @@ function renderBaoHanh(data) {
       soSeri: soSeriEl,
       noiDung: noiDungEl,
     };
-
-    console.log("data: ", data);
 
     try {
       const response = await fetch(
@@ -3321,12 +3581,15 @@ function renderBaoHanh(data) {
       );
 
       if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi thêm khuyến mãi");
+        const errorText = await response.text();
+        throw new Error(errorText || "Có lỗi xảy ra khi thêm bảo hành");
       }
 
       const result = await response.json();
       console.log("Thêm thành công:", result);
-      alert("Thêm khuyến mãi thành công!");
+
+      // Hiển thị thông báo thành công
+      Swal.fire("Thành công", "Thêm bảo hành thành công!", "success");
 
       // Cập nhật bảng bằng cách thêm một hàng mới
       const table = document.getElementById("product-table"); // Lấy bảng bằng ID
@@ -3334,23 +3597,36 @@ function renderBaoHanh(data) {
 
       // Thêm các ô (td) vào hàng mới
       newRow.innerHTML = `
-      <td>${result.data.maPBH}</td>
-      <td>${result.data.thoiGianTao}</td>
-              <td>${result.data.tongTien}</td>
-              <td>${result.data.trangThai}</td>
-              <td>${result.data.maNV}</td>
-              <td>${result.data.soSeri}</td>
-              <td>${result.data.noiDung}</td>
-              <td>
-              <button onclick="editBaoHanh('${result.data.maPBH}')"  class="product-table__update-btn product-table-btn">Sửa</button> 
-              <button  onclick="deleteBaoHanh('${result.data.maPBH}')" class="product-table__delete-btn product-table-btn">Xóa</button>             
-          </td>
+        <td>${result.data.maPBH}</td>
+        <td>${result.data.thoiGianTao}</td>
+        <td>${result.data.tongTien}</td>
+        <td>${result.data.trangThai}</td>
+        <td>${result.data.maNV}</td>
+        <td>${result.data.soSeri}</td>
+        <td>${result.data.noiDung}</td>
+        <td>
+          <button onclick="editBaoHanh('${result.data.maPBH}')" class="product-table__update-btn product-table-btn">Sửa</button> 
+          <button onclick="deleteBaoHanh('${result.data.maPBH}')" class="product-table__delete-btn product-table-btn">Xóa</button>             
+        </td>
       `;
+
+      // Xóa dữ liệu trong form sau khi thêm thành công
+      clearInputFields();
     } catch (error) {
-      console.error("Lỗi khi thêm khuyến mãi:", error);
-      alert("Có lỗi xảy ra khi thêm khuyến mãi!");
+      console.error("Lỗi khi thêm bảo hành:", error);
+      Swal.fire("Lỗi", `Không thể thêm bảo hành: ${error.message}`, "error");
     }
   });
+
+  // Hàm xóa dữ liệu nhập trong form
+  function clearInputFields() {
+    document.getElementById("thoiGian").value = "";
+    document.getElementById("tongTien").value = "";
+    document.getElementById("maNv").value = "";
+    document.getElementById("soSeri").value = "";
+    document.getElementById("trangThai").value = "";
+    document.getElementById("noiDung").value = "";
+  }
 }
 
 const editBaoHanh = async (idBaoHanh) => {
@@ -3370,7 +3646,7 @@ const editBaoHanh = async (idBaoHanh) => {
   document.getElementById("maBaoHanh").value = maPBH;
   document.getElementById("thoiGian").value = thoiGianTao;
   document.getElementById("tongTien").value = tongTien;
-  document.getElementById("maNv").value = maNV;
+  document.getElementById("maNv").value = kh.maNV;
   document.getElementById("soSeri").value = soSeri;
   document.getElementById("trangThai").value = trangThai;
   document.getElementById("noiDung").value = noiDung;
@@ -3415,40 +3691,61 @@ const huyBaoHanh = () => {
   }
 };
 const deleteBaoHanh = async (idBaoHanh) => {
-  let row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
-  let maPBH = row.querySelector("td:nth-child(1)").textContent;
-  console.log("maPBH: ", maPBH);
-
-  const data = {
-    idBaoHanh: maPBH, // Gửi idPhiếuBảoHành thay vì maPBH
-  };
-
-  try {
-    const response = await fetch(
-      "http://localhost:8080/phonestore/delete-baohanh",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+  // Hiển thị hộp thoại xác nhận xóa
+  Swal.fire({
+    title: "Bạn có chắc chắn?",
+    text: "Bạn sẽ không thể hoàn tác hành động này!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Có, xóa nó!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      // Lấy dòng tương ứng với idBaoHanh
+      const row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
+      if (!row) {
+        Swal.fire("Lỗi", "Không tìm thấy dòng bảo hành để xóa.", "error");
+        return;
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Có lỗi xảy ra khi xoá bảo hành");
+      const maPBH = row.querySelector("td:nth-child(1)").textContent;
+      console.log("maPBH: ", maPBH);
+
+      const data = { idBaoHanh: maPBH };
+
+      try {
+        // Gửi yêu cầu xóa tới server
+        const response = await fetch(
+          "http://localhost:8080/phonestore/delete-baohanh",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText || "Có lỗi xảy ra khi xóa bảo hành");
+        }
+
+        const result = await response.json();
+        console.log("Xoá thành công:", result);
+
+        // Hiển thị thông báo thành công
+        Swal.fire("Đã xóa!", "Bảo hành đã được xóa thành công.", "success");
+
+        // Xóa dòng khỏi bảng
+        row.remove();
+      } catch (error) {
+        console.error("Có lỗi khi xóa bảo hành:", error);
+        Swal.fire("Lỗi", `Không thể xóa bảo hành: ${error.message}`, "error");
+      }
     }
-
-    const result = await response.json();
-    console.log("Xoá thành công:", result);
-
-    // Thông báo thành công
-    alert("Xoá bảo hành thành công!");
-    row.remove(); // Xóa dòng khỏi bảng sau khi xóa thành công
-  } catch (error) {
-    console.error("Có lỗi khi xoá bảo hành:", error);
-    alert("Có lỗi xảy ra khi xoá bảo hành!");
-  }
+  });
 };
 
 // PHIEU NHAP
@@ -3554,12 +3851,16 @@ async function initPhieuNhapPage() {
   let selectedProductId = null; // Lưu trữ ID sản phẩm được chọn
 
   // Render bảng sản phẩm
+  // Render bảng sản phẩm
   function renderProductTable() {
-    productTable.innerHTML = "";
+    productTable.innerHTML = ""; // Xóa nội dung bảng cũ
     products.forEach((product) => {
       product.chitietphieunhaps.forEach((chitiet) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
+        console.log("chitiet: ", chitiet);
+        // Chỉ thêm dòng nếu phiếu nhập đã xử lý
+        if (chitiet.maPN_phieunhap.trangThai === "da nhap") {
+          const row = document.createElement("tr");
+          row.innerHTML = `
           <td>${product.maPB}</td>
           <td>${product.maSP_sanpham.tenSP}</td>
           <td>${product.RAM}</td>
@@ -3569,13 +3870,14 @@ async function initPhieuNhapPage() {
           <td>${chitiet.donGiaNhap.toLocaleString()}đ</td>
         `;
 
-        // Khi click vào dòng, lưu ID sản phẩm vào biến `selectedProductId`
-        row.addEventListener("click", () => {
-          selectedProductId = product.maPB; // Lưu ID sản phẩm
-          highlightSelectedRow(row); // Làm nổi bật dòng được chọn
-        });
+          // Khi click vào dòng, lưu ID sản phẩm vào biến `selectedProductId`
+          row.addEventListener("click", () => {
+            selectedProductId = product.maPB; // Lưu ID sản phẩm
+            highlightSelectedRow(row); // Làm nổi bật dòng được chọn
+          });
 
-        productTable.appendChild(row);
+          productTable.appendChild(row); // Thêm dòng vào bảng
+        }
       });
     });
   }
@@ -3726,34 +4028,34 @@ async function initPhieuNhapPage() {
   //  IMPORT
   document.getElementById("import").addEventListener("click", async () => {
     // Lấy dữ liệu từ các trường
-    let totalPrice = document
-      .getElementById("totalPrice")
-      .textContent.trim()
-      .replace(/\./g, "") // Xóa bỏ dấu chấm
-      .replace("đ", ""); // Loại bỏ ký tự "đ"
+    const totalPrice =
+      parseInt(
+        document
+          .getElementById("totalPrice")
+          .textContent.trim()
+          .replace(/\./g, "")
+          .replace("đ", "")
+      ) || 0;
+    const maNV = document.getElementById("creatorId").value.trim();
+    const maPN = document.getElementById("noteId").value.trim();
+    const maNCC = document.getElementById("supplier").value.trim();
 
-    let maNV = document.getElementById("creatorId").value.trim();
-    let maPN = document.getElementById("noteId").value.trim();
-    let maNCC = document.getElementById("supplier").value.trim();
+    if (!maPN || !maNV || !maNCC) {
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin phiếu nhập.", "error");
+      return;
+    }
 
     // Tạo object dữ liệu
-    const data = {
-      maPN,
-      tongTien: parseInt(totalPrice) || 0, // Chuyển tổng tiền thành số nguyên
-      maNV,
-      maNCC,
-    };
+    const data = { maPN, tongTien: totalPrice, maNV, maNCC };
 
-    // Gửi dữ liệu qua API
     try {
+      // Gửi dữ liệu thêm phiếu nhập
       const response = await fetch(
         "http://localhost:8080/phonestore/add-phieunhap",
         {
-          method: "POST", // Phương thức POST
-          headers: {
-            "Content-Type": "application/json", // Định dạng JSON
-          },
-          body: JSON.stringify(data), // Chuỗi JSON để gửi
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         }
       );
 
@@ -3762,65 +4064,73 @@ async function initPhieuNhapPage() {
       }
 
       const result = await response.json();
-      console.log("Kết quả từ server:", result);
+      console.log("Kết quả phiếu nhập:", result);
 
-      // Hiển thị thông báo thành công
-      alert("Thêm phiếu nhập thành công!");
+      // Thêm chi tiết phiếu nhập nếu phiếu nhập thành công
+      await addChiTietPhieuNhap(maPN);
+
+      Swal.fire(
+        "Thành công",
+        "Phiếu nhập và chi tiết đã được thêm.",
+        "success"
+      );
     } catch (error) {
-      console.error("Lỗi khi gọi API thêm phiếu nhập:", error);
-      alert("Đã xảy ra lỗi khi thêm phiếu nhập. Vui lòng kiểm tra và thử lại.");
+      console.error("Lỗi khi thêm phiếu nhập:", error);
+      Swal.fire(
+        "Lỗi",
+        "Đã xảy ra lỗi khi thêm phiếu nhập. Vui lòng thử lại.",
+        "error"
+      );
     }
-    // Lấy tbody của bảng
-    const tableBody = document.getElementById("selectedTable");
+  });
 
-    // Lấy tất cả các hàng trong tbody
+  // Hàm thêm chi tiết phiếu nhập
+  async function addChiTietPhieuNhap(maPN) {
+    const tableBody = document.getElementById("selectedTable");
     const rows = tableBody.querySelectorAll("tr");
 
-    // Duyệt qua từng hàng và lấy dữ liệu từ các ô (cells)
-    rows.forEach(async (row) => {
-      const cells = row.querySelectorAll("td"); // Lấy tất cả các ô trong hàng
+    const requests = Array.from(rows).map((row) => {
+      const cells = row.querySelectorAll("td");
 
       const productData = {
-        maPN: maPN,
-        maPB: cells[0]?.textContent.trim() || "", // Lấy nội dung cột 1 (Product ID)
-        soLuong: parseInt(cells[1]?.textContent.trim() || "0"), // Chuyển Quantity thành số nguyên
+        maPN,
+        maPB: cells[0]?.textContent.trim() || "",
+        soLuong: parseInt(cells[1]?.textContent.trim() || "0"),
         donGiaNhap: parseInt(
-          (cells[2]?.textContent.trim() || "0").replace(/\./g, "") // Xóa dấu chấm và chuyển thành số
+          (cells[2]?.textContent.trim() || "0").replace(/\./g, "")
         ),
       };
 
-      console.log("productData: ", productData);
+      console.log("productData:", productData);
 
-      // Gọi API để gửi dữ liệu
-      try {
-        const response = await fetch(
-          "http://localhost:8080/phonestore/add-chitietphieunhap",
-          {
-            method: "POST", // Phương thức POST
-            headers: {
-              "Content-Type": "application/json", // Định dạng JSON
-            },
-            body: JSON.stringify(productData), // Dữ liệu gửi dưới dạng JSON
+      return fetch("http://localhost:8080/phonestore/add-chitietphieunhap", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(productData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Không thể thêm chi tiết: ${productData.maPB}`);
           }
-        );
-
-        if (!response.ok) {
-          throw new Error(
-            "Không thể thêm chi tiết phiếu nhập. Vui lòng thử lại."
-          );
-        }
-
-        const result = await response.json();
-        console.log("Kết quả từ API:", result);
-
-        // Hiển thị thông báo thành công
-        alert("Thêm chi tiết phiếu nhập thành công!");
-      } catch (error) {
-        console.error("Lỗi khi gọi API thêm chi tiết phiếu nhập:", error);
-        alert("Đã xảy ra lỗi khi thêm chi tiết phiếu nhập. Vui lòng thử lại.");
-      }
+          return response.json();
+        })
+        .then((result) => {
+          console.log(`Thêm chi tiết thành công:`, result);
+        });
     });
-  });
+
+    // Thực hiện tất cả các yêu cầu đồng thời
+    try {
+      await Promise.all(requests);
+    } catch (error) {
+      console.error("Lỗi khi thêm chi tiết phiếu nhập:", error);
+      Swal.fire(
+        "Lỗi",
+        "Một số chi tiết phiếu nhập không được thêm. Vui lòng kiểm tra lại.",
+        "error"
+      );
+    }
+  }
 
   // Hàm tìm kiếm sản phẩm
   function searchProducts() {
@@ -3984,41 +4294,561 @@ const xacNhanPhieuNhap = async (idPhieuNhap) => {
   }
 };
 
-// const deletePhieuNhap = async (idPhieuNhap) => {
-//     let row = document.querySelector(`tr[data-value='${idPhieuNhap}']`);
-//     let maPN = row.querySelector('td:nth-child(1)').textContent;
-//     console.log('maPBH: ', maPN);
+// QUAN LI PHIEU NHAP
+async function initNhapPage() {
+  let leftPanelData = [];
+  let rightPanelData = [];
+  let btnacp = document.getElementById("inventory-accept-btn");
+  let btndlt = document.getElementById("inventory-delete-btn");
+  let selectedMaPN = null; // Biến lưu maPN của dòng được chọn
 
-//     const data = {
-//         maPN: maPN, // Gửi idPhiếuBảoHành thay vì maPBH
-//     };
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-phieunhap"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
 
-//     try {
-//         const response = await fetch('http://localhost:8080/phonestore/delete-phieunhap', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(data),
-//         });
+    const data = await response.json();
+    leftPanelData = data.data;
+    console.log("leftPanelData: ", leftPanelData);
+  } catch (error) {
+    console.error("Lỗi khi gọi API sản phẩm:", error);
+    alert("Không thể lấy dữ liệu sản phẩm. Vui lòng thử lại sau.");
+    return;
+  }
 
-//         if (!response.ok) {
-//             throw new Error('Có lỗi xảy ra khi xoá bảo hành');
-//         }
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-phieunhap"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
 
-//         const result = await response.json();
-//         console.log('Xoá thành công:', result);
+    const data = await response.json();
+    rightPanelData = data.data;
+    console.log("rightPanelData: ", rightPanelData);
+  } catch (error) {
+    console.error("Lỗi khi gọi API sản phẩm:", error);
+    alert("Không thể lấy dữ liệu sản phẩm. Vui lòng thử lại sau.");
+    return;
+  }
 
-//         // Thông báo thành công
-//         alert('Xoá bảo hành thành công!');
-//         row.remove(); // Xóa dòng khỏi bảng sau khi xóa thành công
-//     } catch (error) {
-//         console.error('Có lỗi khi xoá bảo hành:', error);
-//         alert('Có lỗi xảy ra khi xoá bảo hành!');
-//     }
-// };
+  function renderLeftPanel(data) {
+    const tableBody = document.getElementById("inventory-data-body");
+    tableBody.innerHTML = "";
 
-// Hàm chuyển đổi giá tiền sang định dạng hiển thị (ví dụ: VND)
+    if (data.length === 0) {
+      tableBody.innerHTML =
+        '<tr><td colspan="6" style="text-align: center; color: #999;">Không có dữ liệu</td></tr>';
+      return;
+    }
+
+    data.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.maPN}</td>
+        <td>${item.maNV}</td>
+        <td>${item.maNCC}</td>
+        <td>${item.trangThai}</td>
+        <td>${item.ngayTao}</td>
+        <td>${item.tongTien.toLocaleString()}đ</td>
+      `;
+      row.dataset.noteId = item.maPN; // Lưu maPN trong data attribute của row
+      row.addEventListener("click", () => handleRowClick(item.maPN)); // Lắng nghe sự kiện click
+      tableBody.appendChild(row);
+    });
+  }
+
+  function handleRowClick(noteId) {
+    selectedMaPN = noteId; // Lưu maPN khi click vào dòng
+    const filteredData = rightPanelData.filter(
+      (product) => product.maPN === noteId
+    );
+    renderRightPanel(filteredData);
+
+    // Cập nhật nút xác nhận để sử dụng maPN đã chọn
+    if (btnacp) {
+      btnacp.disabled = false; // Kích hoạt nút khi có dòng được chọn
+    }
+  }
+
+  function renderRightPanel(data) {
+    const tableBody = document.getElementById("inventory-product-body");
+    tableBody.innerHTML = "";
+
+    if (data.length === 0) {
+      tableBody.innerHTML =
+        '<tr><td colspan="5" style="text-align: center; color: #999;">Không có dữ liệu</td></tr>';
+      return;
+    }
+
+    data.forEach((item) => {
+      (item.chitietphieunhaps || []).forEach((chitiet) => {
+        const maSP =
+          chitiet.maPB_phienbansp?.maSP_sanpham?.maSP || "Không xác định";
+        const tenSP =
+          chitiet.maPB_phienbansp?.maSP_sanpham?.tenSP || "Tên sản phẩm";
+        const soLuong = chitiet.soLuong || 0;
+        const donGiaNhap = chitiet.donGiaNhap || 0;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${maSP}</td>
+          <td>${tenSP}</td>
+          <td>${soLuong}</td>
+          <td>${donGiaNhap.toLocaleString()}đ</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    });
+  }
+
+  // Xử lý sự kiện click nút xác nhận
+  // Xử lý sự kiện click nút xác nhận
+  btnacp.addEventListener("click", async () => {
+    if (selectedMaPN) {
+      Swal.fire({
+        title: "Xác nhận cập nhật?",
+        text: `Bạn có chắc muốn xác nhận phiếu nhập có mã: ${selectedMaPN}?`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xác nhận",
+        cancelButtonText: "Hủy",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Dữ liệu gửi đi
+          const data = {
+            maPN: selectedMaPN,
+            trangThai: "da nhap",
+          };
+
+          try {
+            const response = await updatePhieuNhap(data);
+
+            if (response.success) {
+              Swal.fire(
+                "Thành công!",
+                "Phiếu nhập đã được cập nhật.",
+                "success"
+              );
+
+              // Cập nhật giao diện hoặc tải lại dữ liệu
+              renderLeftPanel(leftPanelData);
+            } else {
+              Swal.fire(
+                "Thất bại!",
+                response.message || "Đã xảy ra lỗi.",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("Lỗi khi gọi API cập nhật phiếu nhập:", error);
+            Swal.fire(
+              "Thất bại!",
+              "Không thể cập nhật phiếu nhập. Vui lòng thử lại.",
+              "error"
+            );
+          }
+        }
+      });
+    } else {
+      Swal.fire("Cảnh báo", "Vui lòng chọn một phiếu nhập.", "warning");
+    }
+  });
+
+  // Hàm gửi yêu cầu API cập nhật phiếu nhập
+  async function updatePhieuNhap(data) {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/update-phieunhap",
+        {
+          method: "PUT", // Hoặc "POST" nếu API yêu cầu
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        return { success: true, data: result };
+      } else {
+        const errorText = await response.text();
+        return { success: false, message: errorText || "Lỗi không xác định." };
+      }
+    } catch (error) {
+      throw new Error("Không thể kết nối với API: " + error.message);
+    }
+  }
+
+  btndlt.addEventListener("click", async () => {
+    if (selectedMaPN) {
+      Swal.fire({
+        title: "Xác nhận xóa?",
+        text: `Bạn có chắc muốn xóa phiếu nhập có mã: ${selectedMaPN}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xóa",
+        cancelButtonText: "Hủy",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Dữ liệu gửi đi
+          const data = {
+            maPN: selectedMaPN,
+          };
+
+          try {
+            const response = await deletePhieuNhap(data);
+
+            if (response.success) {
+              Swal.fire("Thành công!", "Phiếu nhập đã được xóa.", "success");
+
+              // Cập nhật giao diện hoặc tải lại dữ liệu
+              renderLeftPanel(leftPanelData);
+            } else {
+              Swal.fire(
+                "Thất bại!",
+                response.message || "Đã xảy ra lỗi khi xóa phiếu nhập.",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("Lỗi khi gọi API xóa phiếu nhập:", error);
+            Swal.fire(
+              "Lỗi!",
+              "Không thể xóa phiếu nhập. Vui lòng thử lại sau.",
+              "error"
+            );
+          }
+        }
+      });
+    } else {
+      Swal.fire("Cảnh báo", "Vui lòng chọn một phiếu nhập.", "warning");
+    }
+  });
+
+  // Hàm gọi API để xóa phiếu nhập
+  async function deletePhieuNhap(data) {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/phonestore/delete-phieunhap",
+        {
+          method: "POST", // Sử dụng phương thức DELETE
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        return { success: true, data: result };
+      } else {
+        const errorText = await response.text();
+        return { success: false, message: errorText || "Lỗi không xác định." };
+      }
+    } catch (error) {
+      throw new Error("Không thể kết nối với API: " + error.message);
+    }
+  }
+
+  function handleSearch() {
+    const searchValue = document
+      .getElementById("inventory-search")
+      .value.toLowerCase();
+
+    const filteredData = leftPanelData.filter((item) => {
+      const maPN = item.maPN ? item.maPN.toLowerCase() : "";
+      const maNV = item.maNV ? item.maNV.toLowerCase() : "";
+      const maNCC = item.maNCC ? item.maNCC.toLowerCase() : "";
+
+      return (
+        maPN.includes(searchValue) ||
+        maNV.includes(searchValue) ||
+        maNCC.includes(searchValue)
+      );
+    });
+
+    renderLeftPanel(filteredData);
+  }
+
+  renderLeftPanel(leftPanelData);
+  renderRightPanel([]);
+
+  document
+    .getElementById("inventory-search")
+    .addEventListener("input", handleSearch);
+}
+
+// Gọi hàm khởi tạo khi trang đã tải
+window.addEventListener("DOMContentLoaded", initNhapPage);
+
+async function initDonHangPage() {
+  let leftPanelData = [];
+  let rightPanelData = [];
+  let btnacp = document.getElementById("inventory-accept-btn");
+  let dangGiaobtn = document.getElementById("inventory-danggiao-btn");
+  let selectedMaPN = null; // Biến lưu maPN của dòng được chọn
+
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-donhang"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
+
+    const data = await response.json();
+    leftPanelData = data.data;
+    console.log("leftPanelData: ", leftPanelData);
+  } catch (error) {
+    console.error("Lỗi khi gọi API sản phẩm:", error);
+    alert("Không thể lấy dữ liệu sản phẩm. Vui lòng thử lại sau.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-donHang"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
+
+    const data = await response.json();
+    rightPanelData = data.data;
+    console.log("rightPanelData: ", rightPanelData);
+  } catch (error) {
+    console.error("Lỗi khi gọi API sản phẩm:", error);
+    alert("Không thể lấy dữ liệu sản phẩm. Vui lòng thử lại sau.");
+    return;
+  }
+
+  function renderLeftPanel(data) {
+    const tableBody = document.getElementById("inventory-data-body");
+    tableBody.innerHTML = "";
+
+    if (data.length === 0) {
+      tableBody.innerHTML =
+        '<tr><td colspan="6" style="text-align: center; color: #999;">Không có dữ liệu</td></tr>';
+      return;
+    }
+
+    data.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.maDH}</td>
+        <td>${item.maNV}</td>
+        <td>${item.maKH}</td>
+        <td>${item.maKM}</td>
+        <td>${item.ngayDat}</td>
+        <td>${item.trangThai}</td>
+        <td>${item.httt}</td>
+        <td>${item.tongTien.toLocaleString()}đ</td>
+      `;
+      row.dataset.noteId = item.maDH; // Lưu maPN trong data attribute của row
+      row.addEventListener("click", () => handleRowClick(item.maDH)); // Lắng nghe sự kiện click
+      tableBody.appendChild(row);
+    });
+  }
+
+  function handleRowClick(noteId) {
+    selectedMaPN = noteId; // Lưu maPN khi click vào dòng
+    const filteredData = rightPanelData.filter(
+      (product) => product.maDH === noteId
+    );
+    renderRightPanel(filteredData);
+
+    // Cập nhật nút xác nhận để sử dụng maPN đã chọn
+    if (btnacp) {
+      btnacp.disabled = false; // Kích hoạt nút khi có dòng được chọn
+    }
+  }
+
+  function renderRightPanel(data) {
+    const tableBody = document.getElementById("inventory-product-body");
+    tableBody.innerHTML = "";
+
+    if (data.length === 0) {
+      tableBody.innerHTML =
+        '<tr><td colspan="5" style="text-align: center; color: #999;">Không có dữ liệu</td></tr>';
+      return;
+    }
+
+    data.forEach((item) => {
+      (item.chitietdonhangs || []).forEach((chitiet) => {
+        const soSeri = chitiet.soSeri || "Không xác định";
+        const tenSP =
+          chitiet.maPB_phienbansp?.maSP_sanpham?.tenSP || "Tên sản phẩm";
+        const maSP =
+          chitiet.maPB_phienbansp?.maSP_sanpham?.maSP || "Tên sản phẩm";
+        const giaBan = chitiet.giaBan || 0;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${maSP}</td>
+        <td>${tenSP}</td>
+        <td>${soSeri}</td>
+          <td>${giaBan.toLocaleString()}đ</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    });
+  }
+
+  // Xử lý sự kiện click nút xác nhận
+  btnacp.addEventListener("click", async () => {
+    if (selectedMaPN) {
+      // Hiển thị hộp thoại xác nhận trước khi thực hiện thao tác
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to confirm the order?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, confirm it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          console.log("Đang xác nhận phiếu nhập có mã PN:", selectedMaPN);
+
+          // Dữ liệu gửi đi, bao gồm mã phiếu nhập và trạng thái
+          let data = {
+            maDH: selectedMaPN,
+            trangThai: "Đã xác nhận",
+          };
+
+          try {
+            // Gửi yêu cầu cập nhật với phương thức PUT hoặc POST tùy vào API của bạn
+            const response = await fetch(
+              "http://localhost:8080/phonestore/update-donhang",
+              {
+                method: "PUT", // Hoặc "POST" nếu API yêu cầu
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Lỗi khi cập nhật phiếu nhập");
+            }
+
+            const result = await response.json();
+            console.log("Cập nhật thành công:", result);
+            alert("Cập nhật phiếu nhập thành công!");
+
+            // Nếu cần, có thể reload lại dữ liệu hoặc làm gì đó sau khi thành công
+            // Ví dụ: gọi lại API để tải lại dữ liệu phiếu nhập hoặc cập nhật bảng
+            renderLeftPanel(leftPanelData);
+          } catch (error) {
+            console.error("Lỗi khi gọi API cập nhật phiếu nhập:", error);
+            alert("Không thể cập nhật phiếu nhập. Vui lòng thử lại sau.");
+          }
+        }
+      });
+    } else {
+      console.log("Vui lòng chọn một phiếu nhập.");
+      alert("Vui lòng chọn một phiếu nhập.");
+    }
+  });
+
+  dangGiaobtn.addEventListener("click", async () => {
+    if (selectedMaPN) {
+      // Hiển thị hộp thoại xác nhận trước khi thực hiện thao tác
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to change the status to 'Đang giao'?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, change it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          console.log("Đang xác nhận phiếu nhập có mã đơn hàng:", selectedMaPN);
+
+          // Dữ liệu gửi đi, bao gồm mã phiếu nhập và trạng thái
+          let data = {
+            maDH: selectedMaPN,
+            trangThai: "Đang giao",
+          };
+
+          try {
+            // Gửi yêu cầu cập nhật với phương thức PUT
+            const response = await fetch(
+              "http://localhost:8080/phonestore/update-donhang",
+              {
+                method: "PUT", // Hoặc "POST" nếu API yêu cầu
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Lỗi khi cập nhật phiếu nhập");
+            }
+
+            const result = await response.json();
+            console.log("Cập nhật thành công:", result);
+            alert("Cập nhật phiếu nhập thành công!");
+
+            // Nếu cần, có thể reload lại dữ liệu hoặc làm gì đó sau khi thành công
+            // Ví dụ: gọi lại API để tải lại dữ liệu phiếu nhập hoặc cập nhật bảng
+            renderLeftPanel(leftPanelData);
+          } catch (error) {
+            console.error("Lỗi khi gọi API cập nhật phiếu nhập:", error);
+            alert("Không thể cập nhật phiếu nhập. Vui lòng thử lại sau.");
+          }
+        }
+      });
+    } else {
+      console.log("Vui lòng chọn một phiếu nhập.");
+      alert("Vui lòng chọn một phiếu nhập.");
+    }
+  });
+
+  function handleSearch() {
+    const searchValue = document
+      .getElementById("inventory-search")
+      .value.toLowerCase();
+
+    // Lọc dữ liệu dựa trên giá trị tìm kiếm
+    const filteredData = leftPanelData.filter((item) => {
+      const maDH = item.maDH ? item.maDH.toLowerCase() : ""; // Kiểm tra null
+      const maNV = item.maNV ? item.maNV.toLowerCase() : ""; // Kiểm tra null
+      const maKM = item.maKM ? item.maKM.toLowerCase() : ""; // Kiểm tra null
+
+      return (
+        maDH.includes(searchValue) ||
+        maNV.includes(searchValue) ||
+        maKM.includes(searchValue)
+      );
+    });
+
+    // Hiển thị thông báo nếu không tìm thấy dữ liệu
+    if (filteredData.length === 0) {
+      const tableBody = document.getElementById("inventory-data-body");
+      tableBody.innerHTML =
+        '<tr><td colspan="6" style="text-align: center; color: #999;">Không có dữ liệu</td></tr>';
+      return;
+    }
+
+    renderLeftPanel(filteredData);
+  }
+
+  renderLeftPanel(leftPanelData);
+  renderRightPanel([]);
+
+  document
+    .getElementById("inventory-search")
+    .addEventListener("input", handleSearch);
+}
+window.addEventListener("DOMContentLoaded", initDonHangPage);
 function convertMoney(amount) {
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",

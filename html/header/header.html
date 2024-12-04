@@ -33,29 +33,30 @@
             </li>
             <span>|</span>
 
-            <li id="tenTk" class="dropdown">
+            <li id="tenTk" class="dropdown" style="display: none;">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <a id="dangnhapTK" href="/html/home/login.html"></a>
                 <div class="dropdown-content">
                     <a href="/html/home/thongtinuser.html">
                         <p>Thông tin tài khoản</p>
                     </a>
-                    <a href="#" lass="dropdown-toggle" data-toggle="dropdown" onclick="showOrderModal()">
+                    <a id="admin" href="/admin.html" style="display: none;">
+                        <p>Trang quản lí</p>
+                    </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="showOrderModal()">
                         <p>Đơn mua</p>
                     </a>
                     <a href="" onclick="dangXuat()">
                         <p>Đăng xuất</p>
                     </a>
-
                 </div>
-
-
             </li>
+
             <li id="dangNhap">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <a id="dangnhapTK" href="/html/home/login.html">Đăng nhập</a>
-
             </li>
+
 
 
             <!-- Modal cho đơn hàng -->
@@ -105,7 +106,7 @@
                                     <th>Tổng tiền</th>
                                     <th>Hình thức thanh toán</th>
                                     <th>Trạng thái</th>
-                                    <th>Xem chi tiết</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody class="order-product-table__list"> <!-- Đổi class thành order-product-table__list -->

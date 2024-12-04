@@ -1,17 +1,17 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-let brandValues = [
-  "IPhone",
-  "Samsung",
-  "Oppo",
-  "Xiaomi",
-  "Vivo",
-  "Realme",
-  "Nokia",
-  "Masstel",
-  "Itel",
-  "Mobell",
-];
+// let brandValues = [
+//   "IPhone1",
+//   "Samsung",
+//   "Oppo",
+//   "Xiaomi",
+//   "Vivo",
+//   "Realme",
+//   "Nokia",
+//   "Masstel",
+//   "Itel",
+//   "Mobell",
+// ];
 let romValues = [
   "16 GB",
   "32 GB",
