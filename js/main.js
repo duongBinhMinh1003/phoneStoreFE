@@ -98,9 +98,11 @@ $(document).ready(function () {
         $("#dangNhap").hide();
         $("#tenTk").show();
 
-        // Hiển thị mục admin nếu là nv hoặc ql
-        if (user.quyen === "nv" || user.quyen === "ql") {
-          $("#admin").show();
+        // Kiểm tra quyền và gán liên kết admin
+        if (user.quyen === "nv") {
+          $("#admin").show().attr("href", "/nhanvien.html");
+        } else if (user.quyen === "ql") {
+          $("#admin").show().attr("href", "/admin.html");
         } else {
           $("#admin").hide(); // Ẩn admin cho các quyền khác
         }

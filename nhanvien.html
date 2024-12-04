@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/PADung/adung.css">
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <!-- flatpickr -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
+
+</head>
+
+<body>
+    <div class="app">
+        <div class="sidebar">
+            <div class="info__detail">
+                <div class="info__container">
+                    <img class="info__img" src="/img/profile.png" alt="">
+                    <div class="info__hello">Xin chào</div>
+                    <p class="info__name">Tài khoản</p>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <div class="nav-links__container">
+
+                    <li class="nav-links__item" data-value="ql-hoadon">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=119104&format=png&color=000000" alt="invoice" />
+                        <span class="nav-links__name">Quản lý đơn hàng</span>
+                    </li>
+                    <li class="nav-links__item" data-value="ql-sanpham">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=aR2Ar4o65ts7&format=png&color=000000"
+                            alt="product--v1" />
+                        <span class="nav-links__name">Quản lý sản phẩm</span>
+                    </li>
+                    <li class="nav-links__item" data-value="ql-phienBan">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=s7lKmYLIonI6&format=png&color=000000"
+                            alt="product--v1" />
+                        <span class="nav-links__name">Quản lý phiên bản</span>
+                    </li>
+
+                    <li class="nav-links__item" data-value="ql-khuyenmai">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=NGc8Aqc69Sez&format=png&color=000000"
+                            alt="user--v1" />
+                        <span class="nav-links__name">Quản lý khuyến mãi</span>
+                    </li>
+                    <li class="nav-links__item" data-value="ql-baohanh">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=121325&format=png&color=000000" alt="user--v1" />
+                        <span class="nav-links__name">Quản lý bảo hành</span>
+                    </li>
+                    <li class="nav-links__item" data-value="ql-nhap">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=H9hmEcGUGPTS&format=png&color=000000"
+                            alt="user--v1" />
+                        <span class="nav-links__name">Quản lý nhập</span>
+                    </li>
+                    <li class="nav-links__item" data-value="ql-phieunhap">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=44039&format=png&color=000000" alt="user--v1" />
+                        <span class="nav-links__name">Quản lý phiếu nhập</span>
+                    </li>
+
+
+                    <li class="nav-links__item" data-value="ql-nhacungcap">
+                        <img class="nav-links__img" width="35" height="35"
+                            src="https://img.icons8.com/?size=100&id=IqOjfaWLBgco&format=png&color=000000"
+                            alt="user--v1" />
+                        <span class="nav-links__name">Quản lý nhà cung cấp</span>
+                    </li>
+                </div>
+                <div class="nav-links__change">
+                    <li class="nav-links__item" data-value="product-page">
+                        <a href="./index.html" class="active" id="redirect-product-page">
+                            <img class="nav-links__img" width="35" height="35"
+                                src="https://img.icons8.com/?size=100&id=IrNbwGt5kjHz&format=png&color=000000"
+                                alt="sell-stock" />
+                            <span class="nav-links__name">Trang bán hàng</span>
+                        </a>
+                    </li>
+                    <li class="nav-links__item">
+                        <a href="./index.html" class="active" id="log-out-btn" onclick="dangXuat()">
+                            <img class="nav-links__img" width="35" height="35"
+                                src="https://img.icons8.com/?size=100&id=x3PE6z2KLvJf&format=png&color=000000"
+                                alt="open-pane" />
+                            <span onclick="dangXuat()" class="nav-links__name">Đăng xuất</span>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+        <div id="content">
+            <div class="top-line">
+                <div class="css-ribbon">
+                    <h1 class="bsribbon top-line__heading">
+                        <strong class="ribbon-content">CHỌN CHỨC NĂNG Ở THANH MENU TAY TRÁI MÀN HÌNH</strong>
+                    </h1>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <!-- Thêm jQuery vào trang của bạn -->
+
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="./js/admin/constructor.js"></script>
+        <script src="./js/admin/dataProduct.js"> </script>
+        <script src="./js/admin/dataUser.js"></script>
+        <script src="./js/admin/localStorage.js"></script>
+        <script src="./js/admin/admin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+</body>
+<script>
+    const dangXuat = () => {
+
+        localStorage.removeItem('user');
+        localStorage.removeItem('khachhang');
+        window.location.href = "/index.html"
+    }
+</script>
+
+</html>

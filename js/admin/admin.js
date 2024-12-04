@@ -31,17 +31,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
             <div class="top-line">
             <h1 class="top-line__heading">THỐNG KÊ</h1>
         </div>
-        <div class="filter">
-            <div class="filter__container">
-                <label for="" class="filter__label">Chọn tháng cần xem</label>
-                <select name="filter__select" id="filter__select" class="filter__control">
-                    <option value="">--Chọn tháng--</option>
-                    <option value="customer">Khách hàng</option>
-                    <option value="admin">Admin</option>
-
-                </select>
-                <div class="filter__button">Lọc</div>
-            </div>
+       
 
 
         </div>
@@ -65,7 +55,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                     <div class="box-analysis__icon">
                         <i class="fa-solid fa-money-bill"></i>
                     </div>
-                    <div class="box-analysis__label">Tổng hóa đơn</div>
+                    <div class="box-analysis__label">Tổng đơn hàng</div>
                 </div>
                 <div class="box-analysis__number">100000</div>
             </div>
@@ -118,7 +108,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                     <thead>
                         <tr class="analysis-table__heading">
                             <th>Tên thương hiệu</th>
-                            <th>Số lượng</th>
+                            <th>Doanh thu</th>
                         </tr>
                     </thead>
                     <tbody class="analysis-table__list">
@@ -152,11 +142,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                       
     
     
                     </ul>
@@ -284,11 +270,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                       
     
     
                     </ul>
@@ -464,11 +446,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                      
     
     
                     </ul>
@@ -674,11 +652,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                     
     
     
                     </ul>
@@ -800,11 +774,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                       
     
     
                     </ul>
@@ -1040,11 +1010,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                        
     
     
                     </ul>
@@ -1205,11 +1171,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 Chỉnh sửa
                             </span>
                         </li>
-                        <li class="function__item" data-value="delete">
-                            <span class="function__item-title">
-                                Xóa
-                            </span>
-                        </li>
+                   
     
     
                     </ul>
@@ -2387,6 +2349,15 @@ async function initUserPage() {
 
   // Xử lý cập nhật tài khoản
   btnUpdate.addEventListener("click", async () => {
+    // Hiển thị thông báo ban đầu
+    Swal.fire({
+      title: "Đang xử lý...",
+      text: "Vui lòng đợi trong giây lát.",
+      icon: "info",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+    });
+
     const data = {
       tkId: document.getElementById("maTk").value,
       tenDangNhap: document.getElementById("tenDangNhap").value,
@@ -2395,8 +2366,13 @@ async function initUserPage() {
       trangThai: document.getElementById("user-status").value,
     };
 
+    // Kiểm tra nếu có trường nào trống
     if (Object.values(data).some((val) => !val)) {
-      alert("Vui lòng điền đầy đủ thông tin.");
+      Swal.fire({
+        title: "Thiếu thông tin",
+        text: "Vui lòng điền đầy đủ thông tin.",
+        icon: "warning",
+      });
       return;
     }
 
@@ -2409,12 +2385,28 @@ async function initUserPage() {
           body: JSON.stringify(data),
         }
       );
-      if (!response.ok) throw new Error("Lỗi khi cập nhật tài khoản");
-      alert("Cập nhật tài khoản thành công!");
-      window.location.reload();
+
+      if (!response.ok) {
+        throw new Error("Lỗi khi cập nhật tài khoản");
+      }
+
+      // Thông báo thành công
+      Swal.fire({
+        title: "Thành công!",
+        text: "Cập nhật tài khoản thành công!",
+        icon: "success",
+      }).then(() => {
+        window.location.reload(); // Reload trang sau khi người dùng đóng thông báo
+      });
     } catch (error) {
       console.error("Cập nhật thất bại:", error);
-      alert("Có lỗi xảy ra khi cập nhật tài khoản.");
+
+      // Thông báo lỗi
+      Swal.fire({
+        title: "Thất bại!",
+        text: "Có lỗi xảy ra khi cập nhật tài khoản.",
+        icon: "error",
+      });
     }
   });
 
@@ -2996,60 +2988,99 @@ async function initDashboardPage() {
   const filterSelect = document.getElementById("filter__select");
   const filterButton = $(".filter__button");
   const defaultMonth = 11;
-  let brandValues = ["Samsung", "Apple", "Xiaomi"]; // Example list of brands
+  let brandValues = []; // Example list of brands
+
   try {
-    const response = await fetch("http://localhost:8080/phonestore/get-phone");
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-chitietdonhang"
+    );
     if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
 
     const data = await response.json();
-    brandValues = data.data; // Cập nhật lại danh sách sản phẩm từ API
-    console.log("Sản phẩm: ", brandValues);
+    thuongHieu = data.data; // Cập nhật lại danh sách sản phẩm từ API
+    thuongHieu.map((item) => {
+      brandValues.push(item.maPB_phienbansp.maSP_sanpham.thuongHieu);
+      console.log("brandValues: ", brandValues);
+    });
   } catch (error) {
     console.error("Lỗi khi gọi API sản phẩm:", error);
   }
 
-  loadBoxAnalysis();
-  loadOptionMonth();
-  filterMonth();
+  let totalCustomers = 0;
+  let totalDonHang = 0;
+  let totalSanPham = 0;
+  let totalDoanhThu = 0;
 
-  function loadBoxAnalysis(month = 11) {
+  try {
+    const response = await fetch("http://localhost:8080/user/get-khachhang");
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu khách hàng");
+
+    const data = await response.json();
+    totalCustomers = data.khachHang.length;
+    console.log("Tổng số khách hàng: ", totalCustomers);
+    loadBoxAnalysis();
+  } catch (error) {
+    console.error("Lỗi khi gọi API khách hàng:", error);
+  }
+
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-alldonhang"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu đơn hàng");
+
+    const data = await response.json();
+    totalDonHang = data.data.length;
+    console.log("Tổng số đơn hàng: ", totalDonHang);
+    loadBoxAnalysis();
+  } catch (error) {
+    console.error("Lỗi khi gọi API đơn hàng:", error);
+  }
+
+  try {
+    const response = await fetch(
+      "http://localhost:8080/phonestore/get-chitietdonhang"
+    );
+    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu đơn hàng");
+
+    const data = await response.json();
+    console.log("data: ", data.data);
+
+    const doanhThuArray = data.data.map((item) => {
+      const giaBan = parseFloat(item.giaBan); // Chuyển `giaBan` sang số
+      return isNaN(giaBan) ? 0 : giaBan; // Trả về 0 nếu không hợp lệ
+    });
+
+    totalDoanhThu = doanhThuArray.reduce((sum, price) => sum + price, 0);
+    totalSanPham = data.data.length;
+
+    console.log("Tổng số SP: ", totalSanPham);
+    console.log("Tổng doanh thu: ", totalDoanhThu);
+
+    loadBoxAnalysis();
+  } catch (error) {
+    console.error("Lỗi khi gọi API đơn hàng:", error);
+  }
+
+  // Gọi `loadBoxAnalysis` với giá trị được cập nhật
+  function loadBoxAnalysis() {
     boxItem.forEach((item) => {
       if (item.dataset.value === "total-customer") {
-        const a = Invoice.getTotalCustomerByMonth(month);
-        item.querySelector(".box-analysis__number").innerText = a;
-      }
-      if (item.dataset.value === "total-price") {
-        const a = Invoice.calculateRevenueByMonth(month);
-        item.querySelector(".box-analysis__number").innerText = a;
+        item.querySelector(".box-analysis__number").innerText = totalCustomers;
       }
       if (item.dataset.value === "total-invoice") {
-        const a = Invoice.getTotalInvoiceByMonth(month);
-        item.querySelector(".box-analysis__number").innerText = a;
+        item.querySelector(".box-analysis__number").innerText = totalDonHang;
+      }
+      if (item.dataset.value === "total-price") {
+        item.querySelector(".box-analysis__number").innerText =
+          totalDoanhThu.toLocaleString("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }); // Định dạng thành tiền VNĐ
       }
       if (item.dataset.value === "total-product") {
-        const a = Invoice.getTotalSoldProductsInMonth(month);
-        item.querySelector(".box-analysis__number").innerText = a;
+        item.querySelector(".box-analysis__number").innerText = totalSanPham; // Giá trị giả định
       }
-    });
-  }
-
-  function loadOptionMonth() {
-    filterSelect.innerHTML = "";
-    for (let i = 1; i <= 12; i++) {
-      const option = document.createElement("option");
-      option.value = i.toString();
-      option.textContent = `Tháng ${i}`;
-      if (i === defaultMonth) {
-        option.selected = true;
-      }
-      filterSelect.appendChild(option);
-    }
-  }
-
-  function filterMonth() {
-    filterButton.addEventListener("click", () => {
-      loadBoxAnalysis(parseInt(filterSelect.value));
-      renderTable(parseInt(filterSelect.value));
     });
   }
 
@@ -3069,24 +3100,24 @@ async function initDashboardPage() {
   }
 
   function renderTable1(tableBody, month) {
+    const brandCount = {};
+
+    // Count the occurrence of each brand
     brandValues.forEach((item) => {
-      // Kiểm tra xem item có thuộc tính 'thuongHieu' không
-      const brandName = item.thuongHieu || "Chưa có tên thương hiệu"; // Đảm bảo item có thuộc tính thuongHieu
+      const brandName = item || "Chưa có tên thương hiệu";
+      brandCount[brandName] = (brandCount[brandName] || 0) + 1;
+    });
 
-      console.log("item: ", brandName);
-
+    // Render the table rows based on the counted brands
+    Object.keys(brandCount).forEach((brandName) => {
       const row = document.createElement("tr");
       row.classList.add("analysis-table__row");
 
       const brandCell = document.createElement("td");
-      brandCell.textContent = brandName; // Gán tên thương hiệu vào ô của bảng
+      brandCell.textContent = brandName;
 
       const quantityCell = document.createElement("td");
-      const soldQuantity = Invoice.getTotalSoldProductsInMonthByBrand(
-        brandName.toLowerCase(),
-        month
-      );
-      quantityCell.textContent = soldQuantity;
+      quantityCell.textContent = brandCount[brandName];
 
       row.appendChild(brandCell);
       row.appendChild(quantityCell);
@@ -3095,22 +3126,48 @@ async function initDashboardPage() {
   }
 
   function renderTable2(tableBody, month) {
-    brandValues.forEach((item) => {
+    const brandRevenue = {};
+    console.log("brandRevenue: ", brandRevenue);
+
+    console.log("thuongHieu: ", thuongHieu);
+    thuongHieu.forEach((item) => {
+      const brandName =
+        item.maPB_phienbansp.maSP_sanpham.thuongHieu ||
+        "Chưa có tên thương hiệu";
+      const giaBan = parseFloat(item.giaBan); // Get the price
+      const quantity = 1; // Assuming one item per order for now (adjust if necessary)
+
+      if (isNaN(giaBan)) return; // Skip if the price is invalid
+
+      // Update the total revenue and quantity for the brand
+      if (!brandRevenue[brandName]) {
+        brandRevenue[brandName] = { revenue: 0, quantity: 0 };
+      }
+
+      brandRevenue[brandName].revenue += giaBan * quantity;
+      brandRevenue[brandName].quantity += quantity;
+    });
+
+    // Render each unique brand's revenue and quantity
+    Object.keys(brandRevenue).forEach((brandName) => {
       const row = document.createElement("tr");
       row.classList.add("analysis-table__row");
 
       const brandCell = document.createElement("td");
-      brandCell.textContent = item;
+      brandCell.textContent = brandName;
 
-      const quantityCell = document.createElement("td");
-      const revenue = Invoice.calculateRevenueByCategoryAndMonth(
-        item.toLowerCase(),
-        month
+      const revenueCell = document.createElement("td");
+      revenueCell.textContent = brandRevenue[brandName].revenue.toLocaleString(
+        "vi-VN",
+        {
+          style: "currency",
+          currency: "VND",
+        }
       );
-      quantityCell.textContent = revenue;
 
       row.appendChild(brandCell);
-      row.appendChild(quantityCell);
+
+      row.appendChild(revenueCell);
       tableBody.appendChild(row);
     });
   }

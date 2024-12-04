@@ -13,6 +13,7 @@
     <script src="/js/main.js" defer></script>
     <script src="/vendor/bootstrap.js" defer></script>
     <script src="/js/shopping_cart/register.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <body>
     <nav id="header" class="navbar navbar-default" role="navigation"></nav>
@@ -30,35 +31,39 @@
                                     <input type="text" id="name" class="email-text">
                                 </div>
                             </div>
-                           
+
                     </div>
-            
+
                     <div class="container-form">
                         <div class="man">
                             <h3 class="title text-uppercase ">Ngày Sinh</h3>
                         </div>
-    
+
                         <div class="row ">
                             <div class="col-sm-10 col-xs-10 name-date">
-                                <input width="100%" type="date" name="" id="ngaySinh" class="email-text form-control" value="" required="required" title="">
+                                <input width="100%" type="date" name="" id="ngaySinh" class="email-text form-control"
+                                    value="" required="required" title="">
                             </div>
                         </div>
-    
+
                     </div>
                     <div class="container-form">
-    
+
                         <div class="man">
                             <h3 class="title text-uppercase ">Giới tính</h3>
                         </div>
-    
+
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="male"><input type="radio" id="male" name="gioitinh" class="radio-input" value="Nam">Nam</label>
-                                <label for="female"><input type="radio" id="female" name="gioitinh" class="radio-input" value="Nữ">Nữ</label>
-                                <label for="other"><input type="radio" id="other" name="gioitinh" class="radio-input" value="other">Khác</label>
+                                <label for="male"><input type="radio" id="male" name="gioitinh" class="radio-input"
+                                        value="Nam">Nam</label>
+                                <label for="female"><input type="radio" id="female" name="gioitinh" class="radio-input"
+                                        value="Nữ">Nữ</label>
+                                <label for="other"><input type="radio" id="other" name="gioitinh" class="radio-input"
+                                        value="other">Khác</label>
                             </div>
                         </div>
-    
+
                     </div>
                     <div class="container-form">
                         <h3 class="title text-uppercase ">Địa chỉ </h3>
@@ -66,10 +71,10 @@
                             <div class="row">
                                 <div class="col-xs-10 name-diachi">
                                     <span>Địa chỉ</span>
-                                    <input  type="text" id="diaChi" class="email-text">
+                                    <input type="text" id="diaChi" class="email-text">
                                 </div>
                             </div>
-                           
+
                     </div>
                     <div class="container-form">
                         <h3 class="title text-uppercase ">Email</h3>
@@ -77,10 +82,10 @@
                             <div class="row">
                                 <div class="col-xs-10 name-email1">
                                     <span>Email</span>
-                                    <input  type="text" id="email1" class="email-text">
+                                    <input type="text" id="email1" class="email-text">
                                 </div>
                             </div>
-                           
+
                     </div>
                     <div class="container-form">
                         <h3 class="title text-uppercase ">Số điện thoại</h3>
@@ -88,15 +93,15 @@
                             <div class="row">
                                 <div class="col-xs-10 name-phone">
                                     <span>Số điện thoại</span>
-                                    <input  type="text" id="phone" class="email-text">
+                                    <input type="text" id="phone" class="email-text">
                                 </div>
                             </div>
-                           
+
                     </div>
-    
+
                     <div class="container-form">
                         <h3 class="title text-uppercase ">Chi tiết đăng nhập</h3>
-    
+
                         <div class="row">
                             <div class="col-xs-10 name-email">
                                 <span>Tài khoản</span>
@@ -110,12 +115,13 @@
                                 <input type="password" id="password" class="email-text password">
                             </div>
                             <div class="col-xs-10 ">
-                                <p class="span-login text-danger"> Vui lòng đảm bảo mật khẩu của bạn chứa tối thiếu một chữ cái, một
+                                <p class="span-login text-danger"> Vui lòng đảm bảo mật khẩu của bạn chứa tối thiếu một
+                                    chữ cái, một
                                     chữ số và dài tối thiểu 6 ký tự (ex: A12345)</p>
                             </div>
                         </div>
-    
-    
+
+
                         </form>
                         <div class="lg-submit">
                             <a class="btn-submit button-lg btn btn-dark">
@@ -139,20 +145,22 @@
                             </div>
                         </div>
                     </div>
-    
+
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="container-right">
                         <h2 class="text-uppercase header">Tạo một tài khoản</h2>
                         <h4 class="right-title"> Đăng nhập chung sẽ giúp bạn truy cập:</h4>
                         <ul class="rg">
-                            <li class="option"> <i class="fa fa-check" aria-hidden="true"></i> Một lần đăng nhập chung duy
+                            <li class="option"> <i class="fa fa-check" aria-hidden="true"></i> Một lần đăng nhập chung
+                                duy
                                 nhất để tương tác với các sản phẩm và dịch vụ</li>
                             <li class="option"> <i class="fa fa-check" aria-hidden="true"></i>Thanh toán nhanh chóng với
                                 nhiều lựa chọn</li>
                             <li class="option"> <i class="fa fa-check" aria-hidden="true"></i>Chọn sản phẩm truy cập giỏ
                                 hàng nhiều ưu đãi </li>
-                            <li class="option"> <i class="fa fa-check" aria-hidden="true"></i>Tìm kiếm sản phẩm nhanh chóng
+                            <li class="option"> <i class="fa fa-check" aria-hidden="true"></i>Tìm kiếm sản phẩm nhanh
+                                chóng
                             </li>
                         </ul>
                     </div>
