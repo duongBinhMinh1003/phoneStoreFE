@@ -4370,7 +4370,7 @@ async function initNhapPage() {
     console.log("leftPanelData: ", leftPanelData);
   } catch (error) {
     console.error("Lỗi khi gọi API sản phẩm:", error);
-    alert("Không thể lấy dữ liệu sản phẩm. Vui lòng thử lại sau.");
+
     return;
   }
 
