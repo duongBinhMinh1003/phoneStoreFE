@@ -22,9 +22,9 @@ function redirectToAdminPage() {
   location.href = "./admin.html";
 }
 
-function redirectToProductPage() {
-  location.href = "./product.html";
-}
+// function redirectToProductPage() {
+//   location.href = "./product.html";
+// }
 
 function redirectToIndexPage() {
   location.href = "./index.html";

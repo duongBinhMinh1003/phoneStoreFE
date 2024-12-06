@@ -193,7 +193,67 @@ $(document).ready(function () {
       }
     });
 });
-
+document.getElementById("name").onkeyup = () => {
+  let patName = new RegExp(
+    `^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+(\ +[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+)*)$`
+  );
+  let resName = patName.test(document.getElementById("name").value.trim());
+  if (resName) {
+    trueRegex("name");
+    ten = true;
+  } else {
+    falseRegex("name");
+    ten = false;
+  }
+};
+// document.getElementById("name").onkeyup = () => {
+//   let patName = new RegExp(
+//     `^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+(\ +[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+)*)$`
+//   );
+//   let resName = patName.test(document.getElementById("name").value.trim());
+//   if (resName) {
+//     trueRegex("name");
+//     ho = true;
+//   } else {
+//     falseRegex("name");
+//     ho = false;
+//   }
+// };
+document.getElementById("email1").onkeyup = () => {
+  let patMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  let resMail = patMail.test(document.getElementById("email1").value.trim());
+  if (resMail) {
+    trueRegex("email1");
+    email = true;
+  } else {
+    falseRegex("email1");
+    email = false;
+  }
+};
+document.getElementById("password").onkeyup = () => {
+  let passWord = /^(?=.*[a-zA-Z])(?=.*[0-9])(\w).{5,}$/;
+  let resPass = passWord.test(document.getElementById("password").value.trim());
+  if (resPass) {
+    trueRegex("password");
+    pass = true;
+  } else {
+    falseRegex("password");
+    pass = false;
+  }
+};
+document.getElementById("diaChi").onkeyup = () => {
+  let patAddr = new RegExp(
+    `^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ0-9/]+(\ +[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ0-9]+)*)`
+  );
+  let resAddr = patAddr.test(document.getElementById("diaChi").value.trim());
+  if (resAddr) {
+    trueRegex("diaChi");
+    diaChi = true;
+  } else {
+    falseRegex("diaChi");
+    diaChi = false;
+  }
+};
 function falseRegex(id) {
   document.getElementById(id).style.borderBottom = "5px solid red";
 }

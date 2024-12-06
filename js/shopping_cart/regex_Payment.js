@@ -59,14 +59,14 @@ document.getElementById("address").onkeyup = () => {
   }
 };
 
-document.getElementById("email").onkeyup = () => {
+document.getElementById("email1").onkeyup = () => {
   let patMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  let resMail = patMail.test(document.getElementById("email").value.trim());
+  let resMail = patMail.test(document.getElementById("email1").value.trim());
   if (resMail) {
-    trueRegex("email");
+    trueRegex("email1");
     email = true;
   } else {
-    falseRegex("email");
+    falseRegex("email1");
     email = false;
   }
 };

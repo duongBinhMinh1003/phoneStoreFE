@@ -354,6 +354,13 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                             </div>
     
                             <div class="form-group">
+                            <label for="user-id" class="form-label">Mã tài khoản</label>
+
+                            <input id="maTK" name="user-id" type="text" class="form-control" >
+
+                            <span class="form-message"></span>
+                        </div>
+                            <div class="form-group">
                             <label for="user-id" class="form-label">Tài khoản</label>
 
                             <input id="taiKhoan" name="user-id" type="text" class="form-control" >
@@ -430,7 +437,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
         item.classList.add("active");
         contentContainer.innerHTML = `
                     <div class="top-line">
-                    <h1 class="top-line__heading">QUẢN LÝ KHUYẾN MÃI</h1>
+                    <h1 class="top-line__heading">QUẢN LÝ SẢN PHẨM</h1>
                 </div>
     
     
@@ -795,14 +802,15 @@ if (user.quyen == "ql" || user.quyen == "nv") {
 
                             <span class="form-message"></span>
                         </div>
-                            <div class="form-group">
-                                <label for="user-full_name" class="form-label">Thời gian tạo</label>
+                           
     
-                                <input id="thoiGian" name="user-full_name" type="date" class="form-control">
-    
-                                <span class="form-message"></span>
-                            </div>
-    
+                        <div class="form-group">
+                        <label for="user-id" class="form-label">Mã khách hàng</label>
+
+                        <input id="maKH" name="user-id" type="text" class="form-control">
+
+                        <span class="form-message"></span>
+                    </div>
                             <div class="form-group">
                                 <label for="user-username" class="form-label">Tổng tiền</label>
     
@@ -864,6 +872,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                                 <th>Mã nhân viên</th>  
                                 <th>Số seri</th>       
                                 <th>Nội dung</th> 
+                                <th>Mã khách hàng</th>
                                 <th>Hành động</th>            
                                 <!-- <th></th> -->
     
@@ -1028,7 +1037,7 @@ if (user.quyen == "ql" || user.quyen == "nv") {
                             <div class="form-group">
                                 <label for="product-name" class="form-label">Mã sản phẩm</label>
     
-                                <input disabled="true" id="maSP" name="product-name" type="text" "
+                                <input  id="maSP" name="product-name" type="text" "
                                     class="form-control">
     
                                 <span class="form-message"></span>
@@ -1328,22 +1337,27 @@ if (user.quyen == "ql" || user.quyen == "nv") {
             
                
             </div>
+            <div class="table-wrapper">
             <table class="inventory-data-table right_panel_product">
-                <thead>
-                    <tr>
-
-                        <th>Mã sản phẩm</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá nhập</th>
-                    </tr>
-                </thead>
-                <tbody id="inventory-product-body">
-                    <!-- Add rows dynamically -->
-                </tbody>
+              <thead>
+                <tr>
+                  <th>Mã phiếu nhập</th>
+                  <th>Mã phiên bản</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Đơn giá nhập</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-product-body">
+                <!-- Add rows dynamically -->
+              </tbody>
             </table>
-        </div>
-    </div>
+          </div>
+          
+           
+            </div>
+            </div>
                 </div>
                 `;
         initNhapPage();
@@ -1352,7 +1366,64 @@ if (user.quyen == "ql" || user.quyen == "nv") {
         item.classList.add("active");
         contentContainer.innerHTML = `
                     <div class="top-line">
+                    
                     <h1 class="top-line__heading">QUẢN LÝ ĐƠN HÀNG</h1>
+                    <div class="loader">
+                    <div class="truckWrapper">
+                        <div class="truckBody">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 198 93" class="trucksvg">
+                                <path stroke-width="3" stroke="#282828" fill="#F83D3D"
+                                    d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z">
+                                </path>
+                                <path stroke-width="3" stroke="#282828" fill="#7D7C7C"
+                                    d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z">
+                                </path>
+                                <path stroke-width="2" stroke="#282828" fill="#282828"
+                                    d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z">
+                                </path>
+                                <rect stroke-width="2" stroke="#282828" fill="#FFFCAB" rx="1" height="7" width="5" y="63" x="187">
+                                </rect>
+                                <rect stroke-width="2" stroke="#282828" fill="#282828" rx="1" height="11" width="4" y="81" x="193">
+                                </rect>
+                                <rect stroke-width="3" stroke="#282828" fill="#DFDFDF" rx="2.5" height="90" width="121" y="1.5"
+                                    x="6.5"></rect>
+                                <rect stroke-width="2" stroke="#282828" fill="#DFDFDF" rx="2" height="4" width="6" y="84" x="1">
+                                </rect>
+                            </svg>
+                        </div>
+                        <div class="truckTires">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="tiresvg">
+                                <circle stroke-width="3" stroke="#282828" fill="#282828" r="13.5" cy="15" cx="15"></circle>
+                                <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="tiresvg">
+                                <circle stroke-width="3" stroke="#282828" fill="#282828" r="13.5" cy="15" cx="15"></circle>
+                                <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                            </svg>
+                        </div>
+                        <div class="road"></div>
+            
+                        <svg xml:space="preserve" viewBox="0 0 453.459 453.459" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlns="http://www.w3.org/2000/svg" id="Capa_1" version="1.1" fill="#000000" class="lampPost">
+                            <path d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993
+                c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514
+                c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.354-17.203-45.463-19.366v-8.954h-6.917C184.196,29.953,215.101,0,252.882,0
+                c37.962,0,68.686,30.724,68.686,68.686c0,16.114-5.768,31.34-15.2,43.287v45.697c0,30.122-6.135,48.774-21.465,65.935
+                c-3.87,4.486-5.862,10.331-5.862,16.608v5.132c0,18.776,11.328,25.469,15.775,25.469c7.885,0,15.775-11.988,15.775-25.469
+                c0-16.707-8.283-26.547-13.89-36.459c-4.057-4.698-7.734-8.566-10.159-11.907c-2.563-3.412-3.621-7.797-3.621-12.013v-5.726
+                c0-1.095,0.587-1.818,1.673-1.818c0.994,0,1.676,0.723,1.676,1.818v5.726c0,10.93,4.513,19.974,11.397,27.416
+                c3.956,4.223,8.487,7.803,13.362,10.695c-9.868,3.522-18.68,8.586-25.774,14.442c-11.571,9.732-18.482,23.64-18.482,38.048
+                c0,15.053,7.144,27.877,18.48,38.631c9.158,7.384,20.488,12.12,32.539,14.526c-3.364,2.283-5.912,4.842-8.563,7.539
+                c-9.048,9.032-15.291,20.467-15.291,36.315v6.037h-16.685h-16.685v-6.037c0-15.847-6.242-27.283-15.291-36.315
+                c-2.651-2.697-5.199-5.256-8.563-7.539c12.051-2.406,23.381-7.142,32.539-14.526c11.337-10.754,18.481-23.578,18.481-38.631
+                c0-14.408-6.911-28.316-18.482-38.048c-7.094-5.856-15.906-10.92-25.774-14.442c4.874-2.892,9.405-6.472,13.362-10.695
+                c6.884-7.442,11.397-16.486,11.397-27.416v-5.726c0-1.095-0.682-1.818-1.676-1.818c-1.085,0-1.673,0.723-1.673,1.818v5.726
+                c0,4.216,1.058,8.601,3.621,12.013c2.395,3.341,6.102,7.209,10.159,11.907c5.607,9.912,13.891,19.751,13.891,36.459
+                c0,13.481-7.89,25.469-15.775,25.469c-4.447,0-15.775-6.693-15.775-25.469v-5.132c0-6.277-2.991-12.121-5.862-16.608
+                c-15.329-17.161-21.465-35.813-21.465-65.935v-45.697C243.196,99.026,252.882,68.686,252.882,68.686z" />
+                        </svg>
+                    </div>
+                </div>
                 </div>
     
     
@@ -1651,87 +1722,100 @@ async function initProductPage() {
   const btnUpdate = $("#btn-save");
   const btnAdd = $("#btn-add");
   btnUpdate.addEventListener("click", async (e) => {
-    // Lấy giá trị từ các trường nhập liệu
-    let maSanPham = document.getElementById("maSP").value;
-    let tenSP = document.getElementById("tenSP").value;
-    let thuongHieu = document.getElementById("thuongHieu").value;
-    let pin = document.getElementById("pin").value;
-    let camTruoc = document.getElementById("camTruoc").value;
-    let camSau = document.getElementById("camSau").value;
-    let heDieuHanh = document.getElementById("heDieuHanh").value;
-    let xuatXu = document.getElementById("xuatSu").value;
-    let thoiGianBaoHanh = document.getElementById("baoHanh").value;
-    let hinhAnh = document.getElementById("hinhAnh").value;
-    let trangThai = document.getElementById("trangThai").value;
+    // Hiển thị thông báo xác nhận trước khi thực hiện cập nhật
+    const result = await Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: "Don't save",
+    });
 
-    // Kiểm tra dữ liệu trước khi gửi đi
-    if (
-      !maSanPham ||
-      !tenSP ||
-      !thuongHieu ||
-      !camTruoc ||
-      !camSau ||
-      !heDieuHanh ||
-      !xuatXu ||
-      !thoiGianBaoHanh ||
-      !hinhAnh ||
-      !trangThai
-    ) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
-      return;
-    }
+    if (result.isConfirmed) {
+      // Lấy giá trị từ các trường nhập liệu
+      let maSanPham = document.getElementById("maSP").value;
+      let tenSP = document.getElementById("tenSP").value;
+      let thuongHieu = document.getElementById("thuongHieu").value;
+      let pin = document.getElementById("pin").value;
+      let camTruoc = document.getElementById("camTruoc").value;
+      let camSau = document.getElementById("camSau").value;
+      let heDieuHanh = document.getElementById("heDieuHanh").value;
+      let xuatXu = document.getElementById("xuatSu").value;
+      let thoiGianBaoHanh = document.getElementById("baoHanh").value;
+      let hinhAnh = document.getElementById("hinhAnh").value;
+      let trangThai = document.getElementById("trangThai").value;
 
-    // Tạo đối tượng dữ liệu
-    const data = {
-      maSP: maSanPham,
-      tenSP: tenSP,
-      hinhAnh: hinhAnh,
-      thuongHieu: thuongHieu,
-      pin: pin,
-      camTruoc: camTruoc,
-      camSau: camSau,
-      heDieuHanh: heDieuHanh,
-      xuatXu: xuatXu,
-      thoiGianBaoHanh: thoiGianBaoHanh,
-      trangThai: trangThai,
-    };
-
-    console.log("data: ", data);
-
-    // Gọi API để cập nhật khuyến mãi
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/update-sanpham",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+      // Kiểm tra dữ liệu trước khi gửi đi
+      if (
+        !maSanPham ||
+        !tenSP ||
+        !thuongHieu ||
+        !camTruoc ||
+        !camSau ||
+        !heDieuHanh ||
+        !xuatXu ||
+        !thoiGianBaoHanh ||
+        !hinhAnh ||
+        !trangThai
+      ) {
+        Swal.fire("Vui lòng điền đầy đủ các thông tin.", "", "warning");
+        return;
       }
 
-      // Xử lý phản hồi từ API (nếu cần)
-      const result = await response.json();
-      console.log("Cập nhật thành công:", result);
+      // Tạo đối tượng dữ liệu
+      const data = {
+        maSP: maSanPham,
+        tenSP: tenSP,
+        hinhAnh: hinhAnh,
+        thuongHieu: thuongHieu,
+        pin: pin,
+        camTruoc: camTruoc,
+        camSau: camSau,
+        heDieuHanh: heDieuHanh,
+        xuatXu: xuatXu,
+        thoiGianBaoHanh: thoiGianBaoHanh,
+        trangThai: trangThai,
+      };
 
-      // Thông báo cập nhật thành công
-      alert("Cập nhật sản phẩm thành công!");
+      console.log("data: ", data);
 
-      // Reload lại trang
-    } catch (error) {
-      console.error("Cập nhật thất bại:", error);
-      alert("Có lỗi xảy ra khi cập nhật khuyến mãi!");
+      // Gọi API để cập nhật sản phẩm
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/update-sanpham",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi cập nhật sản phẩm");
+        }
+
+        // Xử lý phản hồi từ API
+        const result = await response.json();
+        console.log("Cập nhật thành công:", result);
+
+        // Thông báo cập nhật thành công
+        Swal.fire("Cập nhật sản phẩm thành công!", "", "success");
+
+        // Reload lại trang nếu cần
+        // location.reload(); // Nếu cần tải lại trang
+      } catch (error) {
+        console.error("Cập nhật thất bại:", error);
+        Swal.fire("Có lỗi xảy ra khi cập nhật sản phẩm!", "", "error");
+      }
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
     }
   });
+
   btnAdd.addEventListener("click", async (e) => {
     e.preventDefault();
-
-    // Lấy giá trị từ các trường nhập liệu
     let tenSP = document.getElementById("tenSP").value;
     let thuongHieu = document.getElementById("thuongHieu").value;
     let pin = document.getElementById("pin").value;
@@ -1756,86 +1840,103 @@ async function initProductPage() {
       !hinhAnh ||
       !trangThai
     ) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire("Vui lòng điền đầy đủ các thông tin.");
       return;
     }
+    // Hiển thị xác nhận với SweetAlert
+    Swal.fire({
+      title: "Xác nhận thêm sản phẩm?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: "Don't save",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Nếu người dùng chọn "Save"
+        Swal.fire("Saving...", "", "info");
 
-    // Tạo đối tượng dữ liệu
-    const data = {
-      tenSP,
-      thuongHieu,
-      pin,
-      camTruoc,
-      camSau,
-      heDieuHanh,
-      xuatXu,
-      thoiGianBaoHanh,
-      hinhAnh,
-      trangThai,
-    };
+        // Lấy giá trị từ các trường nhập liệu
 
-    console.log("data: ", data);
+        // Tạo đối tượng dữ liệu
+        const data = {
+          tenSP,
+          thuongHieu,
+          pin,
+          camTruoc,
+          camSau,
+          heDieuHanh,
+          xuatXu,
+          thoiGianBaoHanh,
+          hinhAnh,
+          trangThai,
+        };
 
-    // Gọi API để thêm sản phẩm
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/add-phone",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+        console.log("data: ", data);
+
+        // Gọi API để thêm sản phẩm
+        try {
+          const response = await fetch(
+            "http://localhost:8080/phonestore/add-phone",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Có lỗi xảy ra khi thêm sản phẩm");
+          }
+
+          // Xử lý phản hồi từ API
+          const result = await response.json();
+          console.log("Thêm thành công:", result);
+
+          // Kiểm tra nếu dữ liệu trả về hợp lệ
+          // if (result && result.product) {
+          //   // Thêm sản phẩm mới vào bảng
+          //   const table = document.getElementById("product-table");
+          //   const newRow = table.insertRow();
+
+          //   // Thêm các ô (td) vào hàng mới
+          //   newRow.innerHTML = `
+          //   <tr>
+          //     <td>${result.product.maSP}</td>
+          //     <td>${result.product.tenSP}</td>
+          //     <td>${result.product.thuongHieu}</td>
+          //     <td>${result.product.pin}</td>
+          //     <td>${result.product.camTruoc}</td>
+          //     <td>${result.product.camSau}</td>
+          //     <td>${result.product.heDieuHanh}</td>
+          //     <td>${result.product.xuatXu}</td>
+          //     <td>${result.product.thoiGianBaoHanh}</td>
+          //     <td>${result.product.hinhAnh}</td>
+          //     <td>${result.product.trangThai}</td>
+          //     <td>
+          //       <button
+          //         id="btn-edit"
+          //         onclick="editSanPham('${result.product.maSP}')"
+          //         class="product-table__update-btn product-table-btn"
+          //       >
+          //         Sửa
+          //       </button>
+          //     </td>
+          //     </tr>
+          //   `;
+          // }
+
+          // Thông báo thành công
+          Swal.fire("Thêm sản phẩm thành công!", "", "success");
+        } catch (error) {
+          console.error("Có lỗi xảy ra:", error);
+          Swal.fire("Sản phẩm đã tồn tại!", "", "error");
         }
-      );
-
-      if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi thêm sản phẩm");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
       }
-
-      // Xử lý phản hồi từ API
-      const result = await response.json();
-      console.log("Thêm thành công:", result);
-
-      // Kiểm tra nếu dữ liệu trả về hợp lệ
-      if (result && result.product) {
-        // Thêm sản phẩm mới vào bảng
-        const table = document.getElementById("product-table");
-        const newRow = table.insertRow();
-
-        // Thêm các ô (td) vào hàng mới
-        newRow.innerHTML = `
-          <tr>
-            <td>${result.product.maSP}</td>
-            <td>${result.product.tenSP}</td>
-            <td>${result.product.thuongHieu}</td>
-            <td>${result.product.pin}</td>
-            <td>${result.product.camTruoc}</td>
-            <td>${result.product.camSau}</td>
-            <td>${result.product.heDieuHanh}</td>
-            <td>${result.product.xuatXu}</td>
-            <td>${result.product.thoiGianBaoHanh}</td>
-            <td>${result.product.hinhAnh}</td>
-            <td>${result.product.trangThai}</td>
-            <td>
-              <button
-                id="btn-edit"
-                onclick="editSanPham('${result.product.maSP}')"
-                class="product-table__update-btn product-table-btn"
-              >
-                Sửa
-              </button>
-            </td>
-          </tr>
-        `;
-      }
-
-      // Thông báo thành công
-      alert("Thêm sản phẩm thành công!");
-    } catch (error) {
-      console.error("Có lỗi xảy ra:", error);
-      alert("Có lỗi xảy ra khi thêm sản phẩm!");
-    }
+    });
   });
 }
 
@@ -1915,46 +2016,6 @@ const huyProduct = () => {
 };
 
 // PHIEN BAN
-async function initPhienBanPage() {
-  const searchInput = document.getElementById("query");
-
-  // Khai báo biến sanpham ở phạm vi toàn cục trong hàm
-  let sanpham = [];
-
-  // Lắng nghe sự kiện input để tìm kiếm
-  searchInput.addEventListener("input", function (event) {
-    const searchTerm = event.target.value.toLowerCase(); // Lấy giá trị nhập vào và chuyển thành chữ thường
-    console.log("Giá trị nhập:", searchTerm);
-
-    // Lọc sản phẩm và phiên bản chỉ dựa trên maPB
-    const filteredProducts = sanpham.filter((sp) => {
-      // Kiểm tra nếu có bất kỳ phiên bản nào khớp với maPB
-      const matchesPhienBan =
-        sp.phienbansps &&
-        sp.phienbansps.some((pb) => pb.maPB.toLowerCase().includes(searchTerm));
-
-      console.log("matchesPhienBan: ", matchesPhienBan);
-      return matchesPhienBan; // Chỉ trả về sản phẩm có phiên bản phù hợp
-    });
-
-    // Hiển thị lại danh sách sản phẩm sau khi lọc
-    renderProducts(filteredProducts, searchTerm);
-  });
-
-  try {
-    const response = await fetch("http://localhost:8080/phonestore/get-phone");
-    if (!response.ok) throw new Error("Lỗi khi lấy dữ liệu sản phẩm");
-
-    const data = await response.json();
-    sanpham = data.data; // Gán dữ liệu vào biến sanpham toàn cục
-    console.log("sanpham: ", sanpham);
-
-    // Hiển thị danh sách sản phẩm ban đầu
-    renderProducts(sanpham);
-  } catch (error) {
-    console.error("Lỗi khi gọi API sản phẩm:", error);
-  }
-}
 
 async function initPhienBanPage() {
   const searchInput = document.getElementById("query");
@@ -2048,6 +2109,8 @@ function renderProducts(sanpham, searchTerm = "") {
     let giaGiam = document.getElementById("giaBan").value;
     let giaBan = document.getElementById("giaGiam").value;
     let trangThai = document.getElementById("trangThai").value;
+
+    // Kiểm tra đầu vào, nếu thiếu thông tin thì thông báo
     if (
       !maPB ||
       !mauSac ||
@@ -2058,54 +2121,82 @@ function renderProducts(sanpham, searchTerm = "") {
       !giaBan ||
       !trangThai
     ) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire({
+        title: "Thiếu thông tin",
+        text: "Vui lòng điền đầy đủ các thông tin.",
+        icon: "warning",
+      });
       return;
     }
 
-    // Tạo đối tượng dữ liệu
-    const data = {
-      maPB: maPB,
-      mauSac: mauSac,
-      RAM: ram,
-      ROM: rom,
-      soLuong: soLuong,
-      giaGiam: giaGiam,
-      giaBan: giaBan,
-      trangThai: trangThai,
-    };
+    // Hiển thị hộp thoại xác nhận trước khi thực hiện lưu
+    const result = await Swal.fire({
+      title: "Bạn có chắc chắn muốn lưu thay đổi?",
+      text: "Các thay đổi sẽ được lưu vĩnh viễn!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Lưu",
+      cancelButtonText: "Hủy",
+    });
 
-    console.log("data: ", data);
+    // Nếu người dùng chọn "Lưu"
+    if (result.isConfirmed) {
+      const data = {
+        maPB: maPB,
+        mauSac: mauSac,
+        RAM: ram,
+        ROM: rom,
+        soLuong: soLuong,
+        giaGiam: giaGiam,
+        giaBan: giaBan,
+        trangThai: trangThai,
+      };
 
-    // Gọi API để cập nhật khuyến mãi
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/update-phienban",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data), // Chuyển đối tượng data thành chuỗi JSON
+      // Gọi API để cập nhật phiên bản
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/update-phienban",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Có lỗi xảy ra khi cập nhật phiên bản");
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Có lỗi xảy ra khi cập nhật khuyến mãi");
+        // Xử lý phản hồi từ API
+        const result = await response.json();
+        console.log("Cập nhật thành công:", result);
+
+        // Thông báo cập nhật thành công
+        Swal.fire({
+          title: "Thành công!",
+          text: "Cập nhật phiên bản thành công!",
+          icon: "success",
+        });
+      } catch (error) {
+        console.error("Cập nhật thất bại:", error);
+
+        // Thông báo lỗi
+        Swal.fire({
+          title: "Có lỗi xảy ra",
+          text: "Có lỗi xảy ra khi cập nhật phiên bản.",
+          icon: "error",
+        });
       }
-
-      // Xử lý phản hồi từ API (nếu cần)
-      const result = await response.json();
-      console.log("Cập nhật thành công:", result);
-
-      // Thông báo cập nhật thành công
-      alert("Cập nhật phiên bản thành công!");
-    } catch (error) {
-      console.error("Cập nhật thất bại:", error);
-      alert("Có lỗi xảy ra khi cập nhật phiên bản!");
+    } else {
+      // Nếu người dùng chọn "Hủy"
+      Swal.fire("Hủy thay đổi", "Các thay đổi không được lưu.", "info");
     }
   });
+
   btnAdd.addEventListener("click", async (e) => {
-    e.preventDefault(); // Ngăn chặn reload trang mặc định
+    // Hiển thị thông báo xác nhận
     let maPB = document.getElementById("maPB").value;
     let maSP = document.getElementById("maSP").value;
     let mauSac = document.getElementById("mauSac").value;
@@ -2115,6 +2206,7 @@ function renderProducts(sanpham, searchTerm = "") {
     let giaGiam = document.getElementById("giaBan").value;
     let giaBan = document.getElementById("giaGiam").value;
     let trangThai = document.getElementById("trangThai").value;
+
     // Kiểm tra dữ liệu trước khi gửi đi
     if (
       !maSP ||
@@ -2126,82 +2218,95 @@ function renderProducts(sanpham, searchTerm = "") {
       !giaBan ||
       !trangThai
     ) {
-      alert("Vui lòng điền đầy đủ các thông tin.");
+      Swal.fire("Vui lòng điền đầy đủ các thông tin.");
       return;
     }
+    const result = await Swal.fire({
+      title: "Thêm phiên bản mới?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    });
 
-    // Tạo đối tượng dữ liệu
-    const data = {
-      maSP: maSP,
-      mauSac: mauSac,
-      RAM: ram,
-      ROM: rom,
-      soLuong: soLuong,
-      giaGiam: giaGiam,
-      giaBan: giaBan,
-      trangThai: trangThai,
-      maPB: maPB,
-    };
+    // Nếu người dùng xác nhận "Save", thực hiện các bước tiếp theo
+    if (result.isConfirmed) {
+      e.preventDefault(); // Ngăn chặn reload trang mặc định
 
-    console.log("data: ", data);
+      // Tạo đối tượng dữ liệu
+      const data = {
+        maSP: maSP,
+        mauSac: mauSac,
+        RAM: ram,
+        ROM: rom,
+        soLuong: soLuong,
+        giaGiam: giaGiam,
+        giaBan: giaBan,
+        trangThai: trangThai,
+      };
 
-    // Gọi API để thêm nhân viên
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/add-phienban",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+      console.log("data: ", data);
+
+      // Gọi API để thêm phiên bản
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/add-phienban",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          // Hiển thị lỗi cụ thể từ API
+          if (result.message) {
+            alert("Phiên bản đã tồn tại!!!"); // Hiển thị thông báo lỗi từ server
+          } else {
+            throw new Error("Có lỗi xảy ra khi thêm phiên bản");
+          }
+          return;
         }
-      );
 
-      const result = await response.json();
+        // Xử lý phản hồi từ API (nếu cần)
+        console.log("Thêm thành công:", result);
 
-      if (!response.ok) {
-        // Hiển thị lỗi cụ thể từ API
-        if (result.message) {
-          alert("Phiên bản đã tồn tại!!!"); // Hiển thị thông báo lỗi từ server
-        } else {
-          throw new Error("Có lỗi xảy ra khi thêm nhân viên");
+        // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
+        if (result && result.data) {
+          // Thêm hàng mới vào bảng
+          const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+          const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+          // Thêm các ô (td) vào hàng mới
+          newRow.innerHTML = `
+            <td>${result.data.maPB}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>${result.data.mauSac}</td>
+            <td>${result.data.RAM}</td>
+            <td>${result.data.ROM}</td>
+            <td>${result.data.soLuong}</td>
+            <td>${result.data.giaGiam}</td>
+            <td>${result.data.giaBan}</td>
+            <td>${result.data.trangThai}</td>
+          `;
         }
-        return;
+
+        console.log("Thêm thành công:", result);
+
+        // Cập nhật bảng (nếu cần)
+        alert("Thêm phiên bản thành công!");
+      } catch (error) {
+        console.error("Có lỗi xảy ra:", error);
+        alert("Đã xảy ra lỗi trong quá trình xử lý!");
       }
-      // Xử lý phản hồi từ API (nếu cần)
-
-      console.log("Thêm thành công:", result);
-
-      // Kiểm tra nếu dữ liệu trả về đúng cấu trúc
-      if (result && result.data) {
-        // Thêm hàng mới vào bảng
-        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
-        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
-
-        // Thêm các ô (td) vào hàng mới
-        newRow.innerHTML = `
-        <td>${result.data.maPB}</td>
-        <td></td>
-                     <td></td>
-                     <td></td>
-                     <td>${result.data.mauSac}</td>
-                     <td>${result.data.RAM}</td>
-                     <td>${result.data.ROM}</td>
-                     <td>${result.data.soLuong}</td>
-                     <td>${result.data.giaGiam}</td>
-                     <td>${result.data.giaBan}</td>
-                     <td>${result.data.trangThai}</td>
-                     `;
-      }
-
-      console.log("Thêm thành công:", result);
-
-      // Cập nhật bảng (nếu cần)
-      alert("Thêm phiên bản thành công!");
-    } catch (error) {
-      console.error("Có lỗi xảy ra:", error);
-      alert("Đã xảy ra lỗi trong quá trình xử lý!");
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
     }
   });
 }
@@ -2230,6 +2335,7 @@ const addPhienBan = async (maSP) => {
 };
 const editPhienBan = async (maPB) => {
   console.log("maPB: ", maPB);
+  document.getElementById("maSP").disabled = true;
   document.getElementById("maSP").value = "";
   let row = document.querySelector(`tr[data-value='${maPB}']`);
   // Lấy các giá trị từ các ô trong dòng
@@ -2271,6 +2377,7 @@ const editPhienBan = async (maPB) => {
 };
 
 function huyPhienBan() {
+  document.getElementById("maSP").disabled = false;
   document.getElementById("maPB").value = "";
   document.getElementById("maSP").value = "";
   document.getElementById("mauSac").value = "";
@@ -2349,25 +2456,15 @@ async function initUserPage() {
 
   // Xử lý cập nhật tài khoản
   btnUpdate.addEventListener("click", async () => {
-    // Hiển thị thông báo ban đầu
-    Swal.fire({
-      title: "Đang xử lý...",
-      text: "Vui lòng đợi trong giây lát.",
-      icon: "info",
-      allowOutsideClick: false,
-      showConfirmButton: false,
-    });
-
-    const data = {
-      tkId: document.getElementById("maTk").value,
-      tenDangNhap: document.getElementById("tenDangNhap").value,
-      matKhau: document.getElementById("password").value,
-      quyen: document.getElementById("user-permission").value,
-      trangThai: document.getElementById("user-status").value,
-    };
+    // Lấy dữ liệu từ các trường
+    let tkId = document.getElementById("maTk").value;
+    let matKhau = document.getElementById("password").value;
+    let tenDangNhap = document.getElementById("tenDangNhap").value;
+    let quyen = document.getElementById("user-permission").value;
+    let trangThai = document.getElementById("user-status").value;
 
     // Kiểm tra nếu có trường nào trống
-    if (Object.values(data).some((val) => !val)) {
+    if (!tkId || !matKhau || !tenDangNhap || !quyen || !trangThai) {
       Swal.fire({
         title: "Thiếu thông tin",
         text: "Vui lòng điền đầy đủ thông tin.",
@@ -2376,73 +2473,107 @@ async function initUserPage() {
       return;
     }
 
-    try {
-      const response = await fetch(
-        "http://localhost:8080/user/update-taikhoanadmin",
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+    // Kiểm tra mật khẩu (đảm bảo mật khẩu có độ dài tối thiểu hoặc các điều kiện khác nếu cần)
+    if (matKhau.length < 6) {
+      Swal.fire({
+        title: "Lỗi mật khẩu",
+        text: "Mật khẩu phải có ít nhất 6 ký tự.",
+        icon: "warning",
+      });
+      return;
+    }
+
+    // Hiển thị thông báo xác nhận trước khi tiếp tục
+    const result = await Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: "Don't save",
+    });
+
+    // Nếu người dùng xác nhận thay đổi
+    if (result.isConfirmed) {
+      // Tạo đối tượng dữ liệu gửi lên server
+      const data = {
+        tkId: tkId,
+        tenDangNhap: tenDangNhap,
+        matKhau: matKhau,
+        quyen: quyen,
+        trangThai: trangThai,
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/user/update-taikhoanadmin",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Lỗi khi cập nhật tài khoản");
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Lỗi khi cập nhật tài khoản");
+        // Thông báo thành công
+        Swal.fire({
+          title: "Thành công!",
+          text: "Cập nhật tài khoản thành công!",
+          icon: "success",
+        }).then(() => {
+          window.location.reload(); // Reload trang sau khi người dùng đóng thông báo
+        });
+      } catch (error) {
+        console.error("Cập nhật thất bại:", error);
+
+        // Thông báo lỗi
+        Swal.fire({
+          title: "Thất bại!",
+          text: "Có lỗi xảy ra khi cập nhật tài khoản.",
+          icon: "error",
+        });
       }
-
-      // Thông báo thành công
-      Swal.fire({
-        title: "Thành công!",
-        text: "Cập nhật tài khoản thành công!",
-        icon: "success",
-      }).then(() => {
-        window.location.reload(); // Reload trang sau khi người dùng đóng thông báo
-      });
-    } catch (error) {
-      console.error("Cập nhật thất bại:", error);
-
-      // Thông báo lỗi
-      Swal.fire({
-        title: "Thất bại!",
-        text: "Có lỗi xảy ra khi cập nhật tài khoản.",
-        icon: "error",
-      });
+    } else if (result.isDenied) {
+      // Nếu người dùng chọn không lưu
+      Swal.fire("Changes are not saved", "", "info");
     }
   });
 
   // Xử lý thêm tài khoản mới
-  btnAdd.addEventListener("click", async () => {
-    const data = {
-      tenDangNhap: document.getElementById("tenDangNhap").value,
-      matKhau: document.getElementById("password").value,
-      quyen: document.getElementById("user-permission").value,
-      trangThai: document.getElementById("user-status").value,
-    };
+  // btnAdd.addEventListener("click", async () => {
+  //   const data = {
+  //     tenDangNhap: document.getElementById("tenDangNhap").value,
+  //     matKhau: document.getElementById("password").value,
+  //     quyen: document.getElementById("user-permission").value,
+  //     trangThai: document.getElementById("user-status").value,
+  //   };
 
-    if (
-      document.getElementById("maTk").value ||
-      Object.values(data).some((val) => !val)
-    ) {
-      alert("Mã tài khoản không được nhập hoặc thiếu thông tin!");
-      return;
-    }
+  //   if (
+  //     document.getElementById("maTk").value ||
+  //     Object.values(data).some((val) => !val)
+  //   ) {
+  //     alert("Mã tài khoản không được nhập hoặc thiếu thông tin!");
+  //     return;
+  //   }
 
-    try {
-      const response = await fetch("http://localhost:8080/user/add-taikhoan", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) throw new Error("Lỗi khi thêm tài khoản");
-      const result = await response.json();
-      taiKhoan.push(result.account); // Cập nhật danh sách
-      renderProducts(taiKhoan); // Hiển thị lại danh sách
-      alert("Thêm tài khoản thành công!");
-    } catch (error) {
-      console.error("Thêm tài khoản thất bại:", error);
-      alert("Có lỗi xảy ra khi thêm tài khoản.");
-    }
-  });
+  //   try {
+  //     const response = await fetch("http://localhost:8080/user/add-taikhoan", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(data),
+  //     });
+  //     if (!response.ok) throw new Error("Lỗi khi thêm tài khoản");
+  //     const result = await response.json();
+  //     taiKhoan.push(result.account); // Cập nhật danh sách
+  //     renderProducts(taiKhoan); // Hiển thị lại danh sách
+  //     alert("Thêm tài khoản thành công!");
+  //   } catch (error) {
+  //     console.error("Thêm tài khoản thất bại:", error);
+  //     alert("Có lỗi xảy ra khi thêm tài khoản.");
+  //   }
+  // });
 }
 
 const editTaiKhoan = async (tkId) => {
@@ -2575,17 +2706,37 @@ async function initNhaCungCapPage() {
   const btnAdd = document.getElementById("btn-add");
 
   btnUpdate.addEventListener("click", async (e) => {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của nút (nếu có)
     // Lấy dữ liệu từ các trường nhập liệu
-    let maNCC = document.getElementById("maNCC").value;
-    let tenNCC = document.getElementById("tenNCC").value;
-    let diaChi = document.getElementById("diaChi").value;
-    let sdt = document.getElementById("sdt").value;
-    let email = document.getElementById("email").value;
-    let trangThai = document.getElementById("trangThai").value;
+    let maNCC = document.getElementById("maNCC").value.trim();
+    let tenNCC = document.getElementById("tenNCC").value.trim();
+    let diaChi = document.getElementById("diaChi").value.trim();
+    let sdt = document.getElementById("sdt").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let trangThai = document.getElementById("trangThai").value.trim();
 
     // Kiểm tra dữ liệu nhập
     if (!maNCC || !tenNCC || !diaChi || !sdt || !email || !trangThai) {
       Swal.fire("Lỗi", "Vui lòng điền đầy đủ các thông tin.", "error");
+      return;
+    }
+
+    // Hiển thị hộp thoại xác nhận trước khi xử lý
+    const result = await Swal.fire({
+      title: "Bạn có muốn lưu thay đổi?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Lưu",
+      denyButtonText: "Không lưu",
+    });
+
+    // Xử lý kết quả xác nhận
+    if (result.isDenied) {
+      Swal.fire("Thông báo", "Thay đổi chưa được lưu.", "info");
+      return;
+    }
+    if (result.isDismissed) {
+      // Người dùng nhấn Cancel hoặc đóng hộp thoại
       return;
     }
 
@@ -2603,6 +2754,7 @@ async function initNhaCungCapPage() {
       return;
     }
 
+    // Chuẩn bị dữ liệu để gửi
     const data = {
       maNCC,
       tenNCC,
@@ -2660,16 +2812,34 @@ async function initNhaCungCapPage() {
   }
 
   btnAdd.addEventListener("click", async (e) => {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của nút (nếu trong form)
     // Lấy dữ liệu từ các trường nhập liệu
-    let tenNCC = document.getElementById("tenNCC").value;
-    let diaChi = document.getElementById("diaChi").value;
-    let sdt = document.getElementById("sdt").value;
-    let email = document.getElementById("email").value;
-    let trangThai = document.getElementById("trangThai").value;
-
+    let tenNCC = document.getElementById("tenNCC").value.trim();
+    let diaChi = document.getElementById("diaChi").value.trim();
+    let sdt = document.getElementById("sdt").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let trangThai = document.getElementById("trangThai").value.trim();
     // Kiểm tra dữ liệu nhập
     if (!tenNCC || !diaChi || !sdt || !email || !trangThai) {
       Swal.fire("Lỗi", "Vui lòng điền đầy đủ các thông tin.", "error");
+      return;
+    }
+    // Hiển thị hộp thoại xác nhận trước khi thực hiện
+    const result = await Swal.fire({
+      title: "Bạn có muốn lưu nhà cung cấp này?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Lưu",
+      denyButtonText: "Không lưu",
+    });
+
+    // Xử lý kết quả xác nhận
+    if (result.isDenied) {
+      Swal.fire("Thông báo", "Thay đổi chưa được lưu.", "info");
+      return;
+    }
+    if (result.isDismissed) {
+      // Người dùng nhấn Cancel hoặc đóng hộp thoại
       return;
     }
 
@@ -2732,6 +2902,34 @@ async function initNhaCungCapPage() {
       );
     }
   });
+
+  // Hàm thêm dòng mới vào bảng
+  function addTableRow(data) {
+    const table = document.getElementById("tableNCC"); // Thay ID bảng của bạn
+    const newRow = table.insertRow(-1); // Thêm dòng mới ở cuối bảng
+
+    newRow.innerHTML = `
+      <td>${data.maNCC}</td>
+      <td>${data.tenNCC}</td>
+      <td>${data.diaChi}</td>
+      <td>${data.sdt}</td>
+      <td>${data.email}</td>
+      <td>${data.trangThai}</td>
+      <td>
+        <button class="btn btn-primary btn-edit">Sửa</button>
+        <button class="btn btn-danger btn-delete">Xóa</button>
+      </td>
+    `;
+  }
+
+  // Hàm xóa dữ liệu trong form
+  function clearInputFields() {
+    document.getElementById("tenNCC").value = "";
+    document.getElementById("diaChi").value = "";
+    document.getElementById("sdt").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("trangThai").value = "";
+  }
 
   // Hàm cập nhật giao diện
   function addTableRow(ncc) {
@@ -2823,7 +3021,7 @@ const huyNhaCungCap = () => {
 
 async function initNhanVienPage() {
   const searchInput = document.getElementById("query");
-
+  document.getElementById("maTK").disabled = true;
   // Khai báo biến taiKhoan ở phạm vi toàn cục
   let taiKhoan = [];
 
@@ -2867,9 +3065,229 @@ async function initNhanVienPage() {
 
   const btnUpdate = $("#btn-save");
   const btnAdd = $("#btn-add");
+  btnAdd.addEventListener("click", async () => {
+    let maNV = document.getElementById("maNv").value;
+    let hoTen = document.getElementById("tenNv").value;
+    let email = document.getElementById("email").value;
+    let sdt = document.getElementById("phone").value;
+    let ngaySinh = document.getElementById("date").value;
+    let gioiTinh = document.getElementById("gioiTinh").value;
+    let diaChi = document.getElementById("diaChi").value;
+    let quyen = document.getElementById("user-permission").value;
+    let trangThai = document.getElementById("user-status").value;
+    let tenDangNhap = document.getElementById("taiKhoan").value;
+    let matKhau = document.getElementById("matKhau").value;
 
-  // Thêm các sự kiện xử lý cập nhật và thêm nhân viên như đã có trong mã của bạn...
-  // (Đoạn mã xử lý nút cập nhật và thêm nhân viên sẽ không thay đổi)
+    // Hàm kiểm tra email hợp lệ
+    const isValidEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
+    };
+
+    // Kiểm tra dữ liệu trước khi gửi
+    if (
+      !hoTen ||
+      !email ||
+      !sdt ||
+      !ngaySinh ||
+      !gioiTinh ||
+      !diaChi ||
+      !quyen ||
+      !trangThai ||
+      !tenDangNhap ||
+      !matKhau
+    ) {
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin.", "error");
+      return;
+    }
+
+    // Kiểm tra email hợp lệ
+    if (!isValidEmail(email)) {
+      Swal.fire("Lỗi", "Email không hợp lệ. Vui lòng kiểm tra lại!", "error");
+      return;
+    }
+
+    // Kiểm tra số điện thoại
+    if (!/^\d{10,12}$/.test(sdt)) {
+      Swal.fire(
+        "Lỗi",
+        "Số điện thoại phải là số và có độ dài từ 10 đến 12 ký tự.",
+        "error"
+      );
+      return;
+    }
+
+    // Hiển thị hộp thoại xác nhận
+    Swal.fire({
+      title: "Bạn có chắc muốn thêm nhân viên này?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Thêm",
+      denyButtonText: `Không thêm`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Tạo đối tượng dữ liệu gửi lên server
+        let data = {
+          hoTen,
+          ngaySinh,
+          gioiTinh,
+          diaChi,
+          sdt,
+          email,
+          vaiTro: quyen, // Sử dụng vai trò từ form
+          trangThai,
+          tenDangNhap,
+          matKhau,
+        };
+
+        try {
+          // Gửi yêu cầu API tới backend để thêm nhân viên
+          const response = await fetch(
+            "http://localhost:8080/user/add-nhanvien",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data), // Gửi dữ liệu đã chuẩn bị
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Không thể thêm nhân viên. Vui lòng thử lại.");
+          }
+
+          const result = await response.json();
+          if (result.success) {
+            Swal.fire("Thành công", "Thêm nhân viên thành công!", "success");
+            // Có thể thêm code để cập nhật giao diện hoặc làm mới dữ liệu sau khi thêm thành công.
+          } else {
+            Swal.fire(
+              "Lỗi",
+              result.message || "Có lỗi xảy ra, vui lòng thử lại.",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error("Lỗi khi gửi yêu cầu thêm nhân viên:", error);
+          Swal.fire(
+            "Lỗi",
+            "Không thể thêm nhân viên. Vui lòng kiểm tra định dạng email.",
+            "error"
+          );
+        }
+      } else if (result.isDenied) {
+        // Nếu người dùng chọn "Không thêm"
+        Swal.fire("Đã hủy", "Thông tin không được lưu lại.", "info");
+      }
+    });
+  });
+
+  btnUpdate.addEventListener("click", async () => {
+    let maNV = document.getElementById("maNv").value;
+    let hoTen = document.getElementById("tenNv").value;
+    let email = document.getElementById("email").value;
+    let sdt = document.getElementById("phone").value;
+    let ngaySinh = document.getElementById("date").value;
+    let gioiTinh = document.getElementById("gioiTinh").value;
+    let diaChi = document.getElementById("diaChi").value;
+    let quyen = document.getElementById("user-permission").value;
+    let trangThai = document.getElementById("user-status").value;
+    let tenDangNhap = document.getElementById("taiKhoan").value;
+    let matKhau = document.getElementById("matKhau").value;
+
+    // Hàm kiểm tra email hợp lệ
+    const isValidEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
+    };
+
+    // Kiểm tra dữ liệu trước khi gửi
+    if (
+      !maNV ||
+      !hoTen ||
+      !email ||
+      !sdt ||
+      !ngaySinh ||
+      !gioiTinh ||
+      !diaChi
+    ) {
+      Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin", "error");
+      return;
+    }
+
+    // Kiểm tra email hợp lệ
+    if (!isValidEmail(email)) {
+      Swal.fire("Lỗi", "Email không hợp lệ. Vui lòng kiểm tra lại!", "error");
+      return;
+    }
+
+    // Tạo đối tượng dữ liệu
+    let dataTK = {
+      maNV,
+      hoTen,
+      ngaySinh,
+      gioiTinh,
+      diaChi,
+      sdt,
+      email,
+      tenDangNhap,
+      matKhau, // Có thể mã hóa mật khẩu nếu cần
+      quyen,
+      trangThai,
+    };
+
+    console.log("dataTK: ", dataTK);
+
+    // Hiển thị hộp thoại xác nhận trước khi thực hiện cập nhật
+    Swal.fire({
+      title: "Bạn có chắc chắn muốn cập nhật tài khoản này?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Cập nhật",
+      denyButtonText: `Không cập nhật`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Gửi dữ liệu lên server khi người dùng chọn "Cập nhật"
+        try {
+          const response = await fetch(
+            `http://localhost:8080/user/update-nhanvien`,
+            {
+              method: "PUT", // Sử dụng phương thức PUT cho cập nhật
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(dataTK), // Chuyển dữ liệu thành JSON
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Lỗi khi cập nhật tài khoản");
+          }
+
+          const result = await response.json();
+
+          // Hiển thị thông báo thành công
+          Swal.fire("Thành công", "Cập nhật tài khoản thành công!", "success");
+          console.log("Kết quả từ server: ", result);
+        } catch (error) {
+          console.error("Lỗi khi gọi API cập nhật tài khoản: ", error);
+          Swal.fire(
+            "Lỗi",
+            "Có lỗi xảy ra khi cập nhật tài khoản. Vui lòng thử lại sau.",
+            "error"
+          );
+        }
+      } else if (result.isDenied) {
+        // Nếu người dùng chọn "Không cập nhật"
+        Swal.fire(
+          "Không cập nhật",
+          "Không có thay đổi nào được thực hiện.",
+          "info"
+        );
+      }
+    });
+  });
 }
 
 // Hàm render lại danh sách nhân viên sau khi lọc
@@ -2907,11 +3325,12 @@ const editNhanVien = async (maNV) => {
 
   // Thêm thuộc tính disabled để vô hiệu hóa input
   inputTaiKhoan.disabled = true;
-
+  document.getElementById("maTK").disabled = true;
   // let inputmatKhau = document.getElementById("matKhau");
   // inputmatKhau.disabled = true;
   // Lấy các giá trị từ các ô trong dòng
   let maNv = row.querySelector("td:nth-child(1)").textContent;
+  let maTK = row.querySelector("td:nth-child(2)").textContent;
   let hoTen = row.querySelector("td:nth-child(3)").textContent;
   let ngaySinh = row.querySelector("td:nth-child(4)").textContent;
   let gioiTinh = row.querySelector("td:nth-child(5)").textContent;
@@ -2924,6 +3343,7 @@ const editNhanVien = async (maNV) => {
   let matKhau = row.querySelector("td:nth-child(12)").textContent;
   // Điền các giá trị vào các ô nhập liệu
   document.getElementById("maNv").value = maNv;
+  document.getElementById("maTK").value = maTK;
   document.getElementById("tenNv").value = hoTen;
   document.getElementById("email").value = email;
   document.getElementById("phone").value = sdt;
@@ -3256,11 +3676,11 @@ function renderPromotion(filteredPromotions) {
 }
 const updateKM = async () => {
   // Lấy dữ liệu từ các trường
-  let maKM = document.getElementById("maKhuyenMai").value;
-  let moTa = document.getElementById("moTa").value;
-  let mucGiam = document.getElementById("mucGiam").value;
-  let trangThai = document.getElementById("trangThai").value;
-  let maNV = document.getElementById("maNv").value; // Bổ sung nếu mã nhân viên được nhập từ form
+  let maKM = document.getElementById("maKhuyenMai").value.trim();
+  let moTa = document.getElementById("moTa").value.trim();
+  let mucGiam = document.getElementById("mucGiam").value.trim();
+  let trangThai = document.getElementById("trangThai").value.trim();
+  let maNV = document.getElementById("maNv").value.trim(); // Thay đổi ID nếu cần thiết
 
   // Kiểm tra dữ liệu đầu vào
   if (!maKM || !moTa || !mucGiam || !trangThai || !maNV) {
@@ -3268,11 +3688,17 @@ const updateKM = async () => {
     return;
   }
 
+  // Kiểm tra giá trị của "mucGiam" có hợp lệ không (phải là số dương)
+  if (isNaN(mucGiam) || parseFloat(mucGiam) <= 0) {
+    Swal.fire("Lỗi", "Mức giảm phải là một số dương hợp lệ.", "error");
+    return;
+  }
+
   // Chuẩn bị object dữ liệu
   const data = {
     maKM,
     moTa,
-    mucGiam,
+    mucGiam: parseFloat(mucGiam), // Đảm bảo mức giảm là kiểu số
     trangThai,
     maNV,
   };
@@ -3280,6 +3706,21 @@ const updateKM = async () => {
   console.log("Dữ liệu gửi đi:", data);
 
   try {
+    // Hiển thị hộp thoại xác nhận
+    const confirmResult = await Swal.fire({
+      title: "Bạn có chắc chắn muốn cập nhật khuyến mãi này?",
+      text: "Hãy kiểm tra kỹ thông tin trước khi xác nhận.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    });
+
+    if (!confirmResult.isConfirmed) {
+      Swal.fire("Thông báo", "Hủy cập nhật khuyến mãi.", "info");
+      return;
+    }
+
     // Gửi yêu cầu cập nhật
     const response = await fetch(
       "http://localhost:8080/phonestore/update-khuyenmai", // Thay URL bằng endpoint thực tế
@@ -3299,14 +3740,11 @@ const updateKM = async () => {
 
     // Hiển thị thông báo thành công
     Swal.fire("Thành công", "Khuyến mãi đã được cập nhật.", "success");
-
-    // Tải lại trang hoặc cập nhật bảng nếu cần
-    window.location.reload();
   } catch (error) {
     console.error("Lỗi khi cập nhật khuyến mãi:", error);
     Swal.fire(
       "Lỗi",
-      "Đã xảy ra lỗi khi cập nhật khuyến mãi. Vui lòng thử lại.",
+      `Đã xảy ra lỗi khi cập nhật khuyến mãi: ${error.message}`,
       "error"
     );
   }
@@ -3320,8 +3758,18 @@ const addKM = async () => {
   let maNV = document.getElementById("maNv").value.trim();
 
   // Kiểm tra dữ liệu đầu vào
-  if (!moTa || !mucGiam || !trangThai || !maNV) {
-    Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin.", "error");
+  if (!moTa || mucGiam <= 0 || !trangThai || !maNV) {
+    Swal.fire(
+      "Lỗi",
+      "Vui lòng điền đầy đủ thông tin và đảm bảo mức giảm hợp lệ.",
+      "error"
+    );
+    return;
+  }
+
+  // Kiểm tra mức giảm phải là số dương
+  if (isNaN(mucGiam) || mucGiam <= 0) {
+    Swal.fire("Lỗi", "Mức giảm phải là một số dương hợp lệ.", "error");
     return;
   }
 
@@ -3336,6 +3784,21 @@ const addKM = async () => {
   console.log("Dữ liệu gửi đi:", data);
 
   try {
+    // Hiển thị hộp thoại xác nhận trước khi thêm
+    const confirmResult = await Swal.fire({
+      title: "Bạn có chắc chắn muốn thêm khuyến mãi này?",
+      text: "Hãy kiểm tra kỹ thông tin trước khi xác nhận.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    });
+
+    if (!confirmResult.isConfirmed) {
+      Swal.fire("Thông báo", "Hủy thêm khuyến mãi.", "info");
+      return;
+    }
+
     // Gửi yêu cầu thêm khuyến mãi
     const response = await fetch(
       "http://localhost:8080/phonestore/add-khuyenmai", // Thay URL bằng endpoint thực tế
@@ -3347,7 +3810,10 @@ const addKM = async () => {
     );
 
     if (!response.ok) {
-      throw new Error("Không thể thêm khuyến mãi. Vui lòng thử lại.");
+      const errorText = await response.text();
+      throw new Error(
+        errorText || "Không thể thêm khuyến mãi. Vui lòng thử lại."
+      );
     }
 
     const result = await response.json();
@@ -3356,13 +3822,13 @@ const addKM = async () => {
     // Hiển thị thông báo thành công
     Swal.fire("Thành công", "Khuyến mãi đã được thêm.", "success");
 
-    // Tải lại trang hoặc cập nhật bảng nếu cần
+    // Tải lại trang hoặc cập nhật giao diện nếu cần
     window.location.reload();
   } catch (error) {
     console.error("Lỗi khi thêm khuyến mãi:", error);
     Swal.fire(
       "Lỗi",
-      "Đã xảy ra lỗi khi thêm khuyến mãi. Vui lòng thử lại.",
+      `Đã xảy ra lỗi khi thêm khuyến mãi: ${error.message}`,
       "error"
     );
   }
@@ -3479,12 +3945,14 @@ function renderBaoHanh(data) {
     html += `
         <tr class="product-table__row" data-value="${item.maPBH}">
             <td>${item.maPBH}</td>
+            
             <td>${item.thoiGianTao}</td>
             <td>${item.tongTien}</td>
             <td>${item.trangThai}</td>
             <td>${item.maNV}</td>
             <td>${item.soSeri}</td>
             <td>${item.noiDung}</td>
+            <td>${item.maKH}</td>
             <td>
                 <button onclick="editBaoHanh('${item.maPBH}')"  class="product-table__update-btn product-table-btn">Sửa</button> 
                 <button onclick="deleteBaoHanh('${item.maPBH}')" class="product-table__delete-btn product-table-btn">Xóa</button>             
@@ -3498,7 +3966,7 @@ function renderBaoHanh(data) {
   btnUpdate.addEventListener("click", async (e) => {
     // Lấy giá trị từ các trường nhập liệu
     let maPBHEl = document.getElementById("maBaoHanh").value;
-    let thoiGianTaoEl = document.getElementById("thoiGian").value;
+
     let tongTienEl = document.getElementById("tongTien").value;
     let MaNVEl = document.getElementById("maNv").value;
     let soSeriEl = document.getElementById("soSeri").value;
@@ -3508,7 +3976,6 @@ function renderBaoHanh(data) {
     // Kiểm tra dữ liệu trước khi tiếp tục
     if (
       !maPBHEl ||
-      !thoiGianTaoEl ||
       !tongTienEl ||
       !MaNVEl ||
       !soSeriEl ||
@@ -3533,7 +4000,6 @@ function renderBaoHanh(data) {
         // Tạo đối tượng dữ liệu
         const data = {
           maPBH: maPBHEl,
-          thoiGianTao: thoiGianTaoEl,
           tongTien: tongTienEl,
           trangThai: trangThaiEl,
           maNV: MaNVEl,
@@ -3584,7 +4050,6 @@ function renderBaoHanh(data) {
   function updateRowInTable(maPBH, data) {
     const row = document.querySelector(`tr[data-value='${maPBH}']`);
     if (row) {
-      row.querySelector("td:nth-child(2)").textContent = data.thoiGianTao;
       row.querySelector("td:nth-child(3)").textContent = data.tongTien;
       row.querySelector("td:nth-child(4)").textContent = data.trangThai;
       row.querySelector("td:nth-child(5)").textContent = data.maNV;
@@ -3594,92 +4059,111 @@ function renderBaoHanh(data) {
   }
 
   btnAdd.addEventListener("click", async (e) => {
+    // Hiển thị thông báo xác nhận trước khi thực hiện thêm bảo hành
     // Lấy giá trị từ các trường nhập liệu
-    const thoiGianTaoEl = document.getElementById("thoiGian").value;
     const tongTienEl = document.getElementById("tongTien").value;
     const MaNVEl = document.getElementById("maNv").value;
     const soSeriEl = document.getElementById("soSeri").value;
     const trangThaiEl = document.getElementById("trangThai").value;
     const noiDungEl = document.getElementById("noiDung").value;
+    const maKH = document.getElementById("maKH").value;
 
     // Kiểm tra dữ liệu trước khi gửi đi
-    if (
-      !thoiGianTaoEl ||
-      !tongTienEl ||
-      !MaNVEl ||
-      !soSeriEl ||
-      !trangThaiEl ||
-      !noiDungEl
-    ) {
+    if (!tongTienEl || !MaNVEl || !soSeriEl || !trangThaiEl || !noiDungEl) {
       Swal.fire("Lỗi", "Vui lòng điền đầy đủ các thông tin.", "error");
       return;
     }
+    const result = await Swal.fire({
+      title: "Xác nhận thêm phiếu bảo hành?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: "Don't save",
+    });
 
-    // Tạo đối tượng dữ liệu
-    const data = {
-      thoiGianTao: thoiGianTaoEl,
-      tongTien: tongTienEl,
-      trangThai: trangThaiEl,
-      maNV: MaNVEl,
-      soSeri: soSeriEl,
-      noiDung: noiDungEl,
-    };
+    // Kiểm tra kết quả từ Swal
+    if (result.isConfirmed) {
+      Swal.fire("Saved!", "", "success");
 
-    try {
-      const response = await fetch(
-        "http://localhost:8080/phonestore/add-baohanh",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+      // Tạo đối tượng dữ liệu
+      const data = {
+        tongTien: tongTienEl,
+        trangThai: trangThaiEl,
+        maNV: MaNVEl,
+        soSeri: soSeriEl,
+        noiDung: noiDungEl,
+        maKH: maKH,
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/phonestore/add-baohanh",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText || "Có lỗi xảy ra khi thêm bảo hành");
         }
-      );
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Có lỗi xảy ra khi thêm bảo hành");
+        const result = await response.json();
+        console.log("Thêm thành công:", result);
+
+        // Hiển thị thông báo thành công
+        Swal.fire("Thành công", "Thêm bảo hành thành công!", "success");
+
+        // Cập nhật bảng bằng cách thêm một hàng mới
+        const table = document.getElementById("product-table"); // Lấy bảng bằng ID
+        const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
+
+        // Thêm các ô (td) vào hàng mới
+        newRow.innerHTML = `
+          <td>${result.data.maPBH}</td>
+          <td>${result.data.thoiGianTao}</td>
+          <td>${result.data.tongTien}</td>
+          <td>${result.data.trangThai}</td>
+          <td>${result.data.maNV}</td>
+          <td>${result.data.soSeri}</td>
+          <td>${result.data.noiDung}</td>
+          <td>${result.data.maKH}</td>
+          <td>
+            <button onclick="editBaoHanh('${result.data.maPBH}')" class="product-table__update-btn product-table-btn">Sửa</button> 
+            <button onclick="deleteBaoHanh('${result.data.maPBH}')" class="product-table__delete-btn product-table-btn">Xóa</button>             
+          </td>
+        `;
+
+        // Xóa dữ liệu trong form sau khi thêm thành công
+        clearInputFields();
+      } catch (error) {
+        console.error("Lỗi khi thêm bảo hành:", error);
+        Swal.fire("Lỗi", `Không thể thêm bảo hành: ${error.message}`, "error");
       }
-
-      const result = await response.json();
-      console.log("Thêm thành công:", result);
-
-      // Hiển thị thông báo thành công
-      Swal.fire("Thành công", "Thêm bảo hành thành công!", "success");
-
-      // Cập nhật bảng bằng cách thêm một hàng mới
-      const table = document.getElementById("product-table"); // Lấy bảng bằng ID
-      const newRow = table.insertRow(); // Thêm một hàng mới vào cuối bảng
-
-      // Thêm các ô (td) vào hàng mới
-      newRow.innerHTML = `
-        <td>${result.data.maPBH}</td>
-        <td>${result.data.thoiGianTao}</td>
-        <td>${result.data.tongTien}</td>
-        <td>${result.data.trangThai}</td>
-        <td>${result.data.maNV}</td>
-        <td>${result.data.soSeri}</td>
-        <td>${result.data.noiDung}</td>
-        <td>
-          <button onclick="editBaoHanh('${result.data.maPBH}')" class="product-table__update-btn product-table-btn">Sửa</button> 
-          <button onclick="deleteBaoHanh('${result.data.maPBH}')" class="product-table__delete-btn product-table-btn">Xóa</button>             
-        </td>
-      `;
-
-      // Xóa dữ liệu trong form sau khi thêm thành công
-      clearInputFields();
-    } catch (error) {
-      console.error("Lỗi khi thêm bảo hành:", error);
-      Swal.fire("Lỗi", `Không thể thêm bảo hành: ${error.message}`, "error");
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
     }
   });
 
-  // Hàm xóa dữ liệu nhập trong form
+  // Hàm xóa dữ liệu trong các trường nhập liệu
   function clearInputFields() {
-    document.getElementById("thoiGian").value = "";
     document.getElementById("tongTien").value = "";
     document.getElementById("maNv").value = "";
+    document.getElementById("soSeri").value = "";
+    document.getElementById("trangThai").value = "";
+    document.getElementById("noiDung").value = "";
+    document.getElementById("maKH").value = "";
+  }
+
+  // Hàm xóa dữ liệu nhập trong form
+  function clearInputFields() {
+    document.getElementById("tongTien").value = "";
+    document.getElementById("maKH").value = "";
+
     document.getElementById("soSeri").value = "";
     document.getElementById("trangThai").value = "";
     document.getElementById("noiDung").value = "";
@@ -3689,7 +4173,7 @@ function renderBaoHanh(data) {
 const editBaoHanh = async (idBaoHanh) => {
   // Lấy dòng tương ứng với idBaoHanh
   let row = document.querySelector(`tr[data-value='${idBaoHanh}']`);
-
+  document.getElementById("maKH").disabled = true;
   // Lấy các giá trị từ các ô trong dòng
   let maPBH = row.querySelector("td:nth-child(1)").textContent;
   let thoiGianTao = row.querySelector("td:nth-child(2)").textContent;
@@ -3698,12 +4182,13 @@ const editBaoHanh = async (idBaoHanh) => {
   let maNV = row.querySelector("td:nth-child(5)").textContent;
   let soSeri = row.querySelector("td:nth-child(6)").textContent;
   let noiDung = row.querySelector("td:nth-child(7)").textContent;
+  let maKH = row.querySelector("td:nth-child(8)").textContent;
 
   // Điền các giá trị vào các ô nhập liệu
   document.getElementById("maBaoHanh").value = maPBH;
-  document.getElementById("thoiGian").value = thoiGianTao;
   document.getElementById("tongTien").value = tongTien;
   document.getElementById("maNv").value = kh.maNV;
+  document.getElementById("maKH").value = maKH;
   document.getElementById("soSeri").value = soSeri;
   document.getElementById("trangThai").value = trangThai;
   document.getElementById("noiDung").value = noiDung;
@@ -3724,10 +4209,11 @@ const editBaoHanh = async (idBaoHanh) => {
   }
 };
 const huyBaoHanh = () => {
+  document.getElementById("maKH").disabled = false;
   document.getElementById("maBaoHanh").value = "";
-  document.getElementById("thoiGian").value = "";
+  document.getElementById("maKH").value = "";
   document.getElementById("tongTien").value = "";
-  document.getElementById("maNv").value = "";
+
   document.getElementById("soSeri").value = "";
   document.getElementById("trangThai").value = "";
   document.getElementById("noiDung").value = "";
@@ -4084,6 +4570,22 @@ async function initPhieuNhapPage() {
   });
   //  IMPORT
   document.getElementById("import").addEventListener("click", async () => {
+    // Hiển thị hộp thoại xác nhận
+    const confirmResult = await Swal.fire({
+      title: "Bạn có chắc chắn muốn nhập phiếu này?",
+      text: "Hãy kiểm tra lại thông tin trước khi xác nhận.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    });
+
+    // Nếu người dùng nhấn Hủy hoặc đóng hộp thoại, dừng lại
+    if (!confirmResult.isConfirmed) {
+      Swal.fire("Thông báo", "Hủy thêm phiếu nhập.", "info");
+      return;
+    }
+
     // Lấy dữ liệu từ các trường
     const totalPrice =
       parseInt(
@@ -4097,6 +4599,7 @@ async function initPhieuNhapPage() {
     const maPN = document.getElementById("noteId").value.trim();
     const maNCC = document.getElementById("supplier").value.trim();
 
+    // Kiểm tra dữ liệu
     if (!maPN || !maNV || !maNCC) {
       Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin phiếu nhập.", "error");
       return;
@@ -4123,7 +4626,7 @@ async function initPhieuNhapPage() {
       const result = await response.json();
       console.log("Kết quả phiếu nhập:", result);
 
-      // Thêm chi tiết phiếu nhập nếu phiếu nhập thành công
+      // Gọi hàm thêm chi tiết phiếu nhập
       await addChiTietPhieuNhap(maPN);
 
       Swal.fire(
@@ -4411,8 +4914,126 @@ async function initNhapPage() {
       `;
       row.dataset.noteId = item.maPN; // Lưu maPN trong data attribute của row
       row.addEventListener("click", () => handleRowClick(item.maPN)); // Lắng nghe sự kiện click
+
+      // Chỉnh sửa trực tiếp trong các ô (td)
+      row.querySelectorAll("td").forEach((cell, index) => {
+        if (
+          index !== 0 &&
+          index !== 1 &&
+          index !== 2 &&
+          index !== 3 &&
+          index !== 4
+        ) {
+          // Để ngừng chỉnh sửa maPN, maNV, maNCC
+          cell.addEventListener("click", () =>
+            handleCellClick(cell, index, item)
+          );
+        }
+      });
+
       tableBody.appendChild(row);
     });
+  }
+
+  function handleCellClick(cell, index, item) {
+    // Kiểm tra trạng thái trước khi cho phép chỉnh sửa
+    if (item.trangThai !== "chua xac nhan") {
+      Swal.fire({
+        icon: "error",
+        title: "Không thể chỉnh sửa!",
+        text: "Chỉ những phiếu nhập có trạng thái 'Chưa xác nhận' mới có thể chỉnh sửa.",
+        confirmButtonText: "OK",
+      });
+      return; // Dừng lại nếu trạng thái không phải là 'chưa xác nhận'
+    }
+
+    const oldValue = cell.textContent;
+    // Loại bỏ phần ' VND' để chỉ hiển thị số
+    cell.innerHTML = `<input type="text" value="${oldValue.replace(
+      " VND",
+      ""
+    )}" />`;
+
+    const input = cell.querySelector("input");
+    input.focus();
+
+    input.addEventListener("blur", () => {
+      let newValue = input.value.trim();
+
+      // Nếu có thay đổi
+      if (newValue) {
+        // Loại bỏ các ký tự không phải là số
+        newValue = newValue.replace(/\D/g, ""); // Loại bỏ tất cả ký tự không phải số
+
+        // Định dạng giá trị với dấu phân cách nghìn
+        const formattedValue = parseInt(newValue, 10).toLocaleString();
+
+        // Hiển thị lại giá trị đã được định dạng
+        cell.textContent = `${formattedValue} đ`;
+
+        // Cập nhật giá trị trong item
+        item.tongTien = parseInt(newValue, 10); // Cập nhật lại giá trị số nguyên cho item
+      } else {
+        // Nếu không có thay đổi, giữ nguyên giá trị cũ
+        cell.textContent = oldValue;
+      }
+
+      // Gọi API để gửi dữ liệu cập nhật
+      updateData(item);
+      console.log("item: ", item);
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        input.blur(); // Khi nhấn Enter, sẽ mất focus và cập nhật giá trị
+      }
+    });
+
+    // Prevent event propagation in case the cell is clicked again during editing
+    input.addEventListener("click", (e) => e.stopPropagation());
+  }
+
+  function updateData(item) {
+    console.log("item: ", item);
+    // Kiểm tra trạng thái trước khi gửi yêu cầu cập nhật
+    if (item.trangThai !== "chua xac nhan") {
+      alert(
+        "Chỉ những phiếu nhập có trạng thái 'Chưa xác nhận' mới có thể được cập nhật"
+      );
+      return;
+    }
+
+    // Gửi dữ liệu cập nhật lên server
+    fetch("http://localhost:8080/phonestore/update-tonggiapn", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item), // Gửi toàn bộ item dưới dạng JSON
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Dữ liệu đã được cập nhật:", data);
+
+        // Hiển thị thông báo thành công
+        Swal.fire({
+          icon: "success",
+          title: "Cập nhật thành công!",
+          text: "Dữ liệu đã được cập nhật thành công.",
+          confirmButtonText: "OK",
+        });
+      })
+      .catch((error) => {
+        console.error("Có lỗi xảy ra khi cập nhật dữ liệu:", error);
+
+        // Hiển thị thông báo lỗi
+        Swal.fire({
+          icon: "error",
+          title: "Có lỗi xảy ra!",
+          text: "Không thể cập nhật dữ liệu, vui lòng thử lại.",
+          confirmButtonText: "OK",
+        });
+      });
   }
 
   function handleRowClick(noteId) {
@@ -4439,6 +5060,7 @@ async function initNhapPage() {
     }
 
     data.forEach((item) => {
+      console.log("item: ", item);
       (item.chitietphieunhaps || []).forEach((chitiet) => {
         const maSP =
           chitiet.maPB_phienbansp?.maSP_sanpham?.maSP || "Không xác định";
@@ -4446,21 +5068,111 @@ async function initNhapPage() {
           chitiet.maPB_phienbansp?.maSP_sanpham?.tenSP || "Tên sản phẩm";
         const soLuong = chitiet.soLuong || 0;
         const donGiaNhap = chitiet.donGiaNhap || 0;
+        const maPN = chitiet.maPN || 0;
+        const maPB = chitiet.maPB_phienbansp?.maPB || "Không xác định";
 
         const row = document.createElement("tr");
         row.innerHTML = `
-          <td>${maSP}</td>
+        <td>${maPN}</td>
+          <td>${maPB}</td>
           <td>${tenSP}</td>
           <td>${soLuong}</td>
           <td>${donGiaNhap.toLocaleString()}đ</td>
-        `;
+          <td>
+            <button id="btn-edit" class="product-table__update-btn product-table-btn">Sửa</button>
+          </td>
+          `;
+
+        row.dataset.maPN = maPN; // Store the maPN in the row data attribute
+        row.addEventListener("click", () =>
+          handleRowClick1(row, chitiet, item)
+        ); // Listen for row click
         tableBody.appendChild(row);
       });
     });
   }
 
-  // Xử lý sự kiện click nút xác nhận
-  // Xử lý sự kiện click nút xác nhận
+  const handleRowClick1 = (row, chitiet, item) => {
+    // Kiểm tra trạng thái trước khi cho phép chỉnh sửa
+    if (item.trangThai !== "chua xac nhan") {
+      Swal.fire({
+        icon: "error",
+        title: "Không thể chỉnh sửa!",
+        text: "Chỉ những phiếu nhập có trạng thái 'Chưa xác nhận' mới có thể chỉnh sửa.",
+        confirmButtonText: "OK",
+      });
+      return; // Dừng lại nếu trạng thái không phải là 'chưa xác nhận'
+    }
+
+    if (row.classList.contains("editing")) {
+      return; // If already editing, do nothing
+    }
+
+    row.classList.add("editing");
+    const cells = row.querySelectorAll("td");
+
+    // Chỉnh sửa các ô trong hàng
+    cells[0].innerHTML = `<input type="text" value="${chitiet.maPN}" disabled />`;
+    cells[1].innerHTML = `<input type="text" value="${chitiet.maPB_phienbansp?.maPB}" disabled />`;
+    cells[2].innerHTML = `<input type="text" value="${chitiet.maPB_phienbansp?.maSP_sanpham?.tenSP}" disabled />`;
+    cells[3].innerHTML = `<input type="number" value="${chitiet.soLuong}" />`;
+    cells[4].innerHTML = `<input type="number" value="${chitiet.donGiaNhap}" />`;
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.classList.add("save-btn");
+    saveButton.addEventListener("click", () => saveRowEdit(row, chitiet));
+
+    cells[5].innerHTML = "";
+    cells[5].appendChild(saveButton);
+  };
+
+  //
+  const saveRowEdit = async (row, chitiet) => {
+    // Get the updated values from the input fields
+    const inputs = row.querySelectorAll("input");
+    const updatedData = {
+      maPN: inputs[0].value,
+      maPB: inputs[1].value,
+      soLuong: parseInt(inputs[3].value),
+      donGiaNhap: parseFloat(inputs[4].value),
+    };
+    console.log("updatedData: ", updatedData);
+
+    try {
+      // Call the API to update chitietphieunhap
+      const chitietResponse = await fetch(
+        " http://localhost:8080/phonestore/update-chitietphieunhap",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      if (!chitietResponse.ok) {
+        throw new Error("Không thể cập nhật chi tiết phiếu nhập");
+      }
+
+      // Get updated results and re-render panels
+      const updatedChiTiet = await chitietResponse.json();
+      renderRightPanel([updatedChiTiet]);
+
+      // Remove the "editing" class and show success message
+      row.classList.remove("editing");
+      Swal.fire(
+        "Thành công",
+        "Cập nhật thành công cả chi tiết và phiếu nhập!",
+        "success"
+      );
+    } catch (error) {
+      console.error("Error saving row:", error);
+      Swal.fire("Không có gì thay đổi !");
+    }
+  };
+
   btnacp.addEventListener("click", async () => {
     if (selectedMaPN) {
       Swal.fire({
@@ -4590,11 +5302,20 @@ async function initNhapPage() {
 
   // Hàm gọi API để xóa phiếu nhập
   async function deletePhieuNhap(data) {
+    // Kiểm tra trạng thái trước khi gửi yêu cầu xóa
+    if (data.trangThai !== "chưa xác nhận") {
+      return {
+        success: false,
+        message:
+          "Chỉ những phiếu nhập có trạng thái 'chưa xác nhận' mới có thể bị xóa.",
+      };
+    }
+
     try {
       const response = await fetch(
         "http://localhost:8080/phonestore/delete-phieunhap",
         {
-          method: "POST", // Sử dụng phương thức DELETE
+          method: "POST", // Dùng phương thức POST thay vì DELETE để gửi dữ liệu
           headers: {
             "Content-Type": "application/json",
           },
@@ -4753,7 +5474,7 @@ async function initDonHangPage() {
       });
     });
   }
-
+  const kh = JSON.parse(localStorage.getItem("khachhang"));
   // Xử lý sự kiện click nút xác nhận
   btnacp.addEventListener("click", async () => {
     if (selectedMaPN) {
@@ -4773,6 +5494,7 @@ async function initDonHangPage() {
           // Dữ liệu gửi đi, bao gồm mã phiếu nhập và trạng thái
           let data = {
             maDH: selectedMaPN,
+            maNV: kh.maNV,
             trangThai: "Đã xác nhận",
           };
 
@@ -4830,6 +5552,7 @@ async function initDonHangPage() {
           // Dữ liệu gửi đi, bao gồm mã phiếu nhập và trạng thái
           let data = {
             maDH: selectedMaPN,
+            maNV: kh.maNV,
             trangThai: "Đang giao",
           };
 
@@ -4912,3 +5635,14 @@ function convertMoney(amount) {
     currency: "VND",
   }).format(amount);
 }
+document.getElementById("phone").onkeyup = () => {
+  let patPhone = /^(0[3-9][0-9]{8})$/;
+  let resPhone = patPhone.test(document.getElementById("phone").value.trim());
+  if (resPhone) {
+    trueRegex("phone");
+    phone = true;
+  } else {
+    falseRegex("phone");
+    phone = false;
+  }
+};
