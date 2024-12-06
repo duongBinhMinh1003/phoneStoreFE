@@ -5417,9 +5417,9 @@ async function initDonHangPage() {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.maDH}</td>
-        <td>${item.maNV}</td>
+        <td>${item.maNV || ""}</td>
         <td>${item.maKH}</td>
-        <td>${item.maKM}</td>
+        <td>${item.maKM || ""}</td>
         <td>${item.ngayDat}</td>
         <td>${item.trangThai}</td>
         <td>${item.httt}</td>
@@ -5478,6 +5478,24 @@ async function initDonHangPage() {
   // Xử lý sự kiện click nút xác nhận
   btnacp.addEventListener("click", async () => {
     if (selectedMaPN) {
+      // Lấy thông tin đơn hàng từ dữ liệu hiện tại
+      const selectedOrder = leftPanelData.find(
+        (item) => item.maDH === selectedMaPN
+      );
+
+      if (!selectedOrder) {
+        alert("Không tìm thấy thông tin đơn hàng. Vui lòng thử lại.");
+        return;
+      }
+
+      // Kiểm tra trạng thái của đơn hàng
+      if (selectedOrder.trangThai !== "đang xử lý") {
+        Swal.fire(
+          "Chỉ có thể xác nhận các đơn hàng đang ở trạng thái 'Đang xử lý'."
+        );
+        return;
+      }
+
       // Hiển thị hộp thoại xác nhận trước khi thực hiện thao tác
       Swal.fire({
         title: "Are you sure?",
@@ -5489,9 +5507,9 @@ async function initDonHangPage() {
         confirmButtonText: "Yes, confirm it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          console.log("Đang xác nhận phiếu nhập có mã PN:", selectedMaPN);
+          console.log("Đang xác nhận đơn hàng có mã DH:", selectedMaPN);
 
-          // Dữ liệu gửi đi, bao gồm mã phiếu nhập và trạng thái
+          // Dữ liệu gửi đi, bao gồm mã đơn hàng và trạng thái
           let data = {
             maDH: selectedMaPN,
             maNV: kh.maNV,
@@ -5512,30 +5530,47 @@ async function initDonHangPage() {
             );
 
             if (!response.ok) {
-              throw new Error("Lỗi khi cập nhật phiếu nhập");
+              throw new Error("Lỗi khi cập nhật đơn hàng");
             }
 
             const result = await response.json();
             console.log("Cập nhật thành công:", result);
-            alert("Cập nhật phiếu nhập thành công!");
+            alert("Cập nhật đơn hàng thành công!");
 
             // Nếu cần, có thể reload lại dữ liệu hoặc làm gì đó sau khi thành công
-            // Ví dụ: gọi lại API để tải lại dữ liệu phiếu nhập hoặc cập nhật bảng
             renderLeftPanel(leftPanelData);
           } catch (error) {
-            console.error("Lỗi khi gọi API cập nhật phiếu nhập:", error);
-            alert("Không thể cập nhật phiếu nhập. Vui lòng thử lại sau.");
+            console.error("Lỗi khi gọi API cập nhật đơn hàng:", error);
+            alert("Không thể cập nhật đơn hàng. Vui lòng thử lại sau.");
           }
         }
       });
     } else {
-      console.log("Vui lòng chọn một phiếu nhập.");
-      alert("Vui lòng chọn một phiếu nhập.");
+      console.log("Vui lòng chọn một đơn hàng.");
+      alert("Vui lòng chọn một đơn hàng.");
     }
   });
 
   dangGiaobtn.addEventListener("click", async () => {
     if (selectedMaPN) {
+      // Lấy thông tin đơn hàng từ dữ liệu hiện tại
+      const selectedOrder = leftPanelData.find(
+        (item) => item.maDH === selectedMaPN
+      );
+
+      if (!selectedOrder) {
+        alert("Không tìm thấy thông tin đơn hàng. Vui lòng thử lại.");
+        return;
+      }
+
+      // Kiểm tra trạng thái của đơn hàng
+      if (selectedOrder.trangThai !== "Đã xác nhận") {
+        alert(
+          "Chỉ có thể thay đổi trạng thái khi đơn hàng đang ở trạng thái 'Đã xác nhận'."
+        );
+        return;
+      }
+
       // Hiển thị hộp thoại xác nhận trước khi thực hiện thao tác
       Swal.fire({
         title: "Are you sure?",
@@ -5549,7 +5584,7 @@ async function initDonHangPage() {
         if (result.isConfirmed) {
           console.log("Đang xác nhận phiếu nhập có mã đơn hàng:", selectedMaPN);
 
-          // Dữ liệu gửi đi, bao gồm mã phiếu nhập và trạng thái
+          // Dữ liệu gửi đi, bao gồm mã đơn hàng và trạng thái
           let data = {
             maDH: selectedMaPN,
             maNV: kh.maNV,
@@ -5561,7 +5596,7 @@ async function initDonHangPage() {
             const response = await fetch(
               "http://localhost:8080/phonestore/update-donhang",
               {
-                method: "PUT", // Hoặc "POST" nếu API yêu cầu
+                method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
                 },
@@ -5570,25 +5605,24 @@ async function initDonHangPage() {
             );
 
             if (!response.ok) {
-              throw new Error("Lỗi khi cập nhật phiếu nhập");
+              throw new Error("Lỗi khi cập nhật đơn hàng");
             }
 
             const result = await response.json();
             console.log("Cập nhật thành công:", result);
-            alert("Cập nhật phiếu nhập thành công!");
+            alert("Cập nhật đơn hàng thành công!");
 
             // Nếu cần, có thể reload lại dữ liệu hoặc làm gì đó sau khi thành công
-            // Ví dụ: gọi lại API để tải lại dữ liệu phiếu nhập hoặc cập nhật bảng
             renderLeftPanel(leftPanelData);
           } catch (error) {
-            console.error("Lỗi khi gọi API cập nhật phiếu nhập:", error);
-            alert("Không thể cập nhật phiếu nhập. Vui lòng thử lại sau.");
+            console.error("Lỗi khi gọi API cập nhật đơn hàng:", error);
+            alert("Không thể cập nhật đơn hàng. Vui lòng thử lại sau.");
           }
         }
       });
     } else {
-      console.log("Vui lòng chọn một phiếu nhập.");
-      alert("Vui lòng chọn một phiếu nhập.");
+      console.log("Vui lòng chọn một đơn hàng.");
+      alert("Vui lòng chọn một đơn hàng.");
     }
   });
 

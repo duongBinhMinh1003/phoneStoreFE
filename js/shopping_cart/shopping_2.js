@@ -1,5 +1,7 @@
 $(document).ready(async function () {
-  const priceVOUCHER = JSON.parse(localStorage.getItem("voucher"));
+  const priceVOUCHER = JSON.parse(localStorage.getItem("voucher")) || {
+    discount: 0,
+  };
   console.log("priceVOUCHER: ", priceVOUCHER);
 
   // Hàm gọi API lấy giỏ hàng
@@ -91,7 +93,7 @@ $(document).ready(async function () {
               </div>
           </div>
       <a onclick="thanhToan(${finalTotal})" class="btn btn-danger">Thanh toán ngay</a>
-      <a href="/html/shopping__cart/shopping_cart_3.html" class="btn btn-danger btn-sm">Bỏ qua nếu test</a>
+  
       `
     );
 
